@@ -1,0 +1,69 @@
+id: infrastructure-hardening
+title: Infrastructure Hardening
+description: Systematically reduce attack surface.
+difficulty: hard
+category: defensive
+specialization: defensive
+estimated_minutes: 40
+objectives:
+- Understand minimise, patch, configure
+prerequisites:
+- linux-administration
+- windows-administration
+competency_prereqs: []
+tags:
+- defensive
+- defensive
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Minimise, patch, configure
+  difficulty: hard
+  minutes: 20
+  competency: infrastructure-hardening
+  body: Hardening removes what is not needed (services, accounts, software), keeps the rest patched, and
+    configures secure defaults (authentication, logging, permissions). Benchmarks (e.g. CIS) provide checklists.
+    Verify with configuration review and re-scanning.
+  exercises:
+  - kind: mcq
+    prompt: 'First hardening move:'
+    choices:
+    - Add software
+    - Remove unneeded services/accounts
+    - Open ports
+    - Disable logs
+    answer: Remove unneeded services/accounts
+    competency: infrastructure-hardening
+    explanation: Reduce surface first.
+    points: 10
+    hints: []
+  hints:
+  - text: Less software, fewer accounts, patched, logged.
+  walkthrough: []
+assessment:
+  title: Infrastructure Hardening Assessment
+  questions:
+  - kind: short_answer
+    prompt: Hardening checklists are often based on ___ benchmarks (acronym).
+    answer: CIS
+    competency: infrastructure-hardening
+    explanation: CIS Benchmarks.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: Hardening reduces the attack ___.
+    choices:
+    - surface
+    - speed
+    - cost
+    - colour
+    answer: surface
+    competency: infrastructure-hardening
+    explanation: Smaller surface, less risk.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

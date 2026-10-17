@@ -1,0 +1,68 @@
+id: wireless-security
+title: Wireless Security
+description: Wi-Fi security concepts and defences.
+difficulty: intermediate
+category: networking
+specialization: networking
+estimated_minutes: 35
+objectives:
+- Understand wi-fi protection
+prerequisites:
+- networking-fundamentals
+competency_prereqs: []
+tags:
+- networking
+- infrastructure
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Wi-Fi protection
+  difficulty: intermediate
+  minutes: 15
+  competency: wireless-security
+  body: Wireless security depends on strong protocols (WPA3/WPA2-Enterprise), strong keys, and segmentation
+    of guest/IoT networks. Weak or legacy encryption and default credentials are the recurring issues.
+    Treat wireless as an untrusted edge and segment accordingly.
+  exercises:
+  - kind: mcq
+    prompt: 'Strongest current Wi-Fi protocol here:'
+    choices:
+    - WEP
+    - WPA
+    - WPA2
+    - WPA3
+    answer: WPA3
+    competency: wireless-security
+    explanation: WPA3 is the current standard.
+    points: 10
+    hints: []
+  hints:
+  - text: Segment guest/IoT; avoid legacy encryption.
+  walkthrough: []
+assessment:
+  title: Wireless Security Assessment
+  questions:
+  - kind: short_answer
+    prompt: Legacy Wi-Fi encryption to avoid (3 letters)?
+    answer: WEP
+    competency: wireless-security
+    explanation: WEP is broken.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Guest Wi-Fi should be:'
+    choices:
+    - Flat with corp
+    - Segmented
+    - Open
+    - Unlogged
+    answer: Segmented
+    competency: network-segmentation
+    explanation: Segment guest networks.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

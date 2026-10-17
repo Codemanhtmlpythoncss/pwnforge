@@ -1,0 +1,445 @@
+- id: path-complete-beginner
+  title: Complete Beginner
+  description: Start from zero and build the foundations for every other path.
+  specialization: null
+  difficulty_min: orientation
+  difficulty_max: easy
+  tags:
+  - beginner
+  - foundation
+  steps:
+  - order: 1
+    course_id: hacklab-orientation
+    lab_id: null
+    required: true
+    note: ''
+  - order: 2
+    course_id: cybersecurity-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 3
+    course_id: linux-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 4
+    course_id: networking-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 5
+    course_id: bash-for-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 6
+    course_id: http-https
+    lab_id: null
+    required: true
+    note: ''
+  - order: 7
+    course_id: service-enumeration
+    lab_id: null
+    required: true
+    note: ''
+  - order: 8
+    course_id: null
+    lab_id: web-security-lab
+    required: false
+    note: First easy security lab
+  - order: 9
+    course_id: vulnerability-assessment
+    lab_id: null
+    required: true
+    note: ''
+  - order: 10
+    course_id: security-reporting
+    lab_id: null
+    required: true
+    note: ''
+- id: path-web-pentest
+  title: Web Penetration Testing
+  description: Progress from HTTP basics to chained web application assessment.
+  specialization: web
+  difficulty_min: beginner
+  difficulty_max: expert
+  tags:
+  - web
+  - offensive
+  steps:
+  - order: 1
+    course_id: http-https
+    lab_id: null
+    required: true
+    note: ''
+  - order: 2
+    course_id: web-technologies
+    lab_id: null
+    required: true
+    note: ''
+  - order: 3
+    course_id: linux-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 4
+    course_id: sql-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 5
+    course_id: authentication-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 6
+    course_id: session-management-course
+    lab_id: null
+    required: true
+    note: ''
+  - order: 7
+    course_id: access-control-course
+    lab_id: null
+    required: true
+    note: ''
+  - order: 8
+    course_id: web-application-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 9
+    course_id: sql-injection-labs
+    lab_id: null
+    required: true
+    note: ''
+  - order: 10
+    course_id: cross-site-scripting
+    lab_id: null
+    required: true
+    note: ''
+  - order: 11
+    course_id: api-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 12
+    course_id: null
+    lab_id: web-security-lab
+    required: true
+    note: Intermediate web lab
+  - order: 13
+    course_id: advanced-web-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 14
+    course_id: security-reporting
+    lab_id: null
+    required: true
+    note: Final web assessment reporting
+- id: path-infra-pentest
+  title: Infrastructure Penetration Testing
+  description: Network and host assessment across Linux and Windows.
+  specialization: pentest
+  difficulty_min: beginner
+  difficulty_max: advanced
+  tags:
+  - infrastructure
+  - offensive
+  steps:
+  - order: 1
+    course_id: networking-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 2
+    course_id: linux-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 3
+    course_id: windows-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 4
+    course_id: dns-network-services
+    lab_id: null
+    required: true
+    note: ''
+  - order: 5
+    course_id: reconnaissance
+    lab_id: null
+    required: true
+    note: ''
+  - order: 6
+    course_id: service-enumeration
+    lab_id: null
+    required: true
+    note: ''
+  - order: 7
+    course_id: vulnerability-assessment
+    lab_id: null
+    required: true
+    note: ''
+  - order: 8
+    course_id: linux-privilege-escalation-concepts
+    lab_id: null
+    required: true
+    note: ''
+  - order: 9
+    course_id: windows-privilege-escalation-concepts
+    lab_id: null
+    required: true
+    note: ''
+  - order: 10
+    course_id: null
+    lab_id: enterprise-identity-lab
+    required: true
+    note: Advanced multi-service lab
+  - order: 11
+    course_id: security-reporting
+    lab_id: null
+    required: true
+    note: ''
+- id: path-active-directory
+  title: Active Directory Security
+  description: Windows and directory services from fundamentals to identity security.
+  specialization: active-directory
+  difficulty_min: beginner
+  difficulty_max: expert
+  tags:
+  - identity
+  - windows
+  steps:
+  - order: 1
+    course_id: windows-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 2
+    course_id: windows-administration
+    lab_id: null
+    required: true
+    note: ''
+  - order: 3
+    course_id: authentication-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 4
+    course_id: active-directory-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 5
+    course_id: identity-access-management
+    lab_id: null
+    required: true
+    note: ''
+  - order: 6
+    course_id: windows-privilege-escalation-concepts
+    lab_id: null
+    required: true
+    note: ''
+  - order: 7
+    course_id: null
+    lab_id: enterprise-identity-lab
+    required: true
+    note: Enterprise directory lab
+- id: path-defensive
+  title: Defensive Security
+  description: Build blue-team skills from logging to incident response.
+  specialization: defensive
+  difficulty_min: beginner
+  difficulty_max: advanced
+  tags:
+  - defensive
+  - blue-team
+  steps:
+  - order: 1
+    course_id: cybersecurity-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 2
+    course_id: linux-administration
+    lab_id: null
+    required: true
+    note: ''
+  - order: 3
+    course_id: windows-administration
+    lab_id: null
+    required: true
+    note: ''
+  - order: 4
+    course_id: log-analysis
+    lab_id: null
+    required: true
+    note: ''
+  - order: 5
+    course_id: network-monitoring
+    lab_id: null
+    required: true
+    note: ''
+  - order: 6
+    course_id: siem-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 7
+    course_id: detection-engineering
+    lab_id: null
+    required: true
+    note: ''
+  - order: 8
+    course_id: threat-hunting
+    lab_id: null
+    required: true
+    note: ''
+  - order: 9
+    course_id: incident-response
+    lab_id: null
+    required: true
+    note: ''
+  - order: 10
+    course_id: digital-forensics
+    lab_id: null
+    required: true
+    note: ''
+  - order: 11
+    course_id: null
+    lab_id: defensive-monitoring-lab
+    required: true
+    note: Advanced investigation lab
+- id: path-reverse-engineering
+  title: Reverse Engineering
+  description: From programming foundations to binary analysis and memory safety.
+  specialization: reverse
+  difficulty_min: easy
+  difficulty_max: expert
+  tags:
+  - reverse
+  - re
+  steps:
+  - order: 1
+    course_id: bash-for-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 2
+    course_id: python-for-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 3
+    course_id: reverse-engineering-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 4
+    course_id: memory-safety
+    lab_id: null
+    required: true
+    note: ''
+  - order: 5
+    course_id: malware-analysis-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 6
+    course_id: null
+    lab_id: reverse-engineering-lab
+    required: true
+    note: Final RE challenge
+- id: path-container-infra
+  title: Container and Infrastructure Security
+  description: Secure containers, orchestration and declarative infrastructure.
+  specialization: cloud
+  difficulty_min: easy
+  difficulty_max: advanced
+  tags:
+  - cloud
+  - container
+  steps:
+  - order: 1
+    course_id: linux-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 2
+    course_id: linux-administration
+    lab_id: null
+    required: true
+    note: ''
+  - order: 3
+    course_id: networking-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 4
+    course_id: docker-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 5
+    course_id: kubernetes-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 6
+    course_id: network-segmentation
+    lab_id: null
+    required: true
+    note: ''
+  - order: 7
+    course_id: iac-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 8
+    course_id: null
+    lab_id: container-security-lab
+    required: true
+    note: Advanced container lab
+- id: path-digital-forensics
+  title: Digital Forensics
+  description: Evidence handling through incident reconstruction.
+  specialization: forensics
+  difficulty_min: easy
+  difficulty_max: advanced
+  tags:
+  - forensics
+  - dfir
+  steps:
+  - order: 1
+    course_id: log-analysis
+    lab_id: null
+    required: true
+    note: ''
+  - order: 2
+    course_id: digital-forensics
+    lab_id: null
+    required: true
+    note: ''
+  - order: 3
+    course_id: network-monitoring
+    lab_id: null
+    required: true
+    note: ''
+  - order: 4
+    course_id: incident-response
+    lab_id: null
+    required: true
+    note: ''
+  - order: 5
+    course_id: malware-analysis-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 6
+    course_id: null
+    lab_id: forensics-workstation-lab
+    required: true
+    note: Advanced investigation challenge

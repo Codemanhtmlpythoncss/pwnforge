@@ -1,0 +1,85 @@
+id: windows-administration
+title: Windows Administration
+description: Manage Windows services, policies and the event log.
+difficulty: easy
+category: windows
+specialization: infrastructure
+estimated_minutes: 50
+objectives:
+- Understand services and scheduled tasks
+- Understand event logs and auditing
+prerequisites:
+- windows-fundamentals
+competency_prereqs: []
+tags:
+- windows
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Services and scheduled tasks
+  difficulty: easy
+  minutes: 15
+  competency: windows-administration
+  body: Services run background functionality; scheduled tasks run on triggers. Both are common persistence
+    and misconfiguration points. Review service accounts and binary paths (unquoted service paths are
+    a classic issue). Use `services.msc`, `sc query`, and `Get-ScheduledTask`.
+  exercises:
+  - kind: mcq
+    prompt: 'An unquoted service path is a risk because:'
+    choices:
+    - It is slower
+    - Windows may execute an unintended binary
+    - It uses more RAM
+    - It breaks logging
+    answer: Windows may execute an unintended binary
+    competency: windows-privesc
+    explanation: Spaces in unquoted paths can redirect execution.
+    points: 10
+    hints: []
+  hints:
+  - text: Look for service binaries in paths with spaces and no quotes.
+  walkthrough: []
+- title: Event logs and auditing
+  difficulty: easy
+  minutes: 15
+  competency: windows-administration
+  body: Windows Event Log records security-relevant events (logons 4624/4625, privilege use, process creation
+    4688). Enabling and forwarding these logs underpins detection. `Get-WinEvent` queries them. Auditing
+    is only useful if logs are collected centrally and reviewed.
+  exercises:
+  - kind: short_answer
+    prompt: Event ID for a successful logon?
+    answer: '4624'
+    competency: log-analysis
+    explanation: 4624 is a successful logon.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Windows Administration Assessment
+  questions:
+  - kind: short_answer
+    prompt: Event ID for a failed logon?
+    answer: '4625'
+    competency: log-analysis
+    explanation: 4625 indicates a failed logon.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Scheduled tasks are often abused for:'
+    choices:
+    - Faster boot
+    - Persistence
+    - Disk cleanup
+    - Theming
+    answer: Persistence
+    competency: detection-engineering
+    explanation: Attackers use scheduled tasks to persist.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

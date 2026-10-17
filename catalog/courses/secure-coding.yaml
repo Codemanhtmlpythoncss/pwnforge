@@ -1,0 +1,68 @@
+id: secure-coding
+title: Secure Coding
+description: Write code resilient to the common vulnerability classes.
+difficulty: intermediate
+category: secure-dev
+specialization: secdev
+estimated_minutes: 40
+objectives:
+- Understand validate, encode, parameterise
+prerequisites:
+- python-for-security
+competency_prereqs: []
+tags:
+- secure-dev
+- secure-dev
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Validate, encode, parameterise
+  difficulty: intermediate
+  minutes: 20
+  competency: secure-coding
+  body: 'Three habits prevent most injection and memory issues: validate input against an allowlist, encode
+    output for its exact context, and use parameterised APIs instead of string-built commands/queries.
+    Fail closed, handle errors without leaking internals, and keep secrets out of code and logs.'
+  exercises:
+  - kind: mcq
+    prompt: 'Preferred way to build a DB query with user data:'
+    choices:
+    - Concatenate strings
+    - Parameterised query
+    - eval
+    - format()
+    answer: Parameterised query
+    competency: secure-coding
+    explanation: Parameterisation separates data from code.
+    points: 10
+    hints: []
+  hints:
+  - text: Allowlist input, encode output, parameterise calls.
+  walkthrough: []
+assessment:
+  title: Secure Coding Assessment
+  questions:
+  - kind: short_answer
+    prompt: Handle errors without leaking ___.
+    answer: internals
+    competency: secure-coding
+    explanation: Avoid leaking stack traces/internals.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: Fail ___ (open/closed) is safer.
+    choices:
+    - open
+    - closed
+    - silent
+    - fast
+    answer: closed
+    competency: secure-coding
+    explanation: Fail closed denies by default.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

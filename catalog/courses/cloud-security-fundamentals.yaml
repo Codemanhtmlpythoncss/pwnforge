@@ -1,0 +1,68 @@
+id: cloud-security-fundamentals
+title: Cloud Security Fundamentals
+description: Shared responsibility, identity and common misconfigurations.
+difficulty: intermediate
+category: cloud
+specialization: cloud
+estimated_minutes: 40
+objectives:
+- Understand shared responsibility & iam
+prerequisites:
+- cybersecurity-fundamentals
+competency_prereqs: []
+tags:
+- cloud
+- cloud
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Shared responsibility & IAM
+  difficulty: intermediate
+  minutes: 20
+  competency: cloud-fundamentals
+  body: In the cloud, the provider secures the infrastructure and you secure your configuration, identities
+    and data. Most cloud incidents stem from misconfiguration — public storage, over-privileged roles,
+    exposed keys. IAM least privilege and secure defaults prevent the majority.
+  exercises:
+  - kind: mcq
+    prompt: 'Most cloud incidents stem from:'
+    choices:
+    - Provider outages
+    - Customer misconfiguration
+    - Slow networks
+    - Old CPUs
+    answer: Customer misconfiguration
+    competency: cloud-fundamentals
+    explanation: Config errors dominate.
+    points: 10
+    hints: []
+  hints:
+  - text: You own identity, config and data.
+  walkthrough: []
+assessment:
+  title: Cloud Security Fundamentals Assessment
+  questions:
+  - kind: short_answer
+    prompt: Cloud security splits duties under the ___ responsibility model.
+    answer: shared
+    competency: cloud-fundamentals
+    explanation: Shared responsibility.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'A frequent cloud mistake:'
+    choices:
+    - Public storage buckets
+    - Too much logging
+    - Strong IAM
+    - Encryption
+    answer: Public storage buckets
+    competency: cloud-fundamentals
+    explanation: Public data stores leak often.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

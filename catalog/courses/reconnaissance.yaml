@@ -1,0 +1,67 @@
+id: reconnaissance
+title: Reconnaissance in Authorised Environments
+description: Gather information about in-scope systems methodically.
+difficulty: easy
+category: methodology
+specialization: pentest
+estimated_minutes: 35
+objectives:
+- Understand passive vs active
+prerequisites:
+- networking-fundamentals
+competency_prereqs: []
+tags:
+- methodology
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Passive vs active
+  difficulty: easy
+  minutes: 15
+  competency: reconnaissance
+  body: Passive recon uses information already available without touching the target (public records,
+    documentation). Active recon interacts with in-scope systems (resolving names, checking which services
+    respond). Record everything you learn; a good asset inventory shapes the whole assessment.
+  exercises:
+  - kind: mcq
+    prompt: 'Interacting directly with an in-scope host is:'
+    choices:
+    - Passive recon
+    - Active recon
+    - Reporting
+    - Scoping
+    answer: Active recon
+    competency: reconnaissance
+    explanation: Direct interaction is active.
+    points: 10
+    hints: []
+  hints:
+  - text: Passive = no interaction; active = interaction with in-scope assets.
+  walkthrough: []
+assessment:
+  title: Reconnaissance in Authorised Environments Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Reading public documentation about a target is:'
+    choices:
+    - Active recon
+    - Passive recon
+    - Exploitation
+    - Reporting
+    answer: Passive recon
+    competency: reconnaissance
+    explanation: No interaction = passive.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Recon should produce an asset ___.
+    answer: inventory
+    competency: reconnaissance
+    explanation: An inventory of assets.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

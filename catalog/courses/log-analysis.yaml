@@ -1,0 +1,85 @@
+id: log-analysis
+title: Log Analysis
+description: Read, filter and correlate logs to understand what happened.
+difficulty: easy
+category: defensive
+specialization: defensive
+estimated_minutes: 50
+objectives:
+- Understand where logs live and what they say
+- Understand from logs to findings
+prerequisites:
+- linux-administration
+competency_prereqs: []
+tags:
+- defensive
+references: []
+os_requirements: []
+lab_id: defensive-monitoring-lab
+version: 1.0.0
+lessons:
+- title: Where logs live and what they say
+  difficulty: easy
+  minutes: 15
+  competency: log-analysis
+  body: Linux logs under `/var/log` (auth.log, syslog, service logs); Windows uses the Event Log. Effective
+    analysis means filtering to the relevant time window and events, then correlating across sources.
+    A single log line rarely tells the story; the sequence does.
+  exercises:
+  - kind: mcq
+    prompt: 'Correlating multiple logs helps because:'
+    choices:
+    - Logs are short
+    - A sequence reveals what one line cannot
+    - It saves disk
+    - It is faster
+    answer: A sequence reveals what one line cannot
+    competency: log-analysis
+    explanation: Correlation reconstructs events.
+    points: 10
+    hints: []
+  hints:
+  - text: Pin the time window first.
+  walkthrough: []
+- title: From logs to findings
+  difficulty: easy
+  minutes: 15
+  competency: log-analysis
+  body: 'Turn raw logs into findings: identify the actor, the action, the target and the outcome. Note
+    gaps (missing logs are themselves a finding). Clear, time-ordered notes become the basis of an incident
+    timeline.'
+  exercises:
+  - kind: short_answer
+    prompt: Missing logs are themselves a ___.
+    answer: finding
+    competency: log-analysis
+    explanation: Gaps matter.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Log Analysis Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Linux auth events are typically in:'
+    choices:
+    - /etc/passwd
+    - /var/log/auth.log
+    - /proc
+    - /boot
+    answer: /var/log/auth.log
+    competency: log-analysis
+    explanation: auth.log records authentication.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Correlate logs to build a ___ (time-ordered).
+    answer: timeline
+    competency: timeline-analysis
+    explanation: Timelines order events.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

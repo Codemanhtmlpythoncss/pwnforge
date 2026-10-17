@@ -1,0 +1,90 @@
+id: advanced-web-security
+title: Advanced Web Application Security
+description: Chaining weaknesses, assessment methodology and a capstone web lab.
+difficulty: advanced
+category: web-security
+specialization: web
+estimated_minutes: 65
+objectives:
+- Understand thinking in attack paths
+- Understand structured assessment and reporting
+prerequisites:
+- ssrf-course
+- cross-site-scripting
+- access-control-course
+competency_prereqs:
+- advanced-web
+- access-control
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: web-security-lab
+version: 1.0.0
+lessons:
+- title: Thinking in attack paths
+  difficulty: advanced
+  minutes: 25
+  competency: advanced-web
+  body: 'Real assessments rarely rely on one bug. An analyst maps how lower-severity issues chain: an
+    information leak reveals an endpoint, weak access control exposes an object, and a parsing flaw completes
+    the path. The defensive lesson is that layered, independent controls break chains — and that review
+    must consider combinations, not isolated findings.'
+  exercises:
+  - kind: mcq
+    prompt: Why do chained low-severity issues matter?
+    choices:
+    - They don't
+    - Combined they can enable serious impact
+    - They speed the site
+    - They reduce logs
+    answer: Combined they can enable serious impact
+    competency: advanced-web
+    explanation: Chains turn minor issues into major impact.
+    points: 10
+    hints: []
+  hints:
+  - text: Look for how findings enable one another.
+  walkthrough: []
+- title: Structured assessment and reporting
+  difficulty: advanced
+  minutes: 20
+  competency: security-reporting
+  body: 'A professional assessment follows a methodology: scope, enumerate, verify, assess impact, and
+    report with clear reproduction steps and remediation. The capstone lab asks you to assess a multi-page
+    application, confirm issues safely, and write up findings with prioritised fixes.'
+  exercises:
+  - kind: short_answer
+    prompt: A finding report needs reproduction steps and ___.
+    answer: remediation
+    competency: security-reporting
+    explanation: Report fixes too.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Advanced Web Application Security Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Advanced assessment considers:'
+    choices:
+    - Single bugs only
+    - Combinations/chains
+    - Only XSS
+    - Only SQLi
+    answer: Combinations/chains
+    competency: advanced-web
+    explanation: Consider how issues combine.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Reports prioritise findings by ___ (and likelihood).
+    answer: impact
+    competency: security-reporting
+    explanation: Impact drives prioritisation.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

@@ -1,0 +1,87 @@
+id: cross-site-scripting
+title: Cross-Site Scripting
+description: How XSS arises in the browser and how output encoding prevents it.
+difficulty: intermediate
+category: web-security
+specialization: web
+estimated_minutes: 55
+objectives:
+- Understand reflected, stored and dom xss
+- Understand content-security-policy
+prerequisites:
+- web-application-security
+competency_prereqs:
+- input-validation
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: web-security-lab
+version: 1.0.0
+lessons:
+- title: Reflected, stored and DOM XSS
+  difficulty: intermediate
+  minutes: 20
+  competency: xss
+  body: 'XSS happens when an application places untrusted data into a page without correct encoding, so
+    the browser treats it as script. Variants: reflected (from the request), stored (persisted server-side)
+    and DOM-based (client-side sink). The defence is context-aware output encoding plus a Content-Security-Policy
+    as defence in depth.'
+  exercises:
+  - kind: mcq
+    prompt: 'Primary defence against XSS:'
+    choices:
+    - Input length limits
+    - Context-aware output encoding
+    - Faster rendering
+    - UDP
+    answer: Context-aware output encoding
+    competency: xss
+    explanation: Encoding for the output context neutralises markup.
+    points: 10
+    hints: []
+  hints:
+  - text: Encode for HTML, attribute, JS or URL context specifically.
+  walkthrough: []
+- title: Content-Security-Policy
+  difficulty: intermediate
+  minutes: 15
+  competency: web-technologies
+  body: A strong CSP restricts where scripts may load from and can block inline script, greatly reducing
+    XSS impact even if an encoding bug slips through. It is defence in depth, not a substitute for correct
+    encoding.
+  exercises:
+  - kind: short_answer
+    prompt: Header that restricts script sources? (acronym)
+    answer: CSP
+    competency: web-technologies
+    explanation: Content-Security-Policy.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Cross-Site Scripting Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Stored XSS differs from reflected because the payload is:'
+    choices:
+    - In the URL only
+    - Persisted server-side
+    - In a cookie
+    - In DNS
+    answer: Persisted server-side
+    competency: xss
+    explanation: Stored XSS is saved and served to others.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Defence in depth header for XSS? (acronym)
+    answer: CSP
+    competency: web-technologies
+    explanation: CSP adds a second layer.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

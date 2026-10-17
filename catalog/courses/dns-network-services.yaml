@@ -1,0 +1,86 @@
+id: dns-network-services
+title: DNS and Network Services
+description: Name resolution and the core services that keep networks working.
+difficulty: easy
+category: networking
+specialization: infrastructure
+estimated_minutes: 45
+objectives:
+- Understand how dns resolves names
+- Understand dhcp and core services
+prerequisites:
+- networking-fundamentals
+competency_prereqs: []
+tags:
+- networking
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: How DNS resolves names
+  difficulty: easy
+  minutes: 15
+  competency: dns-services
+  body: 'DNS maps names to addresses through recursive and authoritative servers. Record types matter:
+    A (IPv4), AAAA (IPv6), CNAME (alias), MX (mail), TXT (metadata), NS (delegation). `dig example.com
+    A` queries a record. Misconfigured DNS (open resolvers, stale records) causes both outages and security
+    issues.'
+  exercises:
+  - kind: mcq
+    prompt: Which record maps a name to an IPv4 address?
+    choices:
+    - MX
+    - A
+    - TXT
+    - NS
+    answer: A
+    competency: dns-services
+    explanation: An A record holds an IPv4 address.
+    points: 10
+    hints: []
+  hints:
+  - text: '`dig` is the query tool of choice.'
+  walkthrough: []
+- title: DHCP and core services
+  difficulty: easy
+  minutes: 10
+  competency: dns-services
+  body: DHCP leases addresses to hosts automatically. In HackLab labs, an isolated network can run its
+    own DHCP so guests get predictable addresses. Other core services — NTP (time), SMTP (mail) — each
+    have security-relevant configuration worth understanding.
+  exercises:
+  - kind: short_answer
+    prompt: Which service hands out IP addresses automatically?
+    answer: DHCP
+    competency: dns-services
+    explanation: DHCP leases IP configuration.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: DNS and Network Services Assessment
+  questions:
+  - kind: mcq
+    prompt: 'CNAME records provide:'
+    choices:
+    - Mail routing
+    - An alias to another name
+    - A text note
+    - Reverse lookup
+    answer: An alias to another name
+    competency: dns-services
+    explanation: CNAME aliases one name to another.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Tool to query DNS records from the CLI?
+    answer: dig
+    competency: dns-services
+    explanation: '`dig` queries DNS.'
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

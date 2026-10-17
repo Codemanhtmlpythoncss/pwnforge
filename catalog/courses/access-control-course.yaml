@@ -1,0 +1,88 @@
+id: access-control-course
+title: Access Control
+description: Authorisation models and enforcing them correctly.
+difficulty: intermediate
+category: web-security
+specialization: web
+estimated_minutes: 50
+objectives:
+- Understand authentication vs authorisation
+- Understand idor and the confused deputy
+prerequisites:
+- web-application-security
+competency_prereqs:
+- access-control
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: web-security-lab
+version: 1.0.0
+lessons:
+- title: Authentication vs authorisation
+  difficulty: intermediate
+  minutes: 15
+  competency: access-control
+  body: Authentication proves *who* you are; authorisation decides *what* you may do. Broken access control
+    — missing server-side checks, IDs you can tamper with, trusting the client — is consistently among
+    the most common web risks. Every sensitive action must be checked server-side against the current
+    user.
+  exercises:
+  - kind: mcq
+    prompt: 'Authorisation decides:'
+    choices:
+    - Who you are
+    - What you may do
+    - Your IP
+    - Your browser
+    answer: What you may do
+    competency: access-control
+    explanation: Authorisation governs permitted actions.
+    points: 10
+    hints: []
+  hints:
+  - text: Never trust the client to enforce access.
+  walkthrough: []
+- title: IDOR and the confused deputy
+  difficulty: intermediate
+  minutes: 15
+  competency: access-control
+  body: 'Insecure Direct Object Reference (IDOR) lets a user access another''s object by changing an identifier
+    because the server failed to check ownership. The fix: always verify the current user is authorised
+    for the specific object, server-side, on every request. HackLab enforces per-user ownership on labs
+    and terminals for exactly this reason.'
+  exercises:
+  - kind: short_answer
+    prompt: Accessing another user's record by changing an id is called ___ (acronym).
+    answer: IDOR
+    competency: access-control
+    explanation: Insecure Direct Object Reference.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Access Control Assessment
+  questions:
+  - kind: mcq
+    prompt: Where must access checks happen?
+    choices:
+    - Client only
+    - Server-side
+    - In the cookie
+    - In DNS
+    answer: Server-side
+    competency: access-control
+    explanation: Authorisation must be enforced server-side.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Broken ___ control is a top web risk.
+    answer: access
+    competency: access-control
+    explanation: Broken access control.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

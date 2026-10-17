@@ -1,0 +1,86 @@
+id: web-technologies
+title: Web Technologies
+description: HTML, JavaScript, cookies and the browser security model.
+difficulty: beginner
+category: web-security
+specialization: web
+estimated_minutes: 50
+objectives:
+- Understand how the web fits together
+- Understand cookies and state
+prerequisites:
+- cybersecurity-fundamentals
+competency_prereqs: []
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: How the web fits together
+  difficulty: beginner
+  minutes: 15
+  competency: web-technologies
+  body: 'A browser requests resources over HTTP(S); servers return HTML, CSS and JavaScript. The browser
+    enforces the **same-origin policy**: scripts from one origin cannot freely read another origin''s
+    data. Cookies carry state (including sessions). Understanding origins, cookies and how the browser
+    isolates sites is the foundation of all web security.'
+  exercises:
+  - kind: mcq
+    prompt: 'The same-origin policy restricts:'
+    choices:
+    - CSS loading
+    - Cross-origin script data access
+    - Image sizes
+    - Cookie expiry
+    answer: Cross-origin script data access
+    competency: web-technologies
+    explanation: SOP stops scripts reading another origin's data.
+    points: 10
+    hints: []
+  hints:
+  - text: Origin = scheme + host + port.
+  walkthrough: []
+- title: Cookies and state
+  difficulty: beginner
+  minutes: 15
+  competency: session-management
+  body: 'HTTP is stateless, so applications track users with cookies. Security attributes matter: `Secure`
+    (HTTPS only), `HttpOnly` (not readable by JS), and `SameSite` (limits cross-site sending). Session
+    cookies should set all three appropriately to resist theft and cross-site request forgery.'
+  exercises:
+  - kind: short_answer
+    prompt: Cookie attribute that hides it from JavaScript?
+    answer: HttpOnly
+    competency: session-management
+    explanation: HttpOnly blocks JS access to the cookie.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Web Technologies Assessment
+  questions:
+  - kind: mcq
+    prompt: Which cookie flag limits cross-site sending?
+    choices:
+    - Secure
+    - HttpOnly
+    - SameSite
+    - Path
+    answer: SameSite
+    competency: session-management
+    explanation: SameSite controls cross-site cookie sending.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: scheme+host+port defines an ___
+    answer: origin
+    competency: web-technologies
+    explanation: That triple is the origin.
+    points: 10
+    hints: []
+  difficulty: beginner
+  passing_score: 70
+  description: ''

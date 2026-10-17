@@ -1,0 +1,68 @@
+id: memory-safety
+title: Memory Safety
+description: Memory-safety vulnerability classes and modern mitigations.
+difficulty: advanced
+category: reverse
+specialization: reverse
+estimated_minutes: 40
+objectives:
+- Understand classes and mitigations
+prerequisites:
+- reverse-engineering-fundamentals
+competency_prereqs: []
+tags:
+- reverse
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Classes and mitigations
+  difficulty: advanced
+  minutes: 20
+  competency: memory-safety
+  body: 'Memory-safety bugs (buffer overflows, use-after-free) arise in languages without automatic bounds/lifetime
+    checks. Modern mitigations — ASLR, DEP/NX, stack canaries, and memory-safe languages — raise the bar.
+    The durable fix is to prevent the bug class: bounds checking, safe APIs, and memory-safe languages
+    where possible.'
+  exercises:
+  - kind: mcq
+    prompt: 'A mitigation that randomises memory layout:'
+    choices:
+    - DEP
+    - ASLR
+    - Canary
+    - NX
+    answer: ASLR
+    competency: memory-safety
+    explanation: ASLR randomises addresses.
+    points: 10
+    hints: []
+  hints:
+  - text: The best fix removes the bug class entirely.
+  walkthrough: []
+assessment:
+  title: Memory Safety Assessment
+  questions:
+  - kind: short_answer
+    prompt: Mitigation that marks memory non-executable (acronym)?
+    answer: NX
+    competency: memory-safety
+    explanation: NX/DEP.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Durable fix for memory-safety bugs:'
+    choices:
+    - Bigger RAM
+    - Memory-safe languages / bounds checks
+    - Faster CPU
+    - More threads
+    answer: Memory-safe languages / bounds checks
+    competency: memory-safety
+    explanation: Prevent the class.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

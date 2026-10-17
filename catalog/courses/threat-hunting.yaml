@@ -1,0 +1,67 @@
+id: threat-hunting
+title: Threat Hunting
+description: Proactively search for intrusions with hypotheses.
+difficulty: advanced
+category: defensive
+specialization: defensive
+estimated_minutes: 40
+objectives:
+- Understand hypothesis-driven hunting
+prerequisites:
+- detection-engineering
+competency_prereqs: []
+tags:
+- defensive
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Hypothesis-driven hunting
+  difficulty: advanced
+  minutes: 20
+  competency: threat-hunting
+  body: Hunting assumes something may already be present and tests specific hypotheses ('if an attacker
+    used technique X, I would see Y'). You gather the relevant data, look for the expected artefacts,
+    and either confirm, refute or refine. Findings feed new detections so the hunt improves future coverage.
+  exercises:
+  - kind: mcq
+    prompt: 'Threat hunting is:'
+    choices:
+    - Waiting for alerts
+    - Hypothesis-driven proactive search
+    - Patching
+    - Scanning only
+    answer: Hypothesis-driven proactive search
+    competency: threat-hunting
+    explanation: Hunting is proactive and hypothesis-led.
+    points: 10
+    hints: []
+  hints:
+  - text: State the hypothesis before you look.
+  walkthrough: []
+assessment:
+  title: Threat Hunting Assessment
+  questions:
+  - kind: short_answer
+    prompt: Hunting is driven by a ___.
+    answer: hypothesis
+    competency: threat-hunting
+    explanation: Hypotheses guide hunts.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Hunt findings should become:'
+    choices:
+    - New detections
+    - Deleted logs
+    - Nothing
+    - Faster disks
+    answer: New detections
+    competency: threat-hunting
+    explanation: Feed results back into detection.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

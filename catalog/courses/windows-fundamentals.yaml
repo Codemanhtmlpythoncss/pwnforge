@@ -1,0 +1,85 @@
+id: windows-fundamentals
+title: Windows Fundamentals
+description: Windows OS concepts, the command line and PowerShell basics.
+difficulty: beginner
+category: windows
+specialization: infrastructure
+estimated_minutes: 50
+objectives:
+- Understand windows structure
+- Understand users, groups and privileges
+prerequisites:
+- cybersecurity-fundamentals
+competency_prereqs: []
+tags:
+- windows
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Windows structure
+  difficulty: beginner
+  minutes: 15
+  competency: windows-fundamentals
+  body: Windows organises configuration in the Registry (HKLM, HKCU hives) and stores users as SIDs. The
+    command line (`cmd`) and PowerShell both administer the system; PowerShell is object-oriented (`Get-Service`,
+    `Get-Process`). Understanding users, groups and the Registry is the basis for Windows security work.
+  exercises:
+  - kind: short_answer
+    prompt: PowerShell cmdlet to list running services (Get-____)
+    answer: Service
+    competency: windows-fundamentals
+    explanation: '`Get-Service` lists services.'
+    points: 10
+    hints: []
+  hints:
+  - text: PowerShell cmdlets follow Verb-Noun naming.
+  walkthrough: []
+- title: Users, groups and privileges
+  difficulty: beginner
+  minutes: 15
+  competency: windows-fundamentals
+  body: 'Local accounts and groups (Administrators, Users) govern access. Privileges (like SeDebugPrivilege)
+    grant specific capabilities. Just as on Linux, least privilege is key: day-to-day accounts should
+    not be local administrators.'
+  exercises:
+  - kind: mcq
+    prompt: Which group grants full local control?
+    choices:
+    - Users
+    - Guests
+    - Administrators
+    - Everyone
+    answer: Administrators
+    competency: windows-fundamentals
+    explanation: Administrators have full local control.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Windows Fundamentals Assessment
+  questions:
+  - kind: short_answer
+    prompt: Where does Windows store much of its configuration?
+    answer: Registry
+    competency: windows-fundamentals
+    explanation: The Registry holds configuration.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'PowerShell cmdlets are named:'
+    choices:
+    - Noun-Verb
+    - Verb-Noun
+    - all lowercase
+    - random
+    answer: Verb-Noun
+    competency: windows-fundamentals
+    explanation: Cmdlets use Verb-Noun.
+    points: 10
+    hints: []
+  difficulty: beginner
+  passing_score: 70
+  description: ''

@@ -1,0 +1,86 @@
+id: service-enumeration
+title: Service Enumeration
+description: Identify and fingerprint the services a host exposes.
+difficulty: easy
+category: methodology
+specialization: pentest
+estimated_minutes: 50
+objectives:
+- Understand from open port to service
+- Understand mapping the attack surface
+prerequisites:
+- reconnaissance
+- networking-fundamentals
+competency_prereqs: []
+tags:
+- methodology
+references: []
+os_requirements: []
+lab_id: network-basics-lab
+version: 1.0.0
+lessons:
+- title: From open port to service
+  difficulty: easy
+  minutes: 15
+  competency: service-enumeration
+  body: Enumeration turns 'port 8080 is open' into 'an HTTP server of version X with these endpoints'.
+    Banner text, response headers and default pages all help fingerprint a service. The more precisely
+    you identify a service, the more precisely you can assess and remediate it.
+  exercises:
+  - kind: mcq
+    prompt: 'Enumeration aims to:'
+    choices:
+    - Crash services
+    - Precisely identify services and versions
+    - Encrypt traffic
+    - Reset passwords
+    answer: Precisely identify services and versions
+    competency: service-enumeration
+    explanation: Identify services precisely.
+    points: 10
+    hints: []
+  hints:
+  - text: Headers and banners reveal software and versions.
+  walkthrough: []
+- title: Mapping the attack surface
+  difficulty: easy
+  minutes: 15
+  competency: service-enumeration
+  body: 'Compile services into an attack-surface map: for each, note version, exposure and known weaknesses
+    to check. This map drives the vulnerability-analysis phase and, defensively, tells you what to patch
+    or disable.'
+  exercises:
+  - kind: short_answer
+    prompt: Disabling an unused service reduces the attack ___.
+    answer: surface
+    competency: infrastructure-hardening
+    explanation: Fewer services = smaller surface.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Service Enumeration Assessment
+  questions:
+  - kind: mcq
+    prompt: 'A response header can reveal:'
+    choices:
+    - Nothing
+    - Software and version
+    - The CPU temperature
+    - Disk size
+    answer: Software and version
+    competency: service-enumeration
+    explanation: Headers often leak versions.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: 'Goal: build an attack-___ map.'
+    answer: surface
+    competency: service-enumeration
+    explanation: Attack-surface map.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

@@ -1,0 +1,87 @@
+id: api-security
+title: API Security
+description: Securing REST and GraphQL interfaces.
+difficulty: hard
+category: web-security
+specialization: web
+estimated_minutes: 55
+objectives:
+- Understand api authentication and authorisation
+- Understand rate limiting and schema discipline
+prerequisites:
+- access-control-course
+- authentication-security
+competency_prereqs: []
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: API authentication and authorisation
+  difficulty: hard
+  minutes: 20
+  competency: api-security
+  body: 'APIs need robust auth: tokens (e.g. OAuth2/JWT) validated on every request, with authorisation
+    checks per object and per action. Common failures: accepting unverified tokens, missing object-level
+    checks (the API equivalent of IDOR), and excessive data exposure where the API returns more than the
+    client needs.'
+  exercises:
+  - kind: mcq
+    prompt: '''Broken object level authorization'' is essentially:'
+    choices:
+    - A DNS bug
+    - IDOR for APIs
+    - A TLS bug
+    - A caching bug
+    answer: IDOR for APIs
+    competency: api-security
+    explanation: BOLA is object-level access control failure in APIs.
+    points: 10
+    hints: []
+  hints:
+  - text: Check every object on every request.
+  walkthrough: []
+- title: Rate limiting and schema discipline
+  difficulty: hard
+  minutes: 15
+  competency: api-security
+  body: APIs should enforce rate limits, validate request schemas strictly, and avoid returning internal
+    fields. For GraphQL, limit query depth/complexity to prevent resource exhaustion. Document and version
+    the API clearly.
+  exercises:
+  - kind: short_answer
+    prompt: Control that prevents API abuse by volume?
+    answer: rate limiting
+    competency: api-security
+    explanation: Rate limiting caps request volume.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: API Security Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Excessive data exposure means the API:'
+    choices:
+    - Is too slow
+    - Returns more than the client needs
+    - Uses UDP
+    - Lacks TLS
+    answer: Returns more than the client needs
+    competency: api-security
+    explanation: Return only what is needed.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: API equivalent of IDOR (acronym)?
+    answer: BOLA
+    competency: api-security
+    explanation: Broken Object Level Authorization.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

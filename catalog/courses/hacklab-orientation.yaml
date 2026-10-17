@@ -1,0 +1,130 @@
+id: hacklab-orientation
+title: HackLab Orientation
+description: 'Learn to use the HackLab platform: starting labs, using terminals, understanding isolated
+  networks, and working safely.'
+difficulty: orientation
+category: platform
+specialization: null
+estimated_minutes: 50
+objectives:
+- Navigate the HackLab interface
+- Start, stop and reset a disposable lab VM
+- Understand isolated lab networking and safe practice
+prerequisites: []
+competency_prereqs: []
+tags:
+- orientation
+- beginner
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Welcome to HackLab
+  difficulty: orientation
+  minutes: 10
+  competency: platform-orientation
+  body: "HackLab is a self-hosted training platform. You progress through **courses**\n(instructional\
+    \ content and assessments) and **labs** (disposable virtual\nmachines you interact with). This orientation\
+    \ explains the moving parts so the\nrest of your journey is smooth.\n\nKey ideas:\n\n- **Courses**\
+    \ teach concepts and track your progress and demonstrated\n  competencies server-side.\n- **Labs**\
+    \ spin up one or more VMs on an isolated virtual network. They are\n  *disposable*: resetting a lab\
+    \ returns it to a clean baseline without\n  affecting your learning progress.\n- **Difficulty levels**\
+    \ run from Orientation (0) to Mastery (7). You are guided\n  along a sensible path but may choose\
+    \ to attempt harder material early.\n\nNothing you do inside a lab touches your host machine or the\
+    \ public internet\nunless an administrator has explicitly enabled external connectivity."
+  exercises: []
+  hints:
+  - text: Your progress is stored on the server, not the browser.
+  - text: Labs are isolated by default — experiment freely.
+  walkthrough: []
+- title: Starting and resetting a lab
+  difficulty: orientation
+  minutes: 10
+  competency: platform-orientation
+  body: 'From the **Machine Catalogue** or a course''s **Lab Workspace**, press *Start*.
+
+    HackLab validates the profile, checks host capacity, creates a copy-on-write
+
+    disk overlay, defines the VM, attaches it to an isolated network, and starts
+
+    it. You will see real progress for each stage. A lab is only marked *ready*
+
+    once the hypervisor confirms the VM is actually running.
+
+
+    When you are finished, press *Stop* to free resources, or *Reset* to discard
+
+    all changes inside the VM and start again from the clean baseline. Resetting
+
+    rebuilds the disposable overlay; your course progress, flags and achievements
+
+    are untouched.'
+  exercises:
+  - title: Lifecycle order
+    prompt: Which happens LAST when starting a lab?
+    kind: mcq
+    answer: The lab is marked ready after the VM is confirmed running
+    competency: platform-orientation
+    explanation: Readiness is only reported after the hypervisor confirms the running state.
+    points: 10
+    choices:
+    - The overlay disk is created
+    - The VM is defined
+    - The lab is marked ready after the VM is confirmed running
+    - The network is created
+    hints: []
+    walkthrough: []
+  hints: []
+  walkthrough:
+  - title: Open the catalogue
+    detail: Go to Machine Catalogue and pick a profile marked Ready.
+  - title: Press Start
+    detail: Watch the staged progress bar.
+  - title: Use the terminal
+    detail: Open the in-browser terminal once the VM is running.
+  - title: Reset when done
+    detail: Press Reset to return to a clean baseline.
+- title: Working safely
+  difficulty: orientation
+  minutes: 10
+  competency: security-terminology
+  body: "Treat every vulnerable lab VM as potentially hostile: do not paste real\ncredentials into lab\
+    \ guests, and do not rely on a lab being connected to the\ninternet. The platform keeps labs isolated\
+    \ for your safety and the host's.\n\nGood habits:\n\n- Take notes as you work — labs are disposable\
+    \ but your notes are not.\n- Prefer stopping labs you are not using to conserve CPU and RAM.\n- Use\
+    \ the optional hints and walkthroughs when you are stuck; using a hint is\n  never penalised, it is\
+    \ simply recorded so recommendations can adapt."
+  exercises: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Orientation Check
+  questions:
+  - kind: mcq
+    prompt: What does resetting a lab affect?
+    choices:
+    - Your course progress
+    - Only the VM's disk state
+    - Your achievements
+    - Other users' labs
+    answer: Only the VM's disk state
+    competency: platform-orientation
+    explanation: Resets rebuild the disposable disk; learner progress is independent.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'By default, lab networks are:'
+    choices:
+    - Bridged to your LAN
+    - Isolated
+    - On the public internet
+    - Shared between users
+    answer: Isolated
+    competency: platform-orientation
+    explanation: Isolated networking is the safe default.
+    points: 10
+    hints: []
+  difficulty: orientation
+  passing_score: 60
+  description: ''

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "category",
+    "difficulty",
+    "os_family",
+    "vcpu",
+    "memory_mb",
+    "disk_gb"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "difficulty": {
+      "enum": [
+        "orientation",
+        "beginner",
+        "easy",
+        "intermediate",
+        "hard",
+        "advanced",
+        "expert",
+        "mastery"
+      ]
+    },
+    "vcpu": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "memory_mb": {
+      "type": "integer",
+      "minimum": 128
+    },
+    "disk_gb": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

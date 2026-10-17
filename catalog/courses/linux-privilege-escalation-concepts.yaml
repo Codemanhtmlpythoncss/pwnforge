@@ -1,0 +1,88 @@
+id: linux-privilege-escalation-concepts
+title: Linux Privilege-Escalation Concepts
+description: Understand how Linux privilege boundaries are weakened and hardened.
+difficulty: hard
+category: methodology
+specialization: pentest
+estimated_minutes: 60
+objectives:
+- Understand where boundaries break
+- Understand hardening against it
+prerequisites:
+- linux-administration
+- service-enumeration
+competency_prereqs:
+- linux-administration
+tags:
+- methodology
+references: []
+os_requirements: []
+lab_id: linux-admin-lab
+version: 1.0.0
+lessons:
+- title: Where boundaries break
+  difficulty: hard
+  minutes: 20
+  competency: linux-privesc
+  body: 'Privilege escalation exploits a misconfiguration that lets a low-privilege user gain more rights:
+    over-permissive sudo rules, SUID binaries used unsafely, writable paths used by root services, and
+    exposed credentials. The defensive goal is to enumerate these conditions and remove them — least privilege,
+    minimal SUID, careful sudoers.'
+  exercises:
+  - kind: mcq
+    prompt: Which is a common Linux privesc condition?
+    choices:
+    - Read-only /etc
+    - Over-permissive sudo rules
+    - Disabled services
+    - A firewall
+    answer: Over-permissive sudo rules
+    competency: linux-privesc
+    explanation: Broad sudo rules are a classic path.
+    points: 10
+    hints: []
+  hints:
+  - text: Enumerate sudo, SUID and writable root-run paths.
+  walkthrough: []
+- title: Hardening against it
+  difficulty: hard
+  minutes: 20
+  competency: infrastructure-hardening
+  body: 'Remediation: audit `sudo -l` capability, review SUID/SGID binaries, ensure service files and
+    their directories are not writable by non-root, rotate and protect credentials, and keep the kernel/packages
+    patched. Verify each fix.'
+  exercises:
+  - kind: short_answer
+    prompt: 'Principle to apply to limit privesc: least ___.'
+    answer: privilege
+    competency: linux-privesc
+    explanation: Least privilege limits escalation.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Linux Privilege-Escalation Concepts Assessment
+  questions:
+  - kind: mcq
+    prompt: 'SUID binaries are risky when they:'
+    choices:
+    - Are small
+    - Can be abused to run as owner (often root)
+    - Use colour
+    - Log a lot
+    answer: Can be abused to run as owner (often root)
+    competency: linux-privesc
+    explanation: Unsafe SUID use runs as the file owner.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Core principle against privesc?
+    answer: least privilege
+    competency: linux-privesc
+    explanation: Least privilege.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

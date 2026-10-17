@@ -1,0 +1,86 @@
+id: python-for-security
+title: Python for Security
+description: Use Python to build small security tools and automate analysis.
+difficulty: intermediate
+category: scripting
+specialization: reverse
+estimated_minutes: 55
+objectives:
+- Understand python essentials for tooling
+- Understand parsing and reporting
+prerequisites:
+- bash-for-security
+competency_prereqs: []
+tags:
+- scripting
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Python essentials for tooling
+  difficulty: intermediate
+  minutes: 20
+  competency: python-security
+  body: 'Python''s standard library covers most security tasks: `socket` for network I/O, `hashlib` for
+    hashing, `re` for parsing, `argparse` for CLIs, `requests` for HTTP. Write small, testable functions.
+    Prefer `subprocess.run([...])` with a list (never `shell=True` on untrusted input) to avoid command
+    injection.'
+  exercises:
+  - kind: mcq
+    prompt: Safest way to call an external command on untrusted input?
+    choices:
+    - os.system(s)
+    - subprocess.run([...]) with a list and no shell
+    - eval(s)
+    - shell=True
+    answer: subprocess.run([...]) with a list and no shell
+    competency: secure-coding
+    explanation: A list argv avoids shell interpretation.
+    points: 10
+    hints: []
+  hints:
+  - text: Avoid shell=True with external input.
+  walkthrough: []
+- title: Parsing and reporting
+  difficulty: intermediate
+  minutes: 15
+  competency: python-security
+  body: Security data is often semi-structured. Use `csv`, `json` and `re` to parse logs and emit clean
+    reports. Hashing with `hashlib.sha256` lets you verify file integrity. Keep secrets out of code and
+    logs.
+  exercises:
+  - kind: short_answer
+    prompt: stdlib module for SHA-256 hashing?
+    answer: hashlib
+    competency: python-security
+    explanation: '`hashlib` provides SHA-256.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Python for Security Assessment
+  questions:
+  - kind: mcq
+    prompt: Which avoids command injection?
+    choices:
+    - shell=True
+    - argv list without a shell
+    - eval
+    - os.system
+    answer: argv list without a shell
+    competency: secure-coding
+    explanation: Passing an argv list avoids shell parsing.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Module for regular expressions?
+    answer: re
+    competency: python-security
+    explanation: '`re` handles regular expressions.'
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

@@ -1,0 +1,67 @@
+id: siem-fundamentals
+title: SIEM Fundamentals
+description: Centralised collection, normalisation and alerting.
+difficulty: intermediate
+category: defensive
+specialization: defensive
+estimated_minutes: 35
+objectives:
+- Understand why centralise
+prerequisites:
+- log-analysis
+competency_prereqs: []
+tags:
+- defensive
+references: []
+os_requirements: []
+lab_id: defensive-monitoring-lab
+version: 1.0.0
+lessons:
+- title: Why centralise
+  difficulty: intermediate
+  minutes: 15
+  competency: siem-fundamentals
+  body: A SIEM collects logs from many sources, normalises them to a common schema, and lets you search
+    and alert across the estate. Centralisation defeats attempts to hide by clearing one host's logs and
+    enables correlation rules that no single host could evaluate.
+  exercises:
+  - kind: mcq
+    prompt: 'A key SIEM benefit:'
+    choices:
+    - Faster CPUs
+    - Cross-source correlation and tamper resistance
+    - More disk
+    - Nicer fonts
+    answer: Cross-source correlation and tamper resistance
+    competency: siem-fundamentals
+    explanation: Centralisation enables correlation.
+    points: 10
+    hints: []
+  hints:
+  - text: Normalisation makes cross-source rules possible.
+  walkthrough: []
+assessment:
+  title: SIEM Fundamentals Assessment
+  questions:
+  - kind: short_answer
+    prompt: SIEM normalises logs to a common ___.
+    answer: schema
+    competency: siem-fundamentals
+    explanation: A shared schema.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Forwarding logs off-host helps against:'
+    choices:
+    - Slow disks
+    - Local log tampering
+    - DNS
+    - TLS
+    answer: Local log tampering
+    competency: siem-fundamentals
+    explanation: Off-host copies resist tampering.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

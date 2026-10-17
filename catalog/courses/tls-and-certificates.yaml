@@ -1,0 +1,69 @@
+id: tls-and-certificates
+title: TLS and Certificates
+description: Transport security, certificates and public-key infrastructure.
+difficulty: intermediate
+category: crypto
+specialization: crypto
+estimated_minutes: 40
+objectives:
+- Understand how tls protects a connection
+prerequisites:
+- cryptography-fundamentals
+- http-https
+competency_prereqs: []
+tags:
+- crypto
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: How TLS protects a connection
+  difficulty: intermediate
+  minutes: 20
+  competency: tls-certificates
+  body: TLS authenticates the server via a certificate signed by a trusted CA, then negotiates keys to
+    encrypt and integrity-protect the session. Certificate validation (chain, hostname, expiry, revocation)
+    is what stops impersonation. Misconfigurations — expired certs, weak ciphers, missing validation —
+    undermine the whole guarantee.
+  exercises:
+  - kind: mcq
+    prompt: 'Certificate validation prevents:'
+    choices:
+    - Slow pages
+    - Server impersonation
+    - Large downloads
+    - DNS caching
+    answer: Server impersonation
+    competency: tls-certificates
+    explanation: Validation binds the key to the hostname.
+    points: 10
+    hints: []
+  hints:
+  - text: Chain + hostname + expiry + revocation all matter.
+  walkthrough: []
+assessment:
+  title: TLS and Certificates Assessment
+  questions:
+  - kind: short_answer
+    prompt: Who signs a server certificate (2-letter)?
+    answer: CA
+    competency: tls-certificates
+    explanation: A Certificate Authority.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'A client must validate the cert''s:'
+    choices:
+    - Colour
+    - Hostname and chain
+    - File size
+    - Port
+    answer: Hostname and chain
+    competency: tls-certificates
+    explanation: Validate hostname and chain.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

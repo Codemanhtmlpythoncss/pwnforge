@@ -1,0 +1,87 @@
+id: file-upload-security
+title: File Upload Security
+description: Handling uploaded content without creating execution or traversal risks.
+difficulty: hard
+category: web-security
+specialization: web
+estimated_minutes: 55
+objectives:
+- Understand why uploads are dangerous
+- Understand filenames and traversal
+prerequisites:
+- web-application-security
+competency_prereqs:
+- input-validation
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Why uploads are dangerous
+  difficulty: hard
+  minutes: 20
+  competency: file-upload-security
+  body: 'Uploads combine several risks: a file that can be executed by the server, a path that escapes
+    the intended directory, and content that is actually a different type than claimed. Defences: validate
+    type by content not extension, store outside the web root, generate server-side filenames, and never
+    execute uploaded content.'
+  exercises:
+  - kind: mcq
+    prompt: 'Safest place to store uploads:'
+    choices:
+    - Inside the web root
+    - Outside the web root, non-executable
+    - In /etc
+    - In the DB schema
+    answer: Outside the web root, non-executable
+    competency: file-upload-security
+    explanation: Keep uploads out of executable web paths.
+    points: 10
+    hints: []
+  hints:
+  - text: Trust content inspection, not the file extension.
+  walkthrough: []
+- title: Filenames and traversal
+  difficulty: hard
+  minutes: 15
+  competency: path-traversal
+  body: User-supplied filenames can contain `../` sequences aiming to write outside the target directory.
+    Generate your own safe names and resolve/validate the final path against the intended base directory
+    before writing.
+  exercises:
+  - kind: short_answer
+    prompt: The sequence used to escape directories is ___ (two dots slash).
+    answer: ../
+    competency: path-traversal
+    explanation: '`../` climbs directories.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: File Upload Security Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Validate file type by:'
+    choices:
+    - Extension
+    - Content/magic bytes
+    - Filename length
+    - Upload speed
+    answer: Content/magic bytes
+    competency: file-upload-security
+    explanation: Inspect content, not the extension.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Store uploads ___ the web root (outside/inside)?
+    answer: outside
+    competency: file-upload-security
+    explanation: Outside the web root.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

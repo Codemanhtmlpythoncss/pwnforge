@@ -1,0 +1,67 @@
+id: incident-response
+title: Incident Response
+description: A structured process for handling security incidents.
+difficulty: intermediate
+category: defensive
+specialization: defensive
+estimated_minutes: 40
+objectives:
+- Understand the ir lifecycle
+prerequisites:
+- log-analysis
+competency_prereqs: []
+tags:
+- defensive
+references: []
+os_requirements: []
+lab_id: defensive-monitoring-lab
+version: 1.0.0
+lessons:
+- title: The IR lifecycle
+  difficulty: intermediate
+  minutes: 20
+  competency: incident-response
+  body: 'A common model: Preparation → Identification → Containment → Eradication → Recovery → Lessons
+    Learned. Containment limits damage; eradication removes the cause; recovery restores service safely.
+    Preparation (plans, access, logging) determines how well the rest goes.'
+  exercises:
+  - kind: mcq
+    prompt: Which phase limits ongoing damage?
+    choices:
+    - Recovery
+    - Containment
+    - Lessons learned
+    - Preparation
+    answer: Containment
+    competency: incident-response
+    explanation: Containment stops the bleeding.
+    points: 10
+    hints: []
+  hints:
+  - text: Prepare before, learn after.
+  walkthrough: []
+assessment:
+  title: Incident Response Assessment
+  questions:
+  - kind: short_answer
+    prompt: Phase after eradication?
+    answer: recovery
+    competency: incident-response
+    explanation: Recovery follows eradication.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'The final phase is:'
+    choices:
+    - Identification
+    - Lessons learned
+    - Containment
+    - Detection
+    answer: Lessons learned
+    competency: incident-response
+    explanation: Review closes the loop.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

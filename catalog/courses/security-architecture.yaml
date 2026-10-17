@@ -1,0 +1,69 @@
+id: security-architecture
+title: Security Architecture
+description: Design systems that are secure by construction.
+difficulty: advanced
+category: secure-dev
+specialization: secdev
+estimated_minutes: 40
+objectives:
+- Understand principles of secure design
+prerequisites:
+- secure-development-lifecycle
+- network-segmentation
+competency_prereqs: []
+tags:
+- secure-dev
+- secure-dev
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Principles of secure design
+  difficulty: advanced
+  minutes: 20
+  competency: security-architecture
+  body: Secure architecture applies least privilege, defence in depth, secure defaults, fail-closed behaviour,
+    and clear trust boundaries. Design decisions — where to place controls, how to segment, how components
+    authenticate — determine how resilient a system is before a single line of code is reviewed.
+  exercises:
+  - kind: mcq
+    prompt: 'Secure-by-default means:'
+    choices:
+    - Features off safely by default
+    - Everything open
+    - No logging
+    - No auth
+    answer: Features off safely by default
+    competency: security-architecture
+    explanation: Safe defaults out of the box.
+    points: 10
+    hints: []
+  hints:
+  - text: Draw the trust boundaries explicitly.
+  walkthrough: []
+assessment:
+  title: Security Architecture Assessment
+  questions:
+  - kind: short_answer
+    prompt: Architecture should define clear trust ___.
+    answer: boundaries
+    competency: security-architecture
+    explanation: Trust boundaries.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Resilience is decided largely at:'
+    choices:
+    - Runtime only
+    - Design time
+    - Marketing
+    - Never
+    answer: Design time
+    competency: security-architecture
+    explanation: Architecture decides resilience early.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

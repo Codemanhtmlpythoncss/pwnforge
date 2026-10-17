@@ -1,0 +1,67 @@
+id: cryptography-fundamentals
+title: Cryptography Fundamentals
+description: Symmetric and asymmetric cryptography, hashing and their correct use.
+difficulty: intermediate
+category: crypto
+specialization: crypto
+estimated_minutes: 40
+objectives:
+- Understand symmetric, asymmetric, hashing
+prerequisites:
+- cybersecurity-fundamentals
+competency_prereqs: []
+tags:
+- crypto
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Symmetric, asymmetric, hashing
+  difficulty: intermediate
+  minutes: 20
+  competency: crypto-fundamentals
+  body: Symmetric crypto (AES) uses one shared key for speed; asymmetric crypto (RSA, ECC) uses a key
+    pair to solve key distribution and enable signatures. Hashes (SHA-256) are one-way integrity checks,
+    not encryption. Using the right primitive for the job — and never rolling your own — is the core discipline.
+  exercises:
+  - kind: mcq
+    prompt: 'A hash function provides:'
+    choices:
+    - Confidentiality
+    - One-way integrity
+    - Key exchange
+    - Compression
+    answer: One-way integrity
+    competency: crypto-fundamentals
+    explanation: Hashes verify integrity, they do not encrypt.
+    points: 10
+    hints: []
+  hints:
+  - text: Hashing is not encryption.
+  walkthrough: []
+assessment:
+  title: Cryptography Fundamentals Assessment
+  questions:
+  - kind: mcq
+    prompt: Which solves key distribution?
+    choices:
+    - Symmetric
+    - Asymmetric
+    - Hashing
+    - Base64
+    answer: Asymmetric
+    competency: crypto-fundamentals
+    explanation: Public-key crypto helps distribute keys.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Never roll your own ___.
+    answer: crypto
+    competency: crypto-fundamentals
+    explanation: Use vetted libraries.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

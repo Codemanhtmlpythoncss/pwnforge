@@ -1,0 +1,106 @@
+id: networking-fundamentals
+title: Networking Fundamentals
+description: IP addressing, ports, protocols and routing — how machines talk.
+difficulty: beginner
+category: networking
+specialization: infrastructure
+estimated_minutes: 60
+objectives:
+- Understand ip addressing and subnets
+- Understand ports and protocols
+- Understand routing and the gateway
+prerequisites:
+- cybersecurity-fundamentals
+competency_prereqs: []
+tags:
+- networking
+references: []
+os_requirements: []
+lab_id: network-basics-lab
+version: 1.0.0
+lessons:
+- title: IP addressing and subnets
+  difficulty: beginner
+  minutes: 15
+  competency: networking-fundamentals
+  body: An IPv4 address (e.g. `10.0.5.23`) plus a subnet mask (`/24`) defines a host and the network it
+    belongs to. A `/24` has 256 addresses (254 usable). Hosts on the same subnet talk directly; otherwise
+    traffic goes via a gateway/router. Private ranges (`10/8`, `172.16/12`, `192.168/16`) are used inside
+    networks like HackLab's isolated labs.
+  exercises:
+  - kind: short_answer
+    prompt: How many usable hosts in a /24?
+    answer: '254'
+    competency: networking-fundamentals
+    explanation: 256 total minus network and broadcast.
+    points: 10
+    hints: []
+  hints:
+  - text: Usable = 2^(32-prefix) - 2.
+  walkthrough: []
+- title: Ports and protocols
+  difficulty: beginner
+  minutes: 15
+  competency: networking-fundamentals
+  body: 'TCP and UDP multiplex services using port numbers. Well-known ports: 22 SSH, 53 DNS, 80 HTTP,
+    443 HTTPS, 445 SMB, 3389 RDP. TCP is connection-oriented (handshake, ordered, reliable); UDP is connectionless.
+    Identifying which ports are open and what speaks on them is the start of any enumeration.'
+  exercises:
+  - kind: short_answer
+    prompt: Default port for HTTPS?
+    answer: '443'
+    competency: networking-fundamentals
+    explanation: HTTPS listens on TCP 443.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+- title: Routing and the gateway
+  difficulty: beginner
+  minutes: 10
+  competency: networking-fundamentals
+  body: A host's routing table decides where packets go. The *default gateway* handles anything not on
+    the local subnet. `ip route` shows the table; `ip addr` shows interfaces/addresses. In segmented networks,
+    routing and firewall rules together decide which zones can reach each other.
+  exercises:
+  - kind: command
+    prompt: Command to show the routing table (iproute2)?
+    answer: ip route
+    competency: networking-fundamentals
+    explanation: '`ip route` prints routes.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Networking Fundamentals Assessment
+  questions:
+  - kind: short_answer
+    prompt: Default SSH port?
+    answer: '22'
+    competency: networking-fundamentals
+    explanation: SSH uses TCP 22.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: Which is connectionless?
+    choices:
+    - TCP
+    - UDP
+    - ICMP handshake
+    - TLS
+    answer: UDP
+    competency: networking-fundamentals
+    explanation: UDP is connectionless.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Usable hosts in a /28?
+    answer: '14'
+    competency: networking-fundamentals
+    explanation: 2^4 - 2 = 14.
+    points: 10
+    hints: []
+  difficulty: beginner
+  passing_score: 70
+  description: ''

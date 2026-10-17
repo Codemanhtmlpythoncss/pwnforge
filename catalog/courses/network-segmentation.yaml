@@ -1,0 +1,68 @@
+id: network-segmentation
+title: Network Segmentation
+description: Divide networks into isolated zones.
+difficulty: intermediate
+category: infrastructure
+specialization: defensive
+estimated_minutes: 35
+objectives:
+- Understand zones and blast radius
+prerequisites:
+- firewall-configuration
+competency_prereqs: []
+tags:
+- infrastructure
+- infrastructure
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Zones and blast radius
+  difficulty: intermediate
+  minutes: 15
+  competency: network-segmentation
+  body: Segmentation splits a network into zones (e.g. user, server, management) with controlled flows
+    between them, so a compromise in one zone does not reach all others. HackLab's isolated lab networks
+    are a microcosm of this principle.
+  exercises:
+  - kind: mcq
+    prompt: 'Segmentation primarily limits:'
+    choices:
+    - Bandwidth
+    - Blast radius of a compromise
+    - Latency
+    - Cost
+    answer: Blast radius of a compromise
+    competency: network-segmentation
+    explanation: Zones contain compromise.
+    points: 10
+    hints: []
+  hints:
+  - text: Contain, don't flatten.
+  walkthrough: []
+assessment:
+  title: Network Segmentation Assessment
+  questions:
+  - kind: short_answer
+    prompt: Segmentation reduces the ___ radius.
+    answer: blast
+    competency: network-segmentation
+    explanation: Blast radius.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Management interfaces should be:'
+    choices:
+    - On the user VLAN
+    - In an isolated zone
+    - Public
+    - Unprotected
+    answer: In an isolated zone
+    competency: network-segmentation
+    explanation: Isolate management.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

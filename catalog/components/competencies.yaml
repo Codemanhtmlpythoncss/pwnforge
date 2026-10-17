@@ -1,0 +1,308 @@
+- domain: linux
+  key: linux-fundamentals
+  name: Linux Fundamentals
+  description: Shell, files, permissions, processes.
+- domain: linux
+  key: linux-administration
+  name: Linux Administration
+  description: Services, users, packages, systemd.
+- domain: linux
+  key: linux-enumeration
+  name: Linux Enumeration
+  description: Discovering users, services and misconfig.
+- domain: linux
+  key: linux-privesc
+  name: Linux Privilege Concepts
+  description: Understanding Linux privilege boundaries.
+- domain: linux
+  key: bash-scripting
+  name: Bash Scripting
+  description: Automating tasks safely with Bash.
+- domain: networking
+  key: networking-fundamentals
+  name: Networking Fundamentals
+  description: IP, ports, protocols, routing.
+- domain: networking
+  key: tcpip-analysis
+  name: TCP/IP & Packet Analysis
+  description: Reading and interpreting packet captures.
+- domain: networking
+  key: dns-services
+  name: DNS & Network Services
+  description: Name resolution and core services.
+- domain: networking
+  key: network-segmentation
+  name: Network Segmentation
+  description: Designing isolated network zones.
+- domain: networking
+  key: firewalls
+  name: Firewall Configuration
+  description: Packet filtering and rule design.
+- domain: web
+  key: http-fundamentals
+  name: HTTP Fundamentals
+  description: Requests, responses, headers, methods.
+- domain: web
+  key: web-technologies
+  name: Web Technologies
+  description: HTML, JS, cookies, same-origin model.
+- domain: web
+  key: input-validation
+  name: Input Validation
+  description: Trust boundaries and safe parsing.
+- domain: web
+  key: authn-security
+  name: Authentication Security
+  description: Credential handling and auth flows.
+- domain: web
+  key: session-management
+  name: Session Management
+  description: Session lifecycle and protection.
+- domain: web
+  key: access-control
+  name: Access Control
+  description: Authorisation models and enforcement.
+- domain: web
+  key: sql-injection
+  name: SQL Injection (Lab)
+  description: Recognising and remediating SQLi.
+- domain: web
+  key: xss
+  name: Cross-Site Scripting
+  description: Recognising and remediating XSS.
+- domain: web
+  key: api-security
+  name: API Security
+  description: Securing REST/GraphQL interfaces.
+- domain: web
+  key: file-upload-security
+  name: File Upload Security
+  description: Safe handling of uploaded content.
+- domain: web
+  key: ssrf
+  name: Server-Side Request Forgery
+  description: Recognising and preventing SSRF.
+- domain: web
+  key: path-traversal
+  name: Path Traversal
+  description: Preventing directory traversal.
+- domain: web
+  key: advanced-web
+  name: Advanced Web Security
+  description: Chained vulnerabilities and assessment.
+- domain: windows
+  key: windows-fundamentals
+  name: Windows Fundamentals
+  description: Windows OS and command-line basics.
+- domain: windows
+  key: windows-administration
+  name: Windows Administration
+  description: Users, services, policies.
+- domain: windows
+  key: windows-privesc
+  name: Windows Privilege Concepts
+  description: Windows privilege boundaries.
+- domain: identity
+  key: ldap-directory
+  name: LDAP & Directory Services
+  description: Directory concepts and queries.
+- domain: identity
+  key: ad-fundamentals
+  name: Active Directory Fundamentals
+  description: Domains, OUs, trusts.
+- domain: identity
+  key: kerberos
+  name: Kerberos Concepts
+  description: Ticketing and authentication flows.
+- domain: identity
+  key: group-policy
+  name: Group Policy
+  description: Policy application and hardening.
+- domain: identity
+  key: identity-security
+  name: Identity Security
+  description: IAM weaknesses and defence.
+- domain: methodology
+  key: pentest-methodology
+  name: Pentest Methodology
+  description: Structured, authorised testing.
+- domain: methodology
+  key: reconnaissance
+  name: Reconnaissance
+  description: Authorised information gathering.
+- domain: methodology
+  key: service-enumeration
+  name: Service Enumeration
+  description: Identifying running services.
+- domain: methodology
+  key: vuln-assessment
+  name: Vulnerability Assessment
+  description: Finding and verifying weaknesses.
+- domain: methodology
+  key: vuln-remediation
+  name: Vulnerability Remediation
+  description: Fixing and verifying fixes.
+- domain: methodology
+  key: security-reporting
+  name: Security Reporting
+  description: Clear professional reporting.
+- domain: crypto
+  key: crypto-fundamentals
+  name: Cryptography Fundamentals
+  description: Symmetric/asymmetric, hashing.
+- domain: crypto
+  key: tls-certificates
+  name: TLS & Certificates
+  description: Transport security and PKI.
+- domain: crypto
+  key: password-security
+  name: Password Security
+  description: Hashing, policy, auditing.
+- domain: defensive
+  key: log-analysis
+  name: Log Analysis
+  description: Reading and correlating logs.
+- domain: defensive
+  key: siem-fundamentals
+  name: SIEM Fundamentals
+  description: Centralised monitoring.
+- domain: defensive
+  key: detection-engineering
+  name: Detection Engineering
+  description: Writing detection rules.
+- domain: defensive
+  key: threat-hunting
+  name: Threat Hunting
+  description: Hypothesis-driven investigation.
+- domain: defensive
+  key: incident-response
+  name: Incident Response
+  description: Structured response process.
+- domain: defensive
+  key: network-monitoring
+  name: Network Monitoring
+  description: Observing network behaviour.
+- domain: defensive
+  key: infrastructure-hardening
+  name: Infrastructure Hardening
+  description: Reducing attack surface.
+- domain: defensive
+  key: threat-intelligence
+  name: Threat Intelligence
+  description: Using intel effectively.
+- domain: forensics
+  key: evidence-handling
+  name: Evidence Handling
+  description: Chain of custody and integrity.
+- domain: forensics
+  key: filesystems
+  name: Filesystems
+  description: Filesystem structures and metadata.
+- domain: forensics
+  key: disk-forensics
+  name: Disk Forensics
+  description: Recovering and examining disk artefacts.
+- domain: forensics
+  key: timeline-analysis
+  name: Timeline Analysis
+  description: Reconstructing event sequences.
+- domain: forensics
+  key: memory-forensics
+  name: Memory Forensics
+  description: Analysing volatile memory.
+- domain: forensics
+  key: network-evidence
+  name: Network Evidence
+  description: Analysing captured traffic.
+- domain: reverse
+  key: programming-fundamentals
+  name: Programming Fundamentals
+  description: Core programming concepts.
+- domain: reverse
+  key: python-security
+  name: Python for Security
+  description: Scripting security tooling.
+- domain: reverse
+  key: c-fundamentals
+  name: C Fundamentals
+  description: Low-level language basics.
+- domain: reverse
+  key: computer-architecture
+  name: Computer Architecture
+  description: CPU, memory, registers.
+- domain: reverse
+  key: assembly
+  name: Assembly Fundamentals
+  description: Reading disassembly.
+- domain: reverse
+  key: debugging
+  name: Debugging
+  description: Dynamic analysis with debuggers.
+- domain: reverse
+  key: binary-formats
+  name: Binary Formats
+  description: ELF/PE structure.
+- domain: reverse
+  key: reverse-engineering
+  name: Reverse Engineering
+  description: Static and dynamic RE.
+- domain: reverse
+  key: memory-safety
+  name: Memory Safety
+  description: Memory-safety classes and mitigations.
+- domain: reverse
+  key: malware-analysis
+  name: Malware Analysis
+  description: Safe analysis of malicious code.
+- domain: cloud
+  key: docker-security
+  name: Docker Security
+  description: Container isolation and images.
+- domain: cloud
+  key: container-networking
+  name: Container Networking
+  description: Container network models.
+- domain: cloud
+  key: kubernetes-security
+  name: Kubernetes Security
+  description: Cluster and RBAC security.
+- domain: cloud
+  key: cloud-fundamentals
+  name: Cloud Security Fundamentals
+  description: Shared responsibility, IAM.
+- domain: cloud
+  key: iac-security
+  name: Infrastructure-as-Code Security
+  description: Securing declarative infra.
+- domain: cloud
+  key: network-policies
+  name: Network Policies
+  description: Policy-based micro-segmentation.
+- domain: secdev
+  key: secure-coding
+  name: Secure Coding
+  description: Writing resilient code.
+- domain: secdev
+  key: secure-sdlc
+  name: Secure Development
+  description: Security across the SDLC.
+- domain: secdev
+  key: security-automation
+  name: Security Automation
+  description: Automating security checks.
+- domain: secdev
+  key: security-architecture
+  name: Security Architecture
+  description: Designing secure systems.
+- domain: general
+  key: security-terminology
+  name: Security Terminology
+  description: Core vocabulary and concepts.
+- domain: general
+  key: platform-orientation
+  name: Platform Orientation
+  description: Using the HackLab platform.
+- domain: general
+  key: wireless-security
+  name: Wireless Security
+  description: Wi-Fi security concepts.

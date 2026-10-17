@@ -1,0 +1,68 @@
+id: threat-intelligence
+title: Threat Intelligence
+description: Use intelligence to prioritise defence.
+difficulty: hard
+category: defensive
+specialization: defensive
+estimated_minutes: 35
+objectives:
+- Understand from data to decisions
+prerequisites:
+- detection-engineering
+competency_prereqs: []
+tags:
+- defensive
+- defensive
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: From data to decisions
+  difficulty: hard
+  minutes: 15
+  competency: threat-intelligence
+  body: 'Threat intelligence turns raw indicators and reports into decisions: which threats are relevant
+    to you, what behaviours to detect, and where to invest. Prioritise by relevance to your environment;
+    map adversary techniques to your detections and gaps.'
+  exercises:
+  - kind: mcq
+    prompt: 'Good intel is prioritised by:'
+    choices:
+    - Volume
+    - Relevance to your environment
+    - Age
+    - Source count
+    answer: Relevance to your environment
+    competency: threat-intelligence
+    explanation: Relevance drives value.
+    points: 10
+    hints: []
+  hints:
+  - text: Relevance over volume.
+  walkthrough: []
+assessment:
+  title: Threat Intelligence Assessment
+  questions:
+  - kind: short_answer
+    prompt: Map intel techniques to your detection ___.
+    answer: gaps
+    competency: threat-intelligence
+    explanation: Find coverage gaps.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Intelligence should drive:'
+    choices:
+    - Random changes
+    - Prioritised defence
+    - Nothing
+    - More noise
+    answer: Prioritised defence
+    competency: threat-intelligence
+    explanation: Intel informs priorities.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

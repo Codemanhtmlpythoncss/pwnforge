@@ -1,0 +1,88 @@
+id: web-application-security
+title: Web Application Security
+description: The common classes of web vulnerability and how to prevent them.
+difficulty: intermediate
+category: web-security
+specialization: web
+estimated_minutes: 55
+objectives:
+- Understand trust boundaries and input
+- Understand the owasp top 10 mindset
+prerequisites:
+- http-https
+competency_prereqs:
+- http-fundamentals
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: web-security-lab
+version: 1.0.0
+lessons:
+- title: Trust boundaries and input
+  difficulty: intermediate
+  minutes: 20
+  competency: input-validation
+  body: 'Most web vulnerabilities come from mixing untrusted input with a trusted context. The defensive
+    mental model: identify every trust boundary (user → app, app → database, app → OS, app → browser)
+    and ensure data is validated on input and correctly encoded for each output context. This single idea
+    underlies SQLi, XSS, command injection and more.'
+  exercises:
+  - kind: mcq
+    prompt: 'The root cause of injection flaws is:'
+    choices:
+    - Slow servers
+    - Mixing untrusted data with a trusted context
+    - Too many headers
+    - Weak CPUs
+    answer: Mixing untrusted data with a trusted context
+    competency: input-validation
+    explanation: Injection arises when data crosses into a command/markup context.
+    points: 10
+    hints: []
+  hints:
+  - text: Validate on input, encode on output — for the specific context.
+  walkthrough: []
+- title: The OWASP Top 10 mindset
+  difficulty: intermediate
+  minutes: 15
+  competency: vuln-assessment
+  body: 'The OWASP Top 10 catalogues prevalent risks: broken access control, cryptographic failures, injection,
+    insecure design, misconfiguration, and more. Treat it as a checklist for review, not a guarantee.
+    For each category, learn the defensive control: parameterised queries, output encoding, strong authz
+    checks, secure defaults.'
+  exercises:
+  - kind: short_answer
+    prompt: OWASP risk category for missing authorisation checks? (broken ___ control)
+    answer: access
+    competency: access-control
+    explanation: Broken access control.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Web Application Security Assessment
+  questions:
+  - kind: mcq
+    prompt: Best defence against injection generally?
+    choices:
+    - Disable logs
+    - Context-correct encoding and parameterisation
+    - Hide errors
+    - Use GET only
+    answer: Context-correct encoding and parameterisation
+    competency: input-validation
+    explanation: Separate data from code via parameterisation/encoding.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Encode output for the ___ it enters (context).
+    answer: context
+    competency: input-validation
+    explanation: Encode per output context.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

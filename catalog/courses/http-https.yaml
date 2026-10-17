@@ -1,0 +1,86 @@
+id: http-https
+title: HTTP and HTTPS
+description: Requests, responses, status codes, headers and transport security.
+difficulty: beginner
+category: web-security
+specialization: web
+estimated_minutes: 50
+objectives:
+- Understand anatomy of a request
+- Understand security headers and https
+prerequisites:
+- web-technologies
+competency_prereqs: []
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Anatomy of a request
+  difficulty: beginner
+  minutes: 15
+  competency: http-fundamentals
+  body: 'An HTTP request has a method (GET, POST, PUT, DELETE), a path, headers and an optional body.
+    Responses carry a status code (2xx success, 3xx redirect, 4xx client error, 5xx server error) and
+    headers. Methods have semantics: GET should not change state. Reading requests/responses precisely
+    is essential.'
+  exercises:
+  - kind: mcq
+    prompt: Which status class means client error?
+    choices:
+    - 2xx
+    - 3xx
+    - 4xx
+    - 5xx
+    answer: 4xx
+    competency: http-fundamentals
+    explanation: 4xx indicates client-side errors.
+    points: 10
+    hints: []
+  hints:
+  - text: GET is safe/idempotent; POST changes state.
+  walkthrough: []
+- title: Security headers and HTTPS
+  difficulty: beginner
+  minutes: 15
+  competency: tls-certificates
+  body: 'HTTPS (TLS) provides confidentiality and integrity in transit and authenticates the server via
+    certificates. Response headers harden the app: `Content-Security-Policy`, `Strict-Transport-Security`,
+    `X-Content-Type-Options`, and `X-Frame-Options`. These are cheap, high-value defensive controls.'
+  exercises:
+  - kind: short_answer
+    prompt: Header that forces HTTPS for future visits? (acronym)
+    answer: HSTS
+    competency: tls-certificates
+    explanation: Strict-Transport-Security is HSTS.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: HTTP and HTTPS Assessment
+  questions:
+  - kind: mcq
+    prompt: '500-series status codes indicate:'
+    choices:
+    - Success
+    - Redirect
+    - Client error
+    - Server error
+    answer: Server error
+    competency: http-fundamentals
+    explanation: 5xx are server errors.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Header defining allowed script sources? (acronym)
+    answer: CSP
+    competency: web-technologies
+    explanation: Content-Security-Policy is CSP.
+    points: 10
+    hints: []
+  difficulty: beginner
+  passing_score: 70
+  description: ''

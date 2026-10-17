@@ -1,0 +1,1108 @@
+- id: re-static-ssh-linux-a
+  name: Reverse Engineering Lab — Debian + OpenSSH (realistic)
+  category: reverse
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    level: advanced
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 120
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-x
+  name: Reverse Engineering Lab — Debian + OpenSSH (capstone)
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-backup-agent-1-2
+  name: 'Reverse Engineering Lab: over-privileged backup agent v1.2 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: backup-agent
+    version: '1.2'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v1.2).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-search-index-1-0
+  name: 'Reverse Engineering Lab: unauthenticated search index v1.0 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - search-index
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: search-index
+    version: '1.0'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v1.0).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-auth-proxy-1-7
+  name: 'Reverse Engineering Lab: flawed auth proxy v1.7 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - auth-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: auth-proxy
+    version: '1.7'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v1.7).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-webhook-receiver-1-5
+  name: 'Reverse Engineering Lab: unvalidated webhook receiver v1.5 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: webhook-receiver
+    version: '1.5'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.5).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-reverse-proxy-1-3
+  name: 'Reverse Engineering Lab: misconfigured reverse proxy v1.3 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - reverse-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: reverse-proxy
+    version: '1.3'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.3).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-admin-panel-1-1
+  name: 'Reverse Engineering Lab: weak admin panel v1.1 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - admin-panel
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: admin-panel
+    version: '1.1'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v1.1).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-job-runner-1-8
+  name: 'Reverse Engineering Lab: injectable job runner v1.8 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - job-runner
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: job-runner
+    version: '1.8'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v1.8).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-report-exporter-2-6
+  name: 'Reverse Engineering Lab: template-injectable report exporter v2.6 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - report-exporter
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: report-exporter
+    version: '2.6'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v2.6).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-cache-layer-2-4
+  name: 'Reverse Engineering Lab: insecure cache layer v2.4 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - cache-layer
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: cache-layer
+    version: '2.4'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v2.4).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-api-gateway-2-2
+  name: 'Reverse Engineering Lab: permissive API gateway v2.2 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - api-gateway
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: api-gateway
+    version: '2.2'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v2.2).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-metrics-endpoint-2-0
+  name: 'Reverse Engineering Lab: leaky metrics endpoint v2.0 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - metrics-endpoint
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: metrics-endpoint
+    version: '2.0'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.0).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-import-tool-2-7
+  name: 'Reverse Engineering Lab: unsafe import tool v2.7 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - import-tool
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: import-tool
+    version: '2.7'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v2.7).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-message-queue-2-5
+  name: 'Reverse Engineering Lab: exposed message queue v2.5 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - message-queue
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: message-queue
+    version: '2.5'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v2.5).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-file-service-2-3
+  name: 'Reverse Engineering Lab: unsafe file service v2.3 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - file-service
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: file-service
+    version: '2.3'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v2.3).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-legacy-cgi-3-1
+  name: 'Reverse Engineering Lab: legacy CGI handler v3.1 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: legacy-cgi
+    version: '3.1'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v3.1).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-backup-agent-3-8
+  name: 'Reverse Engineering Lab: over-privileged backup agent v3.8 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: backup-agent
+    version: '3.8'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.8).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-search-index-3-6
+  name: 'Reverse Engineering Lab: unauthenticated search index v3.6 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - search-index
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: search-index
+    version: '3.6'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v3.6).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-auth-proxy-3-4
+  name: 'Reverse Engineering Lab: flawed auth proxy v3.4 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - auth-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: auth-proxy
+    version: '3.4'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v3.4).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-webhook-receiver-3-2
+  name: 'Reverse Engineering Lab: unvalidated webhook receiver v3.2 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: webhook-receiver
+    version: '3.2'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.2).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-reverse-proxy-3-0
+  name: 'Reverse Engineering Lab: misconfigured reverse proxy v3.0 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - reverse-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: reverse-proxy
+    version: '3.0'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.0).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-admin-panel-3-7
+  name: 'Reverse Engineering Lab: weak admin panel v3.7 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - admin-panel
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: admin-panel
+    version: '3.7'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v3.7).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-job-runner-4-5
+  name: 'Reverse Engineering Lab: injectable job runner v4.5 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - job-runner
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: job-runner
+    version: '4.5'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v4.5).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-report-exporter-4-3
+  name: 'Reverse Engineering Lab: template-injectable report exporter v4.3 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - report-exporter
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: report-exporter
+    version: '4.3'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v4.3).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-cache-layer-4-1
+  name: 'Reverse Engineering Lab: insecure cache layer v4.1 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - cache-layer
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: cache-layer
+    version: '4.1'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v4.1).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals

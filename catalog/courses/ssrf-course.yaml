@@ -1,0 +1,68 @@
+id: ssrf-course
+title: Server-Side Request Forgery
+description: How SSRF arises and how to constrain outbound requests.
+difficulty: hard
+category: web-security
+specialization: web
+estimated_minutes: 40
+objectives:
+- Understand understanding ssrf
+prerequisites:
+- api-security
+competency_prereqs: []
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Understanding SSRF
+  difficulty: hard
+  minutes: 20
+  competency: ssrf
+  body: 'SSRF occurs when an application fetches a URL supplied or influenced by a user, letting it reach
+    internal services the user could not reach directly (metadata endpoints, internal APIs). Defences:
+    allowlist destinations, resolve and validate the target address, block internal ranges, and avoid
+    passing raw user URLs to request libraries.'
+  exercises:
+  - kind: mcq
+    prompt: 'A strong SSRF control is:'
+    choices:
+    - Blocklisting a few words
+    - Allowlisting permitted destinations
+    - Bigger timeouts
+    - Disabling TLS
+    answer: Allowlisting permitted destinations
+    competency: ssrf
+    explanation: Allowlists constrain where the server may connect.
+    points: 10
+    hints: []
+  hints:
+  - text: Validate the resolved IP, not just the hostname string.
+  walkthrough: []
+assessment:
+  title: Server-Side Request Forgery Assessment
+  questions:
+  - kind: mcq
+    prompt: 'SSRF lets an attacker make the server reach:'
+    choices:
+    - Only public sites
+    - Internal services it should not
+    - Its own logs
+    - The user's browser
+    answer: Internal services it should not
+    competency: ssrf
+    explanation: SSRF pivots to internal resources.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: 'Preferred SSRF control: ___-list destinations.'
+    answer: allow
+    competency: ssrf
+    explanation: Allowlisting is preferred.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

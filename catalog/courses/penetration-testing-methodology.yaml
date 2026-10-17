@@ -1,0 +1,85 @@
+id: penetration-testing-methodology
+title: Penetration-Testing Methodology
+description: The structured, authorised phases of a professional engagement.
+difficulty: intermediate
+category: methodology
+specialization: pentest
+estimated_minutes: 50
+objectives:
+- Understand scope, rules of engagement, authorisation
+- Understand the phased approach
+prerequisites:
+- vulnerability-assessment
+competency_prereqs: []
+tags:
+- methodology
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Scope, rules of engagement, authorisation
+  difficulty: intermediate
+  minutes: 15
+  competency: pentest-methodology
+  body: 'Every legitimate test begins with written authorisation and a defined scope: which systems, which
+    techniques, which time windows, and who to contact. Working outside scope is both unethical and unlawful.
+    HackLab exists to practise these skills safely inside isolated, owned environments.'
+  exercises:
+  - kind: mcq
+    prompt: What must precede any testing?
+    choices:
+    - A scanner
+    - Written authorisation and scope
+    - A VPN
+    - A report
+    answer: Written authorisation and scope
+    competency: pentest-methodology
+    explanation: Authorisation and scope come first.
+    points: 10
+    hints: []
+  hints:
+  - text: No authorisation, no testing.
+  walkthrough: []
+- title: The phased approach
+  difficulty: intermediate
+  minutes: 15
+  competency: pentest-methodology
+  body: 'A typical methodology: reconnaissance → enumeration → vulnerability analysis → controlled verification
+    → post-activity analysis → reporting. Each phase feeds the next and everything is documented for the
+    final report and for reproducibility.'
+  exercises:
+  - kind: short_answer
+    prompt: Final phase of an engagement?
+    answer: reporting
+    competency: security-reporting
+    explanation: Reporting concludes the work.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Penetration-Testing Methodology Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Testing outside the agreed scope is:'
+    choices:
+    - Fine if quick
+    - Unethical and often unlawful
+    - Encouraged
+    - Required
+    answer: Unethical and often unlawful
+    competency: pentest-methodology
+    explanation: Stay in scope.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: First technical phase after authorisation?
+    answer: reconnaissance
+    competency: reconnaissance
+    explanation: Recon starts the technical work.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

@@ -1,0 +1,67 @@
+id: path-traversal-course
+title: Path Traversal
+description: Preventing directory traversal when serving or reading files.
+difficulty: intermediate
+category: web-security
+specialization: web
+estimated_minutes: 35
+objectives:
+- Understand traversal and canonicalisation
+prerequisites:
+- web-application-security
+competency_prereqs: []
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Traversal and canonicalisation
+  difficulty: intermediate
+  minutes: 15
+  competency: path-traversal
+  body: When a path is built from user input, sequences like `../` can escape the intended directory and
+    read sensitive files. The fix is to canonicalise the resolved path and confirm it still lives under
+    the intended base directory before any file operation — never to blocklist characters.
+  exercises:
+  - kind: mcq
+    prompt: 'Best traversal defence:'
+    choices:
+    - Blocklist ../
+    - Canonicalise and confirm path is under base dir
+    - URL-encode once
+    - Lowercase the path
+    answer: Canonicalise and confirm path is under base dir
+    competency: path-traversal
+    explanation: Resolve then verify containment.
+    points: 10
+    hints: []
+  hints:
+  - text: Resolve the final absolute path, then check its prefix.
+  walkthrough: []
+assessment:
+  title: Path Traversal Assessment
+  questions:
+  - kind: short_answer
+    prompt: Sequence used to climb directories?
+    answer: ../
+    competency: path-traversal
+    explanation: '`../` climbs directories.'
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Correct defence:'
+    choices:
+    - Blocklist
+    - Canonicalise + containment check
+    - Hide errors
+    - Rate limit
+    answer: Canonicalise + containment check
+    competency: path-traversal
+    explanation: Verify the resolved path stays in bounds.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

@@ -1,0 +1,84 @@
+id: digital-forensics
+title: Digital Forensics
+description: Handle evidence and examine artefacts soundly.
+difficulty: intermediate
+category: forensics
+specialization: forensics
+estimated_minutes: 55
+objectives:
+- Understand evidence integrity
+- Understand filesystem artefacts
+prerequisites:
+- linux-administration
+competency_prereqs: []
+tags:
+- forensics
+references: []
+os_requirements: []
+lab_id: forensics-workstation-lab
+version: 1.0.0
+lessons:
+- title: Evidence integrity
+  difficulty: intermediate
+  minutes: 20
+  competency: evidence-handling
+  body: 'Sound forensics preserves evidence integrity: hash data on acquisition, work from copies, and
+    maintain a chain of custody. If integrity is not provable, conclusions are not defensible. Document
+    every action with timestamps.'
+  exercises:
+  - kind: mcq
+    prompt: 'First step to preserve evidence integrity:'
+    choices:
+    - Edit the file
+    - Hash and work from a copy
+    - Delete logs
+    - Reboot
+    answer: Hash and work from a copy
+    competency: evidence-handling
+    explanation: Hash, then analyse copies.
+    points: 10
+    hints: []
+  hints:
+  - text: Never analyse the only copy.
+  walkthrough: []
+- title: Filesystem artefacts
+  difficulty: intermediate
+  minutes: 15
+  competency: filesystems
+  body: Filesystems store timestamps (MACB), deleted-file remnants and metadata that reconstruct activity.
+    Understanding how a filesystem records changes lets you build an accurate timeline and spot tampering.
+  exercises:
+  - kind: short_answer
+    prompt: Timestamps help build a ___.
+    answer: timeline
+    competency: timeline-analysis
+    explanation: Timelines from timestamps.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Digital Forensics Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Chain of custody documents:'
+    choices:
+    - Disk speed
+    - Who handled evidence and when
+    - CPU model
+    - RAM
+    answer: Who handled evidence and when
+    competency: evidence-handling
+    explanation: It tracks handling.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Acquire then verify with a ___.
+    answer: hash
+    competency: evidence-handling
+    explanation: Hashes prove integrity.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

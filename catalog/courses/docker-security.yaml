@@ -1,0 +1,86 @@
+id: docker-security
+title: Docker Security
+description: Container isolation, image hygiene and runtime safety.
+difficulty: intermediate
+category: container
+specialization: cloud
+estimated_minutes: 55
+objectives:
+- Understand how containers isolate
+- Understand image hygiene
+prerequisites:
+- linux-administration
+competency_prereqs: []
+tags:
+- container
+- container
+references: []
+os_requirements: []
+lab_id: container-security-lab
+version: 1.0.0
+lessons:
+- title: How containers isolate
+  difficulty: intermediate
+  minutes: 20
+  competency: docker-security
+  body: 'Containers share the host kernel and isolate processes with namespaces and cgroups. They are
+    not VMs: a container escape reaches the host. Security basics: run as non-root, drop capabilities,
+    use read-only filesystems where possible, and never mount the Docker socket into untrusted containers.'
+  exercises:
+  - kind: mcq
+    prompt: 'Containers isolate using:'
+    choices:
+    - A separate kernel
+    - Namespaces and cgroups
+    - A hypervisor
+    - TLS
+    answer: Namespaces and cgroups
+    competency: docker-security
+    explanation: Namespaces + cgroups, shared kernel.
+    points: 10
+    hints: []
+  hints:
+  - text: Container != VM; kernel is shared.
+  walkthrough: []
+- title: Image hygiene
+  difficulty: intermediate
+  minutes: 15
+  competency: docker-security
+  body: Minimal base images reduce attack surface; pin versions; scan for known vulnerable packages; never
+    bake secrets into layers (they persist in history). A clean, minimal, scanned image is the baseline
+    of container security.
+  exercises:
+  - kind: short_answer
+    prompt: Secrets baked into image layers persist in the ___.
+    answer: history
+    competency: docker-security
+    explanation: Layer history keeps them.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Docker Security Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Mounting the Docker socket into an untrusted container is:'
+    choices:
+    - Safe
+    - Effectively host-level access
+    - Required
+    - Faster
+    answer: Effectively host-level access
+    competency: docker-security
+    explanation: The socket grants host control.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Run containers as ___ (not root).
+    answer: non-root
+    competency: docker-security
+    explanation: Least privilege.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

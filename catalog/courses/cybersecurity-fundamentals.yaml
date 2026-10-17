@@ -1,0 +1,120 @@
+id: cybersecurity-fundamentals
+title: Cybersecurity Fundamentals
+description: 'Core security concepts: the CIA triad, threats and risk, defence in depth, and the vocabulary
+  you will use throughout HackLab.'
+difficulty: beginner
+category: fundamentals
+specialization: null
+estimated_minutes: 65
+objectives:
+- Explain the CIA triad
+- Describe threats, vulnerabilities and risk
+- Understand defence in depth and least privilege
+prerequisites:
+- hacklab-orientation
+competency_prereqs: []
+tags:
+- fundamentals
+- beginner
+- theory
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: The CIA triad
+  difficulty: beginner
+  minutes: 15
+  competency: security-terminology
+  body: "Security is often framed around three properties:\n\n- **Confidentiality** — information is available\
+    \ only to those authorised to\n  see it (e.g. encryption, access control).\n- **Integrity** — information\
+    \ is accurate and unaltered except by authorised\n  actors (e.g. hashing, digital signatures, change\
+    \ control).\n- **Availability** — systems and data are accessible when needed (e.g.\n  redundancy,\
+    \ backups, capacity planning).\n\nMost security decisions trade these against each other and against\
+    \ usability.\nA good analyst can name which property a control protects and what happens when\nit\
+    \ fails."
+  exercises:
+  - kind: mcq
+    prompt: A backup primarily protects which property?
+    choices:
+    - Confidentiality
+    - Integrity
+    - Availability
+    - Non-repudiation
+    answer: Availability
+    competency: security-terminology
+    explanation: Backups restore access after data loss — an availability control.
+    points: 10
+    hints: []
+  hints:
+  - text: Think about which property fails if the control is absent.
+  walkthrough: []
+- title: Threats, vulnerabilities and risk
+  difficulty: beginner
+  minutes: 15
+  competency: security-terminology
+  body: "Precise language matters:\n\n- A **vulnerability** is a weakness (a missing patch, a weak password\
+    \ policy).\n- A **threat** is something that could exploit a vulnerability (a criminal\n  group, malware,\
+    \ an insider error).\n- **Risk** combines likelihood and impact: *risk = likelihood × impact*.\n\n\
+    Security work is risk management, not risk elimination. You cannot fix\neverything, so you prioritise:\
+    \ which weaknesses, if exploited, cause the most\nharm and are most likely to be targeted?"
+  exercises:
+  - kind: short_answer
+    prompt: 'Complete the equation: risk = likelihood × ____'
+    answer: impact
+    competency: security-terminology
+    explanation: Risk is commonly modelled as likelihood multiplied by impact.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+- title: Defence in depth and least privilege
+  difficulty: beginner
+  minutes: 15
+  competency: security-terminology
+  body: "Two foundational principles:\n\n- **Defence in depth**: layer independent controls so that one\
+    \ failure does not\n  cause a breach. A firewall, patched software, monitoring and least privilege\n\
+    \  each cover each other's gaps.\n- **Least privilege**: give every user, process and service only\
+    \ the access it\n  needs, for only as long as it needs it. This limits the blast radius of any\n \
+    \ single compromise or mistake.\n\nYou will apply both repeatedly — when hardening a Linux host, segmenting\
+    \ a\nnetwork, or designing an application's authorisation model."
+  exercises: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Fundamentals Assessment
+  questions:
+  - kind: mcq
+    prompt: Which principle limits the blast radius of a compromised account?
+    choices:
+    - Defence in depth
+    - Least privilege
+    - Availability
+    - Fail-open
+    answer: Least privilege
+    competency: security-terminology
+    explanation: Least privilege restricts what any single account can do.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: What combines likelihood and impact?
+    answer: risk
+    competency: security-terminology
+    explanation: Risk = likelihood × impact.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Encryption of data at rest primarily protects:'
+    choices:
+    - Availability
+    - Integrity
+    - Confidentiality
+    - Redundancy
+    answer: Confidentiality
+    competency: security-terminology
+    explanation: Encryption keeps data readable only to authorised parties.
+    points: 10
+    hints: []
+  difficulty: beginner
+  passing_score: 70
+  description: ''

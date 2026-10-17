@@ -1,0 +1,68 @@
+id: firewall-configuration
+title: Firewall Configuration
+description: Design and apply packet-filtering rules.
+difficulty: easy
+category: infrastructure
+specialization: defensive
+estimated_minutes: 35
+objectives:
+- Understand default deny
+prerequisites:
+- networking-fundamentals
+competency_prereqs: []
+tags:
+- infrastructure
+- infrastructure
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Default deny
+  difficulty: easy
+  minutes: 15
+  competency: firewalls
+  body: A sound firewall policy denies everything by default and explicitly allows only required flows.
+    Rules are ordered and specific; log denied traffic for visibility. This is least privilege applied
+    to the network edge and between zones.
+  exercises:
+  - kind: mcq
+    prompt: 'Best default firewall stance:'
+    choices:
+    - Allow all
+    - Default deny
+    - Random
+    - Log only
+    answer: Default deny
+    competency: firewalls
+    explanation: Deny by default, allow by exception.
+    points: 10
+    hints: []
+  hints:
+  - text: Allow by exception only.
+  walkthrough: []
+assessment:
+  title: Firewall Configuration Assessment
+  questions:
+  - kind: short_answer
+    prompt: Firewalls should default to ___.
+    answer: deny
+    competency: firewalls
+    explanation: Default deny.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Logging denied traffic provides:'
+    choices:
+    - Nothing
+    - Visibility
+    - Speed
+    - Storage
+    answer: Visibility
+    competency: firewalls
+    explanation: Denied-traffic logs aid detection.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

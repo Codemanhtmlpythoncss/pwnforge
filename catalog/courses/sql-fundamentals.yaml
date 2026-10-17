@@ -1,0 +1,90 @@
+id: sql-fundamentals
+title: SQL Fundamentals
+description: Relational data, queries and why parameterisation matters.
+difficulty: easy
+category: web-security
+specialization: web
+estimated_minutes: 50
+objectives:
+- Understand select, where, join
+- Understand parameterised queries
+prerequisites:
+- linux-fundamentals
+competency_prereqs: []
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: SELECT, WHERE, JOIN
+  difficulty: easy
+  minutes: 15
+  competency: input-validation
+  body: SQL queries relational tables. `SELECT col FROM users WHERE id = 5` returns rows; `JOIN` combines
+    tables on a key. Understanding how queries are built is necessary to understand how *string-built*
+    queries become injectable and how *parameterised* queries stay safe.
+  exercises:
+  - kind: mcq
+    prompt: Which clause filters rows?
+    choices:
+    - SELECT
+    - FROM
+    - WHERE
+    - ORDER BY
+    answer: WHERE
+    competency: input-validation
+    explanation: WHERE filters rows.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+- title: Parameterised queries
+  difficulty: easy
+  minutes: 15
+  competency: sql-injection
+  body: A parameterised (prepared) query sends SQL and data separately, so user input can never change
+    query structure. This is the definitive defence against SQL injection. Building queries by string
+    concatenation is the anti-pattern that creates the vulnerability.
+  exercises:
+  - kind: mcq
+    prompt: 'The definitive defence against SQL injection is:'
+    choices:
+    - Escaping quotes by hand
+    - Parameterised queries
+    - Hiding the DB
+    - Rate limiting
+    answer: Parameterised queries
+    competency: sql-injection
+    explanation: Prepared statements separate code from data.
+    points: 10
+    hints: []
+  hints:
+  - text: If input can change query structure, it is unsafe.
+  walkthrough: []
+assessment:
+  title: SQL Fundamentals Assessment
+  questions:
+  - kind: short_answer
+    prompt: Clause that filters rows in SQL?
+    answer: WHERE
+    competency: input-validation
+    explanation: WHERE filters.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'String-concatenated SQL is dangerous because input can:'
+    choices:
+    - Slow the DB
+    - Alter query structure
+    - Add indexes
+    - Change charset
+    answer: Alter query structure
+    competency: sql-injection
+    explanation: Concatenation lets input change the query.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

@@ -1,0 +1,67 @@
+id: detection-engineering
+title: Detection Engineering
+description: Write precise detection rules that balance signal and noise.
+difficulty: hard
+category: defensive
+specialization: defensive
+estimated_minutes: 40
+objectives:
+- Understand good detections
+prerequisites:
+- siem-fundamentals
+competency_prereqs: []
+tags:
+- defensive
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Good detections
+  difficulty: hard
+  minutes: 20
+  competency: detection-engineering
+  body: A good detection targets attacker behaviour (technique) rather than a single indicator, is specific
+    enough to limit false positives, and documents the expected response. Map detections to a framework
+    like MITRE ATT&CK so coverage is measurable and gaps are visible.
+  exercises:
+  - kind: mcq
+    prompt: 'A durable detection targets:'
+    choices:
+    - A single IP
+    - Attacker behaviour/technique
+    - A filename only
+    - A port only
+    answer: Attacker behaviour/technique
+    competency: detection-engineering
+    explanation: Behaviour-based rules survive IOC changes.
+    points: 10
+    hints: []
+  hints:
+  - text: Behaviour outlasts indicators.
+  walkthrough: []
+assessment:
+  title: Detection Engineering Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Detections are often mapped to:'
+    choices:
+    - OSI
+    - MITRE ATT&CK
+    - DNS
+    - TLS
+    answer: MITRE ATT&CK
+    competency: detection-engineering
+    explanation: ATT&CK organises techniques.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Rules balance signal against ___ (false positives).
+    answer: noise
+    competency: detection-engineering
+    explanation: Signal vs noise.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

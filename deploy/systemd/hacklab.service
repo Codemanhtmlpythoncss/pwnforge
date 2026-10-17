@@ -1,0 +1,42 @@
+# HackLab systemd service unit.
+#
+# Install:
+#   sudo cp deploy/systemd/hacklab.service /etc/systemd/system/
+#   edit User=, WorkingDirectory= and Environment= below to match your install,
+#   then:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now hacklab
+#
+# Restarting this service does NOT stop running VMs — those are managed by
+# libvirtd, which is a separate service. On start, HackLab reconciles its
+# database with the hypervisor's actual state.
+
+[Unit]
+Description=HackLab cybersecurity training platform
+After=network-online.target libvirtd.service
+Wants=network-online.target
+# libvirtd is only required for real virtualisation:
+Wants=libvirtd.service
+
+[Service]
+Type=simple
+# Run as a dedicated non-root user that is a member of the 'libvirt' and 'kvm'
+# groups. NEVER run HackLab as root.
+User=hacklab
+Group=hacklab
+SupplementaryGroups=libvirt kvm
+WorkingDirectory=/opt/hacklab
+Environment=HACKLAB_DATA_DIR=/var/lib/hacklab
+# Bind address/port come from the DB settings (server.port / server.lan_access).
+ExecStart=/opt/hacklab/.venv/bin/hacklab serve
+Restart=on-failure
+RestartSec=3
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=read-only
+PrivateTmp=true
+ReadWritePaths=/var/lib/hacklab
+
+[Install]
+WantedBy=multi-user.target

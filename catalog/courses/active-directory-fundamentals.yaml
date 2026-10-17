@@ -1,0 +1,87 @@
+id: active-directory-fundamentals
+title: Active Directory Fundamentals
+description: Domains, organisational units, trusts and authentication in AD.
+difficulty: intermediate
+category: identity
+specialization: active-directory
+estimated_minutes: 60
+objectives:
+- Understand directory structure
+- 'Understand authentication: kerberos basics'
+prerequisites:
+- windows-administration
+competency_prereqs: []
+tags:
+- identity
+references: []
+os_requirements: []
+lab_id: enterprise-identity-lab
+version: 1.0.0
+lessons:
+- title: Directory structure
+  difficulty: intermediate
+  minutes: 20
+  competency: ad-fundamentals
+  body: Active Directory is a hierarchical directory of objects (users, computers, groups) organised into
+    domains and Organisational Units (OUs). Domain Controllers (DCs) hold the directory and authenticate
+    users. Group Policy applies settings across OUs. Understanding this structure is prerequisite to any
+    identity-security work.
+  exercises:
+  - kind: mcq
+    prompt: Which server authenticates domain users?
+    choices:
+    - File server
+    - Domain Controller
+    - Print server
+    - DHCP server
+    answer: Domain Controller
+    competency: ad-fundamentals
+    explanation: DCs hold the directory and authenticate users.
+    points: 10
+    hints: []
+  hints:
+  - text: OUs are containers for delegation and policy.
+  walkthrough: []
+- title: 'Authentication: Kerberos basics'
+  difficulty: intermediate
+  minutes: 20
+  competency: kerberos
+  body: 'AD uses Kerberos: a client gets a Ticket Granting Ticket (TGT) from the DC, then requests service
+    tickets. Tickets, service principal names (SPNs) and delegation settings are central to both AD operation
+    and its security. Misconfigured delegation and weak service-account passwords are common enterprise
+    weaknesses to recognise and remediate.'
+  exercises:
+  - kind: short_answer
+    prompt: What ticket does a client first obtain from the DC? (___)
+    answer: TGT
+    competency: kerberos
+    explanation: The Ticket Granting Ticket comes first.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Active Directory Fundamentals Assessment
+  questions:
+  - kind: mcq
+    prompt: 'OUs are used to:'
+    choices:
+    - Store files
+    - Organise objects and apply policy
+    - Route email
+    - Assign IPs
+    answer: Organise objects and apply policy
+    competency: ad-fundamentals
+    explanation: OUs organise objects and scope Group Policy.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Protocol AD uses for authentication?
+    answer: Kerberos
+    competency: kerberos
+    explanation: AD primarily uses Kerberos.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

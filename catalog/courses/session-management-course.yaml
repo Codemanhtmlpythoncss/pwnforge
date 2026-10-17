@@ -1,0 +1,84 @@
+id: session-management-course
+title: Session Management
+description: Session lifecycle, fixation, and secure cookie handling.
+difficulty: intermediate
+category: web-security
+specialization: web
+estimated_minutes: 45
+objectives:
+- Understand session lifecycle
+- Understand protecting the cookie
+prerequisites:
+- authentication-security
+competency_prereqs: []
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Session lifecycle
+  difficulty: intermediate
+  minutes: 15
+  competency: session-management
+  body: A session begins at login and should be bound to a strong, random identifier. Regenerate the session
+    id on privilege change (login) to prevent fixation. Expire sessions after inactivity and on logout.
+    Store session state server-side; the cookie should be an opaque reference, as HackLab does.
+  exercises:
+  - kind: mcq
+    prompt: 'To prevent session fixation you should:'
+    choices:
+    - Reuse the id
+    - Regenerate the id at login
+    - Store it in localStorage
+    - Disable cookies
+    answer: Regenerate the id at login
+    competency: session-management
+    explanation: Regenerating on login defeats fixation.
+    points: 10
+    hints: []
+  hints:
+  - text: The cookie should reference server-side state, not contain it.
+  walkthrough: []
+- title: Protecting the cookie
+  difficulty: intermediate
+  minutes: 10
+  competency: session-management
+  body: Set `Secure`, `HttpOnly`, and `SameSite` on session cookies. Pair state-changing requests with
+    anti-CSRF tokens. These measures resist theft and cross-site abuse.
+  exercises:
+  - kind: short_answer
+    prompt: Token that protects state-changing requests cross-site? (acronym)
+    answer: CSRF
+    competency: session-management
+    explanation: Anti-CSRF tokens.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Session Management Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Session ids should be:'
+    choices:
+    - Sequential
+    - Guessable
+    - Strong and random
+    - The username
+    answer: Strong and random
+    competency: session-management
+    explanation: Unpredictable ids resist guessing.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Regenerate the session id at ___.
+    answer: login
+    competency: session-management
+    explanation: Regenerate on login.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

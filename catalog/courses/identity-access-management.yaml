@@ -1,0 +1,68 @@
+id: identity-access-management
+title: Identity and Access Management
+description: Managing identities, roles and entitlements.
+difficulty: intermediate
+category: identity
+specialization: identity
+estimated_minutes: 40
+objectives:
+- Understand lifecycle and least privilege
+prerequisites:
+- access-control-course
+competency_prereqs: []
+tags:
+- identity
+- active-directory
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Lifecycle and least privilege
+  difficulty: intermediate
+  minutes: 20
+  competency: identity-security
+  body: 'IAM governs the identity lifecycle: provisioning, authentication, authorisation, and deprovisioning.
+    Stale accounts and privilege creep are major risks. Regular access reviews and role-based entitlements
+    keep access aligned with need.'
+  exercises:
+  - kind: mcq
+    prompt: 'Privilege creep is countered by:'
+    choices:
+    - Ignoring it
+    - Regular access reviews
+    - More admins
+    - Longer passwords
+    answer: Regular access reviews
+    competency: identity-security
+    explanation: Review access periodically.
+    points: 10
+    hints: []
+  hints:
+  - text: Deprovision promptly; review regularly.
+  walkthrough: []
+assessment:
+  title: Identity and Access Management Assessment
+  questions:
+  - kind: short_answer
+    prompt: Remove access promptly on ___ (leaving).
+    answer: deprovisioning
+    competency: identity-security
+    explanation: Deprovision leavers.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Entitlements should map to:'
+    choices:
+    - Seniority
+    - Role/need
+    - Tenure
+    - Location
+    answer: Role/need
+    competency: identity-security
+    explanation: Role-based, need-based access.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

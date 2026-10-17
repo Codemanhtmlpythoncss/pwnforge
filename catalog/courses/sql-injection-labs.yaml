@@ -1,0 +1,88 @@
+id: sql-injection-labs
+title: SQL Injection in Isolated Labs
+description: Recognise, verify and remediate SQL injection in a safe lab.
+difficulty: intermediate
+category: web-security
+specialization: web
+estimated_minutes: 55
+objectives:
+- Understand recognising injection
+- Understand verifying the remediation
+prerequisites:
+- sql-fundamentals
+- web-application-security
+competency_prereqs:
+- sql-injection
+tags:
+- web
+references: []
+os_requirements: []
+lab_id: web-security-lab
+version: 1.0.0
+lessons:
+- title: Recognising injection
+  difficulty: intermediate
+  minutes: 20
+  competency: sql-injection
+  body: 'SQL injection occurs when untrusted input alters a query''s structure. Symptoms a defender looks
+    for: error messages revealing SQL, behaviour that changes with quote characters, and unexpected data
+    returned. In the lab you will observe how a vulnerable endpoint differs from a parameterised one,
+    then apply the fix and confirm the behaviour is gone.'
+  exercises:
+  - kind: mcq
+    prompt: 'A reliable fix once SQLi is found:'
+    choices:
+    - Blocklist the word SELECT
+    - Convert to parameterised queries
+    - Lowercase input
+    - Add a CAPTCHA
+    answer: Convert to parameterised queries
+    competency: sql-injection
+    explanation: Parameterisation removes the class of bug.
+    points: 10
+    hints: []
+  hints:
+  - text: Compare the vulnerable and fixed endpoints side by side.
+  walkthrough: []
+- title: Verifying the remediation
+  difficulty: intermediate
+  minutes: 15
+  competency: vuln-remediation
+  body: Finding a bug is half the job; proving it is fixed is the other half. After converting to prepared
+    statements, re-test the same inputs and confirm the query structure cannot change. Document the before/after
+    for the report — a core professional skill.
+  exercises:
+  - kind: short_answer
+    prompt: Prepared statements separate code from ___.
+    answer: data
+    competency: sql-injection
+    explanation: They separate SQL code from data.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: SQL Injection in Isolated Labs Assessment
+  questions:
+  - kind: mcq
+    prompt: 'SQLi root cause:'
+    choices:
+    - Weak CPU
+    - Input altering query structure
+    - Large tables
+    - UDP
+    answer: Input altering query structure
+    competency: sql-injection
+    explanation: Input changing the query is the cause.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: What you produce to show a fix works (before/___)?
+    answer: after
+    competency: vuln-remediation
+    explanation: Before/after evidence.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

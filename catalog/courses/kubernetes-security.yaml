@@ -1,0 +1,85 @@
+id: kubernetes-security
+title: Kubernetes Security
+description: Cluster architecture, RBAC and network policies.
+difficulty: hard
+category: container
+specialization: cloud
+estimated_minutes: 55
+objectives:
+- Understand cluster and rbac
+- Understand network policies
+prerequisites:
+- docker-security
+competency_prereqs: []
+tags:
+- container
+- cloud
+references: []
+os_requirements: []
+lab_id: container-security-lab
+version: 1.0.0
+lessons:
+- title: Cluster and RBAC
+  difficulty: hard
+  minutes: 20
+  competency: kubernetes-security
+  body: Kubernetes schedules containers across nodes. The API server is the control plane's gateway; RBAC
+    governs who can do what. Over-broad roles (cluster-admin everywhere) are a top risk. Grant least-privilege
+    roles scoped to namespaces.
+  exercises:
+  - kind: mcq
+    prompt: 'K8s authorisation is governed by:'
+    choices:
+    - DNS
+    - RBAC
+    - TLS only
+    - cgroups
+    answer: RBAC
+    competency: kubernetes-security
+    explanation: RBAC controls actions.
+    points: 10
+    hints: []
+  hints:
+  - text: Scope roles to namespaces; avoid cluster-admin.
+  walkthrough: []
+- title: Network policies
+  difficulty: hard
+  minutes: 15
+  competency: network-policies
+  body: By default pods can talk freely. NetworkPolicies implement micro-segmentation, allowing only required
+    flows between workloads — the Kubernetes expression of least privilege and network segmentation.
+  exercises:
+  - kind: short_answer
+    prompt: 'K8s object for pod-to-pod micro-segmentation: Network___.'
+    answer: Policy
+    competency: network-policies
+    explanation: NetworkPolicy.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Kubernetes Security Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Over-broad K8s roles are a risk because:'
+    choices:
+    - They slow pods
+    - They grant excessive control
+    - They use RAM
+    - They break DNS
+    answer: They grant excessive control
+    competency: kubernetes-security
+    explanation: Least privilege applies.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Default pod networking is ___ (open/closed)?
+    answer: open
+    competency: network-policies
+    explanation: Open until policies restrict it.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

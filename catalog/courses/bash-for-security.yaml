@@ -1,0 +1,85 @@
+id: bash-for-security
+title: Bash for Security
+description: Automate repetitive tasks and parse data safely with Bash.
+difficulty: easy
+category: scripting
+specialization: linux
+estimated_minutes: 50
+objectives:
+- Understand variables, loops and pipes
+- Understand writing safe scripts
+prerequisites:
+- linux-fundamentals
+competency_prereqs: []
+tags:
+- scripting
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Variables, loops and pipes
+  difficulty: easy
+  minutes: 15
+  competency: bash-scripting
+  body: 'Bash glues tools together. Pipes (`|`) pass output between commands; loops iterate; variables
+    store values. Example: `for p in 80 443; do echo "checking $p"; done`. Combining `grep`, `awk`, `cut`
+    and `sort` lets you extract exactly the data you need from logs and command output.'
+  exercises:
+  - kind: command
+    prompt: Filter lines containing 'error' from a file with g___
+    answer: grep
+    competency: bash-scripting
+    explanation: '`grep error file` filters matching lines.'
+    points: 10
+    hints: []
+  hints:
+  - text: Pipes connect stdout of one command to stdin of the next.
+  walkthrough: []
+- title: Writing safe scripts
+  difficulty: easy
+  minutes: 15
+  competency: bash-scripting
+  body: Robust scripts start with `set -euo pipefail` so errors stop execution and undefined variables
+    are caught. Always quote variables (`"$var"`) to avoid word-splitting and injection. Never build commands
+    from untrusted input without validation — the same discipline that prevents command injection in applications.
+  exercises:
+  - kind: mcq
+    prompt: What does `set -e` do?
+    choices:
+    - Echo commands
+    - Exit on error
+    - Enable globbing
+    - Disable history
+    answer: Exit on error
+    competency: secure-coding
+    explanation: '`set -e` aborts on the first failing command.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Bash for Security Assessment
+  questions:
+  - kind: command
+    prompt: Command to count lines in output (pipe to)?
+    answer: wc -l
+    competency: bash-scripting
+    explanation: '`| wc -l` counts lines.'
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: Why quote "$var"?
+    choices:
+    - Faster
+    - Prevents word-splitting/injection
+    - Required syntax
+    - Changes colour
+    answer: Prevents word-splitting/injection
+    competency: secure-coding
+    explanation: Quoting avoids splitting and injection issues.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

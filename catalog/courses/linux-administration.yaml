@@ -1,0 +1,111 @@
+id: linux-administration
+title: Linux Administration
+description: Manage services, users, packages and systemd on Debian systems.
+difficulty: easy
+category: linux
+specialization: linux
+estimated_minutes: 65
+objectives:
+- Understand users and groups
+- Understand packages and updates
+- Understand systemd services
+prerequisites:
+- linux-fundamentals
+competency_prereqs:
+- linux-fundamentals
+tags:
+- linux
+references: []
+os_requirements: []
+lab_id: linux-admin-lab
+version: 1.0.0
+lessons:
+- title: Users and groups
+  difficulty: easy
+  minutes: 15
+  competency: linux-administration
+  body: 'User accounts live in `/etc/passwd`; group membership in `/etc/group`. Add users with `useradd`/`adduser`,
+    grant sudo via group membership (e.g. `sudo`), and review `/etc/sudoers` carefully: an over-broad
+    sudo rule is a frequent privilege-escalation path. Audit with `getent passwd` and `id <user>`.'
+  exercises:
+  - kind: command
+    prompt: Command to show a user's uid, gid and groups?
+    answer: id
+    competency: linux-administration
+    explanation: '`id <user>` shows identity info.'
+    points: 10
+    hints: []
+  hints:
+  - text: '`/etc/sudoers` controls elevated access — review it with `visudo`.'
+  walkthrough: []
+- title: Packages and updates
+  difficulty: easy
+  minutes: 15
+  competency: linux-administration
+  body: Debian uses APT. `apt update` refreshes the package index; `apt upgrade` applies updates; `apt
+    install <pkg>` adds software. Keeping packages patched is one of the highest-value security controls.
+    Unattended-upgrades can automate security patches. Know which version is installed with `dpkg -l <pkg>`.
+  exercises:
+  - kind: command
+    prompt: APT subcommand to refresh the package index?
+    answer: update
+    competency: linux-administration
+    explanation: '`apt update` refreshes the index.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+- title: systemd services
+  difficulty: easy
+  minutes: 15
+  competency: linux-administration
+  body: systemd manages services as *units*. `systemctl start/stop/enable <unit>` controls them; `systemctl
+    status <unit>` and `journalctl -u <unit>` show state and logs. Disabling unused services reduces attack
+    surface — a core hardening step.
+  exercises:
+  - kind: command
+    prompt: Command to view logs for the unit ssh?
+    answer: journalctl -u ssh
+    competency: log-analysis
+    explanation: '`journalctl -u <unit>` shows a unit''s logs.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Linux Administration Assessment
+  questions:
+  - kind: mcq
+    prompt: Which file defines sudo privileges?
+    choices:
+    - /etc/passwd
+    - /etc/sudoers
+    - /etc/group
+    - /etc/hosts
+    answer: /etc/sudoers
+    competency: linux-administration
+    explanation: '`/etc/sudoers` governs sudo access.'
+    points: 10
+    hints: []
+  - kind: command
+    prompt: Enable a service at boot with systemctl ___ <unit>
+    answer: enable
+    competency: linux-administration
+    explanation: '`systemctl enable` sets a unit to start at boot.'
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: Highest-value routine security control here?
+    choices:
+    - Changing the MOTD
+    - Applying patches
+    - Renaming root
+    - Disabling colour
+    answer: Applying patches
+    competency: infrastructure-hardening
+    explanation: Patching closes known holes.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

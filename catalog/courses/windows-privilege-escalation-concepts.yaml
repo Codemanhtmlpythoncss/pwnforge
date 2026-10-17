@@ -1,0 +1,69 @@
+id: windows-privilege-escalation-concepts
+title: Windows Privilege-Escalation Concepts
+description: Understand Windows privilege weaknesses and their remediation.
+difficulty: hard
+category: methodology
+specialization: pentest
+estimated_minutes: 40
+objectives:
+- Understand common windows weaknesses
+prerequisites:
+- windows-administration
+- service-enumeration
+competency_prereqs:
+- windows-administration
+tags:
+- methodology
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Common Windows weaknesses
+  difficulty: hard
+  minutes: 20
+  competency: windows-privesc
+  body: Windows privilege issues include unquoted service paths, weak service permissions, misused privileges
+    (e.g. SeImpersonate), and credentials left in configuration or memory. Enumerating these and fixing
+    the configuration (quoting paths, tightening ACLs, removing stored secrets) closes the gaps.
+  exercises:
+  - kind: mcq
+    prompt: 'Unquoted service path risk lets Windows:'
+    choices:
+    - Run faster
+    - Execute an unintended binary
+    - Save RAM
+    - Rotate logs
+    answer: Execute an unintended binary
+    competency: windows-privesc
+    explanation: A space in an unquoted path can be hijacked.
+    points: 10
+    hints: []
+  hints:
+  - text: Check service ACLs and path quoting.
+  walkthrough: []
+assessment:
+  title: Windows Privilege-Escalation Concepts Assessment
+  questions:
+  - kind: mcq
+    prompt: 'A fix for unquoted service paths:'
+    choices:
+    - Delete the service
+    - Quote the binary path
+    - Disable logging
+    - Add RAM
+    answer: Quote the binary path
+    competency: windows-privesc
+    explanation: Quoting the path removes the ambiguity.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Tighten service permissions via ___ (3-letter).
+    answer: ACL
+    competency: windows-privesc
+    explanation: Access control lists.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

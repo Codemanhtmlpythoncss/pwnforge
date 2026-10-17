@@ -1,0 +1,174 @@
+id: linux-fundamentals
+title: Linux Fundamentals
+description: The Linux shell, filesystem, permissions and processes — the bedrock skill for almost every
+  security discipline.
+difficulty: beginner
+category: linux
+specialization: linux
+estimated_minutes: 70
+objectives:
+- Navigate the filesystem
+- Read and reason about permissions
+- Inspect processes and services
+prerequisites:
+- cybersecurity-fundamentals
+competency_prereqs: []
+tags:
+- linux
+- beginner
+- cli
+references: []
+os_requirements: []
+lab_id: linux-practice-basic
+version: 1.0.0
+lessons:
+- title: The shell and filesystem
+  difficulty: beginner
+  minutes: 15
+  competency: linux-fundamentals
+  body: 'The shell is a text interface to the operating system. Core navigation:
+
+
+    ```
+
+    pwd            # print working directory
+
+    ls -la         # list all files, long format
+
+    cd /etc        # change directory
+
+    cat file       # show a file
+
+    less file      # page through a file
+
+    find / -name sshd_config 2>/dev/null   # locate a file
+
+    ```
+
+
+    The Linux filesystem is a single tree rooted at `/`. Important locations
+
+    include `/etc` (configuration), `/var/log` (logs), `/home` (user data) and
+
+    `/usr/bin` (programs). Knowing where things live is half of enumeration.'
+  exercises:
+  - kind: command
+    prompt: Which command prints the current directory?
+    answer: pwd
+    competency: linux-fundamentals
+    explanation: '`pwd` prints the working directory.'
+    points: 10
+    hints: []
+  hints:
+  - text: '`man <command>` shows a command''s manual page.'
+  - text: '`2>/dev/null` discards error output from find.'
+  walkthrough: []
+- title: Permissions
+  difficulty: beginner
+  minutes: 20
+  competency: linux-fundamentals
+  body: 'Every file has an owner, a group, and three permission triads (owner, group,
+
+    other), each with read (r=4), write (w=2) and execute (x=1) bits.
+
+
+    ```
+
+    -rwxr-x--- 1 alice devs 0 Jan 1 file
+
+    ```
+
+
+    Here the owner `alice` has `rwx` (7), the group `devs` has `r-x` (5), others
+
+    have none (0) → mode `750`. `chmod 640 file` sets owner `rw`, group `r`, others
+
+    none. Misconfigured permissions (world-writable sensitive files, over-broad
+
+    group access) are a classic source of privilege issues, so reading them
+
+    accurately is a core skill.'
+  exercises:
+  - kind: short_answer
+    prompt: What numeric mode is rw-r-----?
+    answer: '640'
+    competency: linux-fundamentals
+    explanation: owner rw=6, group r=4, other 0 → 640.
+    points: 10
+    hints:
+    - r=4, w=2, x=1; sum each triad.
+  hints: []
+  walkthrough:
+  - title: List with permissions
+    detail: Run `ls -l` and read the first column.
+  - title: Decode the triads
+    detail: Split into owner/group/other, convert each to a digit.
+  - title: Change a mode
+    detail: Use `chmod 640 file` and verify with `ls -l`.
+- title: Processes and services
+  difficulty: beginner
+  minutes: 15
+  competency: linux-fundamentals
+  body: 'Running programs are processes. Inspect them with:
+
+
+    ```
+
+    ps aux            # all processes
+
+    top               # live view
+
+    ss -tlnp          # listening TCP sockets and owning process
+
+    systemctl status  # service states (systemd)
+
+    ```
+
+
+    A listening socket tells you what services are exposed. Correlating a port to a
+
+    process to a configuration file under `/etc` is the enumeration loop you will
+
+    use constantly.'
+  exercises:
+  - kind: command
+    prompt: Which command lists listening TCP sockets with the owning process?
+    answer: ss -tlnp
+    competency: linux-enumeration
+    explanation: '`ss -tlnp` shows listening TCP sockets and the owning program.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Linux Fundamentals Assessment
+  questions:
+  - kind: short_answer
+    prompt: Numeric mode for rwxr-x--- ?
+    answer: '750'
+    competency: linux-fundamentals
+    explanation: owner rwx=7, group r-x=5, other 0.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: Where do most service configuration files live?
+    choices:
+    - /home
+    - /etc
+    - /var/run
+    - /proc
+    answer: /etc
+    competency: linux-administration
+    explanation: '`/etc` holds system configuration.'
+    points: 10
+    hints: []
+  - kind: command
+    prompt: Command to page through a file read-only?
+    answer: less
+    competency: linux-fundamentals
+    explanation: '`less` pages through files.'
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

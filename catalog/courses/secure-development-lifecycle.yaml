@@ -1,0 +1,68 @@
+id: secure-development-lifecycle
+title: Secure Development
+description: Build security into every phase of the SDLC.
+difficulty: hard
+category: secure-dev
+specialization: secdev
+estimated_minutes: 40
+objectives:
+- Understand security across the sdlc
+prerequisites:
+- secure-coding
+competency_prereqs: []
+tags:
+- secure-dev
+- secure-dev
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Security across the SDLC
+  difficulty: hard
+  minutes: 20
+  competency: secure-sdlc
+  body: 'Security is cheapest early: threat model during design, use safe defaults in implementation,
+    add security tests, scan dependencies, and review before release. A vulnerability caught in design
+    costs a fraction of one found in production.'
+  exercises:
+  - kind: mcq
+    prompt: 'Threat modelling belongs in:'
+    choices:
+    - Design
+    - Only after release
+    - Never
+    - Marketing
+    answer: Design
+    competency: secure-sdlc
+    explanation: Model threats during design.
+    points: 10
+    hints: []
+  hints:
+  - text: Earlier is cheaper and safer.
+  walkthrough: []
+assessment:
+  title: Secure Development Assessment
+  questions:
+  - kind: short_answer
+    prompt: Scan third-party ___ for known vulns.
+    answer: dependencies
+    competency: secure-sdlc
+    explanation: Dependency scanning.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Cheapest phase to fix security:'
+    choices:
+    - Production
+    - Design
+    - Hotfix
+    - Never
+    answer: Design
+    competency: secure-sdlc
+    explanation: Design-time fixes are cheapest.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

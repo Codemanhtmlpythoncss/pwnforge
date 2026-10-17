@@ -1,0 +1,68 @@
+id: iac-security
+title: Infrastructure-as-Code Security
+description: Securing declarative infrastructure and pipelines.
+difficulty: hard
+category: cloud
+specialization: cloud
+estimated_minutes: 40
+objectives:
+- Understand shift security left
+prerequisites:
+- cloud-security-fundamentals
+competency_prereqs: []
+tags:
+- cloud
+- cloud
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Shift security left
+  difficulty: hard
+  minutes: 20
+  competency: iac-security
+  body: IaC (Terraform, manifests) makes infrastructure reviewable and testable. Scan templates for insecure
+    defaults before deployment, keep secrets out of code, and require review for changes. Catching misconfig
+    in code is cheaper and safer than in production.
+  exercises:
+  - kind: mcq
+    prompt: 'IaC security scanning happens best:'
+    choices:
+    - After an incident
+    - Before deployment (in the pipeline)
+    - Never
+    - Only yearly
+    answer: Before deployment (in the pipeline)
+    competency: iac-security
+    explanation: Shift left into the pipeline.
+    points: 10
+    hints: []
+  hints:
+  - text: Review and scan templates pre-deploy.
+  walkthrough: []
+assessment:
+  title: Infrastructure-as-Code Security Assessment
+  questions:
+  - kind: short_answer
+    prompt: Keep secrets ___ of IaC code.
+    answer: out
+    competency: iac-security
+    explanation: Never commit secrets.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'IaC makes infrastructure:'
+    choices:
+    - Opaque
+    - Reviewable and testable
+    - Slower
+    - Random
+    answer: Reviewable and testable
+    competency: iac-security
+    explanation: Declarative infra is reviewable.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

@@ -1,0 +1,69 @@
+id: security-reporting
+title: Security Reporting and Professional Practice
+description: Communicate findings clearly, ethically and actionably.
+difficulty: intermediate
+category: methodology
+specialization: methodology
+estimated_minutes: 40
+objectives:
+- Understand writing a useful report
+prerequisites:
+- vulnerability-assessment
+competency_prereqs: []
+tags:
+- methodology
+- pentest
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Writing a useful report
+  difficulty: intermediate
+  minutes: 20
+  competency: security-reporting
+  body: 'A report serves the reader who must act. Each finding needs: a clear title, risk rating (impact
+    × likelihood), affected assets, reproduction steps, evidence, and specific remediation. Lead with
+    an executive summary; keep technical detail precise and reproducible. Ethics and scope discipline
+    underpin the profession.'
+  exercises:
+  - kind: mcq
+    prompt: 'A finding''s rating combines impact and:'
+    choices:
+    - Length
+    - Likelihood
+    - Font
+    - Author
+    answer: Likelihood
+    competency: security-reporting
+    explanation: Impact × likelihood.
+    points: 10
+    hints: []
+  hints:
+  - text: Write for the person who must fix it.
+  walkthrough: []
+assessment:
+  title: Security Reporting and Professional Practice Assessment
+  questions:
+  - kind: short_answer
+    prompt: Reports open with an executive ___.
+    answer: summary
+    competency: security-reporting
+    explanation: Executive summary.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Each finding must include:'
+    choices:
+    - Only a title
+    - Reproduction + remediation
+    - A screenshot only
+    - Nothing
+    answer: Reproduction + remediation
+    competency: security-reporting
+    explanation: Reproducible and actionable.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

@@ -1,0 +1,85 @@
+id: tcpip-packet-analysis
+title: TCP/IP and Packet Analysis
+description: Read packet captures and understand the protocol stack.
+difficulty: intermediate
+category: networking
+specialization: infrastructure
+estimated_minutes: 55
+objectives:
+- Understand the tcp handshake
+- Understand reading a capture
+prerequisites:
+- networking-fundamentals
+competency_prereqs: []
+tags:
+- networking
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: The TCP handshake
+  difficulty: intermediate
+  minutes: 15
+  competency: tcpip-analysis
+  body: TCP establishes a connection with SYN → SYN/ACK → ACK. Teardown uses FIN/ACK exchanges. In a capture,
+    an unusual number of SYNs without completed handshakes can indicate scanning or packet loss. Recognising
+    normal vs abnormal flow is the heart of traffic analysis.
+  exercises:
+  - kind: mcq
+    prompt: Correct handshake order?
+    choices:
+    - ACK, SYN, SYN/ACK
+    - SYN, SYN/ACK, ACK
+    - SYN, ACK, FIN
+    - SYN/ACK, SYN, ACK
+    answer: SYN, SYN/ACK, ACK
+    competency: tcpip-analysis
+    explanation: Three-way handshake is SYN, SYN/ACK, ACK.
+    points: 10
+    hints: []
+  hints:
+  - text: Think client-initiates, server-responds, client-confirms.
+  walkthrough: []
+- title: Reading a capture
+  difficulty: intermediate
+  minutes: 20
+  competency: tcpip-analysis
+  body: 'Tools like Wireshark/tshark decode frames layer by layer: Ethernet → IP → TCP/UDP → application.
+    Filters (e.g. `tcp.port == 80`) isolate flows. Follow a stream to reconstruct an application exchange.
+    Captures are primary evidence in both defensive investigation and troubleshooting.'
+  exercises:
+  - kind: short_answer
+    prompt: Wireshark display filter for HTTP port only (tcp.port == __)
+    answer: '80'
+    competency: tcpip-analysis
+    explanation: '`tcp.port == 80` filters HTTP.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: TCP/IP and Packet Analysis Assessment
+  questions:
+  - kind: mcq
+    prompt: 'A flood of SYNs with no completed handshakes suggests:'
+    choices:
+    - Normal browsing
+    - Possible scanning
+    - A DNS lookup
+    - A successful login
+    answer: Possible scanning
+    competency: tcpip-analysis
+    explanation: Half-open connections often indicate scanning.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Three-way handshake final packet flag?
+    answer: ACK
+    competency: tcpip-analysis
+    explanation: The client's ACK completes the handshake.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

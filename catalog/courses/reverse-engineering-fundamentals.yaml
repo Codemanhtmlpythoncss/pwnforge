@@ -1,0 +1,85 @@
+id: reverse-engineering-fundamentals
+title: Reverse Engineering Fundamentals
+description: Static and dynamic analysis of compiled programs.
+difficulty: advanced
+category: reverse
+specialization: reverse
+estimated_minutes: 55
+objectives:
+- Understand static vs dynamic
+- Understand binary formats
+prerequisites:
+- python-for-security
+competency_prereqs: []
+tags:
+- reverse
+references: []
+os_requirements: []
+lab_id: reverse-engineering-lab
+version: 1.0.0
+lessons:
+- title: Static vs dynamic
+  difficulty: advanced
+  minutes: 20
+  competency: reverse-engineering
+  body: Static analysis examines a binary without running it (disassembly, strings, structure); dynamic
+    analysis observes it executing in a controlled, isolated environment under a debugger. Each reveals
+    what the other hides. Always analyse untrusted binaries inside isolation, exactly like HackLab's disposable
+    VMs.
+  exercises:
+  - kind: mcq
+    prompt: 'Dynamic analysis means:'
+    choices:
+    - Reading source
+    - Observing execution in isolation
+    - Compiling
+    - Signing
+    answer: Observing execution in isolation
+    competency: reverse-engineering
+    explanation: Dynamic = running it safely.
+    points: 10
+    hints: []
+  hints:
+  - text: Combine both; isolate always.
+  walkthrough: []
+- title: Binary formats
+  difficulty: advanced
+  minutes: 15
+  competency: binary-formats
+  body: ELF (Linux) and PE (Windows) binaries have headers, sections (code, data) and symbol/import tables.
+    Reading these structures tells you how a program is laid out before you ever look at instructions.
+  exercises:
+  - kind: short_answer
+    prompt: Linux executable format (acronym)?
+    answer: ELF
+    competency: binary-formats
+    explanation: ELF on Linux.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Reverse Engineering Fundamentals Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Analyse untrusted binaries:'
+    choices:
+    - On your host
+    - In isolation
+    - On production
+    - In email
+    answer: In isolation
+    competency: malware-analysis
+    explanation: Always isolate untrusted code.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Windows executable format (acronym)?
+    answer: PE
+    competency: binary-formats
+    explanation: PE on Windows.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''
