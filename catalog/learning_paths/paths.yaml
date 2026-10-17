@@ -9,7 +9,7 @@
   - foundation
   steps:
   - order: 1
-    course_id: hacklab-orientation
+    course_id: pwnforge-orientation
     lab_id: null
     required: true
     note: ''

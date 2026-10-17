@@ -7,7 +7,7 @@ operator to supply appropriately licensed media; they are never downloaded
 automatically. All images start as ``absent`` — nothing is fetched on import.
 
 ``source`` for cloud images is the upstream URL used ONLY when an operator runs
-``hacklab images fetch`` on the target host. Checksums should be filled in from
+``pwnforge images fetch`` on the target host. Checksums should be filled in from
 the upstream SHA256SUMS at fetch time / pinned per deployment.
 """
 from __future__ import annotations

@@ -24,8 +24,8 @@ lessons:
   competency: reverse-engineering
   body: Static analysis examines a binary without running it (disassembly, strings, structure); dynamic
     analysis observes it executing in a controlled, isolated environment under a debugger. Each reveals
-    what the other hides. Always analyse untrusted binaries inside isolation, exactly like HackLab's disposable
-    VMs.
+    what the other hides. Always analyse untrusted binaries inside isolation, exactly like Pwnforge's
+    disposable VMs.
   exercises:
   - kind: mcq
     prompt: 'Dynamic analysis means:'

@@ -24,7 +24,7 @@ lessons:
   competency: session-management
   body: A session begins at login and should be bound to a strong, random identifier. Regenerate the session
     id on privilege change (login) to prevent fixation. Expire sessions after inactivity and on logout.
-    Store session state server-side; the cookie should be an opaque reference, as HackLab does.
+    Store session state server-side; the cookie should be an opaque reference, as Pwnforge does.
   exercises:
   - kind: mcq
     prompt: 'To prevent session fixation you should:'

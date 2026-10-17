@@ -165,7 +165,7 @@ COURSES = [
        [L("Zones and blast radius", "intermediate", 15, "network-segmentation",
           "Segmentation splits a network into zones (e.g. user, server, management) with "
           "controlled flows between them, so a compromise in one zone does not reach all "
-          "others. HackLab's isolated lab networks are a microcosm of this principle.",
+          "others. Pwnforge's isolated lab networks are a microcosm of this principle.",
           exercises=[mcq("Segmentation primarily limits:",
                          ["Bandwidth", "Blast radius of a compromise", "Latency",
                           "Cost"], "Blast radius of a compromise", "network-segmentation",

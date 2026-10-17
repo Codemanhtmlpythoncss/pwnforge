@@ -42,7 +42,7 @@ COURSES = [
 - **Difficulty** must reflect real knowledge/complexity/independence, not just
   length. A longer lab is not automatically "expert".
 - **Competency keys** must exist in `content/competencies.py` (validated by
-  `hacklab courses validate`).
+  `pwnforge courses validate`).
 - **Optional hints/walkthroughs** are advertised to the UI but their content is
   fetched on demand, so they stay hidden until the learner opts in.
 - **Answers** are hashed at import; the plaintext never reaches the DB column
@@ -56,8 +56,8 @@ created a new module, import it there.
 ## Validate & import
 
 ```bash
-hacklab courses validate      # unique ids + competency references, 0 issues expected
-hacklab init                  # re-import (idempotent; progress preserved)
+pwnforge courses validate      # unique ids + competency references, 0 issues expected
+pwnforge init                  # re-import (idempotent; progress preserved)
 ```
 
 ## Materialising YAML (optional)

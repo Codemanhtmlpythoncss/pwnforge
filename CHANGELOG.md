@@ -2,7 +2,7 @@
 
 ## 1.0.0 — 2026-10-17
 
-Initial release of HackLab.
+Initial release of Pwnforge.
 
 ### Platform
 - FastAPI backend with ~60 documented endpoints + OpenAPI at `/api/docs`.
@@ -33,7 +33,7 @@ Initial release of HackLab.
   protection.
 
 ### Operations
-- `hacklab` CLI (status, doctor, serve, courses, paths, profiles, images,
+- `pwnforge` CLI (status, doctor, serve, courses, paths, profiles, images,
   storage, backup, init) sharing the same services as the website.
 - Debian installer, systemd unit, backup/verify, diagnostics.
 - 51 automated tests, all passing.

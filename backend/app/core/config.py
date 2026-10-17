@@ -1,4 +1,4 @@
-"""Bootstrap configuration for HackLab.
+"""Bootstrap configuration for Pwnforge.
 
 This module holds *bootstrap* configuration only: the handful of values that
 must be known before the database is open (data directory, database URL, bind
@@ -7,7 +7,7 @@ access, resource limits, theme, ...) lives in the ``settings`` table and is
 served through :mod:`backend.app.core.settings_service`.
 
 Values are read, in order of precedence, from:
-  1. Environment variables prefixed with ``HACKLAB_``.
+  1. Environment variables prefixed with ``PWNFORGE_``.
   2. A ``.env`` file in the data directory.
   3. The defaults below.
 """
@@ -23,18 +23,18 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 def _default_data_dir() -> Path:
-    env = os.environ.get("HACKLAB_DATA_DIR")
+    env = os.environ.get("PWNFORGE_DATA_DIR")
     if env:
         return Path(env).expanduser().resolve()
-    return (Path.home() / ".hacklab").resolve()
+    return (Path.home() / ".pwnforge").resolve()
 
 
 class Settings(BaseSettings):
     """Bootstrap settings, immutable for the life of the process."""
 
     model_config = SettingsConfigDict(
-        env_prefix="HACKLAB_",
-        env_file=os.environ.get("HACKLAB_ENV_FILE", str(_default_data_dir() / ".env")),
+        env_prefix="PWNFORGE_",
+        env_file=os.environ.get("PWNFORGE_ENV_FILE", str(_default_data_dir() / ".env")),
         env_file_encoding="utf-8",
         extra="ignore",
     )
@@ -95,7 +95,7 @@ class Settings(BaseSettings):
     def resolved_database_url(self) -> str:
         if self.database_url:
             return self.database_url
-        return f"sqlite:///{self.data_dir / 'hacklab.db'}"
+        return f"sqlite:///{self.data_dir / 'pwnforge.db'}"
 
     def ensure_dirs(self) -> None:
         for p in (

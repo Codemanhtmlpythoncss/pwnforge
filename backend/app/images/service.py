@@ -4,7 +4,7 @@ Golden images are immutable parents; VM disks are copy-on-write overlays that
 reference them. This service tracks image records, verifies checksums, resolves
 on-disk paths, and performs *explicit-only* downloads. Nothing here ever runs
 automatically — ``fetch_image`` is invoked only by the installer's optional
-image step or the ``hacklab images fetch`` command, and only on the host where
+image step or the ``pwnforge images fetch`` command, and only on the host where
 VMs actually run. On a host without the images present, profiles that need
 them are reported as ``requires_base_image`` and never as ready.
 """

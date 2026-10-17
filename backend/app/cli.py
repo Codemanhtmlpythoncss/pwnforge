@@ -1,7 +1,7 @@
-"""HackLab command-line interface.
+"""Pwnforge command-line interface.
 
 Shares the same core services as the website — it never re-implements logic.
-Run as ``python -m backend.app.cli <command>`` or via the ``hacklab`` wrapper.
+Run as ``python -m backend.app.cli <command>`` or via the ``pwnforge`` wrapper.
 """
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from rich.table import Table
 
 from backend.app.core.config import get_settings
 
-app = typer.Typer(add_completion=False, help="HackLab administration CLI",
+app = typer.Typer(add_completion=False, help="Pwnforge administration CLI",
                   pretty_exceptions_enable=False)
 console = Console()
 
@@ -28,7 +28,7 @@ def status() -> None:
     from backend.app.database.base import session_scope
     from backend.app.database.models import Course, User, VMInstance, VMProfile, VMStatus
     from backend.app.vms.detect import host_summary
-    console.print("[bold]HackLab status[/bold]")
+    console.print("[bold]Pwnforge status[/bold]")
     console.print(host_summary())
     try:
         with session_scope() as s:
@@ -115,7 +115,7 @@ def serve(host: str = None, port: int = None, reload: bool = False) -> None:
         bind_host = bind_host or s.host
         bind_port = bind_port or s.port
     url = f"http://{'localhost' if bind_host in ('127.0.0.1','0.0.0.0') else bind_host}:{bind_port}"
-    console.print(f"[bold green]HackLab serving at {url}[/bold green]")
+    console.print(f"[bold green]Pwnforge serving at {url}[/bold green]")
     if bind_host == "0.0.0.0":
         console.print("[yellow]LAN access enabled — reachable from the local network.[/yellow]")
     uvicorn.run("backend.app.main:app", host=bind_host, port=bind_port, reload=reload)

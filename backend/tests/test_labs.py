@@ -40,7 +40,7 @@ def test_flag_submission_server_side(admin):
     # correct flag (provisioned scheme); only the hash is stored server-side
     good = admin.post("/api/flags/submit",
                       json={"scope_type": "lab", "scope_id": lab,
-                            "value": f"HACKLAB{{{lab}}}"}).json()
+                            "value": f"PWN{{{lab}}}"}).json()
     assert good["correct"] is True and good["points"] > 0
     bad = admin.post("/api/flags/submit",
                      json={"scope_type": "lab", "scope_id": lab, "value": "nope"}).json()

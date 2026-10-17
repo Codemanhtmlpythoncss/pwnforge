@@ -55,5 +55,5 @@ number of stages and expected effort — not merely duration.
 
 Paths live in `backend/app/catalog/content/paths.py`. Each step references a
 real `course_id` or `lab_id`, with `required` and a `note`. Administrators can
-add paths without editing application source; re-import with `hacklab init`.
-`hacklab paths list` shows them.
+add paths without editing application source; re-import with `pwnforge init`.
+`pwnforge paths list` shows them.

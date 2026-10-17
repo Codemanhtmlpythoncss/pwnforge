@@ -60,7 +60,7 @@ export default function LabWorkspace() {
           <div className="mt-4">
             <div className="font-semibold mb-1 text-sm">Submit flag</div>
             <div className="flex gap-2">
-              <input className="input text-sm" placeholder="HACKLAB{…}" value={flag} onChange={e => setFlag(e.target.value)} />
+              <input className="input text-sm" placeholder="PWN{…}" value={flag} onChange={e => setFlag(e.target.value)} />
               <button className="btn btn-primary text-sm" onClick={submitFlag}>Go</button>
             </div>
             {flagMsg && <div className={`text-sm mt-1 ${flagMsg.startsWith("✓") ? "text-ok" : "text-bad"}`}>{flagMsg}</div>}

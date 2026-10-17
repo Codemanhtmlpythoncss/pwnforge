@@ -62,7 +62,7 @@ def constant_time_equals(a: str, b: str) -> bool:
 
 
 def _serializer() -> URLSafeTimedSerializer:
-    return URLSafeTimedSerializer(get_settings().load_or_create_secret(), salt="hacklab-session")
+    return URLSafeTimedSerializer(get_settings().load_or_create_secret(), salt="pwnforge-session")
 
 
 def sign_session(session_id: str) -> str:

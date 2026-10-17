@@ -64,7 +64,7 @@ COURSES = [
                   "host and the network it belongs to. A `/24` has 256 addresses (254 "
                   "usable). Hosts on the same subnet talk directly; otherwise traffic goes "
                   "via a gateway/router. Private ranges (`10/8`, `172.16/12`, `192.168/16`) "
-                  "are used inside networks like HackLab's isolated labs.",
+                  "are used inside networks like Pwnforge's isolated labs.",
                   exercises=[short("How many usable hosts in a /24?", "254",
                                    "networking-fundamentals", "256 total minus network and broadcast.")],
                   hints=["Usable = 2^(32-prefix) - 2."]),
@@ -134,7 +134,7 @@ COURSES = [
                                  "An A record holds an IPv4 address.")],
                   hints=["`dig` is the query tool of choice."]),
            lesson("DHCP and core services", "easy", 10, "dns-services",
-                  "DHCP leases addresses to hosts automatically. In HackLab labs, an "
+                  "DHCP leases addresses to hosts automatically. In Pwnforge labs, an "
                   "isolated network can run its own DHCP so guests get predictable "
                   "addresses. Other core services — NTP (time), SMTP (mail) — each have "
                   "security-relevant configuration worth understanding.",

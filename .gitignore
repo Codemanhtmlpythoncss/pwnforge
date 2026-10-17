@@ -12,3 +12,5 @@ frontend/dist/
 *.egg-info/
 build/
 dist/
+.brandcheck/
+.pwnforge/

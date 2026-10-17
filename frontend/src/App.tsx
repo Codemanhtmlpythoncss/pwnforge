@@ -30,7 +30,7 @@ function toggleTheme() {
   const el = document.documentElement;
   const next = el.getAttribute("data-theme") === "light" ? "dark" : "light";
   el.setAttribute("data-theme", next);
-  try { localStorage.setItem("hacklab-theme", next); } catch {}
+  try { localStorage.setItem("pwnforge-theme", next); } catch {}
 }
 
 export default function App() {
@@ -38,7 +38,7 @@ export default function App() {
   const nav = useNavigate();
   useEffect(() => {
     try {
-      const t = localStorage.getItem("hacklab-theme");
+      const t = localStorage.getItem("pwnforge-theme");
       if (t) document.documentElement.setAttribute("data-theme", t);
     } catch {}
   }, []);
@@ -50,7 +50,7 @@ export default function App() {
     <div className="flex h-full">
       <aside className="w-60 shrink-0 border-r border-line bg-panel2 flex flex-col">
         <div className="px-5 py-4 text-xl font-extrabold tracking-tight">
-          Hack<span className="text-brand">Lab</span>
+          Pwn<span className="text-brand">forge</span>
         </div>
         <nav className="flex-1 px-2 space-y-1">
           {NAV.map(([to, label, icon]) => (

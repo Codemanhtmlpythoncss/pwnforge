@@ -1,4 +1,4 @@
-"""SQLAlchemy ORM models for HackLab.
+"""SQLAlchemy ORM models for Pwnforge.
 
 Content (courses, lessons, profiles, labs, paths) is imported from the
 versioned ``catalog/`` definitions into these tables so the API can paginate,

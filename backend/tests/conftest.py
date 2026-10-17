@@ -15,11 +15,11 @@ import pytest
 
 @pytest.fixture(scope="session", autouse=True)
 def _env(tmp_path_factory):
-    data = tmp_path_factory.mktemp("hacklab-test-data")
-    os.environ["HACKLAB_DATA_DIR"] = str(data)
-    os.environ["HACKLAB_DATABASE_URL"] = f"sqlite:///{data/'test.db'}"
-    os.environ["HACKLAB_ENV_FILE"] = str(data / ".env")
-    os.environ["HACKLAB_VM_DRIVER"] = "simulation"
+    data = tmp_path_factory.mktemp("pwnforge-test-data")
+    os.environ["PWNFORGE_DATA_DIR"] = str(data)
+    os.environ["PWNFORGE_DATABASE_URL"] = f"sqlite:///{data/'test.db'}"
+    os.environ["PWNFORGE_ENV_FILE"] = str(data / ".env")
+    os.environ["PWNFORGE_VM_DRIVER"] = "simulation"
     # Reset cached settings/engine to pick up the test env.
     from backend.app.core.config import get_settings
     from backend.app.database import base as dbbase

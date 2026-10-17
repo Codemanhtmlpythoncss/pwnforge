@@ -128,7 +128,7 @@ def start_instance(session: Session, inst: VMInstance, progress=None) -> VMInsta
             if image.status != ImageStatus.present:
                 raise VMServiceError(
                     f"Base image '{image.key}' is {image.status.value}; fetch/build it "
-                    "before starting this VM (hacklab images fetch).")
+                    "before starting this VM (pwnforge images fetch).")
             base_path = str(images.image_path(image))
 
             # 6. verify image
@@ -153,7 +153,7 @@ def start_instance(session: Session, inst: VMInstance, progress=None) -> VMInsta
         # 8. define
         step(7)
         spec = VMSpec(
-            name=f"hacklab-{inst.id}", vcpu=inst.vcpu, memory_mb=inst.memory_mb,
+            name=f"pwnforge-{inst.id}", vcpu=inst.vcpu, memory_mb=inst.memory_mb,
             arch=profile.arch, base_image_path=base_path, overlay_path=overlay_path,
             disk_gb=profile.disk_gb, network_ref=inst.network_id, headless=True,
         )

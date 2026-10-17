@@ -188,7 +188,7 @@ COURSES = [
           "Static analysis examines a binary without running it (disassembly, strings, "
           "structure); dynamic analysis observes it executing in a controlled, isolated "
           "environment under a debugger. Each reveals what the other hides. Always analyse "
-          "untrusted binaries inside isolation, exactly like HackLab's disposable VMs.",
+          "untrusted binaries inside isolation, exactly like Pwnforge's disposable VMs.",
           exercises=[mcq("Dynamic analysis means:",
                          ["Reading source", "Observing execution in isolation",
                           "Compiling", "Signing"], "Observing execution in isolation",

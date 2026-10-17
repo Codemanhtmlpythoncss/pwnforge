@@ -7,12 +7,12 @@ from backend.app.catalog.content._authoring import (
 
 COURSES = [
     course(
-        "hacklab-orientation", "HackLab Orientation",
-        "Learn to use the HackLab platform: starting labs, using terminals, "
+        "pwnforge-orientation", "Pwnforge Orientation",
+        "Learn to use the Pwnforge platform: starting labs, using terminals, "
         "understanding isolated networks, and working safely.",
         "orientation", "platform", specialization=None,
         objectives=[
-            "Navigate the HackLab interface",
+            "Navigate the Pwnforge interface",
             "Start, stop and reset a disposable lab VM",
             "Understand isolated lab networking and safe practice",
         ],
@@ -20,9 +20,9 @@ COURSES = [
         competency_prereqs=[],
         lessons=[
             lesson(
-                "Welcome to HackLab", "orientation", 10, "platform-orientation",
+                "Welcome to Pwnforge", "orientation", 10, "platform-orientation",
                 """
-HackLab is a self-hosted training platform. You progress through **courses**
+Pwnforge is a self-hosted training platform. You progress through **courses**
 (instructional content and assessments) and **labs** (disposable virtual
 machines you interact with). This orientation explains the moving parts so the
 rest of your journey is smooth.
@@ -47,7 +47,7 @@ unless an administrator has explicitly enabled external connectivity.
                 "Starting and resetting a lab", "orientation", 10, "platform-orientation",
                 """
 From the **Machine Catalogue** or a course's **Lab Workspace**, press *Start*.
-HackLab validates the profile, checks host capacity, creates a copy-on-write
+Pwnforge validates the profile, checks host capacity, creates a copy-on-write
 disk overlay, defines the VM, attaches it to an isolated network, and starts
 it. You will see real progress for each stage. A lab is only marked *ready*
 once the hypervisor confirms the VM is actually running.
@@ -110,12 +110,12 @@ Good habits:
     course(
         "cybersecurity-fundamentals", "Cybersecurity Fundamentals",
         "Core security concepts: the CIA triad, threats and risk, defence in "
-        "depth, and the vocabulary you will use throughout HackLab.",
+        "depth, and the vocabulary you will use throughout Pwnforge.",
         "beginner", "fundamentals", specialization=None,
         objectives=["Explain the CIA triad", "Describe threats, vulnerabilities and risk",
                     "Understand defence in depth and least privilege"],
         tags=["fundamentals", "beginner", "theory"],
-        prerequisites=["hacklab-orientation"],
+        prerequisites=["pwnforge-orientation"],
         lessons=[
             lesson(
                 "The CIA triad", "beginner", 15, "security-terminology",

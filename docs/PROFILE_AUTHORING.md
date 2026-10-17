@@ -73,7 +73,7 @@ Readiness is recomputed from host capabilities + image state
 ## Validate
 
 ```bash
-hacklab profiles validate     # schema + required fields, 0 invalid expected
-hacklab profiles stats        # counts by category/difficulty/os/readiness
-hacklab profiles search TERM
+pwnforge profiles validate     # schema + required fields, 0 invalid expected
+pwnforge profiles stats        # counts by category/difficulty/os/readiness
+pwnforge profiles search TERM
 ```

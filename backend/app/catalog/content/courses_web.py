@@ -190,7 +190,7 @@ COURSES = [
        [L("Storing credentials", "intermediate", 15, "authn-security",
           "Passwords must be stored as salted, slow hashes (bcrypt, scrypt, Argon2) — "
           "never plaintext or fast hashes like raw SHA-256. Salting defeats precomputed "
-          "tables; a slow algorithm defeats brute force. HackLab itself uses Argon2id for "
+          "tables; a slow algorithm defeats brute force. Pwnforge itself uses Argon2id for "
           "exactly this reason.",
           exercises=[mcq("Which is appropriate for password storage?",
                          ["MD5", "Plain SHA-256", "Argon2id", "Base64"], "Argon2id",
@@ -215,7 +215,7 @@ COURSES = [
           "A session begins at login and should be bound to a strong, random identifier. "
           "Regenerate the session id on privilege change (login) to prevent fixation. "
           "Expire sessions after inactivity and on logout. Store session state server-"
-          "side; the cookie should be an opaque reference, as HackLab does.",
+          "side; the cookie should be an opaque reference, as Pwnforge does.",
           exercises=[mcq("To prevent session fixation you should:",
                          ["Reuse the id", "Regenerate the id at login",
                           "Store it in localStorage", "Disable cookies"],
@@ -251,7 +251,7 @@ COURSES = [
           "Insecure Direct Object Reference (IDOR) lets a user access another's object "
           "by changing an identifier because the server failed to check ownership. The "
           "fix: always verify the current user is authorised for the specific object, "
-          "server-side, on every request. HackLab enforces per-user ownership on labs "
+          "server-side, on every request. Pwnforge enforces per-user ownership on labs "
           "and terminals for exactly this reason.",
           exercises=[short("Accessing another user's record by changing an id is called ___ (acronym).",
                            "IDOR", "access-control", "Insecure Direct Object Reference.")])],

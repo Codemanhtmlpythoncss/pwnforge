@@ -1,6 +1,6 @@
 # Security
 
-HackLab manages a hypervisor and runs deliberately vulnerable training targets,
+Pwnforge manages a hypervisor and runs deliberately vulnerable training targets,
 so its own security is a first-class concern.
 
 ## Application security
@@ -27,7 +27,7 @@ so its own security is a first-class concern.
 
 ## Virtualisation security
 
-- HackLab **does not run as root**. On Debian it runs as a dedicated user in the
+- Pwnforge **does not run as root**. On Debian it runs as a dedicated user in the
   `libvirt`/`kvm` groups; the systemd unit adds `NoNewPrivileges`,
   `ProtectSystem`, `ProtectHome`, `PrivateTmp`.
 - The libvirt management socket is **never** exposed to the frontend. Only the
@@ -53,7 +53,7 @@ terminal is intentionally **not** implemented.
 
 - A VM is reported `running` only after the hypervisor confirms it.
 - When the simulation driver is active, `real_virtualization` is `false`
-  everywhere and every instance is flagged `simulated`. HackLab never pretends a
+  everywhere and every instance is flagged `simulated`. Pwnforge never pretends a
   VM booted when it did not.
 
 ## Reporting

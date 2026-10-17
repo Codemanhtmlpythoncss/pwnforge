@@ -33,7 +33,7 @@ def create_backup(output_dir: str | None = None, include_disposable: bool = Fals
     out = Path(output_dir) if output_dir else s.backups_dir
     out.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
-    staging = Path(tempfile.mkdtemp(prefix="hacklab-backup-"))
+    staging = Path(tempfile.mkdtemp(prefix="pwnforge-backup-"))
 
     try:
         # Consistent DB copy via SQLite online backup API.
@@ -41,9 +41,9 @@ def create_backup(output_dir: str | None = None, include_disposable: bool = Fals
         manifest: dict = {"created": stamp, "files": {}}
         if db_url.startswith("sqlite"):
             src = db_url.replace("sqlite:///", "")
-            dest = staging / "hacklab.db"
+            dest = staging / "pwnforge.db"
             _online_backup(src, dest)
-            manifest["files"]["hacklab.db"] = {"sha256": _sha256(dest)}
+            manifest["files"]["pwnforge.db"] = {"sha256": _sha256(dest)}
         # Config
         for name in ("secret_key", ".env"):
             p = s.data_dir / name
@@ -53,12 +53,12 @@ def create_backup(output_dir: str | None = None, include_disposable: bool = Fals
         # Image metadata snapshot
         (staging / "manifest.json").write_text(json.dumps(manifest, indent=2))
 
-        archive = out / f"hacklab-backup-{stamp}.tar.gz"
+        archive = out / f"pwnforge-backup-{stamp}.tar.gz"
         with tarfile.open(archive, "w:gz") as tar:
-            tar.add(staging, arcname="hacklab-backup")
+            tar.add(staging, arcname="pwnforge-backup")
         # Verify archive integrity
         checksum = _sha256(archive)
-        (out / f"hacklab-backup-{stamp}.sha256").write_text(f"{checksum}  {archive.name}\n")
+        (out / f"pwnforge-backup-{stamp}.sha256").write_text(f"{checksum}  {archive.name}\n")
         return str(archive)
     finally:
         shutil.rmtree(staging, ignore_errors=True)

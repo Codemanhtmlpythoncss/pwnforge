@@ -42,7 +42,7 @@ Every setting has a real backend consumer. Notable groups:
 
 Admin → Settings → `vm.max_total_memory_mb`. This caps total RAM committed
 across running VMs. On a real host, `vm.reserve_host_memory_mb` is kept free for
-the host and HackLab refuses to start a VM that would exceed physical RAM (it
+the host and Pwnforge refuses to start a VM that would exceed physical RAM (it
 never silently overcommits). Simulated VMs consume no real RAM, so only the
 configured budget applies to them.
 
@@ -52,7 +52,7 @@ configured budget applies to them.
 2. **LAN** — set `server.lan_access = true` to bind 0.0.0.0. Add LAN URLs to
    `server.allowed_origins` if you use the dev frontend. Only authenticated
    users get in; being on the network does not make you an admin.
-3. **Secure remote** — put HackLab behind a VPN or an authenticated reverse
+3. **Secure remote** — put Pwnforge behind a VPN or an authenticated reverse
    proxy. Do **not** expose the management site directly to the internet.
 
 ## Recovery
@@ -60,9 +60,9 @@ configured budget applies to them.
 If you lose web access, use the CLI on the host:
 
 ```bash
-hacklab doctor                      # diagnose
+pwnforge doctor                      # diagnose
 # create a replacement admin (only works if none exists):
-hacklab init --admin-user newadmin
+pwnforge init --admin-user newadmin
 ```
 
 To reset a locked-out admin's password, open a Python shell with the venv and

@@ -301,7 +301,7 @@
 - domain: general
   key: platform-orientation
   name: Platform Orientation
-  description: Using the HackLab platform.
+  description: Using the Pwnforge platform.
 - domain: general
   key: wireless-security
   name: Wireless Security

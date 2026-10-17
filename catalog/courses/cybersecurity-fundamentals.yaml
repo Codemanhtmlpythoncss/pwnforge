@@ -1,7 +1,7 @@
 id: cybersecurity-fundamentals
 title: Cybersecurity Fundamentals
 description: 'Core security concepts: the CIA triad, threats and risk, defence in depth, and the vocabulary
-  you will use throughout HackLab.'
+  you will use throughout Pwnforge.'
 difficulty: beginner
 category: fundamentals
 specialization: null
@@ -11,7 +11,7 @@ objectives:
 - Describe threats, vulnerabilities and risk
 - Understand defence in depth and least privilege
 prerequisites:
-- hacklab-orientation
+- pwnforge-orientation
 competency_prereqs: []
 tags:
 - fundamentals

@@ -22,7 +22,7 @@ export default function Login() {
   return (
     <div className="h-full grid place-items-center p-6">
       <form onSubmit={submit} className="card p-8 w-full max-w-sm">
-        <div className="text-2xl font-extrabold mb-1">Hack<span className="text-brand">Lab</span></div>
+        <div className="text-2xl font-extrabold mb-1">Pwn<span className="text-brand">forge</span></div>
         <div className="text-muted text-sm mb-6">
           {bootstrapping ? "Create the first administrator account." : "Sign in to continue."}
         </div>

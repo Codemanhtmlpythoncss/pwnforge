@@ -46,7 +46,7 @@ lessons:
   difficulty: easy
   minutes: 10
   competency: dns-services
-  body: DHCP leases addresses to hosts automatically. In HackLab labs, an isolated network can run its
+  body: DHCP leases addresses to hosts automatically. In Pwnforge labs, an isolated network can run its
     own DHCP so guests get predictable addresses. Other core services — NTP (time), SMTP (mail) — each
     have security-relevant configuration worth understanding.
   exercises:

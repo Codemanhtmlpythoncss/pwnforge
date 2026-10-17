@@ -48,7 +48,7 @@ COURSES = [
        [L("Scope, rules of engagement, authorisation", "intermediate", 15, "pentest-methodology",
           "Every legitimate test begins with written authorisation and a defined scope: "
           "which systems, which techniques, which time windows, and who to contact. "
-          "Working outside scope is both unethical and unlawful. HackLab exists to "
+          "Working outside scope is both unethical and unlawful. Pwnforge exists to "
           "practise these skills safely inside isolated, owned environments.",
           exercises=[mcq("What must precede any testing?",
                          ["A scanner", "Written authorisation and scope", "A VPN",
@@ -178,6 +178,6 @@ COURSES = [
        [mcq("Salting primarily defeats:", ["Network sniffing", "Precomputed tables",
             "Phishing", "CSRF"], "Precomputed tables", "password-security",
             "Salts defeat rainbow tables."),
-        short("Modern password KDF used by HackLab?", "argon2", "password-security",
+        short("Modern password KDF used by Pwnforge?", "argon2", "password-security",
               "Argon2id.")]),
 ]

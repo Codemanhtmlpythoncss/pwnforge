@@ -1,4 +1,4 @@
-"""Alembic environment. Targets HackLab's ORM metadata and settings URL."""
+"""Alembic environment. Targets Pwnforge's ORM metadata and settings URL."""
 from __future__ import annotations
 
 from logging.config import fileConfig

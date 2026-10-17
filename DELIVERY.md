@@ -1,4 +1,4 @@
-# HackLab — Delivery & Acceptance Report
+# Pwnforge — Delivery & Acceptance Report
 
 Generated for the build on **2026-10-17**, developed on **macOS 26.3, Apple M4
 (arm64), 16 GB RAM** (no KVM/libvirt — the simulation driver is active here;
@@ -6,8 +6,8 @@ the deployment target is Debian/KVM).
 
 ## How things were verified
 
-- **Catalogue counts**: `hacklab courses validate`, `hacklab profiles validate`,
-  `hacklab profiles stats`, and a DB import run.
+- **Catalogue counts**: `pwnforge courses validate`, `pwnforge profiles validate`,
+  `pwnforge profiles stats`, and a DB import run.
 - **API + learning + VM/lab lifecycle**: a scripted end-to-end run against the
   app via Starlette's TestClient, plus the automated suite.
 - **Live website**: the server was run and the SPA driven in a real browser
@@ -82,7 +82,7 @@ the deployment target is Debian/KVM).
 - [x] Installation documented (installer + docs/INSTALLATION.md).
 - [x] Persistent service configuration (systemd unit).
 - [x] Backups and restoration (consistent DB copy + checksum + verify).
-- [x] Diagnostics (`hacklab doctor`, `/api/admin/diagnostics`).
+- [x] Diagnostics (`pwnforge doctor`, `/api/admin/diagnostics`).
 - [x] Automated tests — **51 passing**.
 - [x] Security checks (headers, RBAC, cross-user isolation, server-side grading,
       secret redaction) — covered by tests.
@@ -111,11 +111,11 @@ the deployment target is Debian/KVM).
 ## Reproduce the checks
 
 ```bash
-cd hacklab && . .venv/bin/activate
-hacklab courses validate        # 60 courses, 0 issues
-hacklab profiles validate       # 1040 profiles, 0 invalid
-hacklab profiles stats          # counts by category/difficulty/os/readiness
+cd pwnforge && . .venv/bin/activate
+pwnforge courses validate        # 60 courses, 0 issues
+pwnforge profiles validate       # 1040 profiles, 0 invalid
+pwnforge profiles stats          # counts by category/difficulty/os/readiness
 python -m pytest                # 51 passed
 (cd frontend && npm run build)  # SPA builds
-hacklab serve                   # http://localhost:8080
+pwnforge serve                   # http://localhost:8080
 ```

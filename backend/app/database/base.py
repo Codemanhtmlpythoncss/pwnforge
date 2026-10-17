@@ -71,7 +71,7 @@ def reset_engine_for_tests(url: str) -> None:
     global _engine, _SessionFactory
     import os
 
-    os.environ["HACKLAB_DATABASE_URL"] = url
+    os.environ["PWNFORGE_DATABASE_URL"] = url
     get_settings.cache_clear()  # type: ignore[attr-defined]
     _engine = None
     _SessionFactory = None

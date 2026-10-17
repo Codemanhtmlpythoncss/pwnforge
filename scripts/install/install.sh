@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 #
-# HackLab installer for Debian hosts.
+# Pwnforge installer for Debian hosts.
 #
 # Safe to re-run: it never overwrites an existing database or admin account.
 # It does NOT download any OS images — base images are fetched later, only when
-# you explicitly run `hacklab images fetch <key>`.
+# you explicitly run `pwnforge images fetch <key>`.
 #
 set -euo pipefail
 
-HACKLAB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-DATA_DIR="${HACKLAB_DATA_DIR:-$HOME/.hacklab}"
+PWNFORGE_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+DATA_DIR="${PWNFORGE_DATA_DIR:-$HOME/.pwnforge}"
 PYTHON="${PYTHON:-python3}"
 
 say() { printf '\033[1;32m==>\033[0m %s\n' "$*"; }
 warn() { printf '\033[1;33m[warn]\033[0m %s\n' "$*"; }
 
-say "HackLab installer"
-say "Repo:   $HACKLAB_ROOT"
+say "Pwnforge installer"
+say "Repo:   $PWNFORGE_ROOT"
 say "Data:   $DATA_DIR"
 
 # 1. Detect host
@@ -38,7 +38,7 @@ if command -v free >/dev/null 2>&1; then say "Memory: $(free -h | awk '/Mem:/{pr
 say "Disk: $(df -h "$HOME" | awk 'NR==2{print $4" free"}')"
 
 # 4. Python venv + deps
-cd "$HACKLAB_ROOT"
+cd "$PWNFORGE_ROOT"
 if [ ! -d .venv ]; then say "Creating virtualenv"; "$PYTHON" -m venv .venv; fi
 # shellcheck disable=SC1091
 . .venv/bin/activate
@@ -53,7 +53,7 @@ fi
 mkdir -p "$DATA_DIR"/{images,iso,overlays,snapshots,backups,logs}
 
 # 6. Database migrations
-export HACKLAB_DATA_DIR="$DATA_DIR"
+export PWNFORGE_DATA_DIR="$DATA_DIR"
 say "Applying database migrations"
 alembic upgrade head
 
@@ -88,6 +88,6 @@ say "Running diagnostics"
 python -m backend.app.cli doctor || warn "doctor reported problems (often just missing base images on a fresh host)."
 
 say "Done. Start the server with:"
-echo "    cd $HACKLAB_ROOT && . .venv/bin/activate && hacklab serve"
+echo "    cd $PWNFORGE_ROOT && . .venv/bin/activate && pwnforge serve"
 echo "Then open: http://localhost:8080"
-echo "To install as a systemd service, see deploy/systemd/hacklab.service and docs/INSTALLATION.md."
+echo "To install as a systemd service, see deploy/systemd/pwnforge.service and docs/INSTALLATION.md."

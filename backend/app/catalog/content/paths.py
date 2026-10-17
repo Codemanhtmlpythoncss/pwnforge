@@ -16,7 +16,7 @@ LEARNING_PATHS = [
     _p("path-complete-beginner", "Complete Beginner",
        "Start from zero and build the foundations for every other path.",
        None, "orientation", "easy",
-       [_s(1, "hacklab-orientation"), _s(2, "cybersecurity-fundamentals"),
+       [_s(1, "pwnforge-orientation"), _s(2, "cybersecurity-fundamentals"),
         _s(3, "linux-fundamentals"), _s(4, "networking-fundamentals"),
         _s(5, "bash-for-security"), _s(6, "http-https"),
         _s(7, "service-enumeration"), _s(8, lab="web-security-lab", required=False,

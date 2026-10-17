@@ -1,6 +1,6 @@
 # Troubleshooting
 
-Start with `hacklab doctor` — it checks host virtualisation, catalogue counts
+Start with `pwnforge doctor` — it checks host virtualisation, catalogue counts
 and the image dependency graph.
 
 ## Website
@@ -19,11 +19,11 @@ Settings → `server.lan_access = true`, then browse to `http://<host-ip>:8080`.
 
 **Driver is `simulation` on a Linux host that has KVM** — check `/dev/kvm`
 exists and you're in the `kvm`/`libvirt` groups (`id`), and that
-`python3-libvirt`/`virsh` are installed. `hacklab status` shows the detected
+`python3-libvirt`/`virsh` are installed. `pwnforge status` shows the detected
 host and selected driver.
 
 **VM start fails: "Base image … is absent"** — fetch it on the host:
-`hacklab images fetch debian-13-base` (or build role images from it). Nothing is
+`pwnforge images fetch debian-13-base` (or build role images from it). Nothing is
 downloaded automatically.
 
 **VM start fails: "RAM/vCPU budget exceeded"** — raise the limits in Admin →
@@ -31,7 +31,7 @@ Settings (`vm.max_total_memory_mb`, `vm.max_total_vcpu`, `vm.max_concurrent`),
 within what the host can actually provide.
 
 **VM start fails: "Insufficient host RAM"** — the host genuinely lacks free
-memory beyond `vm.reserve_host_memory_mb`. Stop other VMs or add RAM. HackLab
+memory beyond `vm.reserve_host_memory_mb`. Stop other VMs or add RAM. Pwnforge
 refuses to overcommit physical memory.
 
 **A VM shows a wrong state** — Admin → Overview → *Reconcile*, or
@@ -56,11 +56,11 @@ Admin → Storage → *Cleanup (dry run)* to find orphan overlays, then clean up
 
 ## Database / migrations
 
-**`alembic upgrade head` errors** — ensure `HACKLAB_DATA_DIR` points at the
+**`alembic upgrade head` errors** — ensure `PWNFORGE_DATA_DIR` points at the
 right place and the venv is active. For a brand-new DB you can also bootstrap
 with `python -c "from backend.app.database.init_db import initialise; initialise()"`.
 
 ## Logs
 
 Application logs are under `<data>/logs/`. Run the server in the foreground
-(`hacklab serve`) to watch request logs during debugging.
+(`pwnforge serve`) to watch request logs during debugging.

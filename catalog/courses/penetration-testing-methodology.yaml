@@ -24,7 +24,7 @@ lessons:
   competency: pentest-methodology
   body: 'Every legitimate test begins with written authorisation and a defined scope: which systems, which
     techniques, which time windows, and who to contact. Working outside scope is both unethical and unlawful.
-    HackLab exists to practise these skills safely inside isolated, owned environments.'
+    Pwnforge exists to practise these skills safely inside isolated, owned environments.'
   exercises:
   - kind: mcq
     prompt: What must precede any testing?

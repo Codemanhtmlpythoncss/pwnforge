@@ -49,7 +49,7 @@ lessons:
   competency: access-control
   body: 'Insecure Direct Object Reference (IDOR) lets a user access another''s object by changing an identifier
     because the server failed to check ownership. The fix: always verify the current user is authorised
-    for the specific object, server-side, on every request. HackLab enforces per-user ownership on labs
+    for the specific object, server-side, on every request. Pwnforge enforces per-user ownership on labs
     and terminals for exactly this reason.'
   exercises:
   - kind: short_answer

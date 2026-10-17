@@ -2,7 +2,7 @@
 
 ## Overview
 
-HackLab is a single deployable application with three layers:
+Pwnforge is a single deployable application with three layers:
 
 1. **Frontend** — a React/TypeScript SPA (Vite build) served as static files by
    the backend. It talks only to the JSON API and WebSocket endpoints.
@@ -94,5 +94,5 @@ profiles, labs, paths) is imported from the authored catalogue; learner state
 SQLite runs in WAL mode with enforced foreign keys. Alembic manages schema;
 `backend/app/database/init_db.py` provides a create-all bootstrap for tests.
 
-Swapping to PostgreSQL is a `HACKLAB_DATABASE_URL` change plus `alembic upgrade
+Swapping to PostgreSQL is a `PWNFORGE_DATABASE_URL` change plus `alembic upgrade
 head`.

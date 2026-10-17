@@ -1,4 +1,4 @@
-"""HackLab FastAPI application factory."""
+"""Pwnforge FastAPI application factory."""
 from __future__ import annotations
 
 import time
@@ -36,7 +36,7 @@ def _rate_limited(ip: str) -> bool:
 
 def create_app() -> FastAPI:
     settings = get_settings()
-    app = FastAPI(title="HackLab", version="1.0.0",
+    app = FastAPI(title="Pwnforge", version="1.0.0",
                   description="Self-hosted cybersecurity training platform",
                   docs_url="/api/docs", openapi_url="/api/openapi.json")
 
@@ -112,7 +112,7 @@ def _mount_frontend(app: FastAPI) -> None:
         @app.get("/")
         def placeholder():
             return JSONResponse({
-                "message": "HackLab backend is running. Build the frontend "
+                "message": "Pwnforge backend is running. Build the frontend "
                            "(cd frontend && npm install && npm run build) to serve the UI.",
                 "api_docs": "/api/docs", "health": "/api/health"})
 

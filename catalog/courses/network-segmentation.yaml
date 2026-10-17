@@ -23,7 +23,7 @@ lessons:
   minutes: 15
   competency: network-segmentation
   body: Segmentation splits a network into zones (e.g. user, server, management) with controlled flows
-    between them, so a compromise in one zone does not reach all others. HackLab's isolated lab networks
+    between them, so a compromise in one zone does not reach all others. Pwnforge's isolated lab networks
     are a microcosm of this principle.
   exercises:
   - kind: mcq

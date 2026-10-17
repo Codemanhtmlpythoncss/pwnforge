@@ -1,13 +1,13 @@
-id: hacklab-orientation
-title: HackLab Orientation
-description: 'Learn to use the HackLab platform: starting labs, using terminals, understanding isolated
+id: pwnforge-orientation
+title: Pwnforge Orientation
+description: 'Learn to use the Pwnforge platform: starting labs, using terminals, understanding isolated
   networks, and working safely.'
 difficulty: orientation
 category: platform
 specialization: null
 estimated_minutes: 50
 objectives:
-- Navigate the HackLab interface
+- Navigate the Pwnforge interface
 - Start, stop and reset a disposable lab VM
 - Understand isolated lab networking and safe practice
 prerequisites: []
@@ -20,11 +20,11 @@ os_requirements: []
 lab_id: null
 version: 1.0.0
 lessons:
-- title: Welcome to HackLab
+- title: Welcome to Pwnforge
   difficulty: orientation
   minutes: 10
   competency: platform-orientation
-  body: "HackLab is a self-hosted training platform. You progress through **courses**\n(instructional\
+  body: "Pwnforge is a self-hosted training platform. You progress through **courses**\n(instructional\
     \ content and assessments) and **labs** (disposable virtual\nmachines you interact with). This orientation\
     \ explains the moving parts so the\nrest of your journey is smooth.\n\nKey ideas:\n\n- **Courses**\
     \ teach concepts and track your progress and demonstrated\n  competencies server-side.\n- **Labs**\
@@ -44,7 +44,7 @@ lessons:
   competency: platform-orientation
   body: 'From the **Machine Catalogue** or a course''s **Lab Workspace**, press *Start*.
 
-    HackLab validates the profile, checks host capacity, creates a copy-on-write
+    Pwnforge validates the profile, checks host capacity, creates a copy-on-write
 
     disk overlay, defines the VM, attaches it to an isolated network, and starts
 

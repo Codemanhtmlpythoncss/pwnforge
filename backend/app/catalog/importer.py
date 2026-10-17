@@ -227,7 +227,7 @@ def _import_labs(session: Session) -> int:
             flag = Flag(id=fid, scope_type="lab", scope_id=d["id"])
             session.add(flag)
         flag.name = "root flag"
-        flag.value_hash = crypto.hash_flag(f"HACKLAB{{{d['id']}}}")
+        flag.value_hash = crypto.hash_flag(f"PWN{{{d['id']}}}")
         flag.points = 50
         flag.competency_key = None
     return n

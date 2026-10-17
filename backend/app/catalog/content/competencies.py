@@ -90,7 +90,7 @@ COMPETENCIES: list[tuple[str, str, str, str]] = [
     ("secdev", "security-architecture", "Security Architecture", "Designing secure systems."),
     # General
     ("general", "security-terminology", "Security Terminology", "Core vocabulary and concepts."),
-    ("general", "platform-orientation", "Platform Orientation", "Using the HackLab platform."),
+    ("general", "platform-orientation", "Platform Orientation", "Using the Pwnforge platform."),
     ("general", "wireless-security", "Wireless Security", "Wi-Fi security concepts."),
 ]
 

@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "hacklab",
+      "name": "pwnforge",
       "runtimeExecutable": "bash",
       "runtimeArgs": ["-lc", "cd \"$PWD\" && . .venv/bin/activate && python -m backend.app.cli serve --host 127.0.0.1 --port 8080"],
       "port": 8080

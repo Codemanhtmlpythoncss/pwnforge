@@ -23,7 +23,7 @@ router = APIRouter()
 
 
 def _authenticate_ws(ws: WebSocket, db: Session) -> User | None:
-    token = ws.cookies.get("hacklab_session")
+    token = ws.cookies.get("pwnforge_session")
     if not token:
         token = ws.query_params.get("token")
     if not token:
@@ -109,7 +109,7 @@ async def ws_terminal(ws: WebSocket, vm_id: str) -> None:
             await ws.close()
             return
         simulated = inst.driver == "simulation"
-        banner = (f"\r\nHackLab terminal — {inst.name} ({inst.ip_address or 'no ip'})\r\n")
+        banner = (f"\r\nPwnforge terminal — {inst.name} ({inst.ip_address or 'no ip'})\r\n")
         if simulated:
             banner += ("[simulated guest — no host shell is exposed; "
                        "run a real lab on a KVM host for a live console]\r\n")

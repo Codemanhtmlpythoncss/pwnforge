@@ -17,7 +17,7 @@ from typing import Callable
 from backend.app.database.base import get_session_factory, session_scope
 from backend.app.database.models import Job, JobStatus
 
-_executor = ThreadPoolExecutor(max_workers=4, thread_name_prefix="hacklab-job")
+_executor = ThreadPoolExecutor(max_workers=4, thread_name_prefix="pwnforge-job")
 _target_locks: dict[str, threading.Lock] = defaultdict(threading.Lock)
 _locks_guard = threading.Lock()
 

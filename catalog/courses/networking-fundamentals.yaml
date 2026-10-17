@@ -26,7 +26,7 @@ lessons:
   body: An IPv4 address (e.g. `10.0.5.23`) plus a subnet mask (`/24`) defines a host and the network it
     belongs to. A `/24` has 256 addresses (254 usable). Hosts on the same subnet talk directly; otherwise
     traffic goes via a gateway/router. Private ranges (`10/8`, `172.16/12`, `192.168/16`) are used inside
-    networks like HackLab's isolated labs.
+    networks like Pwnforge's isolated labs.
   exercises:
   - kind: short_answer
     prompt: How many usable hosts in a /24?

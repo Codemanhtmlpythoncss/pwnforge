@@ -1,6 +1,6 @@
-# HackLab
+# Pwnforge
 
-A fully self-hosted cybersecurity training and virtual-lab platform. HackLab
+A fully self-hosted cybersecurity training and virtual-lab platform. Pwnforge
 combines a professional, locally hosted website, a real backend API, a
 persistent database, a difficulty-based learning system, and a real
 virtual-machine orchestration subsystem — so a learner can progress from
@@ -17,8 +17,8 @@ with no mandatory cloud service.
 
 | Area | Status |
 |------|--------|
-| Courses | **60** substantial courses (≥ 50 required) — `hacklab courses validate` → 0 issues |
-| VM profiles | **1,040** distinct, meaningful profiles (≥ 1,000 required) — `hacklab profiles validate` → 0 invalid |
+| Courses | **60** substantial courses (≥ 50 required) — `pwnforge courses validate` → 0 issues |
+| VM profiles | **1,040** distinct, meaningful profiles (≥ 1,000 required) — `pwnforge profiles validate` → 0 invalid |
 | Learning paths | 8 beginner-to-expert paths |
 | Multi-machine labs | 10 labs on isolated virtual networks |
 | Competencies | 77 across 12 domains, with server-side tracking |
@@ -38,19 +38,19 @@ verified vs. unverified on which host.
 ## Quick start (development, any host)
 
 ```bash
-cd hacklab
+cd pwnforge
 python3 -m venv .venv && . .venv/bin/activate
 pip install -r backend/requirements.txt
-pip install -e .                      # provides the `hacklab` command
+pip install -e .                      # provides the `pwnforge` command
 
 # initialise DB + import catalogue + create an admin
-hacklab init
+pwnforge init
 
 # build the website
 cd frontend && npm install && npm run build && cd ..
 
 # run it
-hacklab serve
+pwnforge serve
 # open http://localhost:8080
 ```
 
@@ -65,11 +65,11 @@ sudo apt install qemu-system-x86 qemu-utils libvirt-daemon-system python3-libvir
 bash scripts/install/install.sh          # safe to re-run; never overwrites data
 ```
 
-Then optionally install the systemd service in `deploy/systemd/hacklab.service`.
+Then optionally install the systemd service in `deploy/systemd/pwnforge.service`.
 See [docs/INSTALLATION.md](docs/INSTALLATION.md) for the full guide.
 
 > **No OS images are ever downloaded automatically.** Base images are fetched
-> only when you explicitly run `hacklab images fetch <key>` on the host.
+> only when you explicitly run `pwnforge images fetch <key>` on the host.
 
 ---
 
@@ -110,7 +110,7 @@ dry-run-first garbage collection. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.m
 ## Repository layout
 
 ```
-hacklab/
+pwnforge/
 ├── backend/app/          FastAPI app, services, drivers, catalogue
 │   ├── api/              HTTP + WebSocket routes
 │   ├── auth/ security/   auth, crypto, audit
@@ -130,16 +130,16 @@ hacklab/
 ## CLI
 
 ```
-hacklab status          hacklab doctor            hacklab serve
-hacklab courses list    hacklab courses validate  hacklab paths list
-hacklab profiles stats  hacklab profiles search   hacklab profiles validate
-hacklab images list     hacklab images fetch KEY  hacklab images prune --dry-run
-hacklab storage         hacklab backup
+pwnforge status          pwnforge doctor            pwnforge serve
+pwnforge courses list    pwnforge courses validate  pwnforge paths list
+pwnforge profiles stats  pwnforge profiles search   pwnforge profiles validate
+pwnforge images list     pwnforge images fetch KEY  pwnforge images prune --dry-run
+pwnforge storage         pwnforge backup
 ```
 
 ## Licence & intent
 
-HackLab is for **authorised** security education: your own machine, isolated
+Pwnforge is for **authorised** security education: your own machine, isolated
 labs, learning. All course content is original and defensive/educational in
 framing. It must not be used to attack systems you do not own or have explicit
 permission to test.

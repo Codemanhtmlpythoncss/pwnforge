@@ -13,7 +13,7 @@ from backend.app.database.base import get_session_factory
 from backend.app.database.models import User, UserRole
 from backend.app.security import crypto
 
-SESSION_COOKIE = "hacklab_session"
+SESSION_COOKIE = "pwnforge_session"
 
 
 def get_db(request: Request) -> Iterator[Session]:
