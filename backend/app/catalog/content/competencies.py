@@ -97,6 +97,22 @@ COMPETENCIES: list[tuple[str, str, str, str]] = [
     ("osint", "osint-techniques", "OSINT Techniques", "Search operators, metadata, geolocation, verification."),
     ("osint", "osint-ethics", "OSINT Ethics & OPSEC", "Legal/ethical boundaries and investigator OPSEC."),
     ("osint", "osint-corroboration", "Source Corroboration", "Cross-checking and assessing source reliability."),
+    ("osint", "osint-tooling", "OSINT Tooling", "theHarvester, Amass, Shodan, recon-ng and friends."),
+    # Tool proficiency (used in authorised labs you own or are permitted to test)
+    ("tools", "tool-scanning", "Scanning Tools", "Nmap, Masscan and host/port/service discovery."),
+    ("tools", "tool-web-scanners", "Web Scanners", "Nikto, Nuclei and automated web checks."),
+    ("tools", "tool-packet-analysis", "Packet Analysis Tools", "Wireshark and tcpdump."),
+    ("tools", "tool-web-proxy", "Web Proxy Tools", "Burp Suite and OWASP ZAP."),
+    ("tools", "tool-content-discovery", "Content Discovery Tools", "gobuster, ffuf, dirb, feroxbuster."),
+    ("tools", "tool-exploitation-frameworks", "Exploitation Frameworks", "Metasploit Framework in lab use."),
+    ("tools", "tool-password-auditing", "Password Auditing Tools", "John, Hashcat, Hydra for authorised audits."),
+    ("tools", "tool-netcat", "Network Utilities", "netcat, socat and basic connectivity tooling."),
+    ("tools", "tool-proxying", "Pivoting & Proxying", "proxychains, Tor and SSH tunnelling."),
+    ("tools", "tool-ad-tooling", "AD/Windows Tooling", "Impacket, CrackMapExec, BloodHound, Responder (lab)."),
+    ("tools", "tool-re-tooling", "Reverse-Engineering Tools", "Ghidra, radare2, gdb/pwndbg."),
+    ("tools", "tool-forensics-tooling", "Forensics Tools", "Volatility, Autopsy and The Sleuth Kit."),
+    ("tools", "tool-data-decoding", "Data & Decoding Tools", "CyberChef, hashid, base/encoding analysis."),
+    ("tools", "tool-http-clients", "HTTP Clients", "curl and HTTPie for crafting requests."),
 ]
 
 

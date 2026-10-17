@@ -266,8 +266,8 @@
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ubuntu-srv-search-index-1-0
-  name: 'Container Security Lab: unauthenticated search index v1.0 — Ubuntu Server'
+- id: container-sec-ubuntu-srv-file-service-1-3
+  name: 'Container Security Lab: unsafe file service v1.3 — Ubuntu Server'
   category: container
   difficulty: intermediate
   os_family: ubuntu
@@ -279,20 +279,20 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - search-index
+  - file-service
   services:
   - ssh
   provisioning:
     golden_image: ubuntu-2404-base
     role: container-sec
-    component: search-index
-    version: '1.0'
+    component: file-service
+    version: '1.3'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v1.0).'
+  - 'Focus: identify and remediate the unsafe file service (v1.3).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -301,15 +301,15 @@
   - docker
   - intermediate
   - ubuntu
-  - search-index
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ssh-linux-metrics-endpoint-1-0
-  name: 'Container Security Lab: leaky metrics endpoint v1.0 — Debian + OpenSSH'
+- id: container-sec-ssh-linux-reverse-proxy-1-6
+  name: 'Container Security Lab: misconfigured reverse proxy v1.6 — Debian + OpenSSH'
   category: container
   difficulty: intermediate
   os_family: debian
@@ -322,11 +322,53 @@
   packages:
   - openssh-server
   - sudo
-  - metrics-endpoint
+  - reverse-proxy
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
+    role: container-sec
+    component: reverse-proxy
+    version: '1.6'
+    level: intermediate
+  objectives:
+  - Assess and harden container configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.6).'
+  prerequisites:
+  - docker-security
+  estimated_minutes: 60
+  tags:
+  - container
+  - docker
+  - intermediate
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - docker-security
+- id: container-sec-ubuntu-srv-metrics-endpoint-1-0
+  name: 'Container Security Lab: leaky metrics endpoint v1.0 — Ubuntu Server'
+  category: container
+  difficulty: intermediate
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - metrics-endpoint
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
     role: container-sec
     component: metrics-endpoint
     version: '1.0'
@@ -343,7 +385,7 @@
   - container
   - docker
   - intermediate
-  - debian
+  - ubuntu
   - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
@@ -351,8 +393,51 @@
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ubuntu-srv-reverse-proxy-1-0
-  name: 'Container Security Lab: misconfigured reverse proxy v1.0 — Ubuntu Server'
+- id: container-sec-ssh-linux-search-index-1-3
+  name: 'Container Security Lab: unauthenticated search index v1.3 — Debian + OpenSSH'
+  category: container
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - search-index
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: container-sec
+    component: search-index
+    version: '1.3'
+    level: intermediate
+  objectives:
+  - Assess and harden container configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v1.3).'
+  prerequisites:
+  - docker-security
+  estimated_minutes: 60
+  tags:
+  - container
+  - docker
+  - intermediate
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - docker-security
+- id: container-sec-ubuntu-srv-report-exporter-1-6
+  name: 'Container Security Lab: template-injectable report exporter v1.6 — Ubuntu Server'
   category: container
   difficulty: intermediate
   os_family: ubuntu
@@ -364,20 +449,20 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - reverse-proxy
+  - report-exporter
   services:
   - ssh
   provisioning:
     golden_image: ubuntu-2404-base
     role: container-sec
-    component: reverse-proxy
-    version: '1.0'
+    component: report-exporter
+    version: '1.6'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.0).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v1.6).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -386,7 +471,7 @@
   - docker
   - intermediate
   - ubuntu
-  - reverse-proxy
+  - report-exporter
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -436,8 +521,8 @@
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ubuntu-srv-report-exporter-1-0
-  name: 'Container Security Lab: template-injectable report exporter v1.0 — Ubuntu Server'
+- id: container-sec-ubuntu-srv-reverse-proxy-2-3
+  name: 'Container Security Lab: misconfigured reverse proxy v2.3 — Ubuntu Server'
   category: container
   difficulty: intermediate
   os_family: ubuntu
@@ -449,20 +534,20 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - report-exporter
+  - reverse-proxy
   services:
   - ssh
   provisioning:
     golden_image: ubuntu-2404-base
     role: container-sec
-    component: report-exporter
-    version: '1.0'
+    component: reverse-proxy
+    version: '2.3'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v1.0).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.3).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -471,15 +556,15 @@
   - docker
   - intermediate
   - ubuntu
-  - report-exporter
+  - reverse-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ssh-linux-search-index-1-0
-  name: 'Container Security Lab: unauthenticated search index v1.0 — Debian + OpenSSH'
+- id: container-sec-ssh-linux-metrics-endpoint-2-6
+  name: 'Container Security Lab: leaky metrics endpoint v2.6 — Debian + OpenSSH'
   category: container
   difficulty: intermediate
   os_family: debian
@@ -492,20 +577,20 @@
   packages:
   - openssh-server
   - sudo
-  - search-index
+  - metrics-endpoint
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: container-sec
-    component: search-index
-    version: '1.0'
+    component: metrics-endpoint
+    version: '2.6'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v1.0).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.6).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -514,15 +599,15 @@
   - docker
   - intermediate
   - debian
-  - search-index
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ubuntu-srv-metrics-endpoint-2-0
-  name: 'Container Security Lab: leaky metrics endpoint v2.0 — Ubuntu Server'
+- id: container-sec-ubuntu-srv-search-index-2-0
+  name: 'Container Security Lab: unauthenticated search index v2.0 — Ubuntu Server'
   category: container
   difficulty: intermediate
   os_family: ubuntu
@@ -534,20 +619,20 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - metrics-endpoint
+  - search-index
   services:
   - ssh
   provisioning:
     golden_image: ubuntu-2404-base
     role: container-sec
-    component: metrics-endpoint
+    component: search-index
     version: '2.0'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v2.0).'
+  - 'Focus: identify and remediate the unauthenticated search index (v2.0).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -556,7 +641,92 @@
   - docker
   - intermediate
   - ubuntu
-  - metrics-endpoint
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - docker-security
+- id: container-sec-ssh-linux-report-exporter-2-3
+  name: 'Container Security Lab: template-injectable report exporter v2.3 — Debian + OpenSSH'
+  category: container
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - report-exporter
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: container-sec
+    component: report-exporter
+    version: '2.3'
+    level: intermediate
+  objectives:
+  - Assess and harden container configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v2.3).'
+  prerequisites:
+  - docker-security
+  estimated_minutes: 60
+  tags:
+  - container
+  - docker
+  - intermediate
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - docker-security
+- id: container-sec-ubuntu-srv-file-service-2-6
+  name: 'Container Security Lab: unsafe file service v2.6 — Ubuntu Server'
+  category: container
+  difficulty: intermediate
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - file-service
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: container-sec
+    component: file-service
+    version: '2.6'
+    level: intermediate
+  objectives:
+  - Assess and harden container configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v2.6).'
+  prerequisites:
+  - docker-security
+  estimated_minutes: 60
+  tags:
+  - container
+  - docker
+  - intermediate
+  - ubuntu
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -606,8 +776,8 @@
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ubuntu-srv-file-service-2-0
-  name: 'Container Security Lab: unsafe file service v2.0 — Ubuntu Server'
+- id: container-sec-ubuntu-srv-metrics-endpoint-2-3
+  name: 'Container Security Lab: leaky metrics endpoint v2.3 — Ubuntu Server'
   category: container
   difficulty: intermediate
   os_family: ubuntu
@@ -619,190 +789,20 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - file-service
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: container-sec
-    component: file-service
-    version: '2.0'
-    level: intermediate
-  objectives:
-  - Assess and harden container configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v2.0).'
-  prerequisites:
-  - docker-security
-  estimated_minutes: 60
-  tags:
-  - container
-  - docker
-  - intermediate
-  - ubuntu
-  - file-service
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - docker-security
-- id: container-sec-ssh-linux-report-exporter-2-0
-  name: 'Container Security Lab: template-injectable report exporter v2.0 — Debian + OpenSSH'
-  category: container
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - report-exporter
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: container-sec
-    component: report-exporter
-    version: '2.0'
-    level: intermediate
-  objectives:
-  - Assess and harden container configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v2.0).'
-  prerequisites:
-  - docker-security
-  estimated_minutes: 60
-  tags:
-  - container
-  - docker
-  - intermediate
-  - debian
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - docker-security
-- id: container-sec-ubuntu-srv-search-index-2-0
-  name: 'Container Security Lab: unauthenticated search index v2.0 — Ubuntu Server'
-  category: container
-  difficulty: intermediate
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: container-sec
-    component: search-index
-    version: '2.0'
-    level: intermediate
-  objectives:
-  - Assess and harden container configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v2.0).'
-  prerequisites:
-  - docker-security
-  estimated_minutes: 60
-  tags:
-  - container
-  - docker
-  - intermediate
-  - ubuntu
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - docker-security
-- id: container-sec-ssh-linux-metrics-endpoint-2-0
-  name: 'Container Security Lab: leaky metrics endpoint v2.0 — Debian + OpenSSH'
-  category: container
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
   - metrics-endpoint
   services:
   - ssh
   provisioning:
-    golden_image: debian-13-server
+    golden_image: ubuntu-2404-base
     role: container-sec
     component: metrics-endpoint
-    version: '2.0'
+    version: '2.3'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v2.0).'
-  prerequisites:
-  - docker-security
-  estimated_minutes: 60
-  tags:
-  - container
-  - docker
-  - intermediate
-  - debian
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - docker-security
-- id: container-sec-ubuntu-srv-reverse-proxy-2-0
-  name: 'Container Security Lab: misconfigured reverse proxy v2.0 — Ubuntu Server'
-  category: container
-  difficulty: intermediate
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - reverse-proxy
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: container-sec
-    component: reverse-proxy
-    version: '2.0'
-    level: intermediate
-  objectives:
-  - Assess and harden container configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.0).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.3).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -811,15 +811,15 @@
   - docker
   - intermediate
   - ubuntu
-  - reverse-proxy
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ssh-linux-file-service-3-0
-  name: 'Container Security Lab: unsafe file service v3.0 — Debian + OpenSSH'
+- id: container-sec-ssh-linux-search-index-3-6
+  name: 'Container Security Lab: unauthenticated search index v3.6 — Debian + OpenSSH'
   category: container
   difficulty: intermediate
   os_family: debian
@@ -832,20 +832,20 @@
   packages:
   - openssh-server
   - sudo
-  - file-service
+  - search-index
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: container-sec
-    component: file-service
-    version: '3.0'
+    component: search-index
+    version: '3.6'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v3.0).'
+  - 'Focus: identify and remediate the unauthenticated search index (v3.6).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -854,7 +854,7 @@
   - docker
   - intermediate
   - debian
-  - file-service
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -903,8 +903,8 @@
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ssh-linux-search-index-3-0
-  name: 'Container Security Lab: unauthenticated search index v3.0 — Debian + OpenSSH'
+- id: container-sec-ssh-linux-file-service-3-3
+  name: 'Container Security Lab: unsafe file service v3.3 — Debian + OpenSSH'
   category: container
   difficulty: intermediate
   os_family: debian
@@ -917,20 +917,20 @@
   packages:
   - openssh-server
   - sudo
-  - search-index
+  - file-service
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: container-sec
-    component: search-index
-    version: '3.0'
+    component: file-service
+    version: '3.3'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v3.0).'
+  - 'Focus: identify and remediate the unsafe file service (v3.3).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -939,15 +939,15 @@
   - docker
   - intermediate
   - debian
-  - search-index
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ubuntu-srv-metrics-endpoint-3-0
-  name: 'Container Security Lab: leaky metrics endpoint v3.0 — Ubuntu Server'
+- id: container-sec-ubuntu-srv-reverse-proxy-3-6
+  name: 'Container Security Lab: misconfigured reverse proxy v3.6 — Ubuntu Server'
   category: container
   difficulty: intermediate
   os_family: ubuntu
@@ -959,11 +959,54 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - metrics-endpoint
+  - reverse-proxy
   services:
   - ssh
   provisioning:
     golden_image: ubuntu-2404-base
+    role: container-sec
+    component: reverse-proxy
+    version: '3.6'
+    level: intermediate
+  objectives:
+  - Assess and harden container configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.6).'
+  prerequisites:
+  - docker-security
+  estimated_minutes: 60
+  tags:
+  - container
+  - docker
+  - intermediate
+  - ubuntu
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - docker-security
+- id: container-sec-ssh-linux-metrics-endpoint-3-0
+  name: 'Container Security Lab: leaky metrics endpoint v3.0 — Debian + OpenSSH'
+  category: container
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - metrics-endpoint
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
     role: container-sec
     component: metrics-endpoint
     version: '3.0'
@@ -980,7 +1023,7 @@
   - container
   - docker
   - intermediate
-  - ubuntu
+  - debian
   - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
@@ -988,51 +1031,8 @@
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ssh-linux-reverse-proxy-3-0
-  name: 'Container Security Lab: misconfigured reverse proxy v3.0 — Debian + OpenSSH'
-  category: container
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - reverse-proxy
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: container-sec
-    component: reverse-proxy
-    version: '3.0'
-    level: intermediate
-  objectives:
-  - Assess and harden container configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.0).'
-  prerequisites:
-  - docker-security
-  estimated_minutes: 60
-  tags:
-  - container
-  - docker
-  - intermediate
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - docker-security
-- id: container-sec-ubuntu-srv-file-service-3-0
-  name: 'Container Security Lab: unsafe file service v3.0 — Ubuntu Server'
+- id: container-sec-ubuntu-srv-search-index-3-3
+  name: 'Container Security Lab: unauthenticated search index v3.3 — Ubuntu Server'
   category: container
   difficulty: intermediate
   os_family: ubuntu
@@ -1044,20 +1044,20 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - file-service
+  - search-index
   services:
   - ssh
   provisioning:
     golden_image: ubuntu-2404-base
     role: container-sec
-    component: file-service
-    version: '3.0'
+    component: search-index
+    version: '3.3'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v3.0).'
+  - 'Focus: identify and remediate the unauthenticated search index (v3.3).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -1066,15 +1066,15 @@
   - docker
   - intermediate
   - ubuntu
-  - file-service
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ssh-linux-report-exporter-3-0
-  name: 'Container Security Lab: template-injectable report exporter v3.0 — Debian + OpenSSH'
+- id: container-sec-ssh-linux-report-exporter-3-6
+  name: 'Container Security Lab: template-injectable report exporter v3.6 — Debian + OpenSSH'
   category: container
   difficulty: intermediate
   os_family: debian
@@ -1094,13 +1094,13 @@
     golden_image: debian-13-server
     role: container-sec
     component: report-exporter
-    version: '3.0'
+    version: '3.6'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v3.0).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v3.6).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -1116,8 +1116,8 @@
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ubuntu-srv-search-index-4-0
-  name: 'Container Security Lab: unauthenticated search index v4.0 — Ubuntu Server'
+- id: container-sec-ubuntu-srv-file-service-4-0
+  name: 'Container Security Lab: unsafe file service v4.0 — Ubuntu Server'
   category: container
   difficulty: intermediate
   os_family: ubuntu
@@ -1129,139 +1129,11 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: container-sec
-    component: search-index
-    version: '4.0'
-    level: intermediate
-  objectives:
-  - Assess and harden container configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v4.0).'
-  prerequisites:
-  - docker-security
-  estimated_minutes: 60
-  tags:
-  - container
-  - docker
-  - intermediate
-  - ubuntu
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - docker-security
-- id: container-sec-ssh-linux-metrics-endpoint-4-0
-  name: 'Container Security Lab: leaky metrics endpoint v4.0 — Debian + OpenSSH'
-  category: container
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - metrics-endpoint
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: container-sec
-    component: metrics-endpoint
-    version: '4.0'
-    level: intermediate
-  objectives:
-  - Assess and harden container configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v4.0).'
-  prerequisites:
-  - docker-security
-  estimated_minutes: 60
-  tags:
-  - container
-  - docker
-  - intermediate
-  - debian
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - docker-security
-- id: container-sec-ubuntu-srv-reverse-proxy-4-0
-  name: 'Container Security Lab: misconfigured reverse proxy v4.0 — Ubuntu Server'
-  category: container
-  difficulty: intermediate
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - reverse-proxy
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: container-sec
-    component: reverse-proxy
-    version: '4.0'
-    level: intermediate
-  objectives:
-  - Assess and harden container configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.0).'
-  prerequisites:
-  - docker-security
-  estimated_minutes: 60
-  tags:
-  - container
-  - docker
-  - intermediate
-  - ubuntu
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - docker-security
-- id: container-sec-ssh-linux-file-service-4-0
-  name: 'Container Security Lab: unsafe file service v4.0 — Debian + OpenSSH'
-  category: container
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
   - file-service
   services:
   - ssh
   provisioning:
-    golden_image: debian-13-server
+    golden_image: ubuntu-2404-base
     role: container-sec
     component: file-service
     version: '4.0'
@@ -1278,7 +1150,7 @@
   - container
   - docker
   - intermediate
-  - debian
+  - ubuntu
   - file-service
   reset_supported: true
   snapshots_supported: true
@@ -1286,8 +1158,51 @@
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ubuntu-srv-report-exporter-4-0
-  name: 'Container Security Lab: template-injectable report exporter v4.0 — Ubuntu Server'
+- id: container-sec-ssh-linux-reverse-proxy-4-3
+  name: 'Container Security Lab: misconfigured reverse proxy v4.3 — Debian + OpenSSH'
+  category: container
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - reverse-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: container-sec
+    component: reverse-proxy
+    version: '4.3'
+    level: intermediate
+  objectives:
+  - Assess and harden container configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.3).'
+  prerequisites:
+  - docker-security
+  estimated_minutes: 60
+  tags:
+  - container
+  - docker
+  - intermediate
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - docker-security
+- id: container-sec-ubuntu-srv-metrics-endpoint-4-6
+  name: 'Container Security Lab: leaky metrics endpoint v4.6 — Ubuntu Server'
   category: container
   difficulty: intermediate
   os_family: ubuntu
@@ -1299,20 +1214,20 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - report-exporter
+  - metrics-endpoint
   services:
   - ssh
   provisioning:
     golden_image: ubuntu-2404-base
     role: container-sec
-    component: report-exporter
-    version: '4.0'
+    component: metrics-endpoint
+    version: '4.6'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v4.0).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.6).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -1321,7 +1236,7 @@
   - docker
   - intermediate
   - ubuntu
-  - report-exporter
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -1371,8 +1286,8 @@
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ubuntu-srv-metrics-endpoint-4-0
-  name: 'Container Security Lab: leaky metrics endpoint v4.0 — Ubuntu Server'
+- id: container-sec-ubuntu-srv-report-exporter-4-3
+  name: 'Container Security Lab: template-injectable report exporter v4.3 — Ubuntu Server'
   category: container
   difficulty: intermediate
   os_family: ubuntu
@@ -1384,20 +1299,20 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - metrics-endpoint
+  - report-exporter
   services:
   - ssh
   provisioning:
     golden_image: ubuntu-2404-base
     role: container-sec
-    component: metrics-endpoint
-    version: '4.0'
+    component: report-exporter
+    version: '4.3'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v4.0).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v4.3).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -1406,15 +1321,15 @@
   - docker
   - intermediate
   - ubuntu
-  - metrics-endpoint
+  - report-exporter
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - docker-security
-- id: container-sec-ssh-linux-reverse-proxy-5-0
-  name: 'Container Security Lab: misconfigured reverse proxy v5.0 — Debian + OpenSSH'
+- id: container-sec-ssh-linux-file-service-4-6
+  name: 'Container Security Lab: unsafe file service v4.6 — Debian + OpenSSH'
   category: container
   difficulty: intermediate
   os_family: debian
@@ -1427,20 +1342,20 @@
   packages:
   - openssh-server
   - sudo
-  - reverse-proxy
+  - file-service
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: container-sec
-    component: reverse-proxy
-    version: '5.0'
+    component: file-service
+    version: '4.6'
     level: intermediate
   objectives:
   - Assess and harden container configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v5.0).'
+  - 'Focus: identify and remediate the unsafe file service (v4.6).'
   prerequisites:
   - docker-security
   estimated_minutes: 60
@@ -1449,7 +1364,92 @@
   - docker
   - intermediate
   - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - docker-security
+- id: container-sec-ubuntu-srv-reverse-proxy-4-0
+  name: 'Container Security Lab: misconfigured reverse proxy v4.0 — Ubuntu Server'
+  category: container
+  difficulty: intermediate
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
   - reverse-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: container-sec
+    component: reverse-proxy
+    version: '4.0'
+    level: intermediate
+  objectives:
+  - Assess and harden container configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.0).'
+  prerequisites:
+  - docker-security
+  estimated_minutes: 60
+  tags:
+  - container
+  - docker
+  - intermediate
+  - ubuntu
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - docker-security
+- id: container-sec-ssh-linux-metrics-endpoint-5-3
+  name: 'Container Security Lab: leaky metrics endpoint v5.3 — Debian + OpenSSH'
+  category: container
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - metrics-endpoint
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: container-sec
+    component: metrics-endpoint
+    version: '5.3'
+    level: intermediate
+  objectives:
+  - Assess and harden container configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v5.3).'
+  prerequisites:
+  - docker-security
+  estimated_minutes: 60
+  tags:
+  - container
+  - docker
+  - intermediate
+  - debian
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true

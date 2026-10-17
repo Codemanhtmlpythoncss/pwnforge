@@ -1,0 +1,90 @@
+id: tool-http-clients
+title: 'curl & HTTPie: Crafting HTTP Requests'
+description: Drive and inspect web APIs and apps straight from the terminal.
+difficulty: easy
+category: tools
+specialization: web
+estimated_minutes: 45
+objectives:
+- Understand curl essentials
+- Understand httpie for humans
+prerequisites:
+- http-https
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: curl essentials
+  difficulty: easy
+  minutes: 15
+  competency: tool-http-clients
+  body: 'curl makes any HTTP request, scriptably.
+
+
+    ```
+
+    curl -i http://10.200.0.10/            # show response headers
+
+    curl -X POST -d ''a=1&b=2'' http://.../x # form POST
+
+    curl -H ''Authorization: Bearer T'' .../ # custom header
+
+    curl -b ''session=...'' .../             # send a cookie
+
+    curl -sk https://.../ | jq .           # TLS, pipe JSON to jq
+
+    ```
+
+    `-i` shows headers, `-s` is quiet, `-k` skips cert checks (labs only).'
+  exercises:
+  - kind: command
+    prompt: curl flag to include response headers?
+    answer: -i
+    competency: tool-http-clients
+    explanation: '`-i` includes headers.'
+    points: 10
+    hints: []
+  hints:
+  - text: Pipe JSON APIs through `jq` to read them.
+  walkthrough: []
+- title: HTTPie for humans
+  difficulty: easy
+  minutes: 10
+  competency: tool-http-clients
+  body: 'HTTPie is a friendlier client: `http POST 10.200.0.10/login user=admin pass=admin` sends JSON
+    by default with colourised output. Great for exploring an API quickly before scripting it with curl.'
+  exercises:
+  - kind: short_answer
+    prompt: Friendly curl alternative with colour output?
+    answer: httpie
+    competency: tool-http-clients
+    explanation: HTTPie.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: 'curl & HTTPie: Crafting HTTP Requests Assessment'
+  questions:
+  - kind: command
+    prompt: curl flag to show headers?
+    answer: -i
+    competency: tool-http-clients
+    explanation: '`-i`.'
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Tool to pretty-print/filter JSON in a pipe?
+    answer: jq
+    competency: tool-http-clients
+    explanation: jq.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

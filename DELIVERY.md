@@ -11,7 +11,7 @@ the deployment target is Debian/KVM).
 - **API + learning + VM/lab lifecycle**: a scripted end-to-end run against the
   app via Starlette's TestClient, plus the automated suite.
 - **Live website**: the server was run and the SPA driven in a real browser
-  (login → dashboard with real host metrics → 1,040-profile catalogue → course
+  (login → dashboard with real host metrics → 1,440-profile catalogue → course
   with lessons/optional hints/assessment).
 - **Automated tests**: `pytest` — **51 passed**.
 - **Migrations**: `alembic upgrade head` on a fresh DB — 29 tables, at head.
@@ -20,7 +20,7 @@ the deployment target is Debian/KVM).
 ## Reported facts
 
 - **Courses (valid):** 60 (`courses validate` → 0 issues). Required ≥ 50. ✅
-- **VM profiles (valid):** 1,040 (`profiles validate` → 0 invalid; unique ids).
+- **VM profiles (valid):** 1,440 (`profiles validate` → 0 invalid; unique ids).
   Required ≥ 1,000. ✅
 - **Difficulty levels implemented:** orientation, beginner, easy, intermediate,
   hard, advanced, expert, mastery (0–7). ✅
@@ -45,11 +45,11 @@ the deployment target is Debian/KVM).
 - [x] Functional administration (settings/users/images/storage/audit/diagnostics).
 
 ### Learning
-- [x] ≥ 50 substantial courses — **60**.
-- [x] ≥ 1,000 meaningful VM profiles — **1,040**.
+- [x] ≥ 50 substantial courses — **89**.
+- [x] ≥ 1,000 meaningful VM profiles — **1,440**.
 - [x] Easy-to-hard progression; beginner-to-expert paths (8).
 - [x] Working prerequisites (soft-lock + override).
-- [x] Competency tracking (server-side, 77 competencies).
+- [x] Competency tracking (server-side, 96 competencies).
 - [x] Persistent course progress.
 - [x] Practical assessments (server-side validated).
 - [x] Achievements based on real completion criteria.
@@ -112,7 +112,7 @@ the deployment target is Debian/KVM).
 
 ```bash
 cd pwnforge && . .venv/bin/activate
-pwnforge courses validate        # 60 courses, 0 issues
+pwnforge courses validate        # 89 courses, 0 issues
 pwnforge profiles validate       # 1040 profiles, 0 invalid
 pwnforge profiles stats          # counts by category/difficulty/os/readiness
 python -m pytest                # 51 passed

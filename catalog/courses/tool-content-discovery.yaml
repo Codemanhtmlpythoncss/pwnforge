@@ -1,0 +1,104 @@
+id: tool-content-discovery
+title: 'Content Discovery: gobuster, ffuf & feroxbuster'
+description: Find hidden paths, files, subdomains and parameters with wordlists.
+difficulty: intermediate
+category: tools
+specialization: web
+estimated_minutes: 55
+objectives:
+- Understand directory & file brute-forcing
+- Understand vhosts, dns & parameters
+prerequisites:
+- web-application-security
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: web-security-lab
+version: 1.0.0
+lessons:
+- title: Directory & file brute-forcing
+  difficulty: intermediate
+  minutes: 20
+  competency: tool-content-discovery
+  body: 'Apps often have unlinked paths. Content-discovery tools request many candidate names from a wordlist
+    and report what exists.
+
+
+    ```
+
+    gobuster dir -u http://10.200.0.10 -w /usr/share/wordlists/dirb/common.txt
+
+    ffuf -u http://10.200.0.10/FUZZ -w common.txt -mc 200,301,403
+
+    feroxbuster -u http://10.200.0.10 -w common.txt
+
+    ```
+
+    `FUZZ` is ffuf''s placeholder; `-mc` matches status codes. Wordlist choice matters more than the tool.
+
+
+    > Only run these tools against systems you own or are explicitly authorised to test — the Pwnforge
+    labs are built for exactly this. Unauthorised scanning or access is unethical and usually unlawful.'
+  exercises:
+  - kind: command
+    prompt: ffuf placeholder keyword in a URL?
+    answer: FUZZ
+    competency: tool-content-discovery
+    explanation: '`FUZZ` marks the inject point.'
+    points: 10
+    hints: []
+  hints:
+  - text: SecLists is the go-to wordlist collection.
+  - text: Match/limit by status code and size to cut noise.
+  walkthrough: []
+- title: Vhosts, DNS & parameters
+  difficulty: intermediate
+  minutes: 15
+  competency: tool-content-discovery
+  body: 'The same idea fuzzes more than paths:
+
+
+    ```
+
+    ffuf -u http://10.200.0.10 -H ''Host: FUZZ.site.lab'' -w subs.txt   # vhosts
+
+    gobuster dns -d site.lab -w subs.txt                               # subdomains
+
+    ffuf -u ''http://10.200.0.10/page?FUZZ=1'' -w params.txt             # parameters
+
+    ```
+
+    Filter results by response size (`-fs`) to drop the uniform ''not found'' noise.'
+  exercises:
+  - kind: short_answer
+    prompt: ffuf flag to filter by response size?
+    answer: -fs
+    competency: tool-content-discovery
+    explanation: '`-fs` filters by size.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: 'Content Discovery: gobuster, ffuf & feroxbuster Assessment'
+  questions:
+  - kind: command
+    prompt: ffuf URL placeholder?
+    answer: FUZZ
+    competency: tool-content-discovery
+    explanation: FUZZ.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Most important factor besides the tool?
+    answer: wordlist
+    competency: tool-content-discovery
+    explanation: Wordlist quality.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

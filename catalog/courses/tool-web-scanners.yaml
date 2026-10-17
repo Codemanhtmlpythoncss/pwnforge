@@ -1,0 +1,105 @@
+id: tool-web-scanners
+title: 'Web Scanners: Nikto & Nuclei'
+description: Automated first-pass web checks and template-based scanning.
+difficulty: intermediate
+category: tools
+specialization: web
+estimated_minutes: 55
+objectives:
+- Understand nikto for quick server checks
+- Understand nuclei & templates
+prerequisites:
+- tool-nmap
+- web-application-security
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: web-security-lab
+version: 1.0.0
+lessons:
+- title: Nikto for quick server checks
+  difficulty: intermediate
+  minutes: 15
+  competency: tool-web-scanners
+  body: 'Nikto does a fast, noisy sweep for known issues, dangerous files and server misconfig.
+
+
+    ```
+
+    nikto -h http://10.200.0.10
+
+    nikto -h http://10.200.0.10 -p 8080 -Tuning 123b
+
+    ```
+
+    It''s a starting point, not a verdict — every finding must be confirmed manually. Great for spotting
+    default pages, outdated servers and exposed admin paths in your lab app.'
+  exercises:
+  - kind: command
+    prompt: Scan a host with nikto (nikto -h URL)
+    answer: nikto -h http://10.0.0.5
+    competency: tool-web-scanners
+    explanation: '`-h` sets the target host.'
+    points: 10
+    hints: []
+  hints:
+  - text: Nikto is loud; use it in labs, not quietly on real estates.
+  walkthrough: []
+- title: Nuclei & templates
+  difficulty: intermediate
+  minutes: 20
+  competency: tool-web-scanners
+  body: 'Nuclei runs community/custom YAML *templates* to check for specific, known issues with far less
+    noise than a blind scanner.
+
+
+    ```
+
+    nuclei -u http://10.200.0.10
+
+    nuclei -u http://10.200.0.10 -t http/misconfiguration/
+
+    nuclei -l targets.txt -severity high,critical
+
+    ```
+
+    Templates make findings reproducible and reviewable — you can read exactly what was checked, which
+    is ideal for a report.'
+  exercises:
+  - kind: short_answer
+    prompt: Nuclei checks are written as ___ (file type).
+    answer: templates
+    competency: tool-web-scanners
+    explanation: YAML templates.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: 'Web Scanners: Nikto & Nuclei Assessment'
+  questions:
+  - kind: mcq
+    prompt: 'A scanner result should be treated as:'
+    choices:
+    - Proof
+    - A lead to verify
+    - A patch
+    - Noise
+    answer: A lead to verify
+    competency: tool-web-scanners
+    explanation: Always confirm manually.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Nuclei runs checks written as ___.
+    answer: templates
+    competency: tool-web-scanners
+    explanation: Templates.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

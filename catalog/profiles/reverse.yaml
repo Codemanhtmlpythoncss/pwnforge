@@ -117,94 +117,51 @@
   lab_id: null
   course_ids:
   - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-api-gateway-1-2
-  name: 'Reverse Engineering Lab: permissive API gateway v1.2 — Debian + OpenSSH'
+- id: re-static-ssh-linux-job-runner-1-5
+  name: 'Reverse Engineering Lab: injectable job runner v1.5 — Debian + OpenSSH'
   category: reverse
-  difficulty: expert
+  difficulty: advanced
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-server
   vcpu: 4
-  memory_mb: 6144
-  disk_gb: 30
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - openssh-server
   - sudo
-  - api-gateway
+  - job-runner
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: re-static
-    component: api-gateway
-    version: '1.2'
-    level: expert
+    component: job-runner
+    version: '1.5'
+    level: advanced
   objectives:
   - Statically and dynamically analyse a sample in isolation.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v1.2).'
+  - 'Focus: identify and remediate the injectable job runner (v1.5).'
   prerequisites:
   - reverse-engineering-fundamentals
-  estimated_minutes: 180
+  estimated_minutes: 120
   tags:
   - reverse
   - re
-  - expert
+  - advanced
   - debian
-  - api-gateway
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-webhook-receiver-1-2
-  name: 'Reverse Engineering Lab: unvalidated webhook receiver v1.2 — Debian + OpenSSH'
-  category: reverse
-  difficulty: expert
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 6144
-  disk_gb: 30
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - webhook-receiver
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: re-static
-    component: webhook-receiver
-    version: '1.2'
-    level: expert
-  objectives:
-  - Statically and dynamically analyse a sample in isolation.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.2).'
-  prerequisites:
-  - reverse-engineering-fundamentals
-  estimated_minutes: 180
-  tags:
-  - reverse
-  - re
-  - expert
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-message-queue-1-2
-  name: 'Reverse Engineering Lab: exposed message queue v1.2 — Debian + OpenSSH'
+- id: re-static-ssh-linux-message-queue-1-8
+  name: 'Reverse Engineering Lab: exposed message queue v1.8 — Debian + OpenSSH'
   category: reverse
   difficulty: expert
   os_family: debian
@@ -224,13 +181,13 @@
     golden_image: debian-13-server
     role: re-static
     component: message-queue
-    version: '1.2'
+    version: '1.8'
     level: expert
   objectives:
   - Statically and dynamically analyse a sample in isolation.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v1.2).'
+  - 'Focus: identify and remediate the exposed message queue (v1.8).'
   prerequisites:
   - reverse-engineering-fundamentals
   estimated_minutes: 180
@@ -240,6 +197,135 @@
   - expert
   - debian
   - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-webhook-receiver-1-2
+  name: 'Reverse Engineering Lab: unvalidated webhook receiver v1.2 — Debian + OpenSSH'
+  category: reverse
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: webhook-receiver
+    version: '1.2'
+    level: advanced
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.2).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 120
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-api-gateway-1-5
+  name: 'Reverse Engineering Lab: permissive API gateway v1.5 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - api-gateway
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: api-gateway
+    version: '1.5'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v1.5).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-backup-agent-1-8
+  name: 'Reverse Engineering Lab: over-privileged backup agent v1.8 — Debian + OpenSSH'
+  category: reverse
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: backup-agent
+    version: '1.8'
+    level: advanced
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v1.8).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 120
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -289,8 +375,51 @@
   lab_id: null
   course_ids:
   - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-webhook-receiver-2-2
-  name: 'Reverse Engineering Lab: unvalidated webhook receiver v2.2 — Debian + OpenSSH'
+- id: re-static-ssh-linux-message-queue-2-5
+  name: 'Reverse Engineering Lab: exposed message queue v2.5 — Debian + OpenSSH'
+  category: reverse
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - message-queue
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: message-queue
+    version: '2.5'
+    level: advanced
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v2.5).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 120
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-webhook-receiver-2-8
+  name: 'Reverse Engineering Lab: unvalidated webhook receiver v2.8 — Debian + OpenSSH'
   category: reverse
   difficulty: expert
   os_family: debian
@@ -310,13 +439,13 @@
     golden_image: debian-13-server
     role: re-static
     component: webhook-receiver
-    version: '2.2'
+    version: '2.8'
     level: expert
   objectives:
   - Statically and dynamically analyse a sample in isolation.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.2).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.8).'
   prerequisites:
   - reverse-engineering-fundamentals
   estimated_minutes: 180
@@ -326,6 +455,135 @@
   - expert
   - debian
   - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-api-gateway-2-2
+  name: 'Reverse Engineering Lab: permissive API gateway v2.2 — Debian + OpenSSH'
+  category: reverse
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - api-gateway
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: api-gateway
+    version: '2.2'
+    level: advanced
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v2.2).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 120
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-backup-agent-2-5
+  name: 'Reverse Engineering Lab: over-privileged backup agent v2.5 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: backup-agent
+    version: '2.5'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v2.5).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-job-runner-2-8
+  name: 'Reverse Engineering Lab: injectable job runner v2.8 — Debian + OpenSSH'
+  category: reverse
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - job-runner
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: job-runner
+    version: '2.8'
+    level: advanced
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v2.8).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 120
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -375,94 +633,51 @@
   lab_id: null
   course_ids:
   - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-job-runner-2-2
-  name: 'Reverse Engineering Lab: injectable job runner v2.2 — Debian + OpenSSH'
+- id: re-static-ssh-linux-webhook-receiver-2-5
+  name: 'Reverse Engineering Lab: unvalidated webhook receiver v2.5 — Debian + OpenSSH'
   category: reverse
-  difficulty: expert
+  difficulty: advanced
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-server
   vcpu: 4
-  memory_mb: 6144
-  disk_gb: 30
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - openssh-server
   - sudo
-  - job-runner
+  - webhook-receiver
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: re-static
-    component: job-runner
-    version: '2.2'
-    level: expert
+    component: webhook-receiver
+    version: '2.5'
+    level: advanced
   objectives:
   - Statically and dynamically analyse a sample in isolation.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v2.2).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.5).'
   prerequisites:
   - reverse-engineering-fundamentals
-  estimated_minutes: 180
+  estimated_minutes: 120
   tags:
   - reverse
   - re
-  - expert
+  - advanced
   - debian
-  - job-runner
+  - webhook-receiver
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-backup-agent-2-2
-  name: 'Reverse Engineering Lab: over-privileged backup agent v2.2 — Debian + OpenSSH'
-  category: reverse
-  difficulty: expert
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 6144
-  disk_gb: 30
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - backup-agent
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: re-static
-    component: backup-agent
-    version: '2.2'
-    level: expert
-  objectives:
-  - Statically and dynamically analyse a sample in isolation.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v2.2).'
-  prerequisites:
-  - reverse-engineering-fundamentals
-  estimated_minutes: 180
-  tags:
-  - reverse
-  - re
-  - expert
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-api-gateway-2-2
-  name: 'Reverse Engineering Lab: permissive API gateway v2.2 — Debian + OpenSSH'
+- id: re-static-ssh-linux-api-gateway-3-8
+  name: 'Reverse Engineering Lab: permissive API gateway v3.8 — Debian + OpenSSH'
   category: reverse
   difficulty: expert
   os_family: debian
@@ -482,13 +697,13 @@
     golden_image: debian-13-server
     role: re-static
     component: api-gateway
-    version: '2.2'
+    version: '3.8'
     level: expert
   objectives:
   - Statically and dynamically analyse a sample in isolation.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v2.2).'
+  - 'Focus: identify and remediate the permissive API gateway (v3.8).'
   prerequisites:
   - reverse-engineering-fundamentals
   estimated_minutes: 180
@@ -498,49 +713,6 @@
   - expert
   - debian
   - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-job-runner-3-2
-  name: 'Reverse Engineering Lab: injectable job runner v3.2 — Debian + OpenSSH'
-  category: reverse
-  difficulty: expert
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 6144
-  disk_gb: 30
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - job-runner
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: re-static
-    component: job-runner
-    version: '3.2'
-    level: expert
-  objectives:
-  - Statically and dynamically analyse a sample in isolation.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v3.2).'
-  prerequisites:
-  - reverse-engineering-fundamentals
-  estimated_minutes: 180
-  tags:
-  - reverse
-  - re
-  - expert
-  - debian
-  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -550,13 +722,13 @@
 - id: re-static-ssh-linux-backup-agent-3-2
   name: 'Reverse Engineering Lab: over-privileged backup agent v3.2 — Debian + OpenSSH'
   category: reverse
-  difficulty: expert
+  difficulty: advanced
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-server
   vcpu: 4
-  memory_mb: 6144
-  disk_gb: 30
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - openssh-server
@@ -569,7 +741,7 @@
     role: re-static
     component: backup-agent
     version: '3.2'
-    level: expert
+    level: advanced
   objectives:
   - Statically and dynamically analyse a sample in isolation.
   - Work with minimal guidance; justify decisions and document findings.
@@ -577,11 +749,11 @@
   - 'Focus: identify and remediate the over-privileged backup agent (v3.2).'
   prerequisites:
   - reverse-engineering-fundamentals
-  estimated_minutes: 180
+  estimated_minutes: 120
   tags:
   - reverse
   - re
-  - expert
+  - advanced
   - debian
   - backup-agent
   reset_supported: true
@@ -590,8 +762,8 @@
   lab_id: null
   course_ids:
   - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-api-gateway-3-2
-  name: 'Reverse Engineering Lab: permissive API gateway v3.2 — Debian + OpenSSH'
+- id: re-static-ssh-linux-job-runner-3-5
+  name: 'Reverse Engineering Lab: injectable job runner v3.5 — Debian + OpenSSH'
   category: reverse
   difficulty: expert
   os_family: debian
@@ -604,20 +776,20 @@
   packages:
   - openssh-server
   - sudo
-  - api-gateway
+  - job-runner
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: re-static
-    component: api-gateway
-    version: '3.2'
+    component: job-runner
+    version: '3.5'
     level: expert
   objectives:
   - Statically and dynamically analyse a sample in isolation.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v3.2).'
+  - 'Focus: identify and remediate the injectable job runner (v3.5).'
   prerequisites:
   - reverse-engineering-fundamentals
   estimated_minutes: 180
@@ -626,7 +798,50 @@
   - re
   - expert
   - debian
-  - api-gateway
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-message-queue-3-8
+  name: 'Reverse Engineering Lab: exposed message queue v3.8 — Debian + OpenSSH'
+  category: reverse
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - message-queue
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: message-queue
+    version: '3.8'
+    level: advanced
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v3.8).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 120
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -676,8 +891,137 @@
   lab_id: null
   course_ids:
   - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-message-queue-3-2
-  name: 'Reverse Engineering Lab: exposed message queue v3.2 — Debian + OpenSSH'
+- id: re-static-ssh-linux-api-gateway-3-5
+  name: 'Reverse Engineering Lab: permissive API gateway v3.5 — Debian + OpenSSH'
+  category: reverse
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - api-gateway
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: api-gateway
+    version: '3.5'
+    level: advanced
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v3.5).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 120
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-backup-agent-3-8
+  name: 'Reverse Engineering Lab: over-privileged backup agent v3.8 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: backup-agent
+    version: '3.8'
+    level: expert
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.8).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 180
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-job-runner-4-2
+  name: 'Reverse Engineering Lab: injectable job runner v4.2 — Debian + OpenSSH'
+  category: reverse
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - job-runner
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: job-runner
+    version: '4.2'
+    level: advanced
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v4.2).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 120
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-message-queue-4-5
+  name: 'Reverse Engineering Lab: exposed message queue v4.5 — Debian + OpenSSH'
   category: reverse
   difficulty: expert
   os_family: debian
@@ -697,13 +1041,13 @@
     golden_image: debian-13-server
     role: re-static
     component: message-queue
-    version: '3.2'
+    version: '4.5'
     level: expert
   objectives:
   - Statically and dynamically analyse a sample in isolation.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v3.2).'
+  - 'Focus: identify and remediate the exposed message queue (v4.5).'
   prerequisites:
   - reverse-engineering-fundamentals
   estimated_minutes: 180
@@ -713,6 +1057,49 @@
   - expert
   - debian
   - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-webhook-receiver-4-8
+  name: 'Reverse Engineering Lab: unvalidated webhook receiver v4.8 — Debian + OpenSSH'
+  category: reverse
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: webhook-receiver
+    version: '4.8'
+    level: advanced
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.8).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 120
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  - webhook-receiver
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -762,94 +1149,51 @@
   lab_id: null
   course_ids:
   - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-webhook-receiver-4-2
-  name: 'Reverse Engineering Lab: unvalidated webhook receiver v4.2 — Debian + OpenSSH'
+- id: re-static-ssh-linux-backup-agent-4-5
+  name: 'Reverse Engineering Lab: over-privileged backup agent v4.5 — Debian + OpenSSH'
   category: reverse
-  difficulty: expert
+  difficulty: advanced
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-server
   vcpu: 4
-  memory_mb: 6144
-  disk_gb: 30
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - openssh-server
   - sudo
-  - webhook-receiver
+  - backup-agent
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: re-static
-    component: webhook-receiver
-    version: '4.2'
-    level: expert
+    component: backup-agent
+    version: '4.5'
+    level: advanced
   objectives:
   - Statically and dynamically analyse a sample in isolation.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.2).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v4.5).'
   prerequisites:
   - reverse-engineering-fundamentals
-  estimated_minutes: 180
+  estimated_minutes: 120
   tags:
   - reverse
   - re
-  - expert
+  - advanced
   - debian
-  - webhook-receiver
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-message-queue-4-2
-  name: 'Reverse Engineering Lab: exposed message queue v4.2 — Debian + OpenSSH'
-  category: reverse
-  difficulty: expert
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 6144
-  disk_gb: 30
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - message-queue
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: re-static
-    component: message-queue
-    version: '4.2'
-    level: expert
-  objectives:
-  - Statically and dynamically analyse a sample in isolation.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v4.2).'
-  prerequisites:
-  - reverse-engineering-fundamentals
-  estimated_minutes: 180
-  tags:
-  - reverse
-  - re
-  - expert
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-job-runner-4-2
-  name: 'Reverse Engineering Lab: injectable job runner v4.2 — Debian + OpenSSH'
+- id: re-static-ssh-linux-job-runner-4-8
+  name: 'Reverse Engineering Lab: injectable job runner v4.8 — Debian + OpenSSH'
   category: reverse
   difficulty: expert
   os_family: debian
@@ -869,13 +1213,13 @@
     golden_image: debian-13-server
     role: re-static
     component: job-runner
-    version: '4.2'
+    version: '4.8'
     level: expert
   objectives:
   - Statically and dynamically analyse a sample in isolation.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v4.2).'
+  - 'Focus: identify and remediate the injectable job runner (v4.8).'
   prerequisites:
   - reverse-engineering-fundamentals
   estimated_minutes: 180
@@ -891,59 +1235,16 @@
   lab_id: null
   course_ids:
   - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-backup-agent-4-2
-  name: 'Reverse Engineering Lab: over-privileged backup agent v4.2 — Debian + OpenSSH'
+- id: re-static-ssh-linux-message-queue-4-2
+  name: 'Reverse Engineering Lab: exposed message queue v4.2 — Debian + OpenSSH'
   category: reverse
-  difficulty: expert
+  difficulty: advanced
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-server
   vcpu: 4
-  memory_mb: 6144
-  disk_gb: 30
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - backup-agent
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: re-static
-    component: backup-agent
-    version: '4.2'
-    level: expert
-  objectives:
-  - Statically and dynamically analyse a sample in isolation.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v4.2).'
-  prerequisites:
-  - reverse-engineering-fundamentals
-  estimated_minutes: 180
-  tags:
-  - reverse
-  - re
-  - expert
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - reverse-engineering-fundamentals
-- id: re-static-ssh-linux-message-queue-5-2
-  name: 'Reverse Engineering Lab: exposed message queue v5.2 — Debian + OpenSSH'
-  category: reverse
-  difficulty: expert
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 6144
-  disk_gb: 30
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - openssh-server
@@ -955,13 +1256,56 @@
     golden_image: debian-13-server
     role: re-static
     component: message-queue
-    version: '5.2'
+    version: '4.2'
+    level: advanced
+  objectives:
+  - Statically and dynamically analyse a sample in isolation.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v4.2).'
+  prerequisites:
+  - reverse-engineering-fundamentals
+  estimated_minutes: 120
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - reverse-engineering-fundamentals
+- id: re-static-ssh-linux-webhook-receiver-5-5
+  name: 'Reverse Engineering Lab: unvalidated webhook receiver v5.5 — Debian + OpenSSH'
+  category: reverse
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: re-static
+    component: webhook-receiver
+    version: '5.5'
     level: expert
   objectives:
   - Statically and dynamically analyse a sample in isolation.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v5.2).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v5.5).'
   prerequisites:
   - reverse-engineering-fundamentals
   estimated_minutes: 180
@@ -970,7 +1314,7 @@
   - re
   - expert
   - debian
-  - message-queue
+  - webhook-receiver
   reset_supported: true
   snapshots_supported: true
   disposable: true

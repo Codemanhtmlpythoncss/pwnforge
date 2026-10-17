@@ -511,52 +511,52 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-kali-attack-legacy-cgi-1-7
-  name: 'OSINT Workstation: legacy CGI handler v1.7 — Kali attacker workstation'
+- id: osint-recon-kali-attack-import-tool-1-1
+  name: 'OSINT Workstation: unsafe import tool v1.1 — Kali attacker workstation'
   category: osint
-  difficulty: hard
+  difficulty: intermediate
   os_family: kali
   arch: x86_64
   base_image_key: kali-base
   vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  memory_mb: 2048
+  disk_gb: 12
   network_mode: isolated
   packages:
   - metasploit-framework
   - nmap
   - wireshark
-  - legacy-cgi
+  - import-tool
   services:
   - ssh
   provisioning:
     golden_image: kali-base
     role: osint-recon
-    component: legacy-cgi
-    version: '1.7'
-    level: hard
+    component: import-tool
+    version: '1.1'
+    level: intermediate
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v1.7).'
+  - 'Focus: identify and remediate the unsafe import tool (v1.1).'
   prerequisites:
   - osint-techniques
-  estimated_minutes: 90
+  estimated_minutes: 60
   tags:
   - osint
   - recon
-  - hard
+  - intermediate
   - kali
-  - legacy-cgi
+  - import-tool
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-investigation-osint-station-webhook-receiver-1-8
-  name: 'OSINT Investigation Scenario: unvalidated webhook receiver v1.8 — OSINT workstation'
+- id: osint-investigation-osint-station-backup-agent-1-2
+  name: 'OSINT Investigation Scenario: over-privileged backup agent v1.2 — OSINT workstation'
   category: osint
   difficulty: advanced
   os_family: debian
@@ -570,20 +570,20 @@
   - exiftool
   - python3
   - firefox-esr
-  - webhook-receiver
+  - backup-agent
   services:
   - lightdm
   provisioning:
     golden_image: debian-13-desktop
     role: osint-investigation
-    component: webhook-receiver
-    version: '1.8'
+    component: backup-agent
+    version: '1.2'
     level: advanced
   objectives:
   - Analyse a simulated public footprint and corroborate findings.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.8).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v1.2).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 120
@@ -591,50 +591,137 @@
   - osint
   - advanced
   - debian
-  - webhook-receiver
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-osint-station-cache-layer-1-7
-  name: 'OSINT Workstation: insecure cache layer v1.7 — OSINT workstation'
+- id: osint-recon-osint-station-auth-proxy-1-4
+  name: 'OSINT Workstation: flawed auth proxy v1.4 — OSINT workstation'
   category: osint
-  difficulty: hard
+  difficulty: easy
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-desktop
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
   network_mode: isolated
   packages:
   - exiftool
   - python3
   - firefox-esr
-  - cache-layer
+  - auth-proxy
   services:
   - lightdm
   provisioning:
     golden_image: debian-13-desktop
     role: osint-recon
-    component: cache-layer
-    version: '1.7'
-    level: hard
+    component: auth-proxy
+    version: '1.4'
+    level: easy
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v1.4).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 40
+  tags:
+  - osint
+  - recon
+  - easy
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-investigation-osint-station-job-runner-1-5
+  name: 'OSINT Investigation Scenario: injectable job runner v1.5 — OSINT workstation'
+  category: osint
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - job-runner
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: job-runner
+    version: '1.5'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v1.5).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-kali-attack-cache-layer-1-7
+  name: 'OSINT Workstation: insecure cache layer v1.7 — Kali attacker workstation'
+  category: osint
+  difficulty: advanced
+  os_family: kali
+  arch: x86_64
+  base_image_key: kali-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - metasploit-framework
+  - nmap
+  - wireshark
+  - cache-layer
+  services:
+  - ssh
+  provisioning:
+    golden_image: kali-base
+    role: osint-recon
+    component: cache-layer
+    version: '1.7'
+    level: advanced
+  objectives:
+  - Collect and verify information from public sources in a safe sandbox.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the insecure cache layer (v1.7).'
   prerequisites:
   - osint-techniques
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - osint
   - recon
-  - hard
-  - debian
+  - advanced
+  - kali
   - cache-layer
   reset_supported: true
   snapshots_supported: true
@@ -685,35 +772,35 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-kali-attack-auth-proxy-1-7
-  name: 'OSINT Workstation: flawed auth proxy v1.7 — Kali attacker workstation'
+- id: osint-recon-osint-station-legacy-cgi-1-1
+  name: 'OSINT Workstation: legacy CGI handler v1.1 — OSINT workstation'
   category: osint
   difficulty: hard
-  os_family: kali
+  os_family: debian
   arch: x86_64
-  base_image_key: kali-base
+  base_image_key: debian-13-desktop
   vcpu: 2
   memory_mb: 3072
   disk_gb: 16
   network_mode: isolated
   packages:
-  - metasploit-framework
-  - nmap
-  - wireshark
-  - auth-proxy
+  - exiftool
+  - python3
+  - firefox-esr
+  - legacy-cgi
   services:
-  - ssh
+  - lightdm
   provisioning:
-    golden_image: kali-base
+    golden_image: debian-13-desktop
     role: osint-recon
-    component: auth-proxy
-    version: '1.7'
+    component: legacy-cgi
+    version: '1.1'
     level: hard
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v1.7).'
+  - 'Focus: identify and remediate the legacy CGI handler (v1.1).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 90
@@ -721,16 +808,16 @@
   - osint
   - recon
   - hard
-  - kali
-  - auth-proxy
+  - debian
+  - legacy-cgi
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-investigation-osint-station-job-runner-1-8
-  name: 'OSINT Investigation Scenario: injectable job runner v1.8 — OSINT workstation'
+- id: osint-investigation-osint-station-webhook-receiver-1-2
+  name: 'OSINT Investigation Scenario: unvalidated webhook receiver v1.2 — OSINT workstation'
   category: osint
   difficulty: advanced
   os_family: debian
@@ -744,20 +831,20 @@
   - exiftool
   - python3
   - firefox-esr
-  - job-runner
+  - webhook-receiver
   services:
   - lightdm
   provisioning:
     golden_image: debian-13-desktop
     role: osint-investigation
-    component: job-runner
-    version: '1.8'
+    component: webhook-receiver
+    version: '1.2'
     level: advanced
   objectives:
   - Analyse a simulated public footprint and corroborate findings.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v1.8).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.2).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 120
@@ -765,7 +852,94 @@
   - osint
   - advanced
   - debian
-  - job-runner
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-kali-attack-admin-panel-1-4
+  name: 'OSINT Workstation: weak admin panel v1.4 — Kali attacker workstation'
+  category: osint
+  difficulty: intermediate
+  os_family: kali
+  arch: x86_64
+  base_image_key: kali-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - metasploit-framework
+  - nmap
+  - wireshark
+  - admin-panel
+  services:
+  - ssh
+  provisioning:
+    golden_image: kali-base
+    role: osint-recon
+    component: admin-panel
+    version: '1.4'
+    level: intermediate
+  objectives:
+  - Collect and verify information from public sources in a safe sandbox.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v1.4).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 60
+  tags:
+  - osint
+  - recon
+  - intermediate
+  - kali
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-investigation-osint-station-api-gateway-1-5
+  name: 'OSINT Investigation Scenario: permissive API gateway v1.5 — OSINT workstation'
+  category: osint
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - api-gateway
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: api-gateway
+    version: '1.5'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v1.5).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - api-gateway
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -775,13 +949,13 @@
 - id: osint-recon-osint-station-import-tool-1-7
   name: 'OSINT Workstation: unsafe import tool v1.7 — OSINT workstation'
   category: osint
-  difficulty: hard
+  difficulty: easy
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-desktop
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
   network_mode: isolated
   packages:
   - exiftool
@@ -795,19 +969,19 @@
     role: osint-recon
     component: import-tool
     version: '1.7'
-    level: hard
+    level: easy
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
+  - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the unsafe import tool (v1.7).'
   prerequisites:
   - osint-techniques
-  estimated_minutes: 90
+  estimated_minutes: 40
   tags:
   - osint
   - recon
-  - hard
+  - easy
   - debian
   - import-tool
   reset_supported: true
@@ -859,52 +1033,95 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-kali-attack-admin-panel-1-7
-  name: 'OSINT Workstation: weak admin panel v1.7 — Kali attacker workstation'
+- id: osint-recon-kali-attack-auth-proxy-2-1
+  name: 'OSINT Workstation: flawed auth proxy v2.1 — Kali attacker workstation'
   category: osint
-  difficulty: hard
+  difficulty: advanced
   os_family: kali
   arch: x86_64
   base_image_key: kali-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - metasploit-framework
   - nmap
   - wireshark
-  - admin-panel
+  - auth-proxy
   services:
   - ssh
   provisioning:
     golden_image: kali-base
     role: osint-recon
-    component: admin-panel
-    version: '1.7'
-    level: hard
+    component: auth-proxy
+    version: '2.1'
+    level: advanced
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v1.7).'
+  - 'Focus: identify and remediate the flawed auth proxy (v2.1).'
   prerequisites:
   - osint-techniques
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - osint
   - recon
-  - hard
+  - advanced
   - kali
-  - admin-panel
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-osint-station-legacy-cgi-1-7
-  name: 'OSINT Workstation: legacy CGI handler v1.7 — OSINT workstation'
+- id: osint-investigation-osint-station-job-runner-2-2
+  name: 'OSINT Investigation Scenario: injectable job runner v2.2 — OSINT workstation'
+  category: osint
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - job-runner
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: job-runner
+    version: '2.2'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v2.2).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-osint-station-cache-layer-2-4
+  name: 'OSINT Workstation: insecure cache layer v2.4 — OSINT workstation'
   category: osint
   difficulty: hard
   os_family: debian
@@ -918,20 +1135,20 @@
   - exiftool
   - python3
   - firefox-esr
-  - legacy-cgi
+  - cache-layer
   services:
   - lightdm
   provisioning:
     golden_image: debian-13-desktop
     role: osint-recon
-    component: legacy-cgi
-    version: '1.7'
+    component: cache-layer
+    version: '2.4'
     level: hard
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v1.7).'
+  - 'Focus: identify and remediate the insecure cache layer (v2.4).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 90
@@ -940,50 +1157,6 @@
   - recon
   - hard
   - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-recon-kali-attack-cache-layer-2-7
-  name: 'OSINT Workstation: insecure cache layer v2.7 — Kali attacker workstation'
-  category: osint
-  difficulty: hard
-  os_family: kali
-  arch: x86_64
-  base_image_key: kali-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - metasploit-framework
-  - nmap
-  - wireshark
-  - cache-layer
-  services:
-  - ssh
-  provisioning:
-    golden_image: kali-base
-    role: osint-recon
-    component: cache-layer
-    version: '2.7'
-    level: hard
-  objectives:
-  - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v2.7).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 90
-  tags:
-  - osint
-  - recon
-  - hard
-  - kali
   - cache-layer
   reset_supported: true
   snapshots_supported: true
@@ -991,8 +1164,8 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-investigation-osint-station-message-queue-2-8
-  name: 'OSINT Investigation Scenario: exposed message queue v2.8 — OSINT workstation'
+- id: osint-investigation-osint-station-message-queue-2-5
+  name: 'OSINT Investigation Scenario: exposed message queue v2.5 — OSINT workstation'
   category: osint
   difficulty: advanced
   os_family: debian
@@ -1013,13 +1186,13 @@
     golden_image: debian-13-desktop
     role: osint-investigation
     component: message-queue
-    version: '2.8'
+    version: '2.5'
     level: advanced
   objectives:
   - Analyse a simulated public footprint and corroborate findings.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v2.8).'
+  - 'Focus: identify and remediate the exposed message queue (v2.5).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 120
@@ -1028,6 +1201,267 @@
   - advanced
   - debian
   - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-kali-attack-legacy-cgi-2-7
+  name: 'OSINT Workstation: legacy CGI handler v2.7 — Kali attacker workstation'
+  category: osint
+  difficulty: intermediate
+  os_family: kali
+  arch: x86_64
+  base_image_key: kali-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - metasploit-framework
+  - nmap
+  - wireshark
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: kali-base
+    role: osint-recon
+    component: legacy-cgi
+    version: '2.7'
+    level: intermediate
+  objectives:
+  - Collect and verify information from public sources in a safe sandbox.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v2.7).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 60
+  tags:
+  - osint
+  - recon
+  - intermediate
+  - kali
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-investigation-osint-station-webhook-receiver-2-8
+  name: 'OSINT Investigation Scenario: unvalidated webhook receiver v2.8 — OSINT workstation'
+  category: osint
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - webhook-receiver
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: webhook-receiver
+    version: '2.8'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.8).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-osint-station-admin-panel-2-1
+  name: 'OSINT Workstation: weak admin panel v2.1 — OSINT workstation'
+  category: osint
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - admin-panel
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-recon
+    component: admin-panel
+    version: '2.1'
+    level: easy
+  objectives:
+  - Collect and verify information from public sources in a safe sandbox.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v2.1).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 40
+  tags:
+  - osint
+  - recon
+  - easy
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-investigation-osint-station-api-gateway-2-2
+  name: 'OSINT Investigation Scenario: permissive API gateway v2.2 — OSINT workstation'
+  category: osint
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - api-gateway
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: api-gateway
+    version: '2.2'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v2.2).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-kali-attack-import-tool-2-4
+  name: 'OSINT Workstation: unsafe import tool v2.4 — Kali attacker workstation'
+  category: osint
+  difficulty: advanced
+  os_family: kali
+  arch: x86_64
+  base_image_key: kali-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - metasploit-framework
+  - nmap
+  - wireshark
+  - import-tool
+  services:
+  - ssh
+  provisioning:
+    golden_image: kali-base
+    role: osint-recon
+    component: import-tool
+    version: '2.4'
+    level: advanced
+  objectives:
+  - Collect and verify information from public sources in a safe sandbox.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v2.4).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - recon
+  - advanced
+  - kali
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-investigation-osint-station-backup-agent-2-5
+  name: 'OSINT Investigation Scenario: over-privileged backup agent v2.5 — OSINT workstation'
+  category: osint
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - backup-agent
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: backup-agent
+    version: '2.5'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v2.5).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -1121,52 +1555,52 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-kali-attack-import-tool-2-7
-  name: 'OSINT Workstation: unsafe import tool v2.7 — Kali attacker workstation'
+- id: osint-recon-kali-attack-cache-layer-2-1
+  name: 'OSINT Workstation: insecure cache layer v2.1 — Kali attacker workstation'
   category: osint
-  difficulty: hard
+  difficulty: intermediate
   os_family: kali
   arch: x86_64
   base_image_key: kali-base
   vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  memory_mb: 2048
+  disk_gb: 12
   network_mode: isolated
   packages:
   - metasploit-framework
   - nmap
   - wireshark
-  - import-tool
+  - cache-layer
   services:
   - ssh
   provisioning:
     golden_image: kali-base
     role: osint-recon
-    component: import-tool
-    version: '2.7'
-    level: hard
+    component: cache-layer
+    version: '2.1'
+    level: intermediate
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v2.7).'
+  - 'Focus: identify and remediate the insecure cache layer (v2.1).'
   prerequisites:
   - osint-techniques
-  estimated_minutes: 90
+  estimated_minutes: 60
   tags:
   - osint
   - recon
-  - hard
+  - intermediate
   - kali
-  - import-tool
+  - cache-layer
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-investigation-osint-station-backup-agent-2-8
-  name: 'OSINT Investigation Scenario: over-privileged backup agent v2.8 — OSINT workstation'
+- id: osint-investigation-osint-station-message-queue-2-2
+  name: 'OSINT Investigation Scenario: exposed message queue v2.2 — OSINT workstation'
   category: osint
   difficulty: advanced
   os_family: debian
@@ -1180,20 +1614,20 @@
   - exiftool
   - python3
   - firefox-esr
-  - backup-agent
+  - message-queue
   services:
   - lightdm
   provisioning:
     golden_image: debian-13-desktop
     role: osint-investigation
-    component: backup-agent
-    version: '2.8'
+    component: message-queue
+    version: '2.2'
     level: advanced
   objectives:
   - Analyse a simulated public footprint and corroborate findings.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v2.8).'
+  - 'Focus: identify and remediate the exposed message queue (v2.2).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 120
@@ -1201,137 +1635,50 @@
   - osint
   - advanced
   - debian
-  - backup-agent
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-osint-station-admin-panel-2-7
-  name: 'OSINT Workstation: weak admin panel v2.7 — OSINT workstation'
+- id: osint-recon-osint-station-legacy-cgi-3-4
+  name: 'OSINT Workstation: legacy CGI handler v3.4 — OSINT workstation'
   category: osint
-  difficulty: hard
+  difficulty: easy
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-desktop
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
   network_mode: isolated
   packages:
   - exiftool
   - python3
   - firefox-esr
-  - admin-panel
-  services:
-  - lightdm
-  provisioning:
-    golden_image: debian-13-desktop
-    role: osint-recon
-    component: admin-panel
-    version: '2.7'
-    level: hard
-  objectives:
-  - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v2.7).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 90
-  tags:
-  - osint
-  - recon
-  - hard
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-investigation-osint-station-api-gateway-2-8
-  name: 'OSINT Investigation Scenario: permissive API gateway v2.8 — OSINT workstation'
-  category: osint
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-desktop
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - exiftool
-  - python3
-  - firefox-esr
-  - api-gateway
-  services:
-  - lightdm
-  provisioning:
-    golden_image: debian-13-desktop
-    role: osint-investigation
-    component: api-gateway
-    version: '2.8'
-    level: advanced
-  objectives:
-  - Analyse a simulated public footprint and corroborate findings.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v2.8).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 120
-  tags:
-  - osint
-  - advanced
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-recon-kali-attack-legacy-cgi-2-7
-  name: 'OSINT Workstation: legacy CGI handler v2.7 — Kali attacker workstation'
-  category: osint
-  difficulty: hard
-  os_family: kali
-  arch: x86_64
-  base_image_key: kali-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - metasploit-framework
-  - nmap
-  - wireshark
   - legacy-cgi
   services:
-  - ssh
+  - lightdm
   provisioning:
-    golden_image: kali-base
+    golden_image: debian-13-desktop
     role: osint-recon
     component: legacy-cgi
-    version: '2.7'
-    level: hard
+    version: '3.4'
+    level: easy
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
+  - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v2.7).'
+  - 'Focus: identify and remediate the legacy CGI handler (v3.4).'
   prerequisites:
   - osint-techniques
-  estimated_minutes: 90
+  estimated_minutes: 40
   tags:
   - osint
   - recon
-  - hard
-  - kali
+  - easy
+  - debian
   - legacy-cgi
   reset_supported: true
   snapshots_supported: true
@@ -1339,8 +1686,8 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-investigation-osint-station-webhook-receiver-2-8
-  name: 'OSINT Investigation Scenario: unvalidated webhook receiver v2.8 — OSINT workstation'
+- id: osint-investigation-osint-station-webhook-receiver-3-5
+  name: 'OSINT Investigation Scenario: unvalidated webhook receiver v3.5 — OSINT workstation'
   category: osint
   difficulty: advanced
   os_family: debian
@@ -1361,13 +1708,13 @@
     golden_image: debian-13-desktop
     role: osint-investigation
     component: webhook-receiver
-    version: '2.8'
+    version: '3.5'
     level: advanced
   objectives:
   - Analyse a simulated public footprint and corroborate findings.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.8).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.5).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 120
@@ -1382,191 +1729,16 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-osint-station-cache-layer-2-7
-  name: 'OSINT Workstation: insecure cache layer v2.7 — OSINT workstation'
-  category: osint
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-desktop
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - exiftool
-  - python3
-  - firefox-esr
-  - cache-layer
-  services:
-  - lightdm
-  provisioning:
-    golden_image: debian-13-desktop
-    role: osint-recon
-    component: cache-layer
-    version: '2.7'
-    level: hard
-  objectives:
-  - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v2.7).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 90
-  tags:
-  - osint
-  - recon
-  - hard
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-recon-kali-attack-auth-proxy-2-7
-  name: 'OSINT Workstation: flawed auth proxy v2.7 — Kali attacker workstation'
-  category: osint
-  difficulty: hard
-  os_family: kali
-  arch: x86_64
-  base_image_key: kali-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - metasploit-framework
-  - nmap
-  - wireshark
-  - auth-proxy
-  services:
-  - ssh
-  provisioning:
-    golden_image: kali-base
-    role: osint-recon
-    component: auth-proxy
-    version: '2.7'
-    level: hard
-  objectives:
-  - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v2.7).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 90
-  tags:
-  - osint
-  - recon
-  - hard
-  - kali
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-recon-osint-station-import-tool-3-7
-  name: 'OSINT Workstation: unsafe import tool v3.7 — OSINT workstation'
-  category: osint
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-desktop
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - exiftool
-  - python3
-  - firefox-esr
-  - import-tool
-  services:
-  - lightdm
-  provisioning:
-    golden_image: debian-13-desktop
-    role: osint-recon
-    component: import-tool
-    version: '3.7'
-    level: hard
-  objectives:
-  - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v3.7).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 90
-  tags:
-  - osint
-  - recon
-  - hard
-  - debian
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-investigation-osint-station-backup-agent-3-8
-  name: 'OSINT Investigation Scenario: over-privileged backup agent v3.8 — OSINT workstation'
-  category: osint
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-desktop
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - exiftool
-  - python3
-  - firefox-esr
-  - backup-agent
-  services:
-  - lightdm
-  provisioning:
-    golden_image: debian-13-desktop
-    role: osint-investigation
-    component: backup-agent
-    version: '3.8'
-    level: advanced
-  objectives:
-  - Analyse a simulated public footprint and corroborate findings.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v3.8).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 120
-  tags:
-  - osint
-  - advanced
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
 - id: osint-recon-kali-attack-admin-panel-3-7
   name: 'OSINT Workstation: weak admin panel v3.7 — Kali attacker workstation'
   category: osint
-  difficulty: hard
+  difficulty: advanced
   os_family: kali
   arch: x86_64
   base_image_key: kali-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - metasploit-framework
@@ -1580,19 +1752,19 @@
     role: osint-recon
     component: admin-panel
     version: '3.7'
-    level: hard
+    level: advanced
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the weak admin panel (v3.7).'
   prerequisites:
   - osint-techniques
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - osint
   - recon
-  - hard
+  - advanced
   - kali
   - admin-panel
   reset_supported: true
@@ -1644,8 +1816,8 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-osint-station-legacy-cgi-3-7
-  name: 'OSINT Workstation: legacy CGI handler v3.7 — OSINT workstation'
+- id: osint-recon-osint-station-import-tool-3-1
+  name: 'OSINT Workstation: unsafe import tool v3.1 — OSINT workstation'
   category: osint
   difficulty: hard
   os_family: debian
@@ -1659,20 +1831,20 @@
   - exiftool
   - python3
   - firefox-esr
-  - legacy-cgi
+  - import-tool
   services:
   - lightdm
   provisioning:
     golden_image: debian-13-desktop
     role: osint-recon
-    component: legacy-cgi
-    version: '3.7'
+    component: import-tool
+    version: '3.1'
     level: hard
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v3.7).'
+  - 'Focus: identify and remediate the unsafe import tool (v3.1).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 90
@@ -1681,15 +1853,15 @@
   - recon
   - hard
   - debian
-  - legacy-cgi
+  - import-tool
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-investigation-osint-station-webhook-receiver-3-8
-  name: 'OSINT Investigation Scenario: unvalidated webhook receiver v3.8 — OSINT workstation'
+- id: osint-investigation-osint-station-backup-agent-3-2
+  name: 'OSINT Investigation Scenario: over-privileged backup agent v3.2 — OSINT workstation'
   category: osint
   difficulty: advanced
   os_family: debian
@@ -1703,20 +1875,20 @@
   - exiftool
   - python3
   - firefox-esr
-  - webhook-receiver
+  - backup-agent
   services:
   - lightdm
   provisioning:
     golden_image: debian-13-desktop
     role: osint-investigation
-    component: webhook-receiver
-    version: '3.8'
+    component: backup-agent
+    version: '3.2'
     level: advanced
   objectives:
   - Analyse a simulated public footprint and corroborate findings.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.8).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.2).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 120
@@ -1724,50 +1896,137 @@
   - osint
   - advanced
   - debian
-  - webhook-receiver
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-kali-attack-cache-layer-3-7
-  name: 'OSINT Workstation: insecure cache layer v3.7 — Kali attacker workstation'
+- id: osint-recon-kali-attack-auth-proxy-3-4
+  name: 'OSINT Workstation: flawed auth proxy v3.4 — Kali attacker workstation'
   category: osint
-  difficulty: hard
+  difficulty: intermediate
   os_family: kali
   arch: x86_64
   base_image_key: kali-base
   vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  memory_mb: 2048
+  disk_gb: 12
   network_mode: isolated
   packages:
   - metasploit-framework
   - nmap
   - wireshark
-  - cache-layer
+  - auth-proxy
   services:
   - ssh
   provisioning:
     golden_image: kali-base
     role: osint-recon
-    component: cache-layer
-    version: '3.7'
-    level: hard
+    component: auth-proxy
+    version: '3.4'
+    level: intermediate
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v3.7).'
+  - 'Focus: identify and remediate the flawed auth proxy (v3.4).'
   prerequisites:
   - osint-techniques
-  estimated_minutes: 90
+  estimated_minutes: 60
   tags:
   - osint
   - recon
-  - hard
+  - intermediate
   - kali
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-investigation-osint-station-job-runner-3-5
+  name: 'OSINT Investigation Scenario: injectable job runner v3.5 — OSINT workstation'
+  category: osint
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - job-runner
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: job-runner
+    version: '3.5'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v3.5).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-osint-station-cache-layer-3-7
+  name: 'OSINT Workstation: insecure cache layer v3.7 — OSINT workstation'
+  category: osint
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - cache-layer
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-recon
+    component: cache-layer
+    version: '3.7'
+    level: easy
+  objectives:
+  - Collect and verify information from public sources in a safe sandbox.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v3.7).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 40
+  tags:
+  - osint
+  - recon
+  - easy
+  - debian
   - cache-layer
   reset_supported: true
   snapshots_supported: true
@@ -1818,52 +2077,52 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-osint-station-auth-proxy-3-7
-  name: 'OSINT Workstation: flawed auth proxy v3.7 — OSINT workstation'
+- id: osint-recon-kali-attack-legacy-cgi-3-1
+  name: 'OSINT Workstation: legacy CGI handler v3.1 — Kali attacker workstation'
   category: osint
-  difficulty: hard
-  os_family: debian
+  difficulty: advanced
+  os_family: kali
   arch: x86_64
-  base_image_key: debian-13-desktop
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  base_image_key: kali-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
-  - exiftool
-  - python3
-  - firefox-esr
-  - auth-proxy
+  - metasploit-framework
+  - nmap
+  - wireshark
+  - legacy-cgi
   services:
-  - lightdm
+  - ssh
   provisioning:
-    golden_image: debian-13-desktop
+    golden_image: kali-base
     role: osint-recon
-    component: auth-proxy
-    version: '3.7'
-    level: hard
+    component: legacy-cgi
+    version: '3.1'
+    level: advanced
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v3.7).'
+  - 'Focus: identify and remediate the legacy CGI handler (v3.1).'
   prerequisites:
   - osint-techniques
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - osint
   - recon
-  - hard
-  - debian
-  - auth-proxy
+  - advanced
+  - kali
+  - legacy-cgi
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-investigation-osint-station-job-runner-3-8
-  name: 'OSINT Investigation Scenario: injectable job runner v3.8 — OSINT workstation'
+- id: osint-investigation-osint-station-webhook-receiver-3-2
+  name: 'OSINT Investigation Scenario: unvalidated webhook receiver v3.2 — OSINT workstation'
   category: osint
   difficulty: advanced
   os_family: debian
@@ -1877,20 +2136,20 @@
   - exiftool
   - python3
   - firefox-esr
-  - job-runner
+  - webhook-receiver
   services:
   - lightdm
   provisioning:
     golden_image: debian-13-desktop
     role: osint-investigation
-    component: job-runner
-    version: '3.8'
+    component: webhook-receiver
+    version: '3.2'
     level: advanced
   objectives:
   - Analyse a simulated public footprint and corroborate findings.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v3.8).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.2).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 120
@@ -1898,59 +2157,15 @@
   - osint
   - advanced
   - debian
-  - job-runner
+  - webhook-receiver
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-kali-attack-import-tool-3-7
-  name: 'OSINT Workstation: unsafe import tool v3.7 — Kali attacker workstation'
-  category: osint
-  difficulty: hard
-  os_family: kali
-  arch: x86_64
-  base_image_key: kali-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - metasploit-framework
-  - nmap
-  - wireshark
-  - import-tool
-  services:
-  - ssh
-  provisioning:
-    golden_image: kali-base
-    role: osint-recon
-    component: import-tool
-    version: '3.7'
-    level: hard
-  objectives:
-  - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v3.7).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 90
-  tags:
-  - osint
-  - recon
-  - hard
-  - kali
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-recon-osint-station-admin-panel-3-7
-  name: 'OSINT Workstation: weak admin panel v3.7 — OSINT workstation'
+- id: osint-recon-osint-station-admin-panel-3-4
+  name: 'OSINT Workstation: weak admin panel v3.4 — OSINT workstation'
   category: osint
   difficulty: hard
   os_family: debian
@@ -1971,13 +2186,13 @@
     golden_image: debian-13-desktop
     role: osint-recon
     component: admin-panel
-    version: '3.7'
+    version: '3.4'
     level: hard
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v3.7).'
+  - 'Focus: identify and remediate the weak admin panel (v3.4).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 90
@@ -1993,26 +2208,330 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-kali-attack-legacy-cgi-4-7
-  name: 'OSINT Workstation: legacy CGI handler v4.7 — Kali attacker workstation'
+- id: osint-investigation-osint-station-api-gateway-3-5
+  name: 'OSINT Investigation Scenario: permissive API gateway v3.5 — OSINT workstation'
   category: osint
-  difficulty: hard
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - api-gateway
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: api-gateway
+    version: '3.5'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v3.5).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-kali-attack-import-tool-4-7
+  name: 'OSINT Workstation: unsafe import tool v4.7 — Kali attacker workstation'
+  category: osint
+  difficulty: intermediate
   os_family: kali
   arch: x86_64
   base_image_key: kali-base
   vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  memory_mb: 2048
+  disk_gb: 12
   network_mode: isolated
   packages:
   - metasploit-framework
   - nmap
   - wireshark
-  - legacy-cgi
+  - import-tool
   services:
   - ssh
   provisioning:
     golden_image: kali-base
+    role: osint-recon
+    component: import-tool
+    version: '4.7'
+    level: intermediate
+  objectives:
+  - Collect and verify information from public sources in a safe sandbox.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v4.7).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 60
+  tags:
+  - osint
+  - recon
+  - intermediate
+  - kali
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-investigation-osint-station-backup-agent-4-8
+  name: 'OSINT Investigation Scenario: over-privileged backup agent v4.8 — OSINT workstation'
+  category: osint
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - backup-agent
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: backup-agent
+    version: '4.8'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v4.8).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-osint-station-auth-proxy-4-1
+  name: 'OSINT Workstation: flawed auth proxy v4.1 — OSINT workstation'
+  category: osint
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - auth-proxy
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-recon
+    component: auth-proxy
+    version: '4.1'
+    level: easy
+  objectives:
+  - Collect and verify information from public sources in a safe sandbox.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v4.1).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 40
+  tags:
+  - osint
+  - recon
+  - easy
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-investigation-osint-station-job-runner-4-2
+  name: 'OSINT Investigation Scenario: injectable job runner v4.2 — OSINT workstation'
+  category: osint
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - job-runner
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: job-runner
+    version: '4.2'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v4.2).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-kali-attack-cache-layer-4-4
+  name: 'OSINT Workstation: insecure cache layer v4.4 — Kali attacker workstation'
+  category: osint
+  difficulty: advanced
+  os_family: kali
+  arch: x86_64
+  base_image_key: kali-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - metasploit-framework
+  - nmap
+  - wireshark
+  - cache-layer
+  services:
+  - ssh
+  provisioning:
+    golden_image: kali-base
+    role: osint-recon
+    component: cache-layer
+    version: '4.4'
+    level: advanced
+  objectives:
+  - Collect and verify information from public sources in a safe sandbox.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v4.4).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - recon
+  - advanced
+  - kali
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-investigation-osint-station-message-queue-4-5
+  name: 'OSINT Investigation Scenario: exposed message queue v4.5 — OSINT workstation'
+  category: osint
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - message-queue
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: message-queue
+    version: '4.5'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v4.5).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-osint-station-legacy-cgi-4-7
+  name: 'OSINT Workstation: legacy CGI handler v4.7 — OSINT workstation'
+  category: osint
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - legacy-cgi
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
     role: osint-recon
     component: legacy-cgi
     version: '4.7'
@@ -2029,7 +2548,7 @@
   - osint
   - recon
   - hard
-  - kali
+  - debian
   - legacy-cgi
   reset_supported: true
   snapshots_supported: true
@@ -2080,52 +2599,52 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-osint-station-cache-layer-4-7
-  name: 'OSINT Workstation: insecure cache layer v4.7 — OSINT workstation'
+- id: osint-recon-kali-attack-admin-panel-4-1
+  name: 'OSINT Workstation: weak admin panel v4.1 — Kali attacker workstation'
   category: osint
-  difficulty: hard
-  os_family: debian
+  difficulty: intermediate
+  os_family: kali
   arch: x86_64
-  base_image_key: debian-13-desktop
+  base_image_key: kali-base
   vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  memory_mb: 2048
+  disk_gb: 12
   network_mode: isolated
   packages:
-  - exiftool
-  - python3
-  - firefox-esr
-  - cache-layer
+  - metasploit-framework
+  - nmap
+  - wireshark
+  - admin-panel
   services:
-  - lightdm
+  - ssh
   provisioning:
-    golden_image: debian-13-desktop
+    golden_image: kali-base
     role: osint-recon
-    component: cache-layer
-    version: '4.7'
-    level: hard
+    component: admin-panel
+    version: '4.1'
+    level: intermediate
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v4.7).'
+  - 'Focus: identify and remediate the weak admin panel (v4.1).'
   prerequisites:
   - osint-techniques
-  estimated_minutes: 90
+  estimated_minutes: 60
   tags:
   - osint
   - recon
-  - hard
-  - debian
-  - cache-layer
+  - intermediate
+  - kali
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-investigation-osint-station-message-queue-4-8
-  name: 'OSINT Investigation Scenario: exposed message queue v4.8 — OSINT workstation'
+- id: osint-investigation-osint-station-api-gateway-4-2
+  name: 'OSINT Investigation Scenario: permissive API gateway v4.2 — OSINT workstation'
   category: osint
   difficulty: advanced
   os_family: debian
@@ -2139,20 +2658,20 @@
   - exiftool
   - python3
   - firefox-esr
-  - message-queue
+  - api-gateway
   services:
   - lightdm
   provisioning:
     golden_image: debian-13-desktop
     role: osint-investigation
-    component: message-queue
-    version: '4.8'
+    component: api-gateway
+    version: '4.2'
     level: advanced
   objectives:
   - Analyse a simulated public footprint and corroborate findings.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v4.8).'
+  - 'Focus: identify and remediate the permissive API gateway (v4.2).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 120
@@ -2160,7 +2679,94 @@
   - osint
   - advanced
   - debian
-  - message-queue
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-recon-osint-station-import-tool-4-4
+  name: 'OSINT Workstation: unsafe import tool v4.4 — OSINT workstation'
+  category: osint
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - import-tool
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-recon
+    component: import-tool
+    version: '4.4'
+    level: easy
+  objectives:
+  - Collect and verify information from public sources in a safe sandbox.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v4.4).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 40
+  tags:
+  - osint
+  - recon
+  - easy
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - osint-techniques
+- id: osint-investigation-osint-station-backup-agent-4-5
+  name: 'OSINT Investigation Scenario: over-privileged backup agent v4.5 — OSINT workstation'
+  category: osint
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-desktop
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - exiftool
+  - python3
+  - firefox-esr
+  - backup-agent
+  services:
+  - lightdm
+  provisioning:
+    golden_image: debian-13-desktop
+    role: osint-investigation
+    component: backup-agent
+    version: '4.5'
+    level: advanced
+  objectives:
+  - Analyse a simulated public footprint and corroborate findings.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v4.5).'
+  prerequisites:
+  - osint-techniques
+  estimated_minutes: 120
+  tags:
+  - osint
+  - advanced
+  - debian
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -2170,13 +2776,13 @@
 - id: osint-recon-kali-attack-auth-proxy-4-7
   name: 'OSINT Workstation: flawed auth proxy v4.7 — Kali attacker workstation'
   category: osint
-  difficulty: hard
+  difficulty: advanced
   os_family: kali
   arch: x86_64
   base_image_key: kali-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - metasploit-framework
@@ -2190,19 +2796,19 @@
     role: osint-recon
     component: auth-proxy
     version: '4.7'
-    level: hard
+    level: advanced
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the flawed auth proxy (v4.7).'
   prerequisites:
   - osint-techniques
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - osint
   - recon
-  - hard
+  - advanced
   - kali
   - auth-proxy
   reset_supported: true
@@ -2254,8 +2860,8 @@
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-recon-osint-station-import-tool-4-7
-  name: 'OSINT Workstation: unsafe import tool v4.7 — OSINT workstation'
+- id: osint-recon-osint-station-cache-layer-5-1
+  name: 'OSINT Workstation: insecure cache layer v5.1 — OSINT workstation'
   category: osint
   difficulty: hard
   os_family: debian
@@ -2269,282 +2875,20 @@
   - exiftool
   - python3
   - firefox-esr
-  - import-tool
-  services:
-  - lightdm
-  provisioning:
-    golden_image: debian-13-desktop
-    role: osint-recon
-    component: import-tool
-    version: '4.7'
-    level: hard
-  objectives:
-  - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v4.7).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 90
-  tags:
-  - osint
-  - recon
-  - hard
-  - debian
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-investigation-osint-station-backup-agent-4-8
-  name: 'OSINT Investigation Scenario: over-privileged backup agent v4.8 — OSINT workstation'
-  category: osint
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-desktop
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - exiftool
-  - python3
-  - firefox-esr
-  - backup-agent
-  services:
-  - lightdm
-  provisioning:
-    golden_image: debian-13-desktop
-    role: osint-investigation
-    component: backup-agent
-    version: '4.8'
-    level: advanced
-  objectives:
-  - Analyse a simulated public footprint and corroborate findings.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v4.8).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 120
-  tags:
-  - osint
-  - advanced
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-recon-kali-attack-admin-panel-4-7
-  name: 'OSINT Workstation: weak admin panel v4.7 — Kali attacker workstation'
-  category: osint
-  difficulty: hard
-  os_family: kali
-  arch: x86_64
-  base_image_key: kali-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - metasploit-framework
-  - nmap
-  - wireshark
-  - admin-panel
-  services:
-  - ssh
-  provisioning:
-    golden_image: kali-base
-    role: osint-recon
-    component: admin-panel
-    version: '4.7'
-    level: hard
-  objectives:
-  - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v4.7).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 90
-  tags:
-  - osint
-  - recon
-  - hard
-  - kali
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-investigation-osint-station-api-gateway-4-8
-  name: 'OSINT Investigation Scenario: permissive API gateway v4.8 — OSINT workstation'
-  category: osint
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-desktop
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - exiftool
-  - python3
-  - firefox-esr
-  - api-gateway
-  services:
-  - lightdm
-  provisioning:
-    golden_image: debian-13-desktop
-    role: osint-investigation
-    component: api-gateway
-    version: '4.8'
-    level: advanced
-  objectives:
-  - Analyse a simulated public footprint and corroborate findings.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v4.8).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 120
-  tags:
-  - osint
-  - advanced
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-recon-osint-station-legacy-cgi-4-7
-  name: 'OSINT Workstation: legacy CGI handler v4.7 — OSINT workstation'
-  category: osint
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-desktop
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - exiftool
-  - python3
-  - firefox-esr
-  - legacy-cgi
-  services:
-  - lightdm
-  provisioning:
-    golden_image: debian-13-desktop
-    role: osint-recon
-    component: legacy-cgi
-    version: '4.7'
-    level: hard
-  objectives:
-  - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v4.7).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 90
-  tags:
-  - osint
-  - recon
-  - hard
-  - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-recon-kali-attack-cache-layer-4-7
-  name: 'OSINT Workstation: insecure cache layer v4.7 — Kali attacker workstation'
-  category: osint
-  difficulty: hard
-  os_family: kali
-  arch: x86_64
-  base_image_key: kali-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - metasploit-framework
-  - nmap
-  - wireshark
   - cache-layer
   services:
-  - ssh
+  - lightdm
   provisioning:
-    golden_image: kali-base
+    golden_image: debian-13-desktop
     role: osint-recon
     component: cache-layer
-    version: '4.7'
+    version: '5.1'
     level: hard
   objectives:
   - Collect and verify information from public sources in a safe sandbox.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v4.7).'
-  prerequisites:
-  - osint-techniques
-  estimated_minutes: 90
-  tags:
-  - osint
-  - recon
-  - hard
-  - kali
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - osint-techniques
-- id: osint-recon-osint-station-auth-proxy-5-7
-  name: 'OSINT Workstation: flawed auth proxy v5.7 — OSINT workstation'
-  category: osint
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-desktop
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - exiftool
-  - python3
-  - firefox-esr
-  - auth-proxy
-  services:
-  - lightdm
-  provisioning:
-    golden_image: debian-13-desktop
-    role: osint-recon
-    component: auth-proxy
-    version: '5.7'
-    level: hard
-  objectives:
-  - Collect and verify information from public sources in a safe sandbox.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v5.7).'
+  - 'Focus: identify and remediate the insecure cache layer (v5.1).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 90
@@ -2553,15 +2897,15 @@
   - recon
   - hard
   - debian
-  - auth-proxy
+  - cache-layer
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - osint-techniques
-- id: osint-investigation-osint-station-job-runner-5-8
-  name: 'OSINT Investigation Scenario: injectable job runner v5.8 — OSINT workstation'
+- id: osint-investigation-osint-station-message-queue-5-2
+  name: 'OSINT Investigation Scenario: exposed message queue v5.2 — OSINT workstation'
   category: osint
   difficulty: advanced
   os_family: debian
@@ -2575,20 +2919,20 @@
   - exiftool
   - python3
   - firefox-esr
-  - job-runner
+  - message-queue
   services:
   - lightdm
   provisioning:
     golden_image: debian-13-desktop
     role: osint-investigation
-    component: job-runner
-    version: '5.8'
+    component: message-queue
+    version: '5.2'
     level: advanced
   objectives:
   - Analyse a simulated public footprint and corroborate findings.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v5.8).'
+  - 'Focus: identify and remediate the exposed message queue (v5.2).'
   prerequisites:
   - osint-techniques
   estimated_minutes: 120
@@ -2596,7 +2940,7 @@
   - osint
   - advanced
   - debian
-  - job-runner
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true

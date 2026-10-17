@@ -97,4 +97,26 @@ LEARNING_PATHS = [
         _s(5, "malware-analysis-fundamentals"),
         _s(6, lab="forensics-workstation-lab", note="Advanced investigation challenge")],
        tags=["forensics", "dfir"]),
+
+    _p("path-hacker-toolkit", "The Hacker's Toolkit",
+       "Learn to actually use the essential security tools — from scanning to "
+       "exploitation frameworks to reverse engineering — in authorised labs.",
+       "pentest", "easy", "advanced",
+       [_s(1, "tool-nmap"), _s(2, "tool-content-discovery"), _s(3, "tool-http-clients"),
+        _s(4, "tool-burp"), _s(5, "tool-sqlmap"), _s(6, "tool-netcat"),
+        _s(7, "tool-hydra"), _s(8, "tool-john"), _s(9, "tool-hashcat"),
+        _s(10, "tool-metasploit"), _s(11, "tool-smb-enum"), _s(12, "tool-impacket"),
+        _s(13, "tool-bloodhound"), _s(14, "tool-wireshark"), _s(15, "tool-ghidra"),
+        _s(16, lab="enterprise-identity-lab", note="Put the toolkit to work", required=False)],
+       tags=["tools", "hands-on"]),
+
+    _p("path-osint", "OSINT & Reconnaissance",
+       "Open-source intelligence from fundamentals and ethics through practical "
+       "tooling, OPSEC and responsible reporting.",
+       "osint", "easy", "advanced",
+       [_s(1, "osint-fundamentals"), _s(2, "reconnaissance"),
+        _s(3, "osint-techniques"), _s(4, "osint-tools"),
+        _s(5, "osint-opsec-reporting"),
+        _s(6, lab="osint-investigation-lab", note="OSINT investigation challenge")],
+       tags=["osint", "recon"]),
 ]

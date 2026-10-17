@@ -151,8 +151,8 @@
   lab_id: null
   course_ids:
   - identity-access-management
-- id: ad-identity-windows-srv-report-exporter-1-3
-  name: 'Identity Security Lab: template-injectable report exporter v1.3 — Windows Server'
+- id: ad-identity-windows-srv-reverse-proxy-1-6
+  name: 'Identity Security Lab: misconfigured reverse proxy v1.6 — Windows Server'
   category: active-directory
   difficulty: hard
   os_family: windows
@@ -163,21 +163,21 @@
   disk_gb: 16
   network_mode: isolated
   packages:
-  - report-exporter
+  - reverse-proxy
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: ad-identity
-    component: report-exporter
-    version: '1.3'
+    component: reverse-proxy
+    version: '1.6'
     level: hard
   objectives:
   - Review identity and access configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v1.3).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.6).'
   prerequisites:
   - identity-access-management
   estimated_minutes: 90
@@ -186,7 +186,49 @@
   - identity
   - hard
   - windows
-  - report-exporter
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-metrics-endpoint-1-0
+  name: 'Identity Security Lab: leaky metrics endpoint v1.0 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - metrics-endpoint
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: metrics-endpoint
+    version: '1.0'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v1.0).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -235,8 +277,8 @@
   lab_id: null
   course_ids:
   - identity-access-management
-- id: ad-identity-windows-srv-metrics-endpoint-1-3
-  name: 'Identity Security Lab: leaky metrics endpoint v1.3 — Windows Server'
+- id: ad-identity-windows-srv-report-exporter-1-6
+  name: 'Identity Security Lab: template-injectable report exporter v1.6 — Windows Server'
   category: active-directory
   difficulty: hard
   os_family: windows
@@ -247,21 +289,21 @@
   disk_gb: 16
   network_mode: isolated
   packages:
-  - metrics-endpoint
+  - report-exporter
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: ad-identity
-    component: metrics-endpoint
-    version: '1.3'
+    component: report-exporter
+    version: '1.6'
     level: hard
   objectives:
   - Review identity and access configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v1.3).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v1.6).'
   prerequisites:
   - identity-access-management
   estimated_minutes: 90
@@ -270,7 +312,49 @@
   - identity
   - hard
   - windows
-  - metrics-endpoint
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-file-service-1-0
+  name: 'Identity Security Lab: unsafe file service v1.0 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - file-service
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: file-service
+    version: '1.0'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v1.0).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -319,50 +403,8 @@
   lab_id: null
   course_ids:
   - identity-access-management
-- id: ad-identity-windows-srv-search-index-2-3
-  name: 'Identity Security Lab: unauthenticated search index v2.3 — Windows Server'
-  category: active-directory
-  difficulty: hard
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - search-index
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: ad-identity
-    component: search-index
-    version: '2.3'
-    level: hard
-  objectives:
-  - Review identity and access configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v2.3).'
-  prerequisites:
-  - identity-access-management
-  estimated_minutes: 90
-  tags:
-  - ad
-  - identity
-  - hard
-  - windows
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - identity-access-management
-- id: ad-identity-windows-srv-metrics-endpoint-2-3
-  name: 'Identity Security Lab: leaky metrics endpoint v2.3 — Windows Server'
+- id: ad-identity-windows-srv-metrics-endpoint-2-6
+  name: 'Identity Security Lab: leaky metrics endpoint v2.6 — Windows Server'
   category: active-directory
   difficulty: hard
   os_family: windows
@@ -381,13 +423,13 @@
     golden_image: windows-server-base
     role: ad-identity
     component: metrics-endpoint
-    version: '2.3'
+    version: '2.6'
     level: hard
   objectives:
   - Review identity and access configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v2.3).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.6).'
   prerequisites:
   - identity-access-management
   estimated_minutes: 90
@@ -403,8 +445,8 @@
   lab_id: null
   course_ids:
   - identity-access-management
-- id: ad-identity-windows-srv-reverse-proxy-2-3
-  name: 'Identity Security Lab: misconfigured reverse proxy v2.3 — Windows Server'
+- id: ad-identity-windows-srv-search-index-2-0
+  name: 'Identity Security Lab: unauthenticated search index v2.0 — Windows Server'
   category: active-directory
   difficulty: hard
   os_family: windows
@@ -415,21 +457,21 @@
   disk_gb: 16
   network_mode: isolated
   packages:
-  - reverse-proxy
+  - search-index
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: ad-identity
-    component: reverse-proxy
-    version: '2.3'
+    component: search-index
+    version: '2.0'
     level: hard
   objectives:
   - Review identity and access configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.3).'
+  - 'Focus: identify and remediate the unauthenticated search index (v2.0).'
   prerequisites:
   - identity-access-management
   estimated_minutes: 90
@@ -438,49 +480,7 @@
   - identity
   - hard
   - windows
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - identity-access-management
-- id: ad-identity-windows-srv-file-service-2-3
-  name: 'Identity Security Lab: unsafe file service v2.3 — Windows Server'
-  category: active-directory
-  difficulty: hard
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - file-service
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: ad-identity
-    component: file-service
-    version: '2.3'
-    level: hard
-  objectives:
-  - Review identity and access configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v2.3).'
-  prerequisites:
-  - identity-access-management
-  estimated_minutes: 90
-  tags:
-  - ad
-  - identity
-  - hard
-  - windows
-  - file-service
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -529,8 +529,50 @@
   lab_id: null
   course_ids:
   - identity-access-management
-- id: ad-identity-windows-srv-reverse-proxy-3-3
-  name: 'Identity Security Lab: misconfigured reverse proxy v3.3 — Windows Server'
+- id: ad-identity-windows-srv-file-service-2-6
+  name: 'Identity Security Lab: unsafe file service v2.6 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - file-service
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: file-service
+    version: '2.6'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v2.6).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-reverse-proxy-2-0
+  name: 'Identity Security Lab: misconfigured reverse proxy v2.0 — Windows Server'
   category: active-directory
   difficulty: hard
   os_family: windows
@@ -549,13 +591,13 @@
     golden_image: windows-server-base
     role: ad-identity
     component: reverse-proxy
-    version: '3.3'
+    version: '2.0'
     level: hard
   objectives:
   - Review identity and access configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.3).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.0).'
   prerequisites:
   - identity-access-management
   estimated_minutes: 90
@@ -565,6 +607,132 @@
   - hard
   - windows
   - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-metrics-endpoint-2-3
+  name: 'Identity Security Lab: leaky metrics endpoint v2.3 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - metrics-endpoint
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: metrics-endpoint
+    version: '2.3'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.3).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-search-index-2-6
+  name: 'Identity Security Lab: unauthenticated search index v2.6 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - search-index
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: search-index
+    version: '2.6'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v2.6).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-report-exporter-3-0
+  name: 'Identity Security Lab: template-injectable report exporter v3.0 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - report-exporter
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: report-exporter
+    version: '3.0'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v3.0).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - report-exporter
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -613,8 +781,8 @@
   lab_id: null
   course_ids:
   - identity-access-management
-- id: ad-identity-windows-srv-report-exporter-3-3
-  name: 'Identity Security Lab: template-injectable report exporter v3.3 — Windows Server'
+- id: ad-identity-windows-srv-reverse-proxy-3-6
+  name: 'Identity Security Lab: misconfigured reverse proxy v3.6 — Windows Server'
   category: active-directory
   difficulty: hard
   os_family: windows
@@ -625,21 +793,21 @@
   disk_gb: 16
   network_mode: isolated
   packages:
-  - report-exporter
+  - reverse-proxy
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: ad-identity
-    component: report-exporter
-    version: '3.3'
+    component: reverse-proxy
+    version: '3.6'
     level: hard
   objectives:
   - Review identity and access configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v3.3).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.6).'
   prerequisites:
   - identity-access-management
   estimated_minutes: 90
@@ -648,7 +816,49 @@
   - identity
   - hard
   - windows
-  - report-exporter
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-metrics-endpoint-3-0
+  name: 'Identity Security Lab: leaky metrics endpoint v3.0 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - metrics-endpoint
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: metrics-endpoint
+    version: '3.0'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v3.0).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -697,50 +907,8 @@
   lab_id: null
   course_ids:
   - identity-access-management
-- id: ad-identity-windows-srv-metrics-endpoint-3-3
-  name: 'Identity Security Lab: leaky metrics endpoint v3.3 — Windows Server'
-  category: active-directory
-  difficulty: hard
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - metrics-endpoint
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: ad-identity
-    component: metrics-endpoint
-    version: '3.3'
-    level: hard
-  objectives:
-  - Review identity and access configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v3.3).'
-  prerequisites:
-  - identity-access-management
-  estimated_minutes: 90
-  tags:
-  - ad
-  - identity
-  - hard
-  - windows
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - identity-access-management
-- id: ad-identity-windows-srv-report-exporter-4-3
-  name: 'Identity Security Lab: template-injectable report exporter v4.3 — Windows Server'
+- id: ad-identity-windows-srv-report-exporter-3-6
+  name: 'Identity Security Lab: template-injectable report exporter v3.6 — Windows Server'
   category: active-directory
   difficulty: hard
   os_family: windows
@@ -759,13 +927,13 @@
     golden_image: windows-server-base
     role: ad-identity
     component: report-exporter
-    version: '4.3'
+    version: '3.6'
     level: hard
   objectives:
   - Review identity and access configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v4.3).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v3.6).'
   prerequisites:
   - identity-access-management
   estimated_minutes: 90
@@ -781,8 +949,8 @@
   lab_id: null
   course_ids:
   - identity-access-management
-- id: ad-identity-windows-srv-search-index-4-3
-  name: 'Identity Security Lab: unauthenticated search index v4.3 — Windows Server'
+- id: ad-identity-windows-srv-file-service-3-0
+  name: 'Identity Security Lab: unsafe file service v3.0 — Windows Server'
   category: active-directory
   difficulty: hard
   os_family: windows
@@ -793,21 +961,21 @@
   disk_gb: 16
   network_mode: isolated
   packages:
-  - search-index
+  - file-service
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: ad-identity
-    component: search-index
-    version: '4.3'
+    component: file-service
+    version: '3.0'
     level: hard
   objectives:
   - Review identity and access configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v4.3).'
+  - 'Focus: identify and remediate the unsafe file service (v3.0).'
   prerequisites:
   - identity-access-management
   estimated_minutes: 90
@@ -816,49 +984,7 @@
   - identity
   - hard
   - windows
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - identity-access-management
-- id: ad-identity-windows-srv-metrics-endpoint-4-3
-  name: 'Identity Security Lab: leaky metrics endpoint v4.3 — Windows Server'
-  category: active-directory
-  difficulty: hard
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - metrics-endpoint
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: ad-identity
-    component: metrics-endpoint
-    version: '4.3'
-    level: hard
-  objectives:
-  - Review identity and access configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v4.3).'
-  prerequisites:
-  - identity-access-management
-  estimated_minutes: 90
-  tags:
-  - ad
-  - identity
-  - hard
-  - windows
-  - metrics-endpoint
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -907,50 +1033,8 @@
   lab_id: null
   course_ids:
   - identity-access-management
-- id: ad-identity-windows-srv-file-service-4-3
-  name: 'Identity Security Lab: unsafe file service v4.3 — Windows Server'
-  category: active-directory
-  difficulty: hard
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - file-service
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: ad-identity
-    component: file-service
-    version: '4.3'
-    level: hard
-  objectives:
-  - Review identity and access configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v4.3).'
-  prerequisites:
-  - identity-access-management
-  estimated_minutes: 90
-  tags:
-  - ad
-  - identity
-  - hard
-  - windows
-  - file-service
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - identity-access-management
-- id: ad-identity-windows-srv-metrics-endpoint-5-3
-  name: 'Identity Security Lab: leaky metrics endpoint v5.3 — Windows Server'
+- id: ad-identity-windows-srv-metrics-endpoint-4-6
+  name: 'Identity Security Lab: leaky metrics endpoint v4.6 — Windows Server'
   category: active-directory
   difficulty: hard
   os_family: windows
@@ -969,13 +1053,13 @@
     golden_image: windows-server-base
     role: ad-identity
     component: metrics-endpoint
-    version: '5.3'
+    version: '4.6'
     level: hard
   objectives:
   - Review identity and access configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v5.3).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.6).'
   prerequisites:
   - identity-access-management
   estimated_minutes: 90
@@ -991,8 +1075,134 @@
   lab_id: null
   course_ids:
   - identity-access-management
-- id: ad-identity-windows-srv-reverse-proxy-5-3
-  name: 'Identity Security Lab: misconfigured reverse proxy v5.3 — Windows Server'
+- id: ad-identity-windows-srv-search-index-4-0
+  name: 'Identity Security Lab: unauthenticated search index v4.0 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - search-index
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: search-index
+    version: '4.0'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v4.0).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-report-exporter-4-3
+  name: 'Identity Security Lab: template-injectable report exporter v4.3 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - report-exporter
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: report-exporter
+    version: '4.3'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v4.3).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-file-service-4-6
+  name: 'Identity Security Lab: unsafe file service v4.6 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - file-service
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: file-service
+    version: '4.6'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v4.6).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-reverse-proxy-4-0
+  name: 'Identity Security Lab: misconfigured reverse proxy v4.0 — Windows Server'
   category: active-directory
   difficulty: hard
   os_family: windows
@@ -1011,13 +1221,13 @@
     golden_image: windows-server-base
     role: ad-identity
     component: reverse-proxy
-    version: '5.3'
+    version: '4.0'
     level: hard
   objectives:
   - Review identity and access configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v5.3).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.0).'
   prerequisites:
   - identity-access-management
   estimated_minutes: 90
@@ -1027,6 +1237,90 @@
   - hard
   - windows
   - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-metrics-endpoint-4-3
+  name: 'Identity Security Lab: leaky metrics endpoint v4.3 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - metrics-endpoint
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: metrics-endpoint
+    version: '4.3'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.3).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - identity-access-management
+- id: ad-identity-windows-srv-search-index-5-6
+  name: 'Identity Security Lab: unauthenticated search index v5.6 — Windows Server'
+  category: active-directory
+  difficulty: hard
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - search-index
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: ad-identity
+    component: search-index
+    version: '5.6'
+    level: hard
+  objectives:
+  - Review identity and access configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v5.6).'
+  prerequisites:
+  - identity-access-management
+  estimated_minutes: 90
+  tags:
+  - ad
+  - identity
+  - hard
+  - windows
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true

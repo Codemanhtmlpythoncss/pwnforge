@@ -1,0 +1,149 @@
+id: tool-nmap
+title: 'Nmap: Network Scanning & Enumeration'
+description: Discover hosts, find open ports, fingerprint services and run NSE scripts — the enumeration
+  workhorse.
+difficulty: easy
+category: tools
+specialization: pentest
+estimated_minutes: 75
+objectives:
+- Understand host discovery & your first scan
+- Understand service & version detection, os
+- Understand nse, timing & output
+prerequisites:
+- networking-fundamentals
+- service-enumeration
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: network-basics-lab
+version: 1.0.0
+lessons:
+- title: Host discovery & your first scan
+  difficulty: easy
+  minutes: 20
+  competency: tool-scanning
+  body: 'Nmap maps what''s reachable and what''s listening.
+
+
+    ```
+
+    nmap -sn 10.200.0.0/24        # ping sweep: which hosts are up
+
+    nmap 10.200.0.10              # default: top 1000 TCP ports
+
+    nmap -p- 10.200.0.10          # all 65535 TCP ports
+
+    nmap -p 22,80,443 10.200.0.10 # specific ports
+
+    ```
+
+    Start a Pwnforge lab and scan the target you own. Read every line: `open`, `closed` and `filtered`
+    each mean something different (filtered usually implies a firewall).
+
+
+    > Only run these tools against systems you own or are explicitly authorised to test — the Pwnforge
+    labs are built for exactly this. Unauthorised scanning or access is unethical and usually unlawful.'
+  exercises:
+  - kind: command
+    prompt: Scan ALL TCP ports on 10.0.0.5 (nmap -p- ...)
+    answer: nmap -p- 10.0.0.5
+    competency: tool-scanning
+    explanation: '`-p-` scans all 65535 ports.'
+    points: 10
+    hints: []
+  hints:
+  - text: '`-sn` = no port scan, just host discovery.'
+  - text: '`filtered` often means a firewall is dropping probes.'
+  walkthrough: []
+- title: Service & version detection, OS
+  difficulty: easy
+  minutes: 20
+  competency: tool-scanning
+  body: 'Knowing a port is open is step one; knowing *what* answers is the goal.
+
+
+    ```
+
+    nmap -sV 10.200.0.10          # service/version detection
+
+    nmap -sV -sC 10.200.0.10      # + default safe NSE scripts
+
+    nmap -O 10.200.0.10           # OS guess (needs privilege)
+
+    nmap -A 10.200.0.10           # aggressive: -sV -sC -O + traceroute
+
+    ```
+
+    `-sC` runs the *default* category of the Nmap Scripting Engine — safe, informative scripts. Record
+    versions; they drive the whole assessment and tell a defender exactly what to patch.'
+  exercises:
+  - kind: command
+    prompt: Enable service/version detection (flag)?
+    answer: -sV
+    competency: tool-scanning
+    explanation: '`-sV` probes service versions.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough:
+  - title: Start the Network Basics Lab
+    detail: It gives you owned targets.
+  - title: Sweep then scan
+    detail: '`nmap -sn` the subnet, then `-sV -sC` a host.'
+  - title: Record versions
+    detail: Note service + version for each open port.
+  - title: Map to risk
+    detail: List known-weak versions to investigate/patch.
+- title: NSE, timing & output
+  difficulty: easy
+  minutes: 15
+  competency: tool-scanning
+  body: 'The NSE has categories (`default`, `safe`, `vuln`, `auth`, ...): `nmap --script vuln 10.200.0.10`.
+    Timing templates `-T0`..`-T5` trade speed for stealth/stability (`-T4` is a common lab default). Always
+    save output: `-oA scan` writes normal/greppable/XML at once, which feeds reports and other tools.'
+  exercises:
+  - kind: command
+    prompt: Save all three output formats with base name 'scan'
+    answer: nmap -oA scan
+    competency: tool-scanning
+    explanation: '`-oA` writes .nmap/.gnmap/.xml.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: 'Nmap: Network Scanning & Enumeration Assessment'
+  questions:
+  - kind: command
+    prompt: All-ports flag?
+    answer: -p-
+    competency: tool-scanning
+    explanation: '`-p-` = every TCP port.'
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: '`-sC` runs:'
+    choices:
+    - All scripts
+    - Default/safe NSE scripts
+    - Exploits
+    - Nothing
+    answer: Default/safe NSE scripts
+    competency: tool-scanning
+    explanation: Default category.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Port state that usually means a firewall is dropping probes?
+    answer: filtered
+    competency: tool-scanning
+    explanation: filtered.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

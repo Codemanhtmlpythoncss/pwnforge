@@ -1,0 +1,96 @@
+id: tool-proxychains
+title: 'Pivoting: proxychains, Tor & SSH Tunnels'
+description: Route tools through tunnels to reach segmented lab networks.
+difficulty: advanced
+category: tools
+specialization: pentest
+estimated_minutes: 55
+objectives:
+- Understand ssh tunnels
+- Understand proxychains & tor
+prerequisites:
+- tool-netcat
+- network-segmentation
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: SSH tunnels
+  difficulty: advanced
+  minutes: 20
+  competency: tool-proxying
+  body: 'SSH can forward ports to reach hosts you can only see from a jump box in your lab.
+
+
+    ```
+
+    ssh -L 8080:10.10.0.5:80 user@jump      # local forward
+
+    ssh -D 1080 user@jump                   # dynamic SOCKS proxy
+
+    ```
+
+    A dynamic `-D` proxy turns SSH into a SOCKS proxy other tools can use to reach an internal lab subnet.'
+  exercises:
+  - kind: command
+    prompt: SSH flag for a dynamic SOCKS proxy?
+    answer: -D
+    competency: tool-proxying
+    explanation: '`-D` opens a SOCKS proxy.'
+    points: 10
+    hints: []
+  hints:
+  - text: '`-L` = local forward, `-D` = SOCKS proxy, `-R` = remote forward.'
+  walkthrough: []
+- title: proxychains & Tor
+  difficulty: advanced
+  minutes: 15
+  competency: tool-proxying
+  body: 'proxychains forces a tool''s traffic through a proxy (e.g. your SSH SOCKS or Tor): `proxychains
+    nmap -sT 10.10.0.0/24`. Set the proxy in `/etc/proxychains.conf`. Tor provides anonymity for authorised
+    OSINT, but note many scans don''t work well over Tor (no UDP, slow).'
+  exercises:
+  - kind: mcq
+    prompt: 'proxychains is used to:'
+    choices:
+    - Speed up scans
+    - Route a tool through a proxy
+    - Crack hashes
+    - Fuzz
+    answer: Route a tool through a proxy
+    competency: tool-proxying
+    explanation: It forces traffic via a proxy.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: 'Pivoting: proxychains, Tor & SSH Tunnels Assessment'
+  questions:
+  - kind: command
+    prompt: SSH dynamic SOCKS flag?
+    answer: -D
+    competency: tool-proxying
+    explanation: '`-D`.'
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'proxychains routes a tool through a:'
+    choices:
+    - GPU
+    - Proxy
+    - Database
+    - Shell
+    answer: Proxy
+    competency: tool-proxying
+    explanation: A proxy.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

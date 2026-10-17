@@ -1,0 +1,102 @@
+id: tool-smb-enum
+title: SMB & LDAP Enumeration Toolkit
+description: enum4linux, smbclient, rpcclient and ldapsearch for Windows/AD recon.
+difficulty: hard
+category: tools
+specialization: active-directory
+estimated_minutes: 55
+objectives:
+- Understand smb shares & sessions
+- Understand ldap & rpc
+prerequisites:
+- tool-nmap
+- active-directory-fundamentals
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: enterprise-identity-lab
+version: 1.0.0
+lessons:
+- title: SMB shares & sessions
+  difficulty: hard
+  minutes: 20
+  competency: tool-ad-tooling
+  body: 'Enumerate SMB on owned lab hosts.
+
+
+    ```
+
+    enum4linux -a 10.200.0.10
+
+    smbclient -L //10.200.0.10 -N          # list shares, null session
+
+    smbclient //10.200.0.10/share -N       # connect to a share
+
+    ```
+
+    Null/anonymous sessions and over-shared folders are classic misconfigurations — the fix is tightening
+    share ACLs and disabling anonymous access.
+
+
+    > Only run these tools against systems you own or are explicitly authorised to test — the Pwnforge
+    labs are built for exactly this. Unauthorised scanning or access is unethical and usually unlawful.'
+  exercises:
+  - kind: command
+    prompt: List SMB shares with a null session (smbclient ...)?
+    answer: smbclient -L //10.0.0.5 -N
+    competency: tool-ad-tooling
+    explanation: '`-L` lists shares, `-N` no password.'
+    points: 10
+    hints: []
+  hints:
+  - text: '`-N` attempts a null (anonymous) session.'
+  walkthrough: []
+- title: LDAP & RPC
+  difficulty: hard
+  minutes: 15
+  competency: tool-ad-tooling
+  body: '`ldapsearch` queries the directory; `rpcclient` enumerates users and policy.
+
+
+    ```
+
+    ldapsearch -x -H ldap://10.200.0.10 -b ''dc=lab,dc=local''
+
+    rpcclient -U '''' -N 10.200.0.10 -c enumdomusers
+
+    ```
+
+    This maps users, groups and policy — the same inventory a defender should review for over-exposure.'
+  exercises:
+  - kind: short_answer
+    prompt: Tool to query a directory over LDAP?
+    answer: ldapsearch
+    competency: tool-ad-tooling
+    explanation: ldapsearch.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: SMB & LDAP Enumeration Toolkit Assessment
+  questions:
+  - kind: command
+    prompt: smbclient flag to list shares?
+    answer: -L
+    competency: tool-ad-tooling
+    explanation: '`-L`.'
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Null/anonymous SMB session flag?
+    answer: -N
+    competency: tool-ad-tooling
+    explanation: '`-N`.'
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

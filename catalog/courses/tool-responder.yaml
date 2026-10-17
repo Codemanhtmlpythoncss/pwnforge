@@ -1,0 +1,73 @@
+id: tool-responder
+title: 'Responder: LLMNR/NBT-NS Analysis & Defence (Lab)'
+description: Understand name-resolution poisoning and, crucially, how to stop it.
+difficulty: advanced
+category: tools
+specialization: defensive
+estimated_minutes: 35
+objectives:
+- Understand what responder demonstrates
+prerequisites:
+- tool-smb-enum
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: enterprise-identity-lab
+version: 1.0.0
+lessons:
+- title: What Responder demonstrates
+  difficulty: advanced
+  minutes: 15
+  competency: tool-ad-tooling
+  body: 'On a lab network, Responder answers broadcast name-resolution queries (LLMNR/NBT-NS/mDNS) to
+    show how misconfigured networks leak authentication material: `responder -I eth0`. The *point* for
+    most learners is defensive — disabling LLMNR/NBT-NS and enabling SMB signing removes the weakness
+    entirely.
+
+
+    > Only run these tools against systems you own or are explicitly authorised to test — the Pwnforge
+    labs are built for exactly this. Unauthorised scanning or access is unethical and usually unlawful.'
+  exercises:
+  - kind: mcq
+    prompt: 'The durable fix Responder teaches:'
+    choices:
+    - Faster NICs
+    - Disable LLMNR/NBT-NS + SMB signing
+    - More RAM
+    - Bigger subnets
+    answer: Disable LLMNR/NBT-NS + SMB signing
+    competency: tool-ad-tooling
+    explanation: Remove the weak broadcast protocols.
+    points: 10
+    hints: []
+  hints:
+  - text: LLMNR/NBT-NS are the broadcast protocols to disable.
+  walkthrough: []
+assessment:
+  title: 'Responder: LLMNR/NBT-NS Analysis & Defence (Lab) Assessment'
+  questions:
+  - kind: mcq
+    prompt: Responder abuses which protocols?
+    choices:
+    - HTTP/HTTPS
+    - LLMNR/NBT-NS/mDNS
+    - SSH/SFTP
+    - DNS over TLS
+    answer: LLMNR/NBT-NS/mDNS
+    competency: tool-ad-tooling
+    explanation: Broadcast name resolution.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Enable SMB ___ to resist relay.
+    answer: signing
+    competency: tool-ad-tooling
+    explanation: SMB signing.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

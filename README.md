@@ -17,11 +17,11 @@ with no mandatory cloud service.
 
 | Area | Status |
 |------|--------|
-| Courses | **60** substantial courses (≥ 50 required) — `pwnforge courses validate` → 0 issues |
-| VM profiles | **1,040** distinct, meaningful profiles (≥ 1,000 required) — `pwnforge profiles validate` → 0 invalid |
-| Learning paths | 8 beginner-to-expert paths |
-| Multi-machine labs | 10 labs on isolated virtual networks |
-| Competencies | 77 across 12 domains, with server-side tracking |
+| Courses | **89** substantial courses (≥ 50 required) — `pwnforge courses validate` → 0 issues |
+| VM profiles | **1,440** distinct, meaningful profiles (≥ 1,000 required) — `pwnforge profiles validate` → 0 invalid |
+| Learning paths | 10 beginner-to-expert paths |
+| Multi-machine labs | 11 labs on isolated virtual networks |
+| Competencies | 96 across 13 domains, with server-side tracking |
 | Difficulty levels | Orientation → Beginner → Easy → Intermediate → Hard → Advanced → Expert → Mastery |
 | Website | React + TypeScript + Vite SPA, dark/light theme, served by the backend |
 | API | FastAPI, ~60 documented endpoints + OpenAPI at `/api/docs` |

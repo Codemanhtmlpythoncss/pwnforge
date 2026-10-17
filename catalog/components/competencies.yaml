@@ -322,3 +322,63 @@
   key: osint-corroboration
   name: Source Corroboration
   description: Cross-checking and assessing source reliability.
+- domain: osint
+  key: osint-tooling
+  name: OSINT Tooling
+  description: theHarvester, Amass, Shodan, recon-ng and friends.
+- domain: tools
+  key: tool-scanning
+  name: Scanning Tools
+  description: Nmap, Masscan and host/port/service discovery.
+- domain: tools
+  key: tool-web-scanners
+  name: Web Scanners
+  description: Nikto, Nuclei and automated web checks.
+- domain: tools
+  key: tool-packet-analysis
+  name: Packet Analysis Tools
+  description: Wireshark and tcpdump.
+- domain: tools
+  key: tool-web-proxy
+  name: Web Proxy Tools
+  description: Burp Suite and OWASP ZAP.
+- domain: tools
+  key: tool-content-discovery
+  name: Content Discovery Tools
+  description: gobuster, ffuf, dirb, feroxbuster.
+- domain: tools
+  key: tool-exploitation-frameworks
+  name: Exploitation Frameworks
+  description: Metasploit Framework in lab use.
+- domain: tools
+  key: tool-password-auditing
+  name: Password Auditing Tools
+  description: John, Hashcat, Hydra for authorised audits.
+- domain: tools
+  key: tool-netcat
+  name: Network Utilities
+  description: netcat, socat and basic connectivity tooling.
+- domain: tools
+  key: tool-proxying
+  name: Pivoting & Proxying
+  description: proxychains, Tor and SSH tunnelling.
+- domain: tools
+  key: tool-ad-tooling
+  name: AD/Windows Tooling
+  description: Impacket, CrackMapExec, BloodHound, Responder (lab).
+- domain: tools
+  key: tool-re-tooling
+  name: Reverse-Engineering Tools
+  description: Ghidra, radare2, gdb/pwndbg.
+- domain: tools
+  key: tool-forensics-tooling
+  name: Forensics Tools
+  description: Volatility, Autopsy and The Sleuth Kit.
+- domain: tools
+  key: tool-data-decoding
+  name: Data & Decoding Tools
+  description: CyberChef, hashid, base/encoding analysis.
+- domain: tools
+  key: tool-http-clients
+  name: HTTP Clients
+  description: curl and HTTPie for crafting requests.

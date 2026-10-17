@@ -1,0 +1,80 @@
+id: tool-autopsy
+title: 'Autopsy & The Sleuth Kit: Disk Forensics'
+description: Examine disk images, recover files and build timelines.
+difficulty: hard
+category: tools
+specialization: forensics
+estimated_minutes: 40
+objectives:
+- Understand the sleuth kit cli & autopsy gui
+prerequisites:
+- digital-forensics
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: forensics-workstation-lab
+version: 1.0.0
+lessons:
+- title: The Sleuth Kit CLI & Autopsy GUI
+  difficulty: hard
+  minutes: 20
+  competency: tool-forensics-tooling
+  body: 'The Sleuth Kit (TSK) provides CLI tools; Autopsy is the GUI over them.
+
+
+    ```
+
+    mmls disk.img            # partition layout
+
+    fls -r -o 2048 disk.img  # list files (incl. deleted)
+
+    icat -o 2048 disk.img 1234 > out   # extract a file by inode
+
+    ```
+
+    Autopsy adds keyword search, timelines and reporting. Always work from a verified **copy** and hash
+    everything (chain of custody).'
+  exercises:
+  - kind: mcq
+    prompt: 'You should analyse:'
+    choices:
+    - The original disk
+    - A verified copy/image
+    - Live production
+    - Nothing
+    answer: A verified copy/image
+    competency: tool-forensics-tooling
+    explanation: Never the only copy.
+    points: 10
+    hints: []
+  hints:
+  - text: '`mmls` shows partitions; `fls` lists files incl. deleted.'
+  walkthrough: []
+assessment:
+  title: 'Autopsy & The Sleuth Kit: Disk Forensics Assessment'
+  questions:
+  - kind: mcq
+    prompt: 'Autopsy is a GUI over:'
+    choices:
+    - Volatility
+    - The Sleuth Kit
+    - Wireshark
+    - Nmap
+    answer: The Sleuth Kit
+    competency: tool-forensics-tooling
+    explanation: TSK.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Verify evidence integrity with a ___.
+    answer: hash
+    competency: tool-forensics-tooling
+    explanation: Hashes.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

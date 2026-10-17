@@ -919,8 +919,8 @@
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-smb-linux-auth-proxy-1-7
-  name: 'Service Configuration Lab: flawed auth proxy v1.7 — Debian + Samba'
+- id: service-config-smb-linux-legacy-cgi-1-1
+  name: 'Service Configuration Lab: legacy CGI handler v1.1 — Debian + Samba'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -932,20 +932,20 @@
   network_mode: isolated
   packages:
   - samba
-  - auth-proxy
+  - legacy-cgi
   services:
   - smbd
   provisioning:
     golden_image: debian-13-server
     role: service-config
-    component: auth-proxy
-    version: '1.7'
+    component: legacy-cgi
+    version: '1.1'
     level: intermediate
   objectives:
   - Analyse and correct insecure service configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v1.7).'
+  - 'Focus: identify and remediate the legacy CGI handler (v1.1).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -954,59 +954,59 @@
   - config
   - intermediate
   - debian
-  - auth-proxy
+  - legacy-cgi
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-apache-python-admin-panel-1-1
-  name: 'TLS Configuration Lab: weak admin panel v1.1 — Apache + Python/WSGI'
+- id: tls-config-apache-python-auth-proxy-1-4
+  name: 'TLS Configuration Lab: flawed auth proxy v1.4 — Apache + Python/WSGI'
   category: infrastructure
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-web
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
   - apache2
   - python3
   - libapache2-mod-wsgi-py3
-  - admin-panel
+  - auth-proxy
   services:
   - apache2
   provisioning:
     golden_image: debian-13-web
     role: tls-config
-    component: admin-panel
-    version: '1.1'
-    level: intermediate
+    component: auth-proxy
+    version: '1.4'
+    level: hard
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v1.1).'
+  - 'Focus: identify and remediate the flawed auth proxy (v1.4).'
   prerequisites:
   - tls-and-certificates
-  estimated_minutes: 60
+  estimated_minutes: 90
   tags:
   - crypto
   - tls
-  - intermediate
+  - hard
   - debian
-  - admin-panel
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-alpine-min-import-tool-1-7
-  name: 'Service Configuration Lab: unsafe import tool v1.7 — Alpine minimal'
+- id: service-config-alpine-min-admin-panel-1-4
+  name: 'Service Configuration Lab: weak admin panel v1.4 — Alpine minimal'
   category: infrastructure
   difficulty: intermediate
   os_family: alpine
@@ -1019,11 +1019,97 @@
   packages:
   - openrc
   - openssh
-  - import-tool
+  - admin-panel
   services:
   - sshd
   provisioning:
     golden_image: alpine-base
+    role: service-config
+    component: admin-panel
+    version: '1.4'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v1.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - alpine
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-nginx-php-cache-layer-1-7
+  name: 'TLS Configuration Lab: insecure cache layer v1.7 — nginx + PHP-FPM'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - cache-layer
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: cache-layer
+    version: '1.7'
+    level: intermediate
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v1.7).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 60
+  tags:
+  - crypto
+  - tls
+  - intermediate
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-ubuntu-srv-import-tool-1-7
+  name: 'Service Configuration Lab: unsafe import tool v1.7 — Ubuntu Server'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - import-tool
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
     role: service-config
     component: import-tool
     version: '1.7'
@@ -1040,7 +1126,7 @@
   - infra
   - config
   - intermediate
-  - alpine
+  - ubuntu
   - import-tool
   reset_supported: true
   snapshots_supported: true
@@ -1048,30 +1134,30 @@
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-nginx-php-legacy-cgi-1-1
-  name: 'TLS Configuration Lab: legacy CGI handler v1.1 — nginx + PHP-FPM'
+- id: tls-config-apache-python-legacy-cgi-1-1
+  name: 'TLS Configuration Lab: legacy CGI handler v1.1 — Apache + Python/WSGI'
   category: infrastructure
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-web
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
-  - nginx
-  - php-fpm
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
   - legacy-cgi
   services:
-  - nginx
-  - php-fpm
+  - apache2
   provisioning:
     golden_image: debian-13-web
     role: tls-config
     component: legacy-cgi
     version: '1.1'
-    level: intermediate
+    level: hard
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
@@ -1079,11 +1165,11 @@
   - 'Focus: identify and remediate the legacy CGI handler (v1.1).'
   prerequisites:
   - tls-and-certificates
-  estimated_minutes: 60
+  estimated_minutes: 90
   tags:
   - crypto
   - tls
-  - intermediate
+  - hard
   - debian
   - legacy-cgi
   reset_supported: true
@@ -1092,94 +1178,8 @@
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-ubuntu-srv-admin-panel-1-7
-  name: 'Service Configuration Lab: weak admin panel v1.7 — Ubuntu Server'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - admin-panel
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: service-config
-    component: admin-panel
-    version: '1.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v1.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - ubuntu
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-apache-python-cache-layer-1-1
-  name: 'TLS Configuration Lab: insecure cache layer v1.1 — Apache + Python/WSGI'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - apache2
-  - python3
-  - libapache2-mod-wsgi-py3
-  - cache-layer
-  services:
-  - apache2
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: cache-layer
-    version: '1.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v1.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-freebsd-srv-legacy-cgi-1-7
-  name: 'Service Configuration Lab: legacy CGI handler v1.7 — FreeBSD Server'
+- id: service-config-freebsd-srv-auth-proxy-1-1
+  name: 'Service Configuration Lab: flawed auth proxy v1.1 — FreeBSD Server'
   category: infrastructure
   difficulty: intermediate
   os_family: freebsd
@@ -1191,11 +1191,186 @@
   network_mode: isolated
   packages:
   - openssh-portable
-  - legacy-cgi
+  - auth-proxy
   services:
   - sshd
   provisioning:
     golden_image: freebsd-base
+    role: service-config
+    component: auth-proxy
+    version: '1.1'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v1.1).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - freebsd
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-nginx-php-admin-panel-1-4
+  name: 'TLS Configuration Lab: weak admin panel v1.4 — nginx + PHP-FPM'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - admin-panel
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: admin-panel
+    version: '1.4'
+    level: intermediate
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v1.4).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 60
+  tags:
+  - crypto
+  - tls
+  - intermediate
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-nginx-php-cache-layer-1-4
+  name: 'Service Configuration Lab: insecure cache layer v1.4 — nginx + PHP-FPM'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - cache-layer
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: service-config
+    component: cache-layer
+    version: '1.4'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v1.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-apache-python-import-tool-1-7
+  name: 'TLS Configuration Lab: unsafe import tool v1.7 — Apache + Python/WSGI'
+  category: infrastructure
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - import-tool
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: import-tool
+    version: '1.7'
+    level: hard
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v1.7).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 90
+  tags:
+  - crypto
+  - tls
+  - hard
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-ssh-linux-legacy-cgi-1-7
+  name: 'Service Configuration Lab: legacy CGI handler v1.7 — Debian + OpenSSH'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
     role: service-config
     component: legacy-cgi
     version: '1.7'
@@ -1212,7 +1387,7 @@
   - infra
   - config
   - intermediate
-  - freebsd
+  - debian
   - legacy-cgi
   reset_supported: true
   snapshots_supported: true
@@ -1264,183 +1439,8 @@
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-nginx-php-cache-layer-1-7
-  name: 'Service Configuration Lab: insecure cache layer v1.7 — nginx + PHP-FPM'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - cache-layer
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: service-config
-    component: cache-layer
-    version: '1.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v1.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-apache-python-import-tool-1-1
-  name: 'TLS Configuration Lab: unsafe import tool v1.1 — Apache + Python/WSGI'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - apache2
-  - python3
-  - libapache2-mod-wsgi-py3
-  - import-tool
-  services:
-  - apache2
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: import-tool
-    version: '1.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v1.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-ssh-linux-auth-proxy-1-7
-  name: 'Service Configuration Lab: flawed auth proxy v1.7 — Debian + OpenSSH'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - auth-proxy
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: service-config
-    component: auth-proxy
-    version: '1.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v1.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - debian
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-nginx-php-admin-panel-1-1
-  name: 'TLS Configuration Lab: weak admin panel v1.1 — nginx + PHP-FPM'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - admin-panel
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: admin-panel
-    version: '1.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v1.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-smb-linux-import-tool-2-7
-  name: 'Service Configuration Lab: unsafe import tool v2.7 — Debian + Samba'
+- id: service-config-smb-linux-admin-panel-2-1
+  name: 'Service Configuration Lab: weak admin panel v2.1 — Debian + Samba'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -1452,20 +1452,20 @@
   network_mode: isolated
   packages:
   - samba
-  - import-tool
+  - admin-panel
   services:
   - smbd
   provisioning:
     golden_image: debian-13-server
     role: service-config
-    component: import-tool
-    version: '2.7'
+    component: admin-panel
+    version: '2.1'
     level: intermediate
   objectives:
   - Analyse and correct insecure service configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v2.7).'
+  - 'Focus: identify and remediate the weak admin panel (v2.1).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -1474,59 +1474,59 @@
   - config
   - intermediate
   - debian
-  - import-tool
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-apache-python-legacy-cgi-2-1
-  name: 'TLS Configuration Lab: legacy CGI handler v2.1 — Apache + Python/WSGI'
+- id: tls-config-apache-python-cache-layer-2-4
+  name: 'TLS Configuration Lab: insecure cache layer v2.4 — Apache + Python/WSGI'
   category: infrastructure
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-web
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
   - apache2
   - python3
   - libapache2-mod-wsgi-py3
-  - legacy-cgi
+  - cache-layer
   services:
   - apache2
   provisioning:
     golden_image: debian-13-web
     role: tls-config
-    component: legacy-cgi
-    version: '2.1'
-    level: intermediate
+    component: cache-layer
+    version: '2.4'
+    level: hard
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v2.1).'
+  - 'Focus: identify and remediate the insecure cache layer (v2.4).'
   prerequisites:
   - tls-and-certificates
-  estimated_minutes: 60
+  estimated_minutes: 90
   tags:
   - crypto
   - tls
-  - intermediate
+  - hard
   - debian
-  - legacy-cgi
+  - cache-layer
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-alpine-min-admin-panel-2-7
-  name: 'Service Configuration Lab: weak admin panel v2.7 — Alpine minimal'
+- id: service-config-alpine-min-import-tool-2-4
+  name: 'Service Configuration Lab: unsafe import tool v2.4 — Alpine minimal'
   category: infrastructure
   difficulty: intermediate
   os_family: alpine
@@ -1539,11 +1539,358 @@
   packages:
   - openrc
   - openssh
-  - admin-panel
+  - import-tool
   services:
   - sshd
   provisioning:
     golden_image: alpine-base
+    role: service-config
+    component: import-tool
+    version: '2.4'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v2.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - alpine
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-nginx-php-legacy-cgi-2-7
+  name: 'TLS Configuration Lab: legacy CGI handler v2.7 — nginx + PHP-FPM'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - legacy-cgi
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: legacy-cgi
+    version: '2.7'
+    level: intermediate
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v2.7).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 60
+  tags:
+  - crypto
+  - tls
+  - intermediate
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-ubuntu-srv-auth-proxy-2-7
+  name: 'Service Configuration Lab: flawed auth proxy v2.7 — Ubuntu Server'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - auth-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: service-config
+    component: auth-proxy
+    version: '2.7'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v2.7).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - ubuntu
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-apache-python-admin-panel-2-1
+  name: 'TLS Configuration Lab: weak admin panel v2.1 — Apache + Python/WSGI'
+  category: infrastructure
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - admin-panel
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: admin-panel
+    version: '2.1'
+    level: hard
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v2.1).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 90
+  tags:
+  - crypto
+  - tls
+  - hard
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-freebsd-srv-cache-layer-2-1
+  name: 'Service Configuration Lab: insecure cache layer v2.1 — FreeBSD Server'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - cache-layer
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: service-config
+    component: cache-layer
+    version: '2.1'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v2.1).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - freebsd
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-nginx-php-import-tool-2-4
+  name: 'TLS Configuration Lab: unsafe import tool v2.4 — nginx + PHP-FPM'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - import-tool
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: import-tool
+    version: '2.4'
+    level: intermediate
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v2.4).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 60
+  tags:
+  - crypto
+  - tls
+  - intermediate
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-nginx-php-legacy-cgi-2-4
+  name: 'Service Configuration Lab: legacy CGI handler v2.4 — nginx + PHP-FPM'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - legacy-cgi
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: service-config
+    component: legacy-cgi
+    version: '2.4'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v2.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-apache-python-auth-proxy-2-7
+  name: 'TLS Configuration Lab: flawed auth proxy v2.7 — Apache + Python/WSGI'
+  category: infrastructure
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - auth-proxy
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: auth-proxy
+    version: '2.7'
+    level: hard
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v2.7).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 90
+  tags:
+  - crypto
+  - tls
+  - hard
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-ssh-linux-admin-panel-2-7
+  name: 'Service Configuration Lab: weak admin panel v2.7 — Debian + OpenSSH'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - admin-panel
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
     role: service-config
     component: admin-panel
     version: '2.7'
@@ -1560,7 +1907,7 @@
   - infra
   - config
   - intermediate
-  - alpine
+  - debian
   - admin-panel
   reset_supported: true
   snapshots_supported: true
@@ -1612,355 +1959,8 @@
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-ubuntu-srv-legacy-cgi-2-7
-  name: 'Service Configuration Lab: legacy CGI handler v2.7 — Ubuntu Server'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - legacy-cgi
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: service-config
-    component: legacy-cgi
-    version: '2.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v2.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - ubuntu
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-apache-python-auth-proxy-2-1
-  name: 'TLS Configuration Lab: flawed auth proxy v2.1 — Apache + Python/WSGI'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - apache2
-  - python3
-  - libapache2-mod-wsgi-py3
-  - auth-proxy
-  services:
-  - apache2
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: auth-proxy
-    version: '2.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v2.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-freebsd-srv-cache-layer-2-7
-  name: 'Service Configuration Lab: insecure cache layer v2.7 — FreeBSD Server'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-portable
-  - cache-layer
-  services:
-  - sshd
-  provisioning:
-    golden_image: freebsd-base
-    role: service-config
-    component: cache-layer
-    version: '2.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v2.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - freebsd
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-nginx-php-import-tool-2-1
-  name: 'TLS Configuration Lab: unsafe import tool v2.1 — nginx + PHP-FPM'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - import-tool
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: import-tool
-    version: '2.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v2.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-nginx-php-auth-proxy-2-7
-  name: 'Service Configuration Lab: flawed auth proxy v2.7 — nginx + PHP-FPM'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - auth-proxy
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: service-config
-    component: auth-proxy
-    version: '2.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v2.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - debian
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-apache-python-admin-panel-2-1
-  name: 'TLS Configuration Lab: weak admin panel v2.1 — Apache + Python/WSGI'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - apache2
-  - python3
-  - libapache2-mod-wsgi-py3
-  - admin-panel
-  services:
-  - apache2
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: admin-panel
-    version: '2.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v2.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-ssh-linux-import-tool-2-7
-  name: 'Service Configuration Lab: unsafe import tool v2.7 — Debian + OpenSSH'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - import-tool
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: service-config
-    component: import-tool
-    version: '2.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v2.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - debian
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-nginx-php-legacy-cgi-2-1
-  name: 'TLS Configuration Lab: legacy CGI handler v2.1 — nginx + PHP-FPM'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - legacy-cgi
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: legacy-cgi
-    version: '2.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v2.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-smb-linux-admin-panel-2-7
-  name: 'Service Configuration Lab: weak admin panel v2.7 — Debian + Samba'
+- id: service-config-smb-linux-import-tool-2-1
+  name: 'Service Configuration Lab: unsafe import tool v2.1 — Debian + Samba'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -1972,20 +1972,20 @@
   network_mode: isolated
   packages:
   - samba
-  - admin-panel
+  - import-tool
   services:
   - smbd
   provisioning:
     golden_image: debian-13-server
     role: service-config
-    component: admin-panel
-    version: '2.7'
+    component: import-tool
+    version: '2.1'
     level: intermediate
   objectives:
   - Analyse and correct insecure service configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v2.7).'
+  - 'Focus: identify and remediate the unsafe import tool (v2.1).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -1994,59 +1994,59 @@
   - config
   - intermediate
   - debian
-  - admin-panel
+  - import-tool
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-apache-python-cache-layer-2-1
-  name: 'TLS Configuration Lab: insecure cache layer v2.1 — Apache + Python/WSGI'
+- id: tls-config-apache-python-legacy-cgi-2-4
+  name: 'TLS Configuration Lab: legacy CGI handler v2.4 — Apache + Python/WSGI'
   category: infrastructure
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-web
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
   - apache2
   - python3
   - libapache2-mod-wsgi-py3
-  - cache-layer
+  - legacy-cgi
   services:
   - apache2
   provisioning:
     golden_image: debian-13-web
     role: tls-config
-    component: cache-layer
-    version: '2.1'
-    level: intermediate
+    component: legacy-cgi
+    version: '2.4'
+    level: hard
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v2.1).'
+  - 'Focus: identify and remediate the legacy CGI handler (v2.4).'
   prerequisites:
   - tls-and-certificates
-  estimated_minutes: 60
+  estimated_minutes: 90
   tags:
   - crypto
   - tls
-  - intermediate
+  - hard
   - debian
-  - cache-layer
+  - legacy-cgi
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-alpine-min-legacy-cgi-3-7
-  name: 'Service Configuration Lab: legacy CGI handler v3.7 — Alpine minimal'
+- id: service-config-alpine-min-auth-proxy-3-4
+  name: 'Service Configuration Lab: flawed auth proxy v3.4 — Alpine minimal'
   category: infrastructure
   difficulty: intermediate
   os_family: alpine
@@ -2059,20 +2059,20 @@
   packages:
   - openrc
   - openssh
-  - legacy-cgi
+  - auth-proxy
   services:
   - sshd
   provisioning:
     golden_image: alpine-base
     role: service-config
-    component: legacy-cgi
-    version: '3.7'
+    component: auth-proxy
+    version: '3.4'
     level: intermediate
   objectives:
   - Analyse and correct insecure service configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v3.7).'
+  - 'Focus: identify and remediate the flawed auth proxy (v3.4).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -2081,15 +2081,15 @@
   - config
   - intermediate
   - alpine
-  - legacy-cgi
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-nginx-php-auth-proxy-3-1
-  name: 'TLS Configuration Lab: flawed auth proxy v3.1 — nginx + PHP-FPM'
+- id: tls-config-nginx-php-admin-panel-3-7
+  name: 'TLS Configuration Lab: weak admin panel v3.7 — nginx + PHP-FPM'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -2102,21 +2102,21 @@
   packages:
   - nginx
   - php-fpm
-  - auth-proxy
+  - admin-panel
   services:
   - nginx
   - php-fpm
   provisioning:
     golden_image: debian-13-web
     role: tls-config
-    component: auth-proxy
-    version: '3.1'
+    component: admin-panel
+    version: '3.7'
     level: intermediate
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v3.1).'
+  - 'Focus: identify and remediate the weak admin panel (v3.7).'
   prerequisites:
   - tls-and-certificates
   estimated_minutes: 60
@@ -2125,7 +2125,7 @@
   - tls
   - intermediate
   - debian
-  - auth-proxy
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -2177,13 +2177,13 @@
 - id: tls-config-apache-python-import-tool-3-1
   name: 'TLS Configuration Lab: unsafe import tool v3.1 — Apache + Python/WSGI'
   category: infrastructure
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-web
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
   - apache2
@@ -2197,7 +2197,7 @@
     role: tls-config
     component: import-tool
     version: '3.1'
-    level: intermediate
+    level: hard
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
@@ -2205,11 +2205,11 @@
   - 'Focus: identify and remediate the unsafe import tool (v3.1).'
   prerequisites:
   - tls-and-certificates
-  estimated_minutes: 60
+  estimated_minutes: 90
   tags:
   - crypto
   - tls
-  - intermediate
+  - hard
   - debian
   - import-tool
   reset_supported: true
@@ -2218,8 +2218,8 @@
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-freebsd-srv-auth-proxy-3-7
-  name: 'Service Configuration Lab: flawed auth proxy v3.7 — FreeBSD Server'
+- id: service-config-freebsd-srv-legacy-cgi-3-1
+  name: 'Service Configuration Lab: legacy CGI handler v3.1 — FreeBSD Server'
   category: infrastructure
   difficulty: intermediate
   os_family: freebsd
@@ -2231,20 +2231,20 @@
   network_mode: isolated
   packages:
   - openssh-portable
-  - auth-proxy
+  - legacy-cgi
   services:
   - sshd
   provisioning:
     golden_image: freebsd-base
     role: service-config
-    component: auth-proxy
-    version: '3.7'
+    component: legacy-cgi
+    version: '3.1'
     level: intermediate
   objectives:
   - Analyse and correct insecure service configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v3.7).'
+  - 'Focus: identify and remediate the legacy CGI handler (v3.1).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -2253,15 +2253,15 @@
   - config
   - intermediate
   - freebsd
-  - auth-proxy
+  - legacy-cgi
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-nginx-php-admin-panel-3-1
-  name: 'TLS Configuration Lab: weak admin panel v3.1 — nginx + PHP-FPM'
+- id: tls-config-nginx-php-auth-proxy-3-4
+  name: 'TLS Configuration Lab: flawed auth proxy v3.4 — nginx + PHP-FPM'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -2274,21 +2274,21 @@
   packages:
   - nginx
   - php-fpm
-  - admin-panel
+  - auth-proxy
   services:
   - nginx
   - php-fpm
   provisioning:
     golden_image: debian-13-web
     role: tls-config
-    component: admin-panel
-    version: '3.1'
+    component: auth-proxy
+    version: '3.4'
     level: intermediate
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v3.1).'
+  - 'Focus: identify and remediate the flawed auth proxy (v3.4).'
   prerequisites:
   - tls-and-certificates
   estimated_minutes: 60
@@ -2297,15 +2297,15 @@
   - tls
   - intermediate
   - debian
-  - admin-panel
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-nginx-php-import-tool-3-7
-  name: 'Service Configuration Lab: unsafe import tool v3.7 — nginx + PHP-FPM'
+- id: service-config-nginx-php-admin-panel-3-4
+  name: 'Service Configuration Lab: weak admin panel v3.4 — nginx + PHP-FPM'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -2318,12 +2318,99 @@
   packages:
   - nginx
   - php-fpm
-  - import-tool
+  - admin-panel
   services:
   - nginx
   - php-fpm
   provisioning:
     golden_image: debian-13-web
+    role: service-config
+    component: admin-panel
+    version: '3.4'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v3.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-apache-python-cache-layer-3-7
+  name: 'TLS Configuration Lab: insecure cache layer v3.7 — Apache + Python/WSGI'
+  category: infrastructure
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - cache-layer
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: cache-layer
+    version: '3.7'
+    level: hard
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v3.7).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 90
+  tags:
+  - crypto
+  - tls
+  - hard
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-ssh-linux-import-tool-3-7
+  name: 'Service Configuration Lab: unsafe import tool v3.7 — Debian + OpenSSH'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - import-tool
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
     role: service-config
     component: import-tool
     version: '3.7'
@@ -2348,8 +2435,8 @@
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-apache-python-legacy-cgi-3-1
-  name: 'TLS Configuration Lab: legacy CGI handler v3.1 — Apache + Python/WSGI'
+- id: tls-config-nginx-php-legacy-cgi-3-1
+  name: 'TLS Configuration Lab: legacy CGI handler v3.1 — nginx + PHP-FPM'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -2360,12 +2447,12 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - apache2
-  - python3
-  - libapache2-mod-wsgi-py3
+  - nginx
+  - php-fpm
   - legacy-cgi
   services:
-  - apache2
+  - nginx
+  - php-fpm
   provisioning:
     golden_image: debian-13-web
     role: tls-config
@@ -2392,95 +2479,8 @@
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-ssh-linux-admin-panel-3-7
-  name: 'Service Configuration Lab: weak admin panel v3.7 — Debian + OpenSSH'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - admin-panel
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: service-config
-    component: admin-panel
-    version: '3.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v3.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-nginx-php-cache-layer-3-1
-  name: 'TLS Configuration Lab: insecure cache layer v3.1 — nginx + PHP-FPM'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - cache-layer
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: cache-layer
-    version: '3.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v3.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-smb-linux-legacy-cgi-3-7
-  name: 'Service Configuration Lab: legacy CGI handler v3.7 — Debian + Samba'
+- id: service-config-smb-linux-auth-proxy-3-1
+  name: 'Service Configuration Lab: flawed auth proxy v3.1 — Debian + Samba'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -2492,20 +2492,20 @@
   network_mode: isolated
   packages:
   - samba
-  - legacy-cgi
+  - auth-proxy
   services:
   - smbd
   provisioning:
     golden_image: debian-13-server
     role: service-config
-    component: legacy-cgi
-    version: '3.7'
+    component: auth-proxy
+    version: '3.1'
     level: intermediate
   objectives:
   - Analyse and correct insecure service configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v3.7).'
+  - 'Focus: identify and remediate the flawed auth proxy (v3.1).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -2514,59 +2514,59 @@
   - config
   - intermediate
   - debian
-  - legacy-cgi
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-apache-python-auth-proxy-3-1
-  name: 'TLS Configuration Lab: flawed auth proxy v3.1 — Apache + Python/WSGI'
+- id: tls-config-apache-python-admin-panel-3-4
+  name: 'TLS Configuration Lab: weak admin panel v3.4 — Apache + Python/WSGI'
   category: infrastructure
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-web
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
   - apache2
   - python3
   - libapache2-mod-wsgi-py3
-  - auth-proxy
+  - admin-panel
   services:
   - apache2
   provisioning:
     golden_image: debian-13-web
     role: tls-config
-    component: auth-proxy
-    version: '3.1'
-    level: intermediate
+    component: admin-panel
+    version: '3.4'
+    level: hard
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v3.1).'
+  - 'Focus: identify and remediate the weak admin panel (v3.4).'
   prerequisites:
   - tls-and-certificates
-  estimated_minutes: 60
+  estimated_minutes: 90
   tags:
   - crypto
   - tls
-  - intermediate
+  - hard
   - debian
-  - auth-proxy
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-alpine-min-cache-layer-3-7
-  name: 'Service Configuration Lab: insecure cache layer v3.7 — Alpine minimal'
+- id: service-config-alpine-min-cache-layer-3-4
+  name: 'Service Configuration Lab: insecure cache layer v3.4 — Alpine minimal'
   category: infrastructure
   difficulty: intermediate
   os_family: alpine
@@ -2586,13 +2586,13 @@
     golden_image: alpine-base
     role: service-config
     component: cache-layer
-    version: '3.7'
+    version: '3.4'
     level: intermediate
   objectives:
   - Analyse and correct insecure service configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v3.7).'
+  - 'Focus: identify and remediate the insecure cache layer (v3.4).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -2608,8 +2608,8 @@
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-nginx-php-import-tool-3-1
-  name: 'TLS Configuration Lab: unsafe import tool v3.1 — nginx + PHP-FPM'
+- id: tls-config-nginx-php-import-tool-3-7
+  name: 'TLS Configuration Lab: unsafe import tool v3.7 — nginx + PHP-FPM'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -2630,13 +2630,13 @@
     golden_image: debian-13-web
     role: tls-config
     component: import-tool
-    version: '3.1'
+    version: '3.7'
     level: intermediate
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v3.1).'
+  - 'Focus: identify and remediate the unsafe import tool (v3.7).'
   prerequisites:
   - tls-and-certificates
   estimated_minutes: 60
@@ -2652,8 +2652,8 @@
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-ubuntu-srv-auth-proxy-4-7
-  name: 'Service Configuration Lab: flawed auth proxy v4.7 — Ubuntu Server'
+- id: service-config-ubuntu-srv-legacy-cgi-4-7
+  name: 'Service Configuration Lab: legacy CGI handler v4.7 — Ubuntu Server'
   category: infrastructure
   difficulty: intermediate
   os_family: ubuntu
@@ -2665,272 +2665,11 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - auth-proxy
+  - legacy-cgi
   services:
   - ssh
   provisioning:
     golden_image: ubuntu-2404-base
-    role: service-config
-    component: auth-proxy
-    version: '4.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v4.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - ubuntu
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-apache-python-admin-panel-4-1
-  name: 'TLS Configuration Lab: weak admin panel v4.1 — Apache + Python/WSGI'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - apache2
-  - python3
-  - libapache2-mod-wsgi-py3
-  - admin-panel
-  services:
-  - apache2
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: admin-panel
-    version: '4.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v4.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-freebsd-srv-import-tool-4-7
-  name: 'Service Configuration Lab: unsafe import tool v4.7 — FreeBSD Server'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-portable
-  - import-tool
-  services:
-  - sshd
-  provisioning:
-    golden_image: freebsd-base
-    role: service-config
-    component: import-tool
-    version: '4.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v4.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - freebsd
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-nginx-php-legacy-cgi-4-1
-  name: 'TLS Configuration Lab: legacy CGI handler v4.1 — nginx + PHP-FPM'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - legacy-cgi
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: legacy-cgi
-    version: '4.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v4.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-nginx-php-admin-panel-4-7
-  name: 'Service Configuration Lab: weak admin panel v4.7 — nginx + PHP-FPM'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - admin-panel
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: service-config
-    component: admin-panel
-    version: '4.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v4.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-apache-python-cache-layer-4-1
-  name: 'TLS Configuration Lab: insecure cache layer v4.1 — Apache + Python/WSGI'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - apache2
-  - python3
-  - libapache2-mod-wsgi-py3
-  - cache-layer
-  services:
-  - apache2
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: cache-layer
-    version: '4.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v4.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-ssh-linux-legacy-cgi-4-7
-  name: 'Service Configuration Lab: legacy CGI handler v4.7 — Debian + OpenSSH'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - legacy-cgi
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
     role: service-config
     component: legacy-cgi
     version: '4.7'
@@ -2947,7 +2686,7 @@
   - infra
   - config
   - intermediate
-  - debian
+  - ubuntu
   - legacy-cgi
   reset_supported: true
   snapshots_supported: true
@@ -2955,8 +2694,94 @@
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-nginx-php-auth-proxy-4-1
-  name: 'TLS Configuration Lab: flawed auth proxy v4.1 — nginx + PHP-FPM'
+- id: tls-config-apache-python-auth-proxy-4-1
+  name: 'TLS Configuration Lab: flawed auth proxy v4.1 — Apache + Python/WSGI'
+  category: infrastructure
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - auth-proxy
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: auth-proxy
+    version: '4.1'
+    level: hard
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v4.1).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 90
+  tags:
+  - crypto
+  - tls
+  - hard
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-freebsd-srv-admin-panel-4-1
+  name: 'Service Configuration Lab: weak admin panel v4.1 — FreeBSD Server'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - admin-panel
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: service-config
+    component: admin-panel
+    version: '4.1'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v4.1).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - freebsd
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-nginx-php-cache-layer-4-4
+  name: 'TLS Configuration Lab: insecure cache layer v4.4 — nginx + PHP-FPM'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -2969,21 +2794,21 @@
   packages:
   - nginx
   - php-fpm
-  - auth-proxy
+  - cache-layer
   services:
   - nginx
   - php-fpm
   provisioning:
     golden_image: debian-13-web
     role: tls-config
-    component: auth-proxy
-    version: '4.1'
+    component: cache-layer
+    version: '4.4'
     level: intermediate
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v4.1).'
+  - 'Focus: identify and remediate the insecure cache layer (v4.4).'
   prerequisites:
   - tls-and-certificates
   estimated_minutes: 60
@@ -2992,15 +2817,103 @@
   - tls
   - intermediate
   - debian
-  - auth-proxy
+  - cache-layer
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-smb-linux-cache-layer-4-7
-  name: 'Service Configuration Lab: insecure cache layer v4.7 — Debian + Samba'
+- id: service-config-nginx-php-import-tool-4-4
+  name: 'Service Configuration Lab: unsafe import tool v4.4 — nginx + PHP-FPM'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - import-tool
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: service-config
+    component: import-tool
+    version: '4.4'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v4.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-apache-python-legacy-cgi-4-7
+  name: 'TLS Configuration Lab: legacy CGI handler v4.7 — Apache + Python/WSGI'
+  category: infrastructure
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - legacy-cgi
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: legacy-cgi
+    version: '4.7'
+    level: hard
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v4.7).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 90
+  tags:
+  - crypto
+  - tls
+  - hard
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-ssh-linux-auth-proxy-4-7
+  name: 'Service Configuration Lab: flawed auth proxy v4.7 — Debian + OpenSSH'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -3011,99 +2924,13 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - samba
-  - cache-layer
-  services:
-  - smbd
-  provisioning:
-    golden_image: debian-13-server
-    role: service-config
-    component: cache-layer
-    version: '4.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v4.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: tls-config-apache-python-import-tool-4-1
-  name: 'TLS Configuration Lab: unsafe import tool v4.1 — Apache + Python/WSGI'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - apache2
-  - python3
-  - libapache2-mod-wsgi-py3
-  - import-tool
-  services:
-  - apache2
-  provisioning:
-    golden_image: debian-13-web
-    role: tls-config
-    component: import-tool
-    version: '4.1'
-    level: intermediate
-  objectives:
-  - Diagnose and fix TLS/certificate configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v4.1).'
-  prerequisites:
-  - tls-and-certificates
-  estimated_minutes: 60
-  tags:
-  - crypto
-  - tls
-  - intermediate
-  - debian
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - tls-and-certificates
-- id: service-config-alpine-min-auth-proxy-4-7
-  name: 'Service Configuration Lab: flawed auth proxy v4.7 — Alpine minimal'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openrc
-  - openssh
+  - openssh-server
+  - sudo
   - auth-proxy
   services:
-  - sshd
+  - ssh
   provisioning:
-    golden_image: alpine-base
+    golden_image: debian-13-server
     role: service-config
     component: auth-proxy
     version: '4.7'
@@ -3120,7 +2947,7 @@
   - infra
   - config
   - intermediate
-  - alpine
+  - debian
   - auth-proxy
   reset_supported: true
   snapshots_supported: true
@@ -3172,8 +2999,181 @@
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-ubuntu-srv-import-tool-4-7
-  name: 'Service Configuration Lab: unsafe import tool v4.7 — Ubuntu Server'
+- id: service-config-smb-linux-cache-layer-4-1
+  name: 'Service Configuration Lab: insecure cache layer v4.1 — Debian + Samba'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - samba
+  - cache-layer
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: service-config
+    component: cache-layer
+    version: '4.1'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v4.1).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-apache-python-import-tool-4-4
+  name: 'TLS Configuration Lab: unsafe import tool v4.4 — Apache + Python/WSGI'
+  category: infrastructure
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - import-tool
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: import-tool
+    version: '4.4'
+    level: hard
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v4.4).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 90
+  tags:
+  - crypto
+  - tls
+  - hard
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-alpine-min-legacy-cgi-4-4
+  name: 'Service Configuration Lab: legacy CGI handler v4.4 — Alpine minimal'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - legacy-cgi
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: service-config
+    component: legacy-cgi
+    version: '4.4'
+    level: intermediate
+  objectives:
+  - Analyse and correct insecure service configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v4.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - infra
+  - config
+  - intermediate
+  - alpine
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tls-config-nginx-php-auth-proxy-4-7
+  name: 'TLS Configuration Lab: flawed auth proxy v4.7 — nginx + PHP-FPM'
+  category: infrastructure
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - auth-proxy
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tls-config
+    component: auth-proxy
+    version: '4.7'
+    level: intermediate
+  objectives:
+  - Diagnose and fix TLS/certificate configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v4.7).'
+  prerequisites:
+  - tls-and-certificates
+  estimated_minutes: 60
+  tags:
+  - crypto
+  - tls
+  - intermediate
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - tls-and-certificates
+- id: service-config-ubuntu-srv-admin-panel-4-7
+  name: 'Service Configuration Lab: weak admin panel v4.7 — Ubuntu Server'
   category: infrastructure
   difficulty: intermediate
   os_family: ubuntu
@@ -3185,20 +3185,20 @@
   network_mode: isolated
   packages:
   - openssh-server
-  - import-tool
+  - admin-panel
   services:
   - ssh
   provisioning:
     golden_image: ubuntu-2404-base
     role: service-config
-    component: import-tool
+    component: admin-panel
     version: '4.7'
     level: intermediate
   objectives:
   - Analyse and correct insecure service configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v4.7).'
+  - 'Focus: identify and remediate the weak admin panel (v4.7).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -3207,59 +3207,59 @@
   - config
   - intermediate
   - ubuntu
-  - import-tool
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-apache-python-legacy-cgi-4-1
-  name: 'TLS Configuration Lab: legacy CGI handler v4.1 — Apache + Python/WSGI'
+- id: tls-config-apache-python-cache-layer-4-1
+  name: 'TLS Configuration Lab: insecure cache layer v4.1 — Apache + Python/WSGI'
   category: infrastructure
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-web
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
   - apache2
   - python3
   - libapache2-mod-wsgi-py3
-  - legacy-cgi
+  - cache-layer
   services:
   - apache2
   provisioning:
     golden_image: debian-13-web
     role: tls-config
-    component: legacy-cgi
+    component: cache-layer
     version: '4.1'
-    level: intermediate
+    level: hard
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v4.1).'
+  - 'Focus: identify and remediate the insecure cache layer (v4.1).'
   prerequisites:
   - tls-and-certificates
-  estimated_minutes: 60
+  estimated_minutes: 90
   tags:
   - crypto
   - tls
-  - intermediate
+  - hard
   - debian
-  - legacy-cgi
+  - cache-layer
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-freebsd-srv-admin-panel-5-7
-  name: 'Service Configuration Lab: weak admin panel v5.7 — FreeBSD Server'
+- id: service-config-freebsd-srv-import-tool-5-1
+  name: 'Service Configuration Lab: unsafe import tool v5.1 — FreeBSD Server'
   category: infrastructure
   difficulty: intermediate
   os_family: freebsd
@@ -3271,20 +3271,20 @@
   network_mode: isolated
   packages:
   - openssh-portable
-  - admin-panel
+  - import-tool
   services:
   - sshd
   provisioning:
     golden_image: freebsd-base
     role: service-config
-    component: admin-panel
-    version: '5.7'
+    component: import-tool
+    version: '5.1'
     level: intermediate
   objectives:
   - Analyse and correct insecure service configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v5.7).'
+  - 'Focus: identify and remediate the unsafe import tool (v5.1).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -3293,15 +3293,15 @@
   - config
   - intermediate
   - freebsd
-  - admin-panel
+  - import-tool
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: tls-config-nginx-php-cache-layer-5-1
-  name: 'TLS Configuration Lab: insecure cache layer v5.1 — nginx + PHP-FPM'
+- id: tls-config-nginx-php-legacy-cgi-5-4
+  name: 'TLS Configuration Lab: legacy CGI handler v5.4 — nginx + PHP-FPM'
   category: infrastructure
   difficulty: intermediate
   os_family: debian
@@ -3314,21 +3314,21 @@
   packages:
   - nginx
   - php-fpm
-  - cache-layer
+  - legacy-cgi
   services:
   - nginx
   - php-fpm
   provisioning:
     golden_image: debian-13-web
     role: tls-config
-    component: cache-layer
-    version: '5.1'
+    component: legacy-cgi
+    version: '5.4'
     level: intermediate
   objectives:
   - Diagnose and fix TLS/certificate configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v5.1).'
+  - 'Focus: identify and remediate the legacy CGI handler (v5.4).'
   prerequisites:
   - tls-and-certificates
   estimated_minutes: 60
@@ -3337,54 +3337,10 @@
   - tls
   - intermediate
   - debian
-  - cache-layer
+  - legacy-cgi
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - tls-and-certificates
-- id: service-config-nginx-php-legacy-cgi-5-7
-  name: 'Service Configuration Lab: legacy CGI handler v5.7 — nginx + PHP-FPM'
-  category: infrastructure
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - legacy-cgi
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: service-config
-    component: legacy-cgi
-    version: '5.7'
-    level: intermediate
-  objectives:
-  - Analyse and correct insecure service configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v5.7).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - infra
-  - config
-  - intermediate
-  - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration

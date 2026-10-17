@@ -1,0 +1,162 @@
+id: tool-metasploit
+title: Metasploit Framework (Lab Use)
+description: Use the framework's modules, sessions and workflow against owned lab targets — and understand
+  how defenders detect it.
+difficulty: hard
+category: tools
+specialization: pentest
+estimated_minutes: 75
+objectives:
+- Understand msfconsole & the module model
+- Understand exploits, payloads & sessions
+- Understand post-exploitation & detection
+prerequisites:
+- penetration-testing-methodology
+- tool-nmap
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: enterprise-identity-lab
+version: 1.0.0
+lessons:
+- title: msfconsole & the module model
+  difficulty: hard
+  minutes: 20
+  competency: tool-exploitation-frameworks
+  body: 'Metasploit organises capability into **modules**: `auxiliary` (scanners/enum), `exploit`, `payload`,
+    `post`, `encoder`.
+
+
+    ```
+
+    msfconsole
+
+    search type:auxiliary smb
+
+    use auxiliary/scanner/smb/smb_version
+
+    set RHOSTS 10.200.0.10
+
+    run
+
+    ```
+
+    `show options` lists required settings; `info` explains a module. Start with auxiliary scanners to
+    enumerate your lab before anything else.
+
+
+    > Only run these tools against systems you own or are explicitly authorised to test — the Pwnforge
+    labs are built for exactly this. Unauthorised scanning or access is unethical and usually unlawful.'
+  exercises:
+  - kind: short_answer
+    prompt: Module type for scanners/enumeration?
+    answer: auxiliary
+    competency: tool-exploitation-frameworks
+    explanation: auxiliary modules.
+    points: 10
+    hints: []
+  hints:
+  - text: '`show options` reveals what a module needs (RHOSTS etc.).'
+  - text: Prefer auxiliary scanners first to map the lab.
+  walkthrough: []
+- title: Exploits, payloads & sessions
+  difficulty: hard
+  minutes: 20
+  competency: tool-exploitation-frameworks
+  body: 'An `exploit` module delivers a `payload`; a staged payload opens a **session** (e.g. Meterpreter)
+    back to a handler.
+
+
+    ```
+
+    use exploit/...
+
+    set RHOSTS 10.200.0.10
+
+    set PAYLOAD <payload>
+
+    set LHOST <your-lab-ip>
+
+    exploit
+
+    sessions -l
+
+    ```
+
+    `LHOST` is where the session connects back — your attacker host on the lab network. Everything stays
+    inside the isolated lab.'
+  exercises:
+  - kind: mcq
+    prompt: '`LHOST` specifies:'
+    choices:
+    - The target
+    - Your listener/host
+    - A port only
+    - The payload
+    answer: Your listener/host
+    competency: tool-exploitation-frameworks
+    explanation: Where the session connects back.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough:
+  - title: Start an infra lab
+    detail: Owned targets on an isolated net.
+  - title: Enumerate
+    detail: Use an auxiliary scanner module first.
+  - title: Configure
+    detail: '`set RHOSTS`, `PAYLOAD`, `LHOST`.'
+  - title: Review sessions
+    detail: '`sessions -l`; clean up when done.'
+- title: Post-exploitation & detection
+  difficulty: hard
+  minutes: 15
+  competency: detection-engineering
+  body: '`post` modules gather information after access. Crucially, learn the defender''s view: framework
+    activity leaves artefacts (process creation, network patterns, auth events) that detections key on.
+    Knowing how the tool behaves makes you a better blue-teamer.'
+  exercises:
+  - kind: short_answer
+    prompt: Module category that runs after access?
+    answer: post
+    competency: tool-exploitation-frameworks
+    explanation: post modules.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: Metasploit Framework (Lab Use) Assessment
+  questions:
+  - kind: short_answer
+    prompt: Non-exploit scanner module type?
+    answer: auxiliary
+    competency: tool-exploitation-frameworks
+    explanation: auxiliary.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'LHOST is:'
+    choices:
+    - The target
+    - Your connect-back host
+    - A CVE
+    - A wordlist
+    answer: Your connect-back host
+    competency: tool-exploitation-frameworks
+    explanation: Your host/listener.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Interactive session type Metasploit often opens?
+    answer: meterpreter
+    competency: tool-exploitation-frameworks
+    explanation: Meterpreter.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

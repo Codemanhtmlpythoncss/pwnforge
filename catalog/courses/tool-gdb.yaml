@@ -1,0 +1,77 @@
+id: tool-gdb
+title: 'gdb & pwndbg: Dynamic Analysis'
+description: Run, break, step and inspect program state at runtime.
+difficulty: advanced
+category: tools
+specialization: reverse
+estimated_minutes: 40
+objectives:
+- Understand breakpoints, stepping & inspection
+prerequisites:
+- tool-ghidra
+- memory-safety
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: reverse-engineering-lab
+version: 1.0.0
+lessons:
+- title: Breakpoints, stepping & inspection
+  difficulty: advanced
+  minutes: 20
+  competency: tool-re-tooling
+  body: 'gdb runs a program under your control; pwndbg/GEF add security-focused views.
+
+
+    ```
+
+    gdb ./binary
+
+    b main          # breakpoint
+
+    run
+
+    ni / si         # next / step instruction
+
+    info registers
+
+    x/16xw $sp      # examine 16 words at the stack pointer
+
+    ```
+
+    Watching registers and memory as code executes reveals what static analysis can''t. Do this on binaries
+    you''re authorised to analyse, in isolation.'
+  exercises:
+  - kind: command
+    prompt: gdb command to set a breakpoint at main?
+    answer: b main
+    competency: tool-re-tooling
+    explanation: '`b main` breaks at main.'
+    points: 10
+    hints: []
+  hints:
+  - text: '`x/` examines memory; `info registers` dumps CPU state.'
+  walkthrough: []
+assessment:
+  title: 'gdb & pwndbg: Dynamic Analysis Assessment'
+  questions:
+  - kind: command
+    prompt: gdb breakpoint command (short form)?
+    answer: b
+    competency: tool-re-tooling
+    explanation: '`b`.'
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: pwndbg/GEF are gdb ___ for security analysis.
+    answer: plugins
+    competency: tool-re-tooling
+    explanation: Extensions/plugins.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

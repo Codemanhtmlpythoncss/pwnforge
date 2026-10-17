@@ -1,0 +1,90 @@
+id: tool-zap
+title: 'OWASP ZAP: Open-Source Web Proxy'
+description: The free, open-source alternative to Burp for authorised web testing.
+difficulty: intermediate
+category: tools
+specialization: web
+estimated_minutes: 50
+objectives:
+- Understand zap basics
+- Understand spider, passive & active scan
+prerequisites:
+- tool-burp
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: web-security-lab
+version: 1.0.0
+lessons:
+- title: ZAP basics
+  difficulty: intermediate
+  minutes: 15
+  competency: tool-web-proxy
+  body: 'ZAP offers an intercepting proxy, an automated and manual scanner, and a spider/crawler. Use
+    the **HUD** in-browser or the desktop UI. Set the browser proxy, import ZAP''s cert, and define a
+    strict **context/scope** so automation stays inside your lab app.
+
+
+    > Only run these tools against systems you own or are explicitly authorised to test — the Pwnforge
+    labs are built for exactly this. Unauthorised scanning or access is unethical and usually unlawful.'
+  exercises:
+  - kind: short_answer
+    prompt: ZAP, like Burp, is an intercepting ___.
+    answer: proxy
+    competency: tool-web-proxy
+    explanation: An intercepting proxy.
+    points: 10
+    hints: []
+  hints:
+  - text: Define a scope/context before running the active scanner.
+  walkthrough: []
+- title: Spider, passive & active scan
+  difficulty: intermediate
+  minutes: 15
+  competency: tool-web-proxy
+  body: The **spider** discovers URLs; the **passive scan** flags issues from observed traffic (safe);
+    the **active scan** sends test payloads and must only run inside your defined scope. ZAP scripts and
+    the API let you automate checks in CI for your own apps.
+  exercises:
+  - kind: mcq
+    prompt: Which ZAP scan sends test payloads?
+    choices:
+    - Passive
+    - Active
+    - Spider
+    - None
+    answer: Active
+    competency: tool-web-proxy
+    explanation: Active scanning sends payloads.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: 'OWASP ZAP: Open-Source Web Proxy Assessment'
+  questions:
+  - kind: short_answer
+    prompt: ZAP is an intercepting ___.
+    answer: proxy
+    competency: tool-web-proxy
+    explanation: Proxy.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: Safe, observation-only scan?
+    choices:
+    - Active
+    - Passive
+    - Intruder
+    - Brute
+    answer: Passive
+    competency: tool-web-proxy
+    explanation: Passive scanning only observes.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

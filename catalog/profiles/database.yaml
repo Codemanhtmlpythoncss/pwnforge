@@ -452,8 +452,8 @@
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-mariadb-message-queue-1-2
-  name: 'Database Hardening Lab: exposed message queue v1.2 — MariaDB'
+- id: db-hardening-mariadb-api-gateway-1-5
+  name: 'Database Hardening Lab: permissive API gateway v1.5 — MariaDB'
   category: database
   difficulty: hard
   os_family: debian
@@ -465,20 +465,20 @@
   network_mode: isolated
   packages:
   - mariadb-server
-  - message-queue
+  - api-gateway
   services:
   - mariadb
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
-    component: message-queue
-    version: '1.2'
+    component: api-gateway
+    version: '1.5'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v1.2).'
+  - 'Focus: identify and remediate the permissive API gateway (v1.5).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -487,15 +487,99 @@
   - hardening
   - hard
   - debian
-  - message-queue
+  - api-gateway
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-mariadb-search-index-1-3
-  name: 'Database Access Control Lab: unauthenticated search index v1.3 — MariaDB'
+- id: db-authz-mariadb-file-service-1-6
+  name: 'Database Access Control Lab: unsafe file service v1.6 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - file-service
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-authz
+    component: file-service
+    version: '1.6'
+    level: hard
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v1.6).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 90
+  tags:
+  - database
+  - authz
+  - hard
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-postgres-backup-agent-1-8
+  name: 'Database Hardening Lab: over-privileged backup agent v1.8 — PostgreSQL'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - postgresql
+  - backup-agent
+  services:
+  - postgresql
+  provisioning:
+    golden_image: debian-13-db
+    role: db-hardening
+    component: backup-agent
+    version: '1.8'
+    level: hard
+  objectives:
+  - Harden a database server's configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v1.8).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 90
+  tags:
+  - database
+  - hardening
+  - hard
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: db-authz-postgres-reverse-proxy-1-0
+  name: 'Database Access Control Lab: misconfigured reverse proxy v1.0 — PostgreSQL'
   category: database
   difficulty: intermediate
   os_family: debian
@@ -506,21 +590,21 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - mariadb-server
-  - search-index
+  - postgresql
+  - reverse-proxy
   services:
-  - mariadb
+  - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-authz
-    component: search-index
-    version: '1.3'
+    component: reverse-proxy
+    version: '1.0'
     level: intermediate
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v1.3).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.0).'
   prerequisites:
   - access-control-course
   estimated_minutes: 60
@@ -529,15 +613,15 @@
   - authz
   - intermediate
   - debian
-  - search-index
+  - reverse-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-postgres-job-runner-1-2
-  name: 'Database Hardening Lab: injectable job runner v1.2 — PostgreSQL'
+- id: db-hardening-mariadb-job-runner-1-2
+  name: 'Database Hardening Lab: injectable job runner v1.2 — MariaDB'
   category: database
   difficulty: hard
   os_family: debian
@@ -548,10 +632,10 @@
   disk_gb: 16
   network_mode: isolated
   packages:
-  - postgresql
+  - mariadb-server
   - job-runner
   services:
-  - postgresql
+  - mariadb
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
@@ -578,50 +662,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-postgres-metrics-endpoint-1-3
-  name: 'Database Access Control Lab: leaky metrics endpoint v1.3 — PostgreSQL'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - postgresql
-  - metrics-endpoint
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: metrics-endpoint
-    version: '1.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v1.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-mariadb-backup-agent-1-2
-  name: 'Database Hardening Lab: over-privileged backup agent v1.2 — MariaDB'
+- id: db-authz-mariadb-metrics-endpoint-1-3
+  name: 'Database Access Control Lab: leaky metrics endpoint v1.3 — MariaDB'
   category: database
   difficulty: hard
   os_family: debian
@@ -633,20 +675,62 @@
   network_mode: isolated
   packages:
   - mariadb-server
-  - backup-agent
+  - metrics-endpoint
   services:
   - mariadb
   provisioning:
     golden_image: debian-13-db
+    role: db-authz
+    component: metrics-endpoint
+    version: '1.3'
+    level: hard
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v1.3).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 90
+  tags:
+  - database
+  - authz
+  - hard
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-postgres-message-queue-1-5
+  name: 'Database Hardening Lab: exposed message queue v1.5 — PostgreSQL'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - postgresql
+  - message-queue
+  services:
+  - postgresql
+  provisioning:
+    golden_image: debian-13-db
     role: db-hardening
-    component: backup-agent
-    version: '1.2'
+    component: message-queue
+    version: '1.5'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v1.2).'
+  - 'Focus: identify and remediate the exposed message queue (v1.5).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -655,15 +739,15 @@
   - hardening
   - hard
   - debian
-  - backup-agent
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-mariadb-reverse-proxy-1-3
-  name: 'Database Access Control Lab: misconfigured reverse proxy v1.3 — MariaDB'
+- id: db-authz-postgres-search-index-1-6
+  name: 'Database Access Control Lab: unauthenticated search index v1.6 — PostgreSQL'
   category: database
   difficulty: intermediate
   os_family: debian
@@ -674,21 +758,21 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - mariadb-server
-  - reverse-proxy
+  - postgresql
+  - search-index
   services:
-  - mariadb
+  - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-authz
-    component: reverse-proxy
-    version: '1.3'
+    component: search-index
+    version: '1.6'
     level: intermediate
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.3).'
+  - 'Focus: identify and remediate the unauthenticated search index (v1.6).'
   prerequisites:
   - access-control-course
   estimated_minutes: 60
@@ -697,7 +781,91 @@
   - authz
   - intermediate
   - debian
-  - reverse-proxy
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-mariadb-webhook-receiver-1-8
+  name: 'Database Hardening Lab: unvalidated webhook receiver v1.8 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - webhook-receiver
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-hardening
+    component: webhook-receiver
+    version: '1.8'
+    level: hard
+  objectives:
+  - Harden a database server's configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.8).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 90
+  tags:
+  - database
+  - hardening
+  - hard
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: db-authz-mariadb-report-exporter-1-0
+  name: 'Database Access Control Lab: template-injectable report exporter v1.0 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - report-exporter
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-authz
+    component: report-exporter
+    version: '1.0'
+    level: hard
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v1.0).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 90
+  tags:
+  - database
+  - authz
+  - hard
+  - debian
+  - report-exporter
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -788,8 +956,8 @@
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-mariadb-webhook-receiver-1-2
-  name: 'Database Hardening Lab: unvalidated webhook receiver v1.2 — MariaDB'
+- id: db-hardening-mariadb-backup-agent-2-5
+  name: 'Database Hardening Lab: over-privileged backup agent v2.5 — MariaDB'
   category: database
   difficulty: hard
   os_family: debian
@@ -801,20 +969,20 @@
   network_mode: isolated
   packages:
   - mariadb-server
-  - webhook-receiver
+  - backup-agent
   services:
   - mariadb
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
-    component: webhook-receiver
-    version: '1.2'
+    component: backup-agent
+    version: '2.5'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.2).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v2.5).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -823,141 +991,57 @@
   - hardening
   - hard
   - debian
-  - webhook-receiver
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-mariadb-report-exporter-1-3
-  name: 'Database Access Control Lab: template-injectable report exporter v1.3 — MariaDB'
+- id: db-authz-mariadb-reverse-proxy-2-6
+  name: 'Database Access Control Lab: misconfigured reverse proxy v2.6 — MariaDB'
   category: database
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-db
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
   - mariadb-server
-  - report-exporter
+  - reverse-proxy
   services:
   - mariadb
   provisioning:
     golden_image: debian-13-db
     role: db-authz
-    component: report-exporter
-    version: '1.3'
-    level: intermediate
+    component: reverse-proxy
+    version: '2.6'
+    level: hard
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v1.3).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.6).'
   prerequisites:
   - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-postgres-message-queue-1-2
-  name: 'Database Hardening Lab: exposed message queue v1.2 — PostgreSQL'
-  category: database
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - postgresql
-  - message-queue
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-hardening
-    component: message-queue
-    version: '1.2'
-    level: hard
-  objectives:
-  - Harden a database server's configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v1.2).'
-  prerequisites:
-  - infrastructure-hardening
   estimated_minutes: 90
   tags:
   - database
-  - hardening
+  - authz
   - hard
   - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: db-authz-postgres-search-index-1-3
-  name: 'Database Access Control Lab: unauthenticated search index v1.3 — PostgreSQL'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - postgresql
-  - search-index
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: search-index
-    version: '1.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v1.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - search-index
+  - reverse-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-mariadb-job-runner-2-2
-  name: 'Database Hardening Lab: injectable job runner v2.2 — MariaDB'
+- id: db-hardening-postgres-job-runner-2-8
+  name: 'Database Hardening Lab: injectable job runner v2.8 — PostgreSQL'
   category: database
   difficulty: hard
   os_family: debian
@@ -968,21 +1052,105 @@
   disk_gb: 16
   network_mode: isolated
   packages:
-  - mariadb-server
+  - postgresql
   - job-runner
   services:
-  - mariadb
+  - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
     component: job-runner
+    version: '2.8'
+    level: hard
+  objectives:
+  - Harden a database server's configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v2.8).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 90
+  tags:
+  - database
+  - hardening
+  - hard
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: db-authz-postgres-metrics-endpoint-2-0
+  name: 'Database Access Control Lab: leaky metrics endpoint v2.0 — PostgreSQL'
+  category: database
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - postgresql
+  - metrics-endpoint
+  services:
+  - postgresql
+  provisioning:
+    golden_image: debian-13-db
+    role: db-authz
+    component: metrics-endpoint
+    version: '2.0'
+    level: intermediate
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.0).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 60
+  tags:
+  - database
+  - authz
+  - intermediate
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-mariadb-message-queue-2-2
+  name: 'Database Hardening Lab: exposed message queue v2.2 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - message-queue
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-hardening
+    component: message-queue
     version: '2.2'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v2.2).'
+  - 'Focus: identify and remediate the exposed message queue (v2.2).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -991,15 +1159,99 @@
   - hardening
   - hard
   - debian
-  - job-runner
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-mariadb-metrics-endpoint-2-3
-  name: 'Database Access Control Lab: leaky metrics endpoint v2.3 — MariaDB'
+- id: db-authz-mariadb-search-index-2-3
+  name: 'Database Access Control Lab: unauthenticated search index v2.3 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - search-index
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-authz
+    component: search-index
+    version: '2.3'
+    level: hard
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v2.3).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 90
+  tags:
+  - database
+  - authz
+  - hard
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-postgres-webhook-receiver-2-5
+  name: 'Database Hardening Lab: unvalidated webhook receiver v2.5 — PostgreSQL'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - postgresql
+  - webhook-receiver
+  services:
+  - postgresql
+  provisioning:
+    golden_image: debian-13-db
+    role: db-hardening
+    component: webhook-receiver
+    version: '2.5'
+    level: hard
+  objectives:
+  - Harden a database server's configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.5).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 90
+  tags:
+  - database
+  - hardening
+  - hard
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: db-authz-postgres-report-exporter-2-6
+  name: 'Database Access Control Lab: template-injectable report exporter v2.6 — PostgreSQL'
   category: database
   difficulty: intermediate
   os_family: debian
@@ -1010,21 +1262,21 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - mariadb-server
-  - metrics-endpoint
+  - postgresql
+  - report-exporter
   services:
-  - mariadb
+  - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-authz
-    component: metrics-endpoint
-    version: '2.3'
+    component: report-exporter
+    version: '2.6'
     level: intermediate
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v2.3).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v2.6).'
   prerequisites:
   - access-control-course
   estimated_minutes: 60
@@ -1033,7 +1285,91 @@
   - authz
   - intermediate
   - debian
-  - metrics-endpoint
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-mariadb-api-gateway-2-8
+  name: 'Database Hardening Lab: permissive API gateway v2.8 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - api-gateway
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-hardening
+    component: api-gateway
+    version: '2.8'
+    level: hard
+  objectives:
+  - Harden a database server's configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v2.8).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 90
+  tags:
+  - database
+  - hardening
+  - hard
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: db-authz-mariadb-file-service-2-0
+  name: 'Database Access Control Lab: unsafe file service v2.0 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - file-service
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-authz
+    component: file-service
+    version: '2.0'
+    level: hard
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v2.0).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 90
+  tags:
+  - database
+  - authz
+  - hard
+  - debian
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -1124,8 +1460,8 @@
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-mariadb-api-gateway-2-2
-  name: 'Database Hardening Lab: permissive API gateway v2.2 — MariaDB'
+- id: db-hardening-mariadb-job-runner-2-5
+  name: 'Database Hardening Lab: injectable job runner v2.5 — MariaDB'
   category: database
   difficulty: hard
   os_family: debian
@@ -1137,272 +1473,20 @@
   network_mode: isolated
   packages:
   - mariadb-server
-  - api-gateway
-  services:
-  - mariadb
-  provisioning:
-    golden_image: debian-13-db
-    role: db-hardening
-    component: api-gateway
-    version: '2.2'
-    level: hard
-  objectives:
-  - Harden a database server's configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v2.2).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 90
-  tags:
-  - database
-  - hardening
-  - hard
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: db-authz-mariadb-file-service-2-3
-  name: 'Database Access Control Lab: unsafe file service v2.3 — MariaDB'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - mariadb-server
-  - file-service
-  services:
-  - mariadb
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: file-service
-    version: '2.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v2.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - file-service
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-postgres-webhook-receiver-2-2
-  name: 'Database Hardening Lab: unvalidated webhook receiver v2.2 — PostgreSQL'
-  category: database
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - postgresql
-  - webhook-receiver
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-hardening
-    component: webhook-receiver
-    version: '2.2'
-    level: hard
-  objectives:
-  - Harden a database server's configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.2).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 90
-  tags:
-  - database
-  - hardening
-  - hard
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: db-authz-postgres-report-exporter-2-3
-  name: 'Database Access Control Lab: template-injectable report exporter v2.3 — PostgreSQL'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - postgresql
-  - report-exporter
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: report-exporter
-    version: '2.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v2.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-mariadb-message-queue-2-2
-  name: 'Database Hardening Lab: exposed message queue v2.2 — MariaDB'
-  category: database
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - mariadb-server
-  - message-queue
-  services:
-  - mariadb
-  provisioning:
-    golden_image: debian-13-db
-    role: db-hardening
-    component: message-queue
-    version: '2.2'
-    level: hard
-  objectives:
-  - Harden a database server's configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v2.2).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 90
-  tags:
-  - database
-  - hardening
-  - hard
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: db-authz-mariadb-search-index-2-3
-  name: 'Database Access Control Lab: unauthenticated search index v2.3 — MariaDB'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - mariadb-server
-  - search-index
-  services:
-  - mariadb
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: search-index
-    version: '2.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v2.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-postgres-job-runner-2-2
-  name: 'Database Hardening Lab: injectable job runner v2.2 — PostgreSQL'
-  category: database
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - postgresql
   - job-runner
   services:
-  - postgresql
+  - mariadb
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
     component: job-runner
-    version: '2.2'
+    version: '2.5'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v2.2).'
+  - 'Focus: identify and remediate the injectable job runner (v2.5).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -1418,40 +1502,40 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-postgres-metrics-endpoint-2-3
-  name: 'Database Access Control Lab: leaky metrics endpoint v2.3 — PostgreSQL'
+- id: db-authz-mariadb-metrics-endpoint-2-6
+  name: 'Database Access Control Lab: leaky metrics endpoint v2.6 — MariaDB'
   category: database
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-db
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
-  - postgresql
+  - mariadb-server
   - metrics-endpoint
   services:
-  - postgresql
+  - mariadb
   provisioning:
     golden_image: debian-13-db
     role: db-authz
     component: metrics-endpoint
-    version: '2.3'
-    level: intermediate
+    version: '2.6'
+    level: hard
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v2.3).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.6).'
   prerequisites:
   - access-control-course
-  estimated_minutes: 60
+  estimated_minutes: 90
   tags:
   - database
   - authz
-  - intermediate
+  - hard
   - debian
   - metrics-endpoint
   reset_supported: true
@@ -1460,92 +1544,8 @@
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-mariadb-backup-agent-2-2
-  name: 'Database Hardening Lab: over-privileged backup agent v2.2 — MariaDB'
-  category: database
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - mariadb-server
-  - backup-agent
-  services:
-  - mariadb
-  provisioning:
-    golden_image: debian-13-db
-    role: db-hardening
-    component: backup-agent
-    version: '2.2'
-    level: hard
-  objectives:
-  - Harden a database server's configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v2.2).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 90
-  tags:
-  - database
-  - hardening
-  - hard
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: db-authz-mariadb-reverse-proxy-2-3
-  name: 'Database Access Control Lab: misconfigured reverse proxy v2.3 — MariaDB'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - mariadb-server
-  - reverse-proxy
-  services:
-  - mariadb
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: reverse-proxy
-    version: '2.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-postgres-api-gateway-3-2
-  name: 'Database Hardening Lab: permissive API gateway v3.2 — PostgreSQL'
+- id: db-hardening-postgres-message-queue-3-8
+  name: 'Database Hardening Lab: exposed message queue v3.8 — PostgreSQL'
   category: database
   difficulty: hard
   os_family: debian
@@ -1557,20 +1557,20 @@
   network_mode: isolated
   packages:
   - postgresql
-  - api-gateway
+  - message-queue
   services:
   - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
-    component: api-gateway
-    version: '3.2'
+    component: message-queue
+    version: '3.8'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v3.2).'
+  - 'Focus: identify and remediate the exposed message queue (v3.8).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -1579,15 +1579,15 @@
   - hardening
   - hard
   - debian
-  - api-gateway
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-postgres-file-service-3-3
-  name: 'Database Access Control Lab: unsafe file service v3.3 — PostgreSQL'
+- id: db-authz-postgres-search-index-3-0
+  name: 'Database Access Control Lab: unauthenticated search index v3.0 — PostgreSQL'
   category: database
   difficulty: intermediate
   os_family: debian
@@ -1599,20 +1599,20 @@
   network_mode: isolated
   packages:
   - postgresql
-  - file-service
+  - search-index
   services:
   - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-authz
-    component: file-service
-    version: '3.3'
+    component: search-index
+    version: '3.0'
     level: intermediate
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v3.3).'
+  - 'Focus: identify and remediate the unauthenticated search index (v3.0).'
   prerequisites:
   - access-control-course
   estimated_minutes: 60
@@ -1621,7 +1621,7 @@
   - authz
   - intermediate
   - debian
-  - file-service
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -1673,13 +1673,13 @@
 - id: db-authz-mariadb-report-exporter-3-3
   name: 'Database Access Control Lab: template-injectable report exporter v3.3 — MariaDB'
   category: database
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-db
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
   - mariadb-server
@@ -1691,7 +1691,7 @@
     role: db-authz
     component: report-exporter
     version: '3.3'
-    level: intermediate
+    level: hard
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
@@ -1699,11 +1699,11 @@
   - 'Focus: identify and remediate the template-injectable report exporter (v3.3).'
   prerequisites:
   - access-control-course
-  estimated_minutes: 60
+  estimated_minutes: 90
   tags:
   - database
   - authz
-  - intermediate
+  - hard
   - debian
   - report-exporter
   reset_supported: true
@@ -1712,8 +1712,8 @@
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-postgres-message-queue-3-2
-  name: 'Database Hardening Lab: exposed message queue v3.2 — PostgreSQL'
+- id: db-hardening-postgres-api-gateway-3-5
+  name: 'Database Hardening Lab: permissive API gateway v3.5 — PostgreSQL'
   category: database
   difficulty: hard
   os_family: debian
@@ -1725,20 +1725,20 @@
   network_mode: isolated
   packages:
   - postgresql
-  - message-queue
+  - api-gateway
   services:
   - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
-    component: message-queue
-    version: '3.2'
+    component: api-gateway
+    version: '3.5'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v3.2).'
+  - 'Focus: identify and remediate the permissive API gateway (v3.5).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -1747,15 +1747,15 @@
   - hardening
   - hard
   - debian
-  - message-queue
+  - api-gateway
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-postgres-search-index-3-3
-  name: 'Database Access Control Lab: unauthenticated search index v3.3 — PostgreSQL'
+- id: db-authz-postgres-file-service-3-6
+  name: 'Database Access Control Lab: unsafe file service v3.6 — PostgreSQL'
   category: database
   difficulty: intermediate
   os_family: debian
@@ -1767,20 +1767,20 @@
   network_mode: isolated
   packages:
   - postgresql
-  - search-index
+  - file-service
   services:
   - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-authz
-    component: search-index
-    version: '3.3'
+    component: file-service
+    version: '3.6'
     level: intermediate
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v3.3).'
+  - 'Focus: identify and remediate the unsafe file service (v3.6).'
   prerequisites:
   - access-control-course
   estimated_minutes: 60
@@ -1789,15 +1789,15 @@
   - authz
   - intermediate
   - debian
-  - search-index
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-mariadb-job-runner-3-2
-  name: 'Database Hardening Lab: injectable job runner v3.2 — MariaDB'
+- id: db-hardening-mariadb-backup-agent-3-8
+  name: 'Database Hardening Lab: over-privileged backup agent v3.8 — MariaDB'
   category: database
   difficulty: hard
   os_family: debian
@@ -1809,9 +1809,93 @@
   network_mode: isolated
   packages:
   - mariadb-server
-  - job-runner
+  - backup-agent
   services:
   - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-hardening
+    component: backup-agent
+    version: '3.8'
+    level: hard
+  objectives:
+  - Harden a database server's configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.8).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 90
+  tags:
+  - database
+  - hardening
+  - hard
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: db-authz-mariadb-reverse-proxy-3-0
+  name: 'Database Access Control Lab: misconfigured reverse proxy v3.0 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - reverse-proxy
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-authz
+    component: reverse-proxy
+    version: '3.0'
+    level: hard
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.0).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 90
+  tags:
+  - database
+  - authz
+  - hard
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-postgres-job-runner-3-2
+  name: 'Database Hardening Lab: injectable job runner v3.2 — PostgreSQL'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - postgresql
+  - job-runner
+  services:
+  - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
@@ -1838,8 +1922,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-mariadb-metrics-endpoint-3-3
-  name: 'Database Access Control Lab: leaky metrics endpoint v3.3 — MariaDB'
+- id: db-authz-postgres-metrics-endpoint-3-3
+  name: 'Database Access Control Lab: leaky metrics endpoint v3.3 — PostgreSQL'
   category: database
   difficulty: intermediate
   os_family: debian
@@ -1850,10 +1934,10 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - mariadb-server
+  - postgresql
   - metrics-endpoint
   services:
-  - mariadb
+  - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-authz
@@ -1880,260 +1964,8 @@
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-postgres-backup-agent-3-2
-  name: 'Database Hardening Lab: over-privileged backup agent v3.2 — PostgreSQL'
-  category: database
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - postgresql
-  - backup-agent
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-hardening
-    component: backup-agent
-    version: '3.2'
-    level: hard
-  objectives:
-  - Harden a database server's configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v3.2).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 90
-  tags:
-  - database
-  - hardening
-  - hard
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: db-authz-postgres-reverse-proxy-3-3
-  name: 'Database Access Control Lab: misconfigured reverse proxy v3.3 — PostgreSQL'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - postgresql
-  - reverse-proxy
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: reverse-proxy
-    version: '3.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-mariadb-api-gateway-3-2
-  name: 'Database Hardening Lab: permissive API gateway v3.2 — MariaDB'
-  category: database
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - mariadb-server
-  - api-gateway
-  services:
-  - mariadb
-  provisioning:
-    golden_image: debian-13-db
-    role: db-hardening
-    component: api-gateway
-    version: '3.2'
-    level: hard
-  objectives:
-  - Harden a database server's configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v3.2).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 90
-  tags:
-  - database
-  - hardening
-  - hard
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: db-authz-mariadb-file-service-3-3
-  name: 'Database Access Control Lab: unsafe file service v3.3 — MariaDB'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - mariadb-server
-  - file-service
-  services:
-  - mariadb
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: file-service
-    version: '3.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v3.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - file-service
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-postgres-webhook-receiver-3-2
-  name: 'Database Hardening Lab: unvalidated webhook receiver v3.2 — PostgreSQL'
-  category: database
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - postgresql
-  - webhook-receiver
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-hardening
-    component: webhook-receiver
-    version: '3.2'
-    level: hard
-  objectives:
-  - Harden a database server's configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.2).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 90
-  tags:
-  - database
-  - hardening
-  - hard
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: db-authz-postgres-report-exporter-3-3
-  name: 'Database Access Control Lab: template-injectable report exporter v3.3 — PostgreSQL'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - postgresql
-  - report-exporter
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: report-exporter
-    version: '3.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v3.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-mariadb-message-queue-4-2
-  name: 'Database Hardening Lab: exposed message queue v4.2 — MariaDB'
+- id: db-hardening-mariadb-message-queue-3-5
+  name: 'Database Hardening Lab: exposed message queue v3.5 — MariaDB'
   category: database
   difficulty: hard
   os_family: debian
@@ -2152,13 +1984,13 @@
     golden_image: debian-13-db
     role: db-hardening
     component: message-queue
-    version: '4.2'
+    version: '3.5'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v4.2).'
+  - 'Focus: identify and remediate the exposed message queue (v3.5).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -2174,16 +2006,16 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-mariadb-search-index-4-3
-  name: 'Database Access Control Lab: unauthenticated search index v4.3 — MariaDB'
+- id: db-authz-mariadb-search-index-3-6
+  name: 'Database Access Control Lab: unauthenticated search index v3.6 — MariaDB'
   category: database
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-db
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
   - mariadb-server
@@ -2194,20 +2026,20 @@
     golden_image: debian-13-db
     role: db-authz
     component: search-index
-    version: '4.3'
-    level: intermediate
+    version: '3.6'
+    level: hard
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v4.3).'
+  - 'Focus: identify and remediate the unauthenticated search index (v3.6).'
   prerequisites:
   - access-control-course
-  estimated_minutes: 60
+  estimated_minutes: 90
   tags:
   - database
   - authz
-  - intermediate
+  - hard
   - debian
   - search-index
   reset_supported: true
@@ -2216,8 +2048,8 @@
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-postgres-job-runner-4-2
-  name: 'Database Hardening Lab: injectable job runner v4.2 — PostgreSQL'
+- id: db-hardening-postgres-webhook-receiver-3-8
+  name: 'Database Hardening Lab: unvalidated webhook receiver v3.8 — PostgreSQL'
   category: database
   difficulty: hard
   os_family: debian
@@ -2229,20 +2061,20 @@
   network_mode: isolated
   packages:
   - postgresql
-  - job-runner
+  - webhook-receiver
   services:
   - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
-    component: job-runner
-    version: '4.2'
+    component: webhook-receiver
+    version: '3.8'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v4.2).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.8).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -2251,15 +2083,15 @@
   - hardening
   - hard
   - debian
-  - job-runner
+  - webhook-receiver
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-postgres-metrics-endpoint-4-3
-  name: 'Database Access Control Lab: leaky metrics endpoint v4.3 — PostgreSQL'
+- id: db-authz-postgres-report-exporter-3-0
+  name: 'Database Access Control Lab: template-injectable report exporter v3.0 — PostgreSQL'
   category: database
   difficulty: intermediate
   os_family: debian
@@ -2271,20 +2103,20 @@
   network_mode: isolated
   packages:
   - postgresql
-  - metrics-endpoint
+  - report-exporter
   services:
   - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-authz
-    component: metrics-endpoint
-    version: '4.3'
+    component: report-exporter
+    version: '3.0'
     level: intermediate
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v4.3).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v3.0).'
   prerequisites:
   - access-control-course
   estimated_minutes: 60
@@ -2293,15 +2125,15 @@
   - authz
   - intermediate
   - debian
-  - metrics-endpoint
+  - report-exporter
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-mariadb-backup-agent-4-2
-  name: 'Database Hardening Lab: over-privileged backup agent v4.2 — MariaDB'
+- id: db-hardening-mariadb-api-gateway-4-2
+  name: 'Database Hardening Lab: permissive API gateway v4.2 — MariaDB'
   category: database
   difficulty: hard
   os_family: debian
@@ -2313,93 +2145,9 @@
   network_mode: isolated
   packages:
   - mariadb-server
-  - backup-agent
-  services:
-  - mariadb
-  provisioning:
-    golden_image: debian-13-db
-    role: db-hardening
-    component: backup-agent
-    version: '4.2'
-    level: hard
-  objectives:
-  - Harden a database server's configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v4.2).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 90
-  tags:
-  - database
-  - hardening
-  - hard
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: db-authz-mariadb-reverse-proxy-4-3
-  name: 'Database Access Control Lab: misconfigured reverse proxy v4.3 — MariaDB'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - mariadb-server
-  - reverse-proxy
-  services:
-  - mariadb
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: reverse-proxy
-    version: '4.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-postgres-api-gateway-4-2
-  name: 'Database Hardening Lab: permissive API gateway v4.2 — PostgreSQL'
-  category: database
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - postgresql
   - api-gateway
   services:
-  - postgresql
+  - mariadb
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
@@ -2426,50 +2174,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-postgres-file-service-4-3
-  name: 'Database Access Control Lab: unsafe file service v4.3 — PostgreSQL'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - postgresql
-  - file-service
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: file-service
-    version: '4.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v4.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - file-service
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-mariadb-webhook-receiver-4-2
-  name: 'Database Hardening Lab: unvalidated webhook receiver v4.2 — MariaDB'
+- id: db-authz-mariadb-file-service-4-3
+  name: 'Database Access Control Lab: unsafe file service v4.3 — MariaDB'
   category: database
   difficulty: hard
   os_family: debian
@@ -2481,20 +2187,62 @@
   network_mode: isolated
   packages:
   - mariadb-server
-  - webhook-receiver
+  - file-service
   services:
   - mariadb
   provisioning:
     golden_image: debian-13-db
+    role: db-authz
+    component: file-service
+    version: '4.3'
+    level: hard
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v4.3).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 90
+  tags:
+  - database
+  - authz
+  - hard
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-postgres-backup-agent-4-5
+  name: 'Database Hardening Lab: over-privileged backup agent v4.5 — PostgreSQL'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - postgresql
+  - backup-agent
+  services:
+  - postgresql
+  provisioning:
+    golden_image: debian-13-db
     role: db-hardening
-    component: webhook-receiver
-    version: '4.2'
+    component: backup-agent
+    version: '4.5'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.2).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v4.5).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -2503,15 +2251,15 @@
   - hardening
   - hard
   - debian
-  - webhook-receiver
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-mariadb-report-exporter-4-3
-  name: 'Database Access Control Lab: template-injectable report exporter v4.3 — MariaDB'
+- id: db-authz-postgres-reverse-proxy-4-6
+  name: 'Database Access Control Lab: misconfigured reverse proxy v4.6 — PostgreSQL'
   category: database
   difficulty: intermediate
   os_family: debian
@@ -2522,21 +2270,21 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - mariadb-server
-  - report-exporter
+  - postgresql
+  - reverse-proxy
   services:
-  - mariadb
+  - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-authz
-    component: report-exporter
-    version: '4.3'
+    component: reverse-proxy
+    version: '4.6'
     level: intermediate
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v4.3).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.6).'
   prerequisites:
   - access-control-course
   estimated_minutes: 60
@@ -2545,7 +2293,91 @@
   - authz
   - intermediate
   - debian
-  - report-exporter
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-mariadb-job-runner-4-8
+  name: 'Database Hardening Lab: injectable job runner v4.8 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - job-runner
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-hardening
+    component: job-runner
+    version: '4.8'
+    level: hard
+  objectives:
+  - Harden a database server's configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v4.8).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 90
+  tags:
+  - database
+  - hardening
+  - hard
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: db-authz-mariadb-metrics-endpoint-4-0
+  name: 'Database Access Control Lab: leaky metrics endpoint v4.0 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - metrics-endpoint
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-authz
+    component: metrics-endpoint
+    version: '4.0'
+    level: hard
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.0).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 90
+  tags:
+  - database
+  - authz
+  - hard
+  - debian
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -2636,8 +2468,8 @@
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-mariadb-job-runner-4-2
-  name: 'Database Hardening Lab: injectable job runner v4.2 — MariaDB'
+- id: db-hardening-mariadb-webhook-receiver-4-5
+  name: 'Database Hardening Lab: unvalidated webhook receiver v4.5 — MariaDB'
   category: database
   difficulty: hard
   os_family: debian
@@ -2649,20 +2481,272 @@
   network_mode: isolated
   packages:
   - mariadb-server
-  - job-runner
+  - webhook-receiver
   services:
   - mariadb
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
-    component: job-runner
+    component: webhook-receiver
+    version: '4.5'
+    level: hard
+  objectives:
+  - Harden a database server's configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.5).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 90
+  tags:
+  - database
+  - hardening
+  - hard
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: db-authz-mariadb-report-exporter-4-6
+  name: 'Database Access Control Lab: template-injectable report exporter v4.6 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - report-exporter
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-authz
+    component: report-exporter
+    version: '4.6'
+    level: hard
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v4.6).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 90
+  tags:
+  - database
+  - authz
+  - hard
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-postgres-api-gateway-4-8
+  name: 'Database Hardening Lab: permissive API gateway v4.8 — PostgreSQL'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - postgresql
+  - api-gateway
+  services:
+  - postgresql
+  provisioning:
+    golden_image: debian-13-db
+    role: db-hardening
+    component: api-gateway
+    version: '4.8'
+    level: hard
+  objectives:
+  - Harden a database server's configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v4.8).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 90
+  tags:
+  - database
+  - hardening
+  - hard
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: db-authz-postgres-file-service-4-0
+  name: 'Database Access Control Lab: unsafe file service v4.0 — PostgreSQL'
+  category: database
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - postgresql
+  - file-service
+  services:
+  - postgresql
+  provisioning:
+    golden_image: debian-13-db
+    role: db-authz
+    component: file-service
+    version: '4.0'
+    level: intermediate
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v4.0).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 60
+  tags:
+  - database
+  - authz
+  - intermediate
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-mariadb-backup-agent-4-2
+  name: 'Database Hardening Lab: over-privileged backup agent v4.2 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - backup-agent
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-hardening
+    component: backup-agent
     version: '4.2'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v4.2).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v4.2).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 90
+  tags:
+  - database
+  - hardening
+  - hard
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: db-authz-mariadb-reverse-proxy-4-3
+  name: 'Database Access Control Lab: misconfigured reverse proxy v4.3 — MariaDB'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - mariadb-server
+  - reverse-proxy
+  services:
+  - mariadb
+  provisioning:
+    golden_image: debian-13-db
+    role: db-authz
+    component: reverse-proxy
+    version: '4.3'
+    level: hard
+  objectives:
+  - Review and fix database privilege grants.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.3).'
+  prerequisites:
+  - access-control-course
+  estimated_minutes: 90
+  tags:
+  - database
+  - authz
+  - hard
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - access-control-course
+- id: db-hardening-postgres-job-runner-5-5
+  name: 'Database Hardening Lab: injectable job runner v5.5 — PostgreSQL'
+  category: database
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-db
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - postgresql
+  - job-runner
+  services:
+  - postgresql
+  provisioning:
+    golden_image: debian-13-db
+    role: db-hardening
+    component: job-runner
+    version: '5.5'
+    level: hard
+  objectives:
+  - Harden a database server's configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v5.5).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -2678,8 +2762,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-mariadb-metrics-endpoint-4-3
-  name: 'Database Access Control Lab: leaky metrics endpoint v4.3 — MariaDB'
+- id: db-authz-postgres-metrics-endpoint-5-6
+  name: 'Database Access Control Lab: leaky metrics endpoint v5.6 — PostgreSQL'
   category: database
   difficulty: intermediate
   os_family: debian
@@ -2690,21 +2774,21 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - mariadb-server
+  - postgresql
   - metrics-endpoint
   services:
-  - mariadb
+  - postgresql
   provisioning:
     golden_image: debian-13-db
     role: db-authz
     component: metrics-endpoint
-    version: '4.3'
+    version: '5.6'
     level: intermediate
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v4.3).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v5.6).'
   prerequisites:
   - access-control-course
   estimated_minutes: 60
@@ -2720,92 +2804,8 @@
   lab_id: null
   course_ids:
   - access-control-course
-- id: db-hardening-postgres-backup-agent-5-2
-  name: 'Database Hardening Lab: over-privileged backup agent v5.2 — PostgreSQL'
-  category: database
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - postgresql
-  - backup-agent
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-hardening
-    component: backup-agent
-    version: '5.2'
-    level: hard
-  objectives:
-  - Harden a database server's configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v5.2).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 90
-  tags:
-  - database
-  - hardening
-  - hard
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: db-authz-postgres-reverse-proxy-5-3
-  name: 'Database Access Control Lab: misconfigured reverse proxy v5.3 — PostgreSQL'
-  category: database
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-db
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - postgresql
-  - reverse-proxy
-  services:
-  - postgresql
-  provisioning:
-    golden_image: debian-13-db
-    role: db-authz
-    component: reverse-proxy
-    version: '5.3'
-    level: intermediate
-  objectives:
-  - Review and fix database privilege grants.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v5.3).'
-  prerequisites:
-  - access-control-course
-  estimated_minutes: 60
-  tags:
-  - database
-  - authz
-  - intermediate
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - access-control-course
-- id: db-hardening-mariadb-api-gateway-5-2
-  name: 'Database Hardening Lab: permissive API gateway v5.2 — MariaDB'
+- id: db-hardening-mariadb-message-queue-5-8
+  name: 'Database Hardening Lab: exposed message queue v5.8 — MariaDB'
   category: database
   difficulty: hard
   os_family: debian
@@ -2817,20 +2817,20 @@
   network_mode: isolated
   packages:
   - mariadb-server
-  - api-gateway
+  - message-queue
   services:
   - mariadb
   provisioning:
     golden_image: debian-13-db
     role: db-hardening
-    component: api-gateway
-    version: '5.2'
+    component: message-queue
+    version: '5.8'
     level: hard
   objectives:
   - Harden a database server's configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v5.2).'
+  - 'Focus: identify and remediate the exposed message queue (v5.8).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 90
@@ -2839,49 +2839,49 @@
   - hardening
   - hard
   - debian
-  - api-gateway
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: db-authz-mariadb-file-service-5-3
-  name: 'Database Access Control Lab: unsafe file service v5.3 — MariaDB'
+- id: db-authz-mariadb-search-index-5-0
+  name: 'Database Access Control Lab: unauthenticated search index v5.0 — MariaDB'
   category: database
-  difficulty: intermediate
+  difficulty: hard
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-db
   vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  memory_mb: 3072
+  disk_gb: 16
   network_mode: isolated
   packages:
   - mariadb-server
-  - file-service
+  - search-index
   services:
   - mariadb
   provisioning:
     golden_image: debian-13-db
     role: db-authz
-    component: file-service
-    version: '5.3'
-    level: intermediate
+    component: search-index
+    version: '5.0'
+    level: hard
   objectives:
   - Review and fix database privilege grants.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v5.3).'
+  - 'Focus: identify and remediate the unauthenticated search index (v5.0).'
   prerequisites:
   - access-control-course
-  estimated_minutes: 60
+  estimated_minutes: 90
   tags:
   - database
   - authz
-  - intermediate
+  - hard
   - debian
-  - file-service
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true

@@ -1,0 +1,3836 @@
+- id: tool-range-ssh-linux-e
+  name: Tool Practice Range — Debian + OpenSSH (basic)
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-ssh-linux-i
+  name: Tool Practice Range — Debian + OpenSSH (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: intermediate
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - tools
+  - range
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-ssh-linux-h
+  name: Tool Practice Range — Debian + OpenSSH (complex)
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: hard
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 90
+  tags:
+  - tools
+  - range
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-smb-linux-e
+  name: Tool Practice Range — Debian + Samba (basic)
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - samba
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-smb-linux-i
+  name: Tool Practice Range — Debian + Samba (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - samba
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: intermediate
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - tools
+  - range
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-smb-linux-h
+  name: Tool Practice Range — Debian + Samba (complex)
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - samba
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: hard
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 90
+  tags:
+  - tools
+  - range
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-alpine-min-e
+  name: Tool Practice Range — Alpine minimal (basic)
+  category: tools
+  difficulty: easy
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: tool-range
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - alpine
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-alpine-min-i
+  name: Tool Practice Range — Alpine minimal (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: tool-range
+    level: intermediate
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - tools
+  - range
+  - intermediate
+  - alpine
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-alpine-min-h
+  name: Tool Practice Range — Alpine minimal (complex)
+  category: tools
+  difficulty: hard
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: tool-range
+    level: hard
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 90
+  tags:
+  - tools
+  - range
+  - hard
+  - alpine
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-ubuntu-srv-e
+  name: Tool Practice Range — Ubuntu Server (basic)
+  category: tools
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: tool-range
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - ubuntu
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-ubuntu-srv-i
+  name: Tool Practice Range — Ubuntu Server (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: tool-range
+    level: intermediate
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - tools
+  - range
+  - intermediate
+  - ubuntu
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-ubuntu-srv-h
+  name: Tool Practice Range — Ubuntu Server (complex)
+  category: tools
+  difficulty: hard
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: tool-range
+    level: hard
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 90
+  tags:
+  - tools
+  - range
+  - hard
+  - ubuntu
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-freebsd-srv-e
+  name: Tool Practice Range — FreeBSD Server (basic)
+  category: tools
+  difficulty: easy
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: tool-range
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - freebsd
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-freebsd-srv-i
+  name: Tool Practice Range — FreeBSD Server (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: tool-range
+    level: intermediate
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - tools
+  - range
+  - intermediate
+  - freebsd
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-freebsd-srv-h
+  name: Tool Practice Range — FreeBSD Server (complex)
+  category: tools
+  difficulty: hard
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: tool-range
+    level: hard
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 90
+  tags:
+  - tools
+  - range
+  - hard
+  - freebsd
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-nginx-php-e
+  name: Tool Practice Range — nginx + PHP-FPM (basic)
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-nginx-php-i
+  name: Tool Practice Range — nginx + PHP-FPM (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    level: intermediate
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - tools
+  - range
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-nginx-php-h
+  name: Tool Practice Range — nginx + PHP-FPM (complex)
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    level: hard
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 90
+  tags:
+  - tools
+  - range
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-apache-python-e
+  name: Tool Practice Range — Apache + Python/WSGI (basic)
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-apache-python-i
+  name: Tool Practice Range — Apache + Python/WSGI (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    level: intermediate
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - tools
+  - range
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-apache-python-h
+  name: Tool Practice Range — Apache + Python/WSGI (complex)
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    level: hard
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 90
+  tags:
+  - tools
+  - range
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-node-express-e
+  name: Tool Practice Range — Node.js + Express (basic)
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-node-express-i
+  name: Tool Practice Range — Node.js + Express (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: intermediate
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - tools
+  - range
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-node-express-h
+  name: Tool Practice Range — Node.js + Express (complex)
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: hard
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 90
+  tags:
+  - tools
+  - range
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-tomcat-java-e
+  name: Tool Practice Range — Tomcat + Java (basic)
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-tomcat-java-i
+  name: Tool Practice Range — Tomcat + Java (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: intermediate
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - tools
+  - range
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-range-tomcat-java-h
+  name: Tool Practice Range — Tomcat + Java (complex)
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    level: hard
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 90
+  tags:
+  - tools
+  - range
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-nginx-php-i
+  name: Web Tool Range — nginx + PHP-FPM (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-web-range-nginx-php-h
+  name: Web Tool Range — nginx + PHP-FPM (complex)
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-web-range-apache-python-i
+  name: Web Tool Range — Apache + Python/WSGI (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-web-range-apache-python-h
+  name: Web Tool Range — Apache + Python/WSGI (complex)
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-web-range-node-express-i
+  name: Web Tool Range — Node.js + Express (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-web-range-node-express-h
+  name: Web Tool Range — Node.js + Express (complex)
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-web-range-tomcat-java-i
+  name: Web Tool Range — Tomcat + Java (standard)
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-web-range-tomcat-java-h
+  name: Web Tool Range — Tomcat + Java (complex)
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-ssh-linux-file-service-1-0
+  name: 'Tool Practice Range: unsafe file service v1.0 — Debian + OpenSSH'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - file-service
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: file-service
+    version: '1.0'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v1.0).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-nginx-php-auth-proxy-1-1
+  name: 'Web Tool Range: flawed auth proxy v1.1 — nginx + PHP-FPM'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - auth-proxy
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: auth-proxy
+    version: '1.1'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v1.1).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-smb-linux-reverse-proxy-1-3
+  name: 'Tool Practice Range: misconfigured reverse proxy v1.3 — Debian + Samba'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - samba
+  - reverse-proxy
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: reverse-proxy
+    version: '1.3'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.3).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-apache-python-cache-layer-1-4
+  name: 'Web Tool Range: insecure cache layer v1.4 — Apache + Python/WSGI'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - cache-layer
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: cache-layer
+    version: '1.4'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v1.4).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-alpine-min-metrics-endpoint-1-6
+  name: 'Tool Practice Range: leaky metrics endpoint v1.6 — Alpine minimal'
+  category: tools
+  difficulty: easy
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - metrics-endpoint
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: tool-range
+    component: metrics-endpoint
+    version: '1.6'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v1.6).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - alpine
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-node-express-legacy-cgi-1-7
+  name: 'Web Tool Range: legacy CGI handler v1.7 — Node.js + Express'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - legacy-cgi
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: legacy-cgi
+    version: '1.7'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v1.7).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-ubuntu-srv-search-index-1-0
+  name: 'Tool Practice Range: unauthenticated search index v1.0 — Ubuntu Server'
+  category: tools
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - search-index
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: tool-range
+    component: search-index
+    version: '1.0'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v1.0).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - ubuntu
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-tomcat-java-admin-panel-1-1
+  name: 'Web Tool Range: weak admin panel v1.1 — Tomcat + Java'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - admin-panel
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: admin-panel
+    version: '1.1'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v1.1).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-freebsd-srv-report-exporter-1-3
+  name: 'Tool Practice Range: template-injectable report exporter v1.3 — FreeBSD Server'
+  category: tools
+  difficulty: easy
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - report-exporter
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: tool-range
+    component: report-exporter
+    version: '1.3'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v1.3).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - freebsd
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-nginx-php-import-tool-1-4
+  name: 'Web Tool Range: unsafe import tool v1.4 — nginx + PHP-FPM'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - import-tool
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: import-tool
+    version: '1.4'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v1.4).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-nginx-php-file-service-1-6
+  name: 'Tool Practice Range: unsafe file service v1.6 — nginx + PHP-FPM'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - file-service
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    component: file-service
+    version: '1.6'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v1.6).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-apache-python-auth-proxy-1-7
+  name: 'Web Tool Range: flawed auth proxy v1.7 — Apache + Python/WSGI'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - auth-proxy
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: auth-proxy
+    version: '1.7'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v1.7).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-apache-python-reverse-proxy-1-0
+  name: 'Tool Practice Range: misconfigured reverse proxy v1.0 — Apache + Python/WSGI'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - reverse-proxy
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    component: reverse-proxy
+    version: '1.0'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.0).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-node-express-cache-layer-1-1
+  name: 'Web Tool Range: insecure cache layer v1.1 — Node.js + Express'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - cache-layer
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: cache-layer
+    version: '1.1'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v1.1).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-node-express-metrics-endpoint-2-3
+  name: 'Tool Practice Range: leaky metrics endpoint v2.3 — Node.js + Express'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - metrics-endpoint
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: metrics-endpoint
+    version: '2.3'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.3).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-tomcat-java-legacy-cgi-2-4
+  name: 'Web Tool Range: legacy CGI handler v2.4 — Tomcat + Java'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - legacy-cgi
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: legacy-cgi
+    version: '2.4'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v2.4).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-tomcat-java-search-index-2-6
+  name: 'Tool Practice Range: unauthenticated search index v2.6 — Tomcat + Java'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - search-index
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: search-index
+    version: '2.6'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v2.6).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-nginx-php-admin-panel-2-7
+  name: 'Web Tool Range: weak admin panel v2.7 — nginx + PHP-FPM'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - admin-panel
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: admin-panel
+    version: '2.7'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v2.7).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-ssh-linux-report-exporter-2-0
+  name: 'Tool Practice Range: template-injectable report exporter v2.0 — Debian + OpenSSH'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - report-exporter
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: report-exporter
+    version: '2.0'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v2.0).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-apache-python-import-tool-2-1
+  name: 'Web Tool Range: unsafe import tool v2.1 — Apache + Python/WSGI'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - import-tool
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: import-tool
+    version: '2.1'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v2.1).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-smb-linux-file-service-2-3
+  name: 'Tool Practice Range: unsafe file service v2.3 — Debian + Samba'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - samba
+  - file-service
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: file-service
+    version: '2.3'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v2.3).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-node-express-auth-proxy-2-4
+  name: 'Web Tool Range: flawed auth proxy v2.4 — Node.js + Express'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - auth-proxy
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: auth-proxy
+    version: '2.4'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v2.4).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-alpine-min-reverse-proxy-2-6
+  name: 'Tool Practice Range: misconfigured reverse proxy v2.6 — Alpine minimal'
+  category: tools
+  difficulty: easy
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - reverse-proxy
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: tool-range
+    component: reverse-proxy
+    version: '2.6'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.6).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - alpine
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-tomcat-java-cache-layer-2-7
+  name: 'Web Tool Range: insecure cache layer v2.7 — Tomcat + Java'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - cache-layer
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: cache-layer
+    version: '2.7'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v2.7).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-ubuntu-srv-metrics-endpoint-2-0
+  name: 'Tool Practice Range: leaky metrics endpoint v2.0 — Ubuntu Server'
+  category: tools
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - metrics-endpoint
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: tool-range
+    component: metrics-endpoint
+    version: '2.0'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.0).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - ubuntu
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-nginx-php-legacy-cgi-2-1
+  name: 'Web Tool Range: legacy CGI handler v2.1 — nginx + PHP-FPM'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - legacy-cgi
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: legacy-cgi
+    version: '2.1'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v2.1).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-freebsd-srv-search-index-2-3
+  name: 'Tool Practice Range: unauthenticated search index v2.3 — FreeBSD Server'
+  category: tools
+  difficulty: easy
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - search-index
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: tool-range
+    component: search-index
+    version: '2.3'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v2.3).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - freebsd
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-apache-python-admin-panel-2-4
+  name: 'Web Tool Range: weak admin panel v2.4 — Apache + Python/WSGI'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - admin-panel
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: admin-panel
+    version: '2.4'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v2.4).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-nginx-php-report-exporter-3-6
+  name: 'Tool Practice Range: template-injectable report exporter v3.6 — nginx + PHP-FPM'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - report-exporter
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    component: report-exporter
+    version: '3.6'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v3.6).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-node-express-import-tool-3-7
+  name: 'Web Tool Range: unsafe import tool v3.7 — Node.js + Express'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - import-tool
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: import-tool
+    version: '3.7'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v3.7).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-apache-python-file-service-3-0
+  name: 'Tool Practice Range: unsafe file service v3.0 — Apache + Python/WSGI'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - file-service
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    component: file-service
+    version: '3.0'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v3.0).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-tomcat-java-auth-proxy-3-1
+  name: 'Web Tool Range: flawed auth proxy v3.1 — Tomcat + Java'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - auth-proxy
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: auth-proxy
+    version: '3.1'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v3.1).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-node-express-reverse-proxy-3-3
+  name: 'Tool Practice Range: misconfigured reverse proxy v3.3 — Node.js + Express'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - reverse-proxy
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: reverse-proxy
+    version: '3.3'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.3).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-nginx-php-cache-layer-3-4
+  name: 'Web Tool Range: insecure cache layer v3.4 — nginx + PHP-FPM'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - cache-layer
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: cache-layer
+    version: '3.4'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v3.4).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-tomcat-java-metrics-endpoint-3-6
+  name: 'Tool Practice Range: leaky metrics endpoint v3.6 — Tomcat + Java'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - metrics-endpoint
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: metrics-endpoint
+    version: '3.6'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v3.6).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-apache-python-legacy-cgi-3-7
+  name: 'Web Tool Range: legacy CGI handler v3.7 — Apache + Python/WSGI'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - legacy-cgi
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: legacy-cgi
+    version: '3.7'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v3.7).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-ssh-linux-search-index-3-0
+  name: 'Tool Practice Range: unauthenticated search index v3.0 — Debian + OpenSSH'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - search-index
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: search-index
+    version: '3.0'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v3.0).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-node-express-admin-panel-3-1
+  name: 'Web Tool Range: weak admin panel v3.1 — Node.js + Express'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - admin-panel
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: admin-panel
+    version: '3.1'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v3.1).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-smb-linux-report-exporter-3-3
+  name: 'Tool Practice Range: template-injectable report exporter v3.3 — Debian + Samba'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - samba
+  - report-exporter
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: report-exporter
+    version: '3.3'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v3.3).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-tomcat-java-import-tool-3-4
+  name: 'Web Tool Range: unsafe import tool v3.4 — Tomcat + Java'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - import-tool
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: import-tool
+    version: '3.4'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v3.4).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-alpine-min-file-service-3-6
+  name: 'Tool Practice Range: unsafe file service v3.6 — Alpine minimal'
+  category: tools
+  difficulty: easy
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - file-service
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: tool-range
+    component: file-service
+    version: '3.6'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v3.6).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - alpine
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-nginx-php-auth-proxy-3-7
+  name: 'Web Tool Range: flawed auth proxy v3.7 — nginx + PHP-FPM'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - auth-proxy
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: auth-proxy
+    version: '3.7'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v3.7).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-ubuntu-srv-reverse-proxy-4-0
+  name: 'Tool Practice Range: misconfigured reverse proxy v4.0 — Ubuntu Server'
+  category: tools
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - reverse-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: tool-range
+    component: reverse-proxy
+    version: '4.0'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.0).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - ubuntu
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-apache-python-cache-layer-4-1
+  name: 'Web Tool Range: insecure cache layer v4.1 — Apache + Python/WSGI'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - cache-layer
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: cache-layer
+    version: '4.1'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v4.1).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-freebsd-srv-metrics-endpoint-4-3
+  name: 'Tool Practice Range: leaky metrics endpoint v4.3 — FreeBSD Server'
+  category: tools
+  difficulty: easy
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - metrics-endpoint
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: tool-range
+    component: metrics-endpoint
+    version: '4.3'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.3).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - freebsd
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-node-express-legacy-cgi-4-4
+  name: 'Web Tool Range: legacy CGI handler v4.4 — Node.js + Express'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - legacy-cgi
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: legacy-cgi
+    version: '4.4'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v4.4).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-nginx-php-search-index-4-6
+  name: 'Tool Practice Range: unauthenticated search index v4.6 — nginx + PHP-FPM'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - search-index
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    component: search-index
+    version: '4.6'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v4.6).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-tomcat-java-admin-panel-4-7
+  name: 'Web Tool Range: weak admin panel v4.7 — Tomcat + Java'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - admin-panel
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: admin-panel
+    version: '4.7'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v4.7).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-apache-python-report-exporter-4-0
+  name: 'Tool Practice Range: template-injectable report exporter v4.0 — Apache + Python/WSGI'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - report-exporter
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-range
+    component: report-exporter
+    version: '4.0'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v4.0).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-nginx-php-import-tool-4-1
+  name: 'Web Tool Range: unsafe import tool v4.1 — nginx + PHP-FPM'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - import-tool
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: import-tool
+    version: '4.1'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v4.1).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-node-express-file-service-4-3
+  name: 'Tool Practice Range: unsafe file service v4.3 — Node.js + Express'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - file-service
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: file-service
+    version: '4.3'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v4.3).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-apache-python-auth-proxy-4-4
+  name: 'Web Tool Range: flawed auth proxy v4.4 — Apache + Python/WSGI'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - auth-proxy
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: auth-proxy
+    version: '4.4'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v4.4).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-tomcat-java-reverse-proxy-4-6
+  name: 'Tool Practice Range: misconfigured reverse proxy v4.6 — Tomcat + Java'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - reverse-proxy
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: reverse-proxy
+    version: '4.6'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.6).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-node-express-cache-layer-4-7
+  name: 'Web Tool Range: insecure cache layer v4.7 — Node.js + Express'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - cache-layer
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: cache-layer
+    version: '4.7'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v4.7).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-ssh-linux-metrics-endpoint-4-0
+  name: 'Tool Practice Range: leaky metrics endpoint v4.0 — Debian + OpenSSH'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - metrics-endpoint
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: metrics-endpoint
+    version: '4.0'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.0).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-tomcat-java-legacy-cgi-4-1
+  name: 'Web Tool Range: legacy CGI handler v4.1 — Tomcat + Java'
+  category: tools
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - legacy-cgi
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-web-range
+    component: legacy-cgi
+    version: '4.1'
+    level: intermediate
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v4.1).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 60
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security
+- id: tool-range-smb-linux-search-index-5-3
+  name: 'Tool Practice Range: unauthenticated search index v5.3 — Debian + Samba'
+  category: tools
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - samba
+  - search-index
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: tool-range
+    component: search-index
+    version: '5.3'
+    level: easy
+  objectives:
+  - A diverse, owned target for practising scanning and enumeration tools.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v5.3).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: tool-web-range-nginx-php-admin-panel-5-4
+  name: 'Web Tool Range: weak admin panel v5.4 — nginx + PHP-FPM'
+  category: tools
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - admin-panel
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: tool-web-range
+    component: admin-panel
+    version: '5.4'
+    level: hard
+  objectives:
+  - An intentionally-flawed web app to practise proxy and discovery tools.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v5.4).'
+  prerequisites:
+  - web-application-security
+  estimated_minutes: 90
+  tags:
+  - tools
+  - web
+  - hard
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - web-application-security

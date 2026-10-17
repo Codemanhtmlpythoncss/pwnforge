@@ -1,0 +1,105 @@
+id: tool-sqlmap
+title: 'sqlmap: Testing & Fixing SQL Injection'
+description: Confirm, understand and remediate SQLi on your own vulnerable lab apps.
+difficulty: hard
+category: tools
+specialization: web
+estimated_minutes: 60
+objectives:
+- Understand running sqlmap safely in a lab
+- Understand from finding to fix
+prerequisites:
+- sql-injection-labs
+- tool-burp
+competency_prereqs:
+- sql-injection
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: web-security-lab
+version: 1.0.0
+lessons:
+- title: Running sqlmap safely in a lab
+  difficulty: hard
+  minutes: 20
+  competency: sql-injection
+  body: 'sqlmap automates detecting and exploiting SQL injection — run it only against the intentionally-vulnerable
+    Pwnforge web lab you own.
+
+
+    ```
+
+    sqlmap -u ''http://10.200.0.10/item?id=1'' --batch
+
+    sqlmap -r request.txt --batch            # from a saved Burp request
+
+    sqlmap -u ''...'' --dbs                     # enumerate databases
+
+    ```
+
+    Save a request from Burp and feed it with `-r` so auth/headers are preserved. The goal here is to
+    *prove* the bug and then fix it.
+
+
+    > Only run these tools against systems you own or are explicitly authorised to test — the Pwnforge
+    labs are built for exactly this. Unauthorised scanning or access is unethical and usually unlawful.'
+  exercises:
+  - kind: command
+    prompt: Feed sqlmap a saved request file (flag)?
+    answer: -r
+    competency: sql-injection
+    explanation: '`-r request.txt`.'
+    points: 10
+    hints: []
+  hints:
+  - text: '`-r` reuses a Burp-saved request (cookies, headers, method).'
+  walkthrough: []
+- title: From finding to fix
+  difficulty: hard
+  minutes: 20
+  competency: vuln-remediation
+  body: 'Once confirmed, the professional step is remediation: convert the offending query to a **parameterised
+    statement**, re-test the same input, and confirm sqlmap can no longer inject. Record before/after
+    evidence. Finding the bug is half the job; proving the fix is the other half.'
+  exercises:
+  - kind: mcq
+    prompt: 'The definitive SQLi fix:'
+    choices:
+    - Blocklist quotes
+    - Parameterised queries
+    - Hide errors
+    - Rate limit
+    answer: Parameterised queries
+    competency: sql-injection
+    explanation: Parameterisation.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: 'sqlmap: Testing & Fixing SQL Injection Assessment'
+  questions:
+  - kind: command
+    prompt: sqlmap flag to load a saved request?
+    answer: -r
+    competency: sql-injection
+    explanation: '`-r`.'
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'After confirming SQLi you should:'
+    choices:
+    - Move on
+    - Parameterise and re-test
+    - Delete logs
+    - Ignore
+    answer: Parameterise and re-test
+    competency: vuln-remediation
+    explanation: Fix then verify.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

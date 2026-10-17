@@ -1,0 +1,76 @@
+id: tool-radare2
+title: 'radare2 / rizin: CLI Reverse Engineering'
+description: Fast, scriptable command-line binary analysis.
+difficulty: advanced
+category: tools
+specialization: reverse
+estimated_minutes: 40
+objectives:
+- Understand opening and navigating
+prerequisites:
+- tool-ghidra
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: reverse-engineering-lab
+version: 1.0.0
+lessons:
+- title: Opening and navigating
+  difficulty: advanced
+  minutes: 20
+  competency: tool-re-tooling
+  body: 'radare2 is terminal-driven.
+
+
+    ```
+
+    r2 ./binary
+
+    aaa        # analyse all
+
+    afl        # list functions
+
+    s main      # seek to main
+
+    pdf        # print disassembly of current function
+
+    VV         # visual graph
+
+    ```
+
+    Commands compose: a letter per concept (`a` analyse, `p` print, `s` seek). It''s steep but fast once
+    learned, and fully scriptable.'
+  exercises:
+  - kind: command
+    prompt: radare2 command to analyse everything?
+    answer: aaa
+    competency: tool-re-tooling
+    explanation: '`aaa` runs full analysis.'
+    points: 10
+    hints: []
+  hints:
+  - text: '`afl` lists functions; `pdf` disassembles the current one.'
+  walkthrough: []
+assessment:
+  title: 'radare2 / rizin: CLI Reverse Engineering Assessment'
+  questions:
+  - kind: command
+    prompt: Analyse-all command in r2?
+    answer: aaa
+    competency: tool-re-tooling
+    explanation: '`aaa`.'
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: r2 command to list functions (af_)?
+    answer: afl
+    competency: tool-re-tooling
+    explanation: afl.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

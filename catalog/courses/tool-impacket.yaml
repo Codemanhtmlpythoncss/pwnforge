@@ -1,0 +1,84 @@
+id: tool-impacket
+title: 'Impacket: Windows Protocol Tooling (Lab)'
+description: Python tools that speak SMB/MSRPC/Kerberos for authorised AD work.
+difficulty: advanced
+category: tools
+specialization: active-directory
+estimated_minutes: 40
+objectives:
+- Understand the impacket example scripts
+prerequisites:
+- tool-smb-enum
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: enterprise-identity-lab
+version: 1.0.0
+lessons:
+- title: The Impacket example scripts
+  difficulty: advanced
+  minutes: 20
+  competency: tool-ad-tooling
+  body: 'Impacket ships example scripts that implement Windows protocols.
+
+
+    ```
+
+    impacket-smbclient lab/user:pass@10.200.0.10
+
+    impacket-GetUserSPNs lab/user:pass -dc-ip 10.200.0.10
+
+    impacket-secretsdump lab/user:pass@10.200.0.10
+
+    ```
+
+    They''re the backbone of AD testing (and of understanding attacks so you can detect them). Use only
+    against your owned lab domain.
+
+
+    > Only run these tools against systems you own or are explicitly authorised to test — the Pwnforge
+    labs are built for exactly this. Unauthorised scanning or access is unethical and usually unlawful.'
+  exercises:
+  - kind: mcq
+    prompt: 'Impacket scripts primarily implement:'
+    choices:
+    - Web scanning
+    - Windows protocols (SMB/RPC/Kerberos)
+    - Password cracking
+    - Packet capture
+    answer: Windows protocols (SMB/RPC/Kerberos)
+    competency: tool-ad-tooling
+    explanation: They speak Windows protocols.
+    points: 10
+    hints: []
+  hints:
+  - text: GetUserSPNs relates to Kerberoasting; secretsdump to credential material.
+  walkthrough: []
+assessment:
+  title: 'Impacket: Windows Protocol Tooling (Lab) Assessment'
+  questions:
+  - kind: mcq
+    prompt: 'Impacket is a toolkit for:'
+    choices:
+    - GPU cracking
+    - Windows protocols
+    - Fuzzing
+    - Forensics
+    answer: Windows protocols
+    competency: tool-ad-tooling
+    explanation: SMB/RPC/Kerberos etc.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Impacket script to request service tickets (GetUser___)?
+    answer: SPNs
+    competency: tool-ad-tooling
+    explanation: GetUserSPNs.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

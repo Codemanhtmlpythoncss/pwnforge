@@ -1,0 +1,77 @@
+id: tool-volatility
+title: 'Volatility: Memory Forensics'
+description: Extract processes, connections and artefacts from memory images.
+difficulty: advanced
+category: tools
+specialization: forensics
+estimated_minutes: 40
+objectives:
+- Understand profiles/symbols & core plugins
+prerequisites:
+- digital-forensics
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: forensics-workstation-lab
+version: 1.0.0
+lessons:
+- title: Profiles/symbols & core plugins
+  difficulty: advanced
+  minutes: 20
+  competency: tool-forensics-tooling
+  body: 'Volatility analyses RAM captures.
+
+
+    ```
+
+    vol -f mem.raw windows.pslist          # processes
+
+    vol -f mem.raw windows.netscan         # network connections
+
+    vol -f mem.raw windows.pstree          # process tree
+
+    vol -f mem.raw windows.cmdline         # command lines
+
+    ```
+
+    (Volatility 3 auto-detects symbols.) Memory reveals what disk can''t — running processes, injected
+    code, and network state at capture time.'
+  exercises:
+  - kind: short_answer
+    prompt: Volatility plugin to list processes (windows.ps___)?
+    answer: pslist
+    competency: tool-forensics-tooling
+    explanation: windows.pslist.
+    points: 10
+    hints: []
+  hints:
+  - text: Compare pslist vs pstree to spot odd parent/child relationships.
+  walkthrough: []
+assessment:
+  title: 'Volatility: Memory Forensics Assessment'
+  questions:
+  - kind: short_answer
+    prompt: Volatility plugin for network connections (windows.net___)?
+    answer: scan
+    competency: tool-forensics-tooling
+    explanation: windows.netscan.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Memory forensics reveals what disk often can''t:'
+    choices:
+    - Nothing
+    - Running processes & volatile state
+    - File names only
+    - Partitions
+    answer: Running processes & volatile state
+    competency: tool-forensics-tooling
+    explanation: Volatile runtime state.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

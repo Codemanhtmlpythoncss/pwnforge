@@ -7,7 +7,7 @@ first-class topics. Exercises use safe, sandboxed scenarios.
 from __future__ import annotations
 
 from backend.app.catalog.content._authoring import (
-    assessment, course, lesson, mcq, short, wstep,
+    assessment, cmd, course, lesson, mcq, short, wstep,
 )
 
 
@@ -151,4 +151,51 @@ COURSES = [
         short("Reports state an explicit ___ level.", "confidence", "security-reporting",
               "State confidence explicitly.")],
        cprereqs=["osint-techniques"]),
+
+    _c("osint-tools", "OSINT Tooling",
+       "The practical toolkit for authorised, public-source collection: "
+       "search operators, theHarvester, Amass, recon-ng, Shodan, dnsrecon and "
+       "username/metadata tools.",
+       "intermediate", ["osint-techniques"],
+       [
+           L("Search operators & dorking", "intermediate", 15, "osint-tooling",
+             "Advanced search operators are the most powerful OSINT 'tool' of all: "
+             "`site:`, `filetype:`, `intitle:`, exact phrases and date ranges turn "
+             "a search engine into a precise collector of **public** information. "
+             "Used ethically, 'dorking' finds inadvertently-public documents an "
+             "organisation should lock down — a defensive win as much as a "
+             "collection technique.",
+             exercises=[short("Operator restricting results to one domain?", "site:",
+                              "osint-tooling", "site: filters by domain.")],
+             hints=["Combine operators: site:example.com filetype:pdf"]),
+           L("Domain & infrastructure recon", "intermediate", 20, "osint-tooling",
+             "Public technical sources map an org's footprint.\n\n```\n"
+             "whois example.com\ndnsrecon -d example.com\n"
+             "theHarvester -d example.com -b bing      # public emails/subdomains\n"
+             "amass enum -passive -d example.com        # passive subdomain enum\n```\n"
+             "Prefer **passive** modes (public data only). Certificate-transparency "
+             "logs (crt.sh) and public DNS reveal subdomains without touching the "
+             "target. This is the recon a defender runs on themselves to find "
+             "exposure.",
+             exercises=[cmd("Passive subdomain enumeration (amass enum -___ -d ...)?",
+                            "-passive", "osint-tooling", "`-passive` uses public sources only.")],
+             walkthrough=[wstep("whois", "Start with `whois` for registration data."),
+                          wstep("DNS", "Run `dnsrecon`/dig for records."),
+                          wstep("Passive subdomains", "Use amass -passive and crt.sh."),
+                          wstep("Corroborate", "Cross-check findings before reporting.")]),
+           L("People, usernames & metadata", "intermediate", 15, "osint-tooling",
+             "recon-ng is a modular framework that organises public lookups into a "
+             "workspace with a database. Username tools (e.g. Sherlock) check where "
+             "a handle appears across public sites; `exiftool` reads public file "
+             "metadata. Apply the same ethics: minimise collection, respect "
+             "privacy, and record provenance for every finding.",
+             exercises=[short("Modular OSINT framework with a workspace/db?", "recon-ng",
+                              "osint-tooling", "recon-ng.")]),
+       ],
+       [short("Operator to limit results to a domain?", "site:", "osint-tooling", "site:."),
+        cmd("Flag for passive amass enumeration?", "-passive", "osint-tooling", "`-passive`."),
+        mcq("Preferred collection mode to avoid touching the target:",
+            ["Active", "Passive (public sources)", "Intrusive", "Credentialed"],
+            "Passive (public sources)", "osint-tooling", "Passive, public-source only.")],
+       cprereqs=["osint-techniques"], lab="osint-investigation-lab"),
 ]

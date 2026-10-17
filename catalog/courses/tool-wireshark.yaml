@@ -1,0 +1,96 @@
+id: tool-wireshark
+title: 'Wireshark & tcpdump: Packet Analysis'
+description: Capture and dissect traffic to understand exactly what's on the wire.
+difficulty: intermediate
+category: tools
+specialization: defensive
+estimated_minutes: 55
+objectives:
+- Understand capturing with tcpdump
+- Understand wireshark display filters & streams
+prerequisites:
+- tcpip-packet-analysis
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: defensive-monitoring-lab
+version: 1.0.0
+lessons:
+- title: Capturing with tcpdump
+  difficulty: intermediate
+  minutes: 15
+  competency: tool-packet-analysis
+  body: '`tcpdump` captures from the CLI; save to a pcap for later analysis.
+
+
+    ```
+
+    tcpdump -i eth0 -w capture.pcap
+
+    tcpdump -i eth0 ''tcp port 80''
+
+    tcpdump -r capture.pcap -n host 10.200.0.10
+
+    ```
+
+    BPF filters (`host`, `port`, `net`, `tcp`/`udp`) limit the capture to what matters. Capturing needs
+    privilege and a NIC you own.'
+  exercises:
+  - kind: command
+    prompt: Write a capture to capture.pcap on eth0
+    answer: tcpdump -i eth0 -w capture.pcap
+    competency: tool-packet-analysis
+    explanation: '`-w` writes a pcap.'
+    points: 10
+    hints: []
+  hints:
+  - text: Capture filters (BPF) differ from Wireshark display filters.
+  walkthrough: []
+- title: Wireshark display filters & streams
+  difficulty: intermediate
+  minutes: 20
+  competency: tool-packet-analysis
+  body: 'Open the pcap in Wireshark and filter with the display language: `http`, `tcp.port == 80`, `ip.addr
+    == 10.200.0.10`, `tcp.flags.syn == 1`. *Follow TCP Stream* reconstructs an exchange so you can read
+    an application conversation end-to-end. Use Statistics → Conversations to see who talks to whom.'
+  exercises:
+  - kind: short_answer
+    prompt: Wireshark display filter for HTTP only?
+    answer: http
+    competency: tool-packet-analysis
+    explanation: '`http` filters HTTP.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough:
+  - title: Capture
+    detail: '`tcpdump -w lab.pcap` while using the lab.'
+  - title: Open in Wireshark
+    detail: Load lab.pcap.
+  - title: Filter
+    detail: Apply `http` or `tcp.port==80`.
+  - title: Follow stream
+    detail: Right-click → Follow → TCP Stream.
+assessment:
+  title: 'Wireshark & tcpdump: Packet Analysis Assessment'
+  questions:
+  - kind: command
+    prompt: tcpdump flag to write a pcap?
+    answer: -w
+    competency: tool-packet-analysis
+    explanation: '`-w file`.'
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: 'Reconstruct a full exchange in Wireshark: Follow TCP ___.'
+    answer: stream
+    competency: tool-packet-analysis
+    explanation: Follow TCP Stream.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

@@ -1,0 +1,79 @@
+id: tool-crackmapexec
+title: 'NetExec / CrackMapExec: AD Assessment (Lab)'
+description: Sweep and assess Windows/AD estates at scale in your lab.
+difficulty: advanced
+category: tools
+specialization: active-directory
+estimated_minutes: 40
+objectives:
+- Understand sweeping with nxc/cme
+prerequisites:
+- tool-impacket
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: enterprise-identity-lab
+version: 1.0.0
+lessons:
+- title: Sweeping with nxc/cme
+  difficulty: advanced
+  minutes: 20
+  competency: tool-ad-tooling
+  body: 'NetExec (the maintained successor to CrackMapExec) checks many hosts for access, shares and config.
+
+
+    ```
+
+    nxc smb 10.200.0.0/24
+
+    nxc smb 10.200.0.10 -u user -p pass --shares
+
+    nxc smb 10.200.0.10 -u user -p pass --users
+
+    ```
+
+    It quickly shows where a credential works — invaluable both for assessment and for spotting over-broad
+    access to remediate.
+
+
+    > Only run these tools against systems you own or are explicitly authorised to test — the Pwnforge
+    labs are built for exactly this. Unauthorised scanning or access is unethical and usually unlawful.'
+  exercises:
+  - kind: short_answer
+    prompt: Maintained successor to CrackMapExec (command)?
+    answer: nxc
+    competency: tool-ad-tooling
+    explanation: NetExec (`nxc`).
+    points: 10
+    hints: []
+  hints:
+  - text: '`--shares` and `--users` are common enumeration flags.'
+  walkthrough: []
+assessment:
+  title: 'NetExec / CrackMapExec: AD Assessment (Lab) Assessment'
+  questions:
+  - kind: short_answer
+    prompt: NetExec command name?
+    answer: nxc
+    competency: tool-ad-tooling
+    explanation: nxc.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'A credential working on many hosts indicates:'
+    choices:
+    - Good hygiene
+    - Over-broad access to fix
+    - A patch
+    - Nothing
+    answer: Over-broad access to fix
+    competency: tool-ad-tooling
+    explanation: Reuse/over-privilege to remediate.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

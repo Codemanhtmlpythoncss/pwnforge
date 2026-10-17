@@ -1,0 +1,133 @@
+id: osint-tools
+title: OSINT Tooling
+description: 'The practical toolkit for authorised, public-source collection: search operators, theHarvester,
+  Amass, recon-ng, Shodan, dnsrecon and username/metadata tools.'
+difficulty: intermediate
+category: osint
+specialization: osint
+estimated_minutes: 70
+objectives:
+- Understand search operators & dorking
+- Understand domain & infrastructure recon
+- Understand people, usernames & metadata
+prerequisites:
+- osint-techniques
+competency_prereqs:
+- osint-techniques
+tags:
+- osint
+- recon
+references: []
+os_requirements: []
+lab_id: osint-investigation-lab
+version: 1.0.0
+lessons:
+- title: Search operators & dorking
+  difficulty: intermediate
+  minutes: 15
+  competency: osint-tooling
+  body: 'Advanced search operators are the most powerful OSINT ''tool'' of all: `site:`, `filetype:`,
+    `intitle:`, exact phrases and date ranges turn a search engine into a precise collector of **public**
+    information. Used ethically, ''dorking'' finds inadvertently-public documents an organisation should
+    lock down — a defensive win as much as a collection technique.'
+  exercises:
+  - kind: short_answer
+    prompt: Operator restricting results to one domain?
+    answer: 'site:'
+    competency: osint-tooling
+    explanation: 'site: filters by domain.'
+    points: 10
+    hints: []
+  hints:
+  - text: 'Combine operators: site:example.com filetype:pdf'
+  walkthrough: []
+- title: Domain & infrastructure recon
+  difficulty: intermediate
+  minutes: 20
+  competency: osint-tooling
+  body: 'Public technical sources map an org''s footprint.
+
+
+    ```
+
+    whois example.com
+
+    dnsrecon -d example.com
+
+    theHarvester -d example.com -b bing      # public emails/subdomains
+
+    amass enum -passive -d example.com        # passive subdomain enum
+
+    ```
+
+    Prefer **passive** modes (public data only). Certificate-transparency logs (crt.sh) and public DNS
+    reveal subdomains without touching the target. This is the recon a defender runs on themselves to
+    find exposure.'
+  exercises:
+  - kind: command
+    prompt: Passive subdomain enumeration (amass enum -___ -d ...)?
+    answer: -passive
+    competency: osint-tooling
+    explanation: '`-passive` uses public sources only.'
+    points: 10
+    hints: []
+  hints: []
+  walkthrough:
+  - title: whois
+    detail: Start with `whois` for registration data.
+  - title: DNS
+    detail: Run `dnsrecon`/dig for records.
+  - title: Passive subdomains
+    detail: Use amass -passive and crt.sh.
+  - title: Corroborate
+    detail: Cross-check findings before reporting.
+- title: People, usernames & metadata
+  difficulty: intermediate
+  minutes: 15
+  competency: osint-tooling
+  body: 'recon-ng is a modular framework that organises public lookups into a workspace with a database.
+    Username tools (e.g. Sherlock) check where a handle appears across public sites; `exiftool` reads
+    public file metadata. Apply the same ethics: minimise collection, respect privacy, and record provenance
+    for every finding.'
+  exercises:
+  - kind: short_answer
+    prompt: Modular OSINT framework with a workspace/db?
+    answer: recon-ng
+    competency: osint-tooling
+    explanation: recon-ng.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: OSINT Tooling Assessment
+  questions:
+  - kind: short_answer
+    prompt: Operator to limit results to a domain?
+    answer: 'site:'
+    competency: osint-tooling
+    explanation: site:.
+    points: 10
+    hints: []
+  - kind: command
+    prompt: Flag for passive amass enumeration?
+    answer: -passive
+    competency: osint-tooling
+    explanation: '`-passive`.'
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Preferred collection mode to avoid touching the target:'
+    choices:
+    - Active
+    - Passive (public sources)
+    - Intrusive
+    - Credentialed
+    answer: Passive (public sources)
+    competency: osint-tooling
+    explanation: Passive, public-source only.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

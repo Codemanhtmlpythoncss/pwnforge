@@ -1,0 +1,73 @@
+id: tool-hydra
+title: 'Hydra: Authorised Authentication Testing'
+description: Test login resilience against guessing on systems you own.
+difficulty: hard
+category: tools
+specialization: pentest
+estimated_minutes: 35
+objectives:
+- Understand how hydra works
+prerequisites:
+- authentication-security
+- tool-nmap
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: How Hydra works
+  difficulty: hard
+  minutes: 15
+  competency: tool-password-auditing
+  body: "Hydra tries username/password combinations against a service to measure resilience — run it only\
+    \ against your own lab logins.\n\n```\nhydra -l admin -P rockyou.txt ssh://10.200.0.10\nhydra -L users.txt\
+    \ -P pass.txt 10.200.0.10 http-post-form \\\n  '/login:user=^USER^&pass=^PASS^:Invalid'\n```\n`^USER^`/`^PASS^`\
+    \ are placeholders; the trailing string is the failure marker. The defensive lesson: rate-limiting,\
+    \ lockout and MFA make this ineffective.\n\n> Only run these tools against systems you own or are\
+    \ explicitly authorised to test — the Pwnforge labs are built for exactly this. Unauthorised scanning\
+    \ or access is unethical and usually unlawful."
+  exercises:
+  - kind: mcq
+    prompt: What defeats online password guessing?
+    choices:
+    - Longer URLs
+    - Rate-limiting/lockout/MFA
+    - Faster CPU
+    - More threads
+    answer: Rate-limiting/lockout/MFA
+    competency: tool-password-auditing
+    explanation: Throttle, lock out, add MFA.
+    points: 10
+    hints: []
+  hints:
+  - text: '`-l` single user, `-L` user list; `-p`/`-P` likewise for passwords.'
+  walkthrough: []
+assessment:
+  title: 'Hydra: Authorised Authentication Testing Assessment'
+  questions:
+  - kind: mcq
+    prompt: 'Best defence against Hydra-style guessing:'
+    choices:
+    - Hide the login
+    - Rate-limit + lockout + MFA
+    - Bigger wordlist
+    - UDP
+    answer: Rate-limit + lockout + MFA
+    competency: tool-password-auditing
+    explanation: Throttle + MFA.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Hydra flag for a password list?
+    answer: -P
+    competency: tool-password-auditing
+    explanation: '`-P`.'
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

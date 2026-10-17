@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from backend.app.catalog.content import (
     courses_defensive, courses_foundations, courses_methodology, courses_osint,
-    courses_specialist, courses_systems, courses_web,
+    courses_specialist, courses_systems, courses_tools, courses_web,
 )
 
 ALL_COURSES: list[dict] = (
@@ -14,6 +14,7 @@ ALL_COURSES: list[dict] = (
     + courses_defensive.COURSES
     + courses_specialist.COURSES
     + courses_osint.COURSES
+    + courses_tools.COURSES
 )
 
 

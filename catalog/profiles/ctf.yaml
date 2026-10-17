@@ -1,0 +1,2269 @@
+- id: ctf-box-nginx-php-i
+  name: CTF Practice Box — nginx + PHP-FPM (standard)
+  category: ctf
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    level: intermediate
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 60
+  tags:
+  - ctf
+  - tools
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-nginx-php-h
+  name: CTF Practice Box — nginx + PHP-FPM (complex)
+  category: ctf
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    level: hard
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 90
+  tags:
+  - ctf
+  - tools
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-nginx-php-a
+  name: CTF Practice Box — nginx + PHP-FPM (realistic)
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-apache-python-i
+  name: CTF Practice Box — Apache + Python/WSGI (standard)
+  category: ctf
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    level: intermediate
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 60
+  tags:
+  - ctf
+  - tools
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-apache-python-h
+  name: CTF Practice Box — Apache + Python/WSGI (complex)
+  category: ctf
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    level: hard
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 90
+  tags:
+  - ctf
+  - tools
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-apache-python-a
+  name: CTF Practice Box — Apache + Python/WSGI (realistic)
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-node-express-i
+  name: CTF Practice Box — Node.js + Express (standard)
+  category: ctf
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: intermediate
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 60
+  tags:
+  - ctf
+  - tools
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-node-express-h
+  name: CTF Practice Box — Node.js + Express (complex)
+  category: ctf
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: hard
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 90
+  tags:
+  - ctf
+  - tools
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-node-express-a
+  name: CTF Practice Box — Node.js + Express (realistic)
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-tomcat-java-i
+  name: CTF Practice Box — Tomcat + Java (standard)
+  category: ctf
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: intermediate
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 60
+  tags:
+  - ctf
+  - tools
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-tomcat-java-h
+  name: CTF Practice Box — Tomcat + Java (complex)
+  category: ctf
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: hard
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 90
+  tags:
+  - ctf
+  - tools
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-tomcat-java-a
+  name: CTF Practice Box — Tomcat + Java (realistic)
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ssh-linux-i
+  name: CTF Practice Box — Debian + OpenSSH (standard)
+  category: ctf
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: intermediate
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 60
+  tags:
+  - ctf
+  - tools
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ssh-linux-h
+  name: CTF Practice Box — Debian + OpenSSH (complex)
+  category: ctf
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: hard
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 90
+  tags:
+  - ctf
+  - tools
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ssh-linux-a
+  name: CTF Practice Box — Debian + OpenSSH (realistic)
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-smb-linux-i
+  name: CTF Practice Box — Debian + Samba (standard)
+  category: ctf
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - samba
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: intermediate
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 60
+  tags:
+  - ctf
+  - tools
+  - intermediate
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-smb-linux-h
+  name: CTF Practice Box — Debian + Samba (complex)
+  category: ctf
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - samba
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: hard
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 90
+  tags:
+  - ctf
+  - tools
+  - hard
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-smb-linux-a
+  name: CTF Practice Box — Debian + Samba (realistic)
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - samba
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-alpine-min-i
+  name: CTF Practice Box — Alpine minimal (standard)
+  category: ctf
+  difficulty: intermediate
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: ctf-box
+    level: intermediate
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 60
+  tags:
+  - ctf
+  - tools
+  - intermediate
+  - alpine
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-alpine-min-h
+  name: CTF Practice Box — Alpine minimal (complex)
+  category: ctf
+  difficulty: hard
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: ctf-box
+    level: hard
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 90
+  tags:
+  - ctf
+  - tools
+  - hard
+  - alpine
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-alpine-min-a
+  name: CTF Practice Box — Alpine minimal (realistic)
+  category: ctf
+  difficulty: advanced
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: ctf-box
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - alpine
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ubuntu-srv-i
+  name: CTF Practice Box — Ubuntu Server (standard)
+  category: ctf
+  difficulty: intermediate
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: ctf-box
+    level: intermediate
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 60
+  tags:
+  - ctf
+  - tools
+  - intermediate
+  - ubuntu
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ubuntu-srv-h
+  name: CTF Practice Box — Ubuntu Server (complex)
+  category: ctf
+  difficulty: hard
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: ctf-box
+    level: hard
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 90
+  tags:
+  - ctf
+  - tools
+  - hard
+  - ubuntu
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ubuntu-srv-a
+  name: CTF Practice Box — Ubuntu Server (realistic)
+  category: ctf
+  difficulty: advanced
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: ctf-box
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - ubuntu
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-freebsd-srv-i
+  name: CTF Practice Box — FreeBSD Server (standard)
+  category: ctf
+  difficulty: intermediate
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: ctf-box
+    level: intermediate
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 60
+  tags:
+  - ctf
+  - tools
+  - intermediate
+  - freebsd
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-freebsd-srv-h
+  name: CTF Practice Box — FreeBSD Server (complex)
+  category: ctf
+  difficulty: hard
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: ctf-box
+    level: hard
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 90
+  tags:
+  - ctf
+  - tools
+  - hard
+  - freebsd
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-freebsd-srv-a
+  name: CTF Practice Box — FreeBSD Server (realistic)
+  category: ctf
+  difficulty: advanced
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: ctf-box
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - freebsd
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-nginx-php-job-runner-1-2
+  name: 'CTF Practice Box: injectable job runner v1.2 — nginx + PHP-FPM'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - job-runner
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    component: job-runner
+    version: '1.2'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v1.2).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-apache-python-message-queue-1-5
+  name: 'CTF Practice Box: exposed message queue v1.5 — Apache + Python/WSGI'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - message-queue
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    component: message-queue
+    version: '1.5'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v1.5).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-node-express-webhook-receiver-1-8
+  name: 'CTF Practice Box: unvalidated webhook receiver v1.8 — Node.js + Express'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - webhook-receiver
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: webhook-receiver
+    version: '1.8'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.8).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-tomcat-java-api-gateway-1-2
+  name: 'CTF Practice Box: permissive API gateway v1.2 — Tomcat + Java'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - api-gateway
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: api-gateway
+    version: '1.2'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v1.2).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ssh-linux-backup-agent-1-5
+  name: 'CTF Practice Box: over-privileged backup agent v1.5 — Debian + OpenSSH'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: backup-agent
+    version: '1.5'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v1.5).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-smb-linux-job-runner-1-8
+  name: 'CTF Practice Box: injectable job runner v1.8 — Debian + Samba'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - samba
+  - job-runner
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: job-runner
+    version: '1.8'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v1.8).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-alpine-min-message-queue-1-2
+  name: 'CTF Practice Box: exposed message queue v1.2 — Alpine minimal'
+  category: ctf
+  difficulty: advanced
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - message-queue
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: ctf-box
+    component: message-queue
+    version: '1.2'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v1.2).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - alpine
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ubuntu-srv-webhook-receiver-2-5
+  name: 'CTF Practice Box: unvalidated webhook receiver v2.5 — Ubuntu Server'
+  category: ctf
+  difficulty: advanced
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: ctf-box
+    component: webhook-receiver
+    version: '2.5'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.5).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - ubuntu
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-freebsd-srv-api-gateway-2-8
+  name: 'CTF Practice Box: permissive API gateway v2.8 — FreeBSD Server'
+  category: ctf
+  difficulty: advanced
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - api-gateway
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: ctf-box
+    component: api-gateway
+    version: '2.8'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v2.8).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - freebsd
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-nginx-php-backup-agent-2-2
+  name: 'CTF Practice Box: over-privileged backup agent v2.2 — nginx + PHP-FPM'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - backup-agent
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    component: backup-agent
+    version: '2.2'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v2.2).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-apache-python-job-runner-2-5
+  name: 'CTF Practice Box: injectable job runner v2.5 — Apache + Python/WSGI'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - job-runner
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    component: job-runner
+    version: '2.5'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v2.5).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-node-express-message-queue-2-8
+  name: 'CTF Practice Box: exposed message queue v2.8 — Node.js + Express'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - message-queue
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: message-queue
+    version: '2.8'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v2.8).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-tomcat-java-webhook-receiver-2-2
+  name: 'CTF Practice Box: unvalidated webhook receiver v2.2 — Tomcat + Java'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - webhook-receiver
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: webhook-receiver
+    version: '2.2'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.2).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ssh-linux-api-gateway-2-5
+  name: 'CTF Practice Box: permissive API gateway v2.5 — Debian + OpenSSH'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - api-gateway
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: api-gateway
+    version: '2.5'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v2.5).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-smb-linux-backup-agent-3-8
+  name: 'CTF Practice Box: over-privileged backup agent v3.8 — Debian + Samba'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - samba
+  - backup-agent
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: backup-agent
+    version: '3.8'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.8).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-alpine-min-job-runner-3-2
+  name: 'CTF Practice Box: injectable job runner v3.2 — Alpine minimal'
+  category: ctf
+  difficulty: advanced
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - job-runner
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: ctf-box
+    component: job-runner
+    version: '3.2'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v3.2).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - alpine
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ubuntu-srv-message-queue-3-5
+  name: 'CTF Practice Box: exposed message queue v3.5 — Ubuntu Server'
+  category: ctf
+  difficulty: advanced
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - message-queue
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: ctf-box
+    component: message-queue
+    version: '3.5'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v3.5).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - ubuntu
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-freebsd-srv-webhook-receiver-3-8
+  name: 'CTF Practice Box: unvalidated webhook receiver v3.8 — FreeBSD Server'
+  category: ctf
+  difficulty: advanced
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - webhook-receiver
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: ctf-box
+    component: webhook-receiver
+    version: '3.8'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.8).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - freebsd
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-nginx-php-api-gateway-3-2
+  name: 'CTF Practice Box: permissive API gateway v3.2 — nginx + PHP-FPM'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - api-gateway
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    component: api-gateway
+    version: '3.2'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v3.2).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-apache-python-backup-agent-3-5
+  name: 'CTF Practice Box: over-privileged backup agent v3.5 — Apache + Python/WSGI'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - backup-agent
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    component: backup-agent
+    version: '3.5'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.5).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-node-express-job-runner-3-8
+  name: 'CTF Practice Box: injectable job runner v3.8 — Node.js + Express'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - job-runner
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: job-runner
+    version: '3.8'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v3.8).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-tomcat-java-message-queue-4-2
+  name: 'CTF Practice Box: exposed message queue v4.2 — Tomcat + Java'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - default-jdk
+  - tomcat10
+  - message-queue
+  services:
+  - tomcat10
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: message-queue
+    version: '4.2'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v4.2).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ssh-linux-webhook-receiver-4-5
+  name: 'CTF Practice Box: unvalidated webhook receiver v4.5 — Debian + OpenSSH'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: webhook-receiver
+    version: '4.5'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.5).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-smb-linux-api-gateway-4-8
+  name: 'CTF Practice Box: permissive API gateway v4.8 — Debian + Samba'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - samba
+  - api-gateway
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: ctf-box
+    component: api-gateway
+    version: '4.8'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v4.8).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-alpine-min-backup-agent-4-2
+  name: 'CTF Practice Box: over-privileged backup agent v4.2 — Alpine minimal'
+  category: ctf
+  difficulty: advanced
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - backup-agent
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: ctf-box
+    component: backup-agent
+    version: '4.2'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v4.2).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - alpine
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-ubuntu-srv-job-runner-4-5
+  name: 'CTF Practice Box: injectable job runner v4.5 — Ubuntu Server'
+  category: ctf
+  difficulty: advanced
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - job-runner
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: ctf-box
+    component: job-runner
+    version: '4.5'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v4.5).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - ubuntu
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-freebsd-srv-message-queue-4-8
+  name: 'CTF Practice Box: exposed message queue v4.8 — FreeBSD Server'
+  category: ctf
+  difficulty: advanced
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - message-queue
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: ctf-box
+    component: message-queue
+    version: '4.8'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v4.8).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - freebsd
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-nginx-php-webhook-receiver-4-2
+  name: 'CTF Practice Box: unvalidated webhook receiver v4.2 — nginx + PHP-FPM'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - webhook-receiver
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    component: webhook-receiver
+    version: '4.2'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.2).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology
+- id: ctf-box-apache-python-api-gateway-5-5
+  name: 'CTF Practice Box: permissive API gateway v5.5 — Apache + Python/WSGI'
+  category: ctf
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - api-gateway
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: ctf-box
+    component: api-gateway
+    version: '5.5'
+    level: advanced
+  objectives:
+  - A mixed challenge box for exercising the full toolkit end to end.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v5.5).'
+  prerequisites:
+  - penetration-testing-methodology
+  estimated_minutes: 120
+  tags:
+  - ctf
+  - tools
+  - advanced
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - penetration-testing-methodology

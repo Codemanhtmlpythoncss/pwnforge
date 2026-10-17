@@ -443,3 +443,135 @@
     lab_id: forensics-workstation-lab
     required: true
     note: Advanced investigation challenge
+- id: path-hacker-toolkit
+  title: The Hacker's Toolkit
+  description: Learn to actually use the essential security tools — from scanning to exploitation frameworks
+    to reverse engineering — in authorised labs.
+  specialization: pentest
+  difficulty_min: easy
+  difficulty_max: advanced
+  tags:
+  - tools
+  - hands-on
+  steps:
+  - order: 1
+    course_id: tool-nmap
+    lab_id: null
+    required: true
+    note: ''
+  - order: 2
+    course_id: tool-content-discovery
+    lab_id: null
+    required: true
+    note: ''
+  - order: 3
+    course_id: tool-http-clients
+    lab_id: null
+    required: true
+    note: ''
+  - order: 4
+    course_id: tool-burp
+    lab_id: null
+    required: true
+    note: ''
+  - order: 5
+    course_id: tool-sqlmap
+    lab_id: null
+    required: true
+    note: ''
+  - order: 6
+    course_id: tool-netcat
+    lab_id: null
+    required: true
+    note: ''
+  - order: 7
+    course_id: tool-hydra
+    lab_id: null
+    required: true
+    note: ''
+  - order: 8
+    course_id: tool-john
+    lab_id: null
+    required: true
+    note: ''
+  - order: 9
+    course_id: tool-hashcat
+    lab_id: null
+    required: true
+    note: ''
+  - order: 10
+    course_id: tool-metasploit
+    lab_id: null
+    required: true
+    note: ''
+  - order: 11
+    course_id: tool-smb-enum
+    lab_id: null
+    required: true
+    note: ''
+  - order: 12
+    course_id: tool-impacket
+    lab_id: null
+    required: true
+    note: ''
+  - order: 13
+    course_id: tool-bloodhound
+    lab_id: null
+    required: true
+    note: ''
+  - order: 14
+    course_id: tool-wireshark
+    lab_id: null
+    required: true
+    note: ''
+  - order: 15
+    course_id: tool-ghidra
+    lab_id: null
+    required: true
+    note: ''
+  - order: 16
+    course_id: null
+    lab_id: enterprise-identity-lab
+    required: false
+    note: Put the toolkit to work
+- id: path-osint
+  title: OSINT & Reconnaissance
+  description: Open-source intelligence from fundamentals and ethics through practical tooling, OPSEC
+    and responsible reporting.
+  specialization: osint
+  difficulty_min: easy
+  difficulty_max: advanced
+  tags:
+  - osint
+  - recon
+  steps:
+  - order: 1
+    course_id: osint-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 2
+    course_id: reconnaissance
+    lab_id: null
+    required: true
+    note: ''
+  - order: 3
+    course_id: osint-techniques
+    lab_id: null
+    required: true
+    note: ''
+  - order: 4
+    course_id: osint-tools
+    lab_id: null
+    required: true
+    note: ''
+  - order: 5
+    course_id: osint-opsec-reporting
+    lab_id: null
+    required: true
+    note: ''
+  - order: 6
+    course_id: null
+    lab_id: osint-investigation-lab
+    required: true
+    note: OSINT investigation challenge

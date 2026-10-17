@@ -1,0 +1,72 @@
+id: tool-john
+title: 'John the Ripper: Password Auditing'
+description: Audit password-hash strength offline from data you're authorised to test.
+difficulty: hard
+category: tools
+specialization: pentest
+estimated_minutes: 40
+objectives:
+- Understand formats, wordlists & rules
+prerequisites:
+- password-security-auditing
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Formats, wordlists & rules
+  difficulty: hard
+  minutes: 20
+  competency: tool-password-auditing
+  body: 'John cracks captured hashes offline to measure strength.
+
+
+    ```
+
+    john --list=formats | head
+
+    john --wordlist=rockyou.txt hashes.txt
+
+    john --wordlist=rockyou.txt --rules hashes.txt
+
+    john --show hashes.txt
+
+    ```
+
+    `--rules` mutates wordlist entries (capitalise, append digits). Use only on hashes from your own lab/accounts.
+    The takeaway: long, unique passphrases and slow KDFs resist this.'
+  exercises:
+  - kind: command
+    prompt: Show already-cracked results (john flag)?
+    answer: --show
+    competency: tool-password-auditing
+    explanation: '`--show` lists cracked.'
+    points: 10
+    hints: []
+  hints:
+  - text: '`--rules` applies mutations; `rockyou.txt` is the classic list.'
+  walkthrough: []
+assessment:
+  title: 'John the Ripper: Password Auditing Assessment'
+  questions:
+  - kind: command
+    prompt: John flag to apply mutation rules?
+    answer: --rules
+    competency: tool-password-auditing
+    explanation: '`--rules`.'
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: 'Property that best resists cracking: length & ___.'
+    answer: uniqueness
+    competency: password-security
+    explanation: Length + uniqueness.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

@@ -1,0 +1,102 @@
+id: tool-netcat
+title: 'netcat & socat: The Network Swiss Army Knife'
+description: Make and manage raw TCP/UDP connections for testing and transfers.
+difficulty: easy
+category: tools
+specialization: pentest
+estimated_minutes: 50
+objectives:
+- Understand listeners, clients & banners
+- Understand file transfer & socat
+prerequisites:
+- networking-fundamentals
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: network-basics-lab
+version: 1.0.0
+lessons:
+- title: Listeners, clients & banners
+  difficulty: easy
+  minutes: 15
+  competency: tool-netcat
+  body: 'netcat moves bytes over the network.
+
+
+    ```
+
+    nc -lvnp 4444                 # listen on 4444 (verbose, no DNS)
+
+    nc 10.200.0.10 80             # connect; then type an HTTP request
+
+    nc -nv 10.200.0.10 22         # grab an SSH banner
+
+    ```
+
+    A listener on one lab host plus a client on another is the simplest way to test connectivity and read
+    service banners.'
+  exercises:
+  - kind: command
+    prompt: Listen verbosely on TCP 4444 (nc flags)?
+    answer: nc -lvnp 4444
+    competency: tool-netcat
+    explanation: '`-l` listen, `-v` verbose, `-n` no DNS, `-p` port.'
+    points: 10
+    hints: []
+  hints:
+  - text: '`-lvnp` is the classic listener combo.'
+  walkthrough: []
+- title: File transfer & socat
+  difficulty: easy
+  minutes: 15
+  competency: tool-netcat
+  body: 'Pipe data across a connection:
+
+
+    ```
+
+    # receiver:
+
+    nc -lvnp 4444 > out.bin
+
+    # sender:
+
+    nc 10.200.0.10 4444 < in.bin
+
+    ```
+
+    `socat` is netcat''s more capable cousin (TLS, PTYs, bidirectional relays): `socat - TCP:10.200.0.10:80`.
+    Both are invaluable for testing and for stabilising shells in your labs.'
+  exercises:
+  - kind: short_answer
+    prompt: More capable netcat alternative (TLS/PTY)?
+    answer: socat
+    competency: tool-netcat
+    explanation: socat.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: 'netcat & socat: The Network Swiss Army Knife Assessment'
+  questions:
+  - kind: command
+    prompt: Classic nc listener flags for port 4444?
+    answer: nc -lvnp 4444
+    competency: tool-netcat
+    explanation: '`-lvnp`.'
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: netcat cousin supporting TLS/PTYs?
+    answer: socat
+    competency: tool-netcat
+    explanation: socat.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

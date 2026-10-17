@@ -1,0 +1,77 @@
+id: tool-hashcat
+title: 'Hashcat: GPU Password Auditing'
+description: Fast, GPU-accelerated hash auditing and the attack modes that matter.
+difficulty: hard
+category: tools
+specialization: pentest
+estimated_minutes: 40
+objectives:
+- Understand hash modes & attack modes
+prerequisites:
+- tool-john
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Hash modes & attack modes
+  difficulty: hard
+  minutes: 20
+  competency: tool-password-auditing
+  body: 'Hashcat needs the **hash mode** (`-m`) and **attack mode** (`-a`).
+
+
+    ```
+
+    hashcat -m 0 -a 0 hashes.txt rockyou.txt     # MD5, straight wordlist
+
+    hashcat -m 1000 -a 0 ntlm.txt rockyou.txt     # NTLM
+
+    hashcat -m 0 -a 3 hashes.txt ''?l?l?l?l?d?d''    # mask (brute)
+
+    hashcat --show -m 0 hashes.txt
+
+    ```
+
+    `-a 0` = wordlist, `-a 3` = mask/brute. `hashid`/`hashcat --identify` helps spot the mode. Audit only
+    hashes you''re authorised to test.'
+  exercises:
+  - kind: command
+    prompt: Hashcat flag that sets the hash type?
+    answer: -m
+    competency: tool-password-auditing
+    explanation: '`-m` sets hash mode.'
+    points: 10
+    hints: []
+  hints:
+  - text: '`-a 0` wordlist, `-a 3` mask; `-m` picks the hash type.'
+  walkthrough: []
+assessment:
+  title: 'Hashcat: GPU Password Auditing Assessment'
+  questions:
+  - kind: command
+    prompt: Hashcat attack-mode flag?
+    answer: -a
+    competency: tool-password-auditing
+    explanation: '`-a`.'
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: '`-a 3` is:'
+    choices:
+    - Wordlist
+    - Mask/brute
+    - Combinator
+    - Rule
+    answer: Mask/brute
+    competency: tool-password-auditing
+    explanation: Mask attack.
+    points: 10
+    hints: []
+  difficulty: hard
+  passing_score: 70
+  description: ''

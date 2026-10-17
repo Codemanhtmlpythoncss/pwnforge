@@ -1,0 +1,135 @@
+id: tool-burp
+title: 'Burp Suite: Web Proxy Testing'
+description: Intercept, inspect, replay and tamper HTTP for authorised web testing.
+difficulty: intermediate
+category: tools
+specialization: web
+estimated_minutes: 75
+objectives:
+- Understand proxy & intercept
+- Understand repeater & decoder
+- Understand intruder & scanner (responsibly)
+prerequisites:
+- web-application-security
+- http-https
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: web-security-lab
+version: 1.0.0
+lessons:
+- title: Proxy & intercept
+  difficulty: intermediate
+  minutes: 20
+  competency: tool-web-proxy
+  body: 'Burp sits between your browser and the app so you can see and modify every request. Set the browser
+    proxy to `127.0.0.1:8080`, install Burp''s CA cert for HTTPS, then use **Proxy → Intercept** to pause
+    and edit requests. **HTTP history** records everything for review. Point it only at your lab app.
+
+
+    > Only run these tools against systems you own or are explicitly authorised to test — the Pwnforge
+    labs are built for exactly this. Unauthorised scanning or access is unethical and usually unlawful.'
+  exercises:
+  - kind: mcq
+    prompt: 'Burp''s default proxy listener is:'
+    choices:
+    - 0.0.0.0:80
+    - 127.0.0.1:8080
+    - 127.0.0.1:443
+    - 10.0.0.1:8000
+    answer: 127.0.0.1:8080
+    competency: tool-web-proxy
+    explanation: Default is 127.0.0.1:8080.
+    points: 10
+    hints: []
+  hints:
+  - text: Install Burp's CA cert so HTTPS traffic is readable.
+  walkthrough: []
+- title: Repeater & Decoder
+  difficulty: intermediate
+  minutes: 20
+  competency: tool-web-proxy
+  body: '**Repeater** lets you resend and tweak a single request repeatedly — ideal for probing how a
+    parameter changes a response (the manual way to confirm injection/authz issues). **Decoder** encodes/decodes
+    URL/base64/hex. **Comparer** diffs two responses. Working manually in Repeater teaches you *why* a
+    bug exists, not just that a scanner flagged it.'
+  exercises:
+  - kind: short_answer
+    prompt: Burp tab for resending/tweaking one request?
+    answer: Repeater
+    competency: tool-web-proxy
+    explanation: Repeater.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough:
+  - title: Start the Web Security Lab
+    detail: Owned, intentional target.
+  - title: Proxy the browser
+    detail: Point it at 127.0.0.1:8080, trust the CA.
+  - title: Send to Repeater
+    detail: Right-click a request → Send to Repeater.
+  - title: Vary one input
+    detail: Change a parameter, compare responses.
+- title: Intruder & scanner (responsibly)
+  difficulty: intermediate
+  minutes: 15
+  competency: tool-web-proxy
+  body: '**Intruder** automates sending many payloads to a position (e.g. to test input handling); use
+    small, targeted sets against your lab, not blind floods. The **Scanner** (Pro) crawls and flags issues
+    — treat results as leads. Always keep scope tight so you never touch anything out of bounds.'
+  exercises:
+  - kind: mcq
+    prompt: 'Scanner/Intruder results are:'
+    choices:
+    - Confirmed vulns
+    - Leads to verify
+    - Exploits
+    - Patches
+    answer: Leads to verify
+    competency: tool-web-proxy
+    explanation: Verify everything manually.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: 'Burp Suite: Web Proxy Testing Assessment'
+  questions:
+  - kind: mcq
+    prompt: Burp default listener?
+    choices:
+    - 127.0.0.1:8080
+    - 0.0.0.0:80
+    - 127.0.0.1:443
+    - '8000'
+    answer: 127.0.0.1:8080
+    competency: tool-web-proxy
+    explanation: 127.0.0.1:8080.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Tab for resending one request?
+    answer: Repeater
+    competency: tool-web-proxy
+    explanation: Repeater.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'To read HTTPS in Burp you must:'
+    choices:
+    - Disable TLS
+    - Install Burp's CA cert
+    - Use HTTP only
+    - Nothing
+    answer: Install Burp's CA cert
+    competency: tool-web-proxy
+    explanation: Trust Burp's CA.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

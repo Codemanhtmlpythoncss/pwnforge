@@ -895,8 +895,8 @@
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-debian-monitor-job-runner-1-8
-  name: 'Log Investigation Lab: injectable job runner v1.8 — Debian monitoring'
+- id: log-investigation-debian-monitor-webhook-receiver-1-2
+  name: 'Log Investigation Lab: unvalidated webhook receiver v1.2 — Debian monitoring'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -909,20 +909,20 @@
   packages:
   - rsyslog
   - auditd
-  - job-runner
+  - webhook-receiver
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: log-investigation
-    component: job-runner
-    version: '1.8'
+    component: webhook-receiver
+    version: '1.2'
     level: hard
   objectives:
   - Investigate activity from host and service logs.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v1.8).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.2).'
   prerequisites:
   - log-analysis
   estimated_minutes: 90
@@ -931,58 +931,58 @@
   - logs
   - hard
   - debian
-  - job-runner
+  - webhook-receiver
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - log-analysis
-- id: detection-debian-monitor-import-tool-1-4
-  name: 'Detection Engineering Lab: unsafe import tool v1.4 — Debian monitoring'
+- id: detection-debian-monitor-cache-layer-1-7
+  name: 'Detection Engineering Lab: insecure cache layer v1.7 — Debian monitoring'
   category: defensive
-  difficulty: hard
+  difficulty: advanced
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - rsyslog
   - auditd
-  - import-tool
+  - cache-layer
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: detection
-    component: import-tool
-    version: '1.4'
-    level: hard
+    component: cache-layer
+    version: '1.7'
+    level: advanced
   objectives:
   - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v1.4).'
+  - 'Focus: identify and remediate the insecure cache layer (v1.7).'
   prerequisites:
   - detection-engineering
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - defensive
   - detection
-  - hard
+  - advanced
   - debian
-  - import-tool
+  - cache-layer
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - detection-engineering
-- id: incident-ssh-linux-backup-agent-1-5
-  name: 'Incident Investigation Lab: over-privileged backup agent v1.5 — Debian + OpenSSH'
+- id: incident-ssh-linux-message-queue-1-8
+  name: 'Incident Investigation Lab: exposed message queue v1.8 — Debian + OpenSSH'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -995,20 +995,20 @@
   packages:
   - openssh-server
   - sudo
-  - backup-agent
+  - message-queue
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: incident
-    component: backup-agent
-    version: '1.5'
+    component: message-queue
+    version: '1.8'
     level: advanced
   objectives:
   - Reconstruct an incident from available evidence.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v1.5).'
+  - 'Focus: identify and remediate the exposed message queue (v1.8).'
   prerequisites:
   - incident-response
   estimated_minutes: 120
@@ -1017,58 +1017,58 @@
   - ir
   - advanced
   - debian
-  - backup-agent
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - incident-response
-- id: threat-hunt-debian-monitor-reverse-proxy-1-6
-  name: 'Threat Hunting Lab: misconfigured reverse proxy v1.6 — Debian monitoring'
+- id: threat-hunt-debian-monitor-search-index-1-0
+  name: 'Threat Hunting Lab: unauthenticated search index v1.0 — Debian monitoring'
   category: defensive
-  difficulty: advanced
+  difficulty: expert
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
   vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
+  memory_mb: 6144
+  disk_gb: 30
   network_mode: isolated
   packages:
   - rsyslog
   - auditd
-  - reverse-proxy
+  - search-index
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: threat-hunt
-    component: reverse-proxy
-    version: '1.6'
-    level: advanced
+    component: search-index
+    version: '1.0'
+    level: expert
   objectives:
   - Run hypothesis-driven hunts across host data.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.6).'
+  - 'Focus: identify and remediate the unauthenticated search index (v1.0).'
   prerequisites:
   - threat-hunting
-  estimated_minutes: 120
+  estimated_minutes: 180
   tags:
   - defensive
   - hunt
-  - advanced
+  - expert
   - debian
-  - reverse-proxy
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-nginx-php-backup-agent-1-8
-  name: 'Log Investigation Lab: over-privileged backup agent v1.8 — nginx + PHP-FPM'
+- id: log-investigation-nginx-php-api-gateway-1-5
+  name: 'Log Investigation Lab: permissive API gateway v1.5 — nginx + PHP-FPM'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -1081,12 +1081,184 @@
   packages:
   - nginx
   - php-fpm
-  - backup-agent
+  - api-gateway
   services:
   - nginx
   - php-fpm
   provisioning:
     golden_image: debian-13-web
+    role: log-investigation
+    component: api-gateway
+    version: '1.5'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v1.5).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-legacy-cgi-1-1
+  name: 'Detection Engineering Lab: legacy CGI handler v1.1 — Debian monitoring'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - legacy-cgi
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: legacy-cgi
+    version: '1.1'
+    level: hard
+  objectives:
+  - Develop and validate detection rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v1.1).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - detection
+  - hard
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-debian-monitor-webhook-receiver-1-2
+  name: 'Incident Investigation Lab: unvalidated webhook receiver v1.2 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - webhook-receiver
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: incident
+    component: webhook-receiver
+    version: '1.2'
+    level: advanced
+  objectives:
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.2).'
+  prerequisites:
+  - incident-response
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - ir
+  - advanced
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - incident-response
+- id: threat-hunt-debian-monitor-report-exporter-1-3
+  name: 'Threat Hunting Lab: template-injectable report exporter v1.3 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - report-exporter
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: report-exporter
+    version: '1.3'
+    level: advanced
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v1.3).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - hunt
+  - advanced
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-ssh-linux-backup-agent-1-8
+  name: 'Log Investigation Lab: over-privileged backup agent v1.8 — Debian + OpenSSH'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
     role: log-investigation
     component: backup-agent
     version: '1.8'
@@ -1114,13 +1286,13 @@
 - id: detection-debian-monitor-admin-panel-1-4
   name: 'Detection Engineering Lab: weak admin panel v1.4 — Debian monitoring'
   category: defensive
-  difficulty: hard
+  difficulty: advanced
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - rsyslog
@@ -1133,19 +1305,19 @@
     role: detection
     component: admin-panel
     version: '1.4'
-    level: hard
+    level: advanced
   objectives:
   - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the weak admin panel (v1.4).'
   prerequisites:
   - detection-engineering
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - defensive
   - detection
-  - hard
+  - advanced
   - debian
   - admin-panel
   reset_supported: true
@@ -1154,25 +1326,25 @@
   lab_id: null
   course_ids:
   - detection-engineering
-- id: incident-debian-monitor-api-gateway-1-5
-  name: 'Incident Investigation Lab: permissive API gateway v1.5 — Debian monitoring'
+- id: incident-ssh-linux-api-gateway-1-5
+  name: 'Incident Investigation Lab: permissive API gateway v1.5 — Debian + OpenSSH'
   category: defensive
   difficulty: advanced
   os_family: debian
   arch: x86_64
-  base_image_key: debian-13-monitoring
+  base_image_key: debian-13-server
   vcpu: 4
   memory_mb: 4096
   disk_gb: 20
   network_mode: isolated
   packages:
-  - rsyslog
-  - auditd
+  - openssh-server
+  - sudo
   - api-gateway
   services:
-  - rsyslog
+  - ssh
   provisioning:
-    golden_image: debian-13-monitoring
+    golden_image: debian-13-server
     role: incident
     component: api-gateway
     version: '1.5'
@@ -1200,13 +1372,13 @@
 - id: threat-hunt-debian-monitor-file-service-1-6
   name: 'Threat Hunting Lab: unsafe file service v1.6 — Debian monitoring'
   category: defensive
-  difficulty: advanced
+  difficulty: expert
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
   vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
+  memory_mb: 6144
+  disk_gb: 30
   network_mode: isolated
   packages:
   - rsyslog
@@ -1219,7 +1391,7 @@
     role: threat-hunt
     component: file-service
     version: '1.6'
-    level: advanced
+    level: expert
   objectives:
   - Run hypothesis-driven hunts across host data.
   - Work with minimal guidance; justify decisions and document findings.
@@ -1227,11 +1399,11 @@
   - 'Focus: identify and remediate the unsafe file service (v1.6).'
   prerequisites:
   - threat-hunting
-  estimated_minutes: 120
+  estimated_minutes: 180
   tags:
   - defensive
   - hunt
-  - advanced
+  - expert
   - debian
   - file-service
   reset_supported: true
@@ -1240,34 +1412,34 @@
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-ssh-linux-api-gateway-1-8
-  name: 'Log Investigation Lab: permissive API gateway v1.8 — Debian + OpenSSH'
+- id: log-investigation-debian-monitor-job-runner-1-2
+  name: 'Log Investigation Lab: injectable job runner v1.2 — Debian monitoring'
   category: defensive
   difficulty: hard
   os_family: debian
   arch: x86_64
-  base_image_key: debian-13-server
+  base_image_key: debian-13-monitoring
   vcpu: 2
   memory_mb: 3072
   disk_gb: 16
   network_mode: isolated
   packages:
-  - openssh-server
-  - sudo
-  - api-gateway
+  - rsyslog
+  - auditd
+  - job-runner
   services:
-  - ssh
+  - rsyslog
   provisioning:
-    golden_image: debian-13-server
+    golden_image: debian-13-monitoring
     role: log-investigation
-    component: api-gateway
-    version: '1.8'
+    component: job-runner
+    version: '1.2'
     level: hard
   objectives:
   - Investigate activity from host and service logs.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v1.8).'
+  - 'Focus: identify and remediate the injectable job runner (v1.2).'
   prerequisites:
   - log-analysis
   estimated_minutes: 90
@@ -1276,15 +1448,15 @@
   - logs
   - hard
   - debian
-  - api-gateway
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - log-analysis
-- id: detection-debian-monitor-legacy-cgi-1-4
-  name: 'Detection Engineering Lab: legacy CGI handler v1.4 — Debian monitoring'
+- id: detection-debian-monitor-import-tool-1-7
+  name: 'Detection Engineering Lab: unsafe import tool v1.7 — Debian monitoring'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -1297,20 +1469,20 @@
   packages:
   - rsyslog
   - auditd
-  - legacy-cgi
+  - import-tool
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: detection
-    component: legacy-cgi
-    version: '1.4'
+    component: import-tool
+    version: '1.7'
     level: hard
   objectives:
   - Develop and validate detection rules.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v1.4).'
+  - 'Focus: identify and remediate the unsafe import tool (v1.7).'
   prerequisites:
   - detection-engineering
   estimated_minutes: 90
@@ -1319,15 +1491,188 @@
   - detection
   - hard
   - debian
-  - legacy-cgi
+  - import-tool
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - detection-engineering
-- id: incident-ssh-linux-webhook-receiver-1-5
-  name: 'Incident Investigation Lab: unvalidated webhook receiver v1.5 — Debian + OpenSSH'
+- id: incident-debian-monitor-backup-agent-1-8
+  name: 'Incident Investigation Lab: over-privileged backup agent v1.8 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - backup-agent
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: incident
+    component: backup-agent
+    version: '1.8'
+    level: advanced
+  objectives:
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v1.8).'
+  prerequisites:
+  - incident-response
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - ir
+  - advanced
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - incident-response
+- id: threat-hunt-debian-monitor-reverse-proxy-1-0
+  name: 'Threat Hunting Lab: misconfigured reverse proxy v1.0 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - reverse-proxy
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: reverse-proxy
+    version: '1.0'
+    level: advanced
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.0).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - hunt
+  - advanced
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-nginx-php-message-queue-1-5
+  name: 'Log Investigation Lab: exposed message queue v1.5 — nginx + PHP-FPM'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - message-queue
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: log-investigation
+    component: message-queue
+    version: '1.5'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v1.5).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-auth-proxy-1-1
+  name: 'Detection Engineering Lab: flawed auth proxy v1.1 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - auth-proxy
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: auth-proxy
+    version: '1.1'
+    level: advanced
+  objectives:
+  - Develop and validate detection rules.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v1.1).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - detection
+  - advanced
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-ssh-linux-job-runner-1-2
+  name: 'Incident Investigation Lab: injectable job runner v1.2 — Debian + OpenSSH'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -1340,20 +1685,20 @@
   packages:
   - openssh-server
   - sudo
-  - webhook-receiver
+  - job-runner
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: incident
-    component: webhook-receiver
-    version: '1.5'
+    component: job-runner
+    version: '1.2'
     level: advanced
   objectives:
   - Reconstruct an incident from available evidence.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.5).'
+  - 'Focus: identify and remediate the injectable job runner (v1.2).'
   prerequisites:
   - incident-response
   estimated_minutes: 120
@@ -1362,75 +1707,75 @@
   - ir
   - advanced
   - debian
-  - webhook-receiver
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - incident-response
-- id: threat-hunt-debian-monitor-report-exporter-1-6
-  name: 'Threat Hunting Lab: template-injectable report exporter v1.6 — Debian monitoring'
+- id: threat-hunt-debian-monitor-metrics-endpoint-1-3
+  name: 'Threat Hunting Lab: leaky metrics endpoint v1.3 — Debian monitoring'
   category: defensive
-  difficulty: advanced
+  difficulty: expert
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
   vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
+  memory_mb: 6144
+  disk_gb: 30
   network_mode: isolated
   packages:
   - rsyslog
   - auditd
-  - report-exporter
+  - metrics-endpoint
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: threat-hunt
-    component: report-exporter
-    version: '1.6'
-    level: advanced
+    component: metrics-endpoint
+    version: '1.3'
+    level: expert
   objectives:
   - Run hypothesis-driven hunts across host data.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v1.6).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v1.3).'
   prerequisites:
   - threat-hunting
-  estimated_minutes: 120
+  estimated_minutes: 180
   tags:
   - defensive
   - hunt
-  - advanced
+  - expert
   - debian
-  - report-exporter
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-debian-monitor-webhook-receiver-1-8
-  name: 'Log Investigation Lab: unvalidated webhook receiver v1.8 — Debian monitoring'
+- id: log-investigation-ssh-linux-webhook-receiver-1-8
+  name: 'Log Investigation Lab: unvalidated webhook receiver v1.8 — Debian + OpenSSH'
   category: defensive
   difficulty: hard
   os_family: debian
   arch: x86_64
-  base_image_key: debian-13-monitoring
+  base_image_key: debian-13-server
   vcpu: 2
   memory_mb: 3072
   disk_gb: 16
   network_mode: isolated
   packages:
-  - rsyslog
-  - auditd
+  - openssh-server
+  - sudo
   - webhook-receiver
   services:
-  - rsyslog
+  - ssh
   provisioning:
-    golden_image: debian-13-monitoring
+    golden_image: debian-13-server
     role: log-investigation
     component: webhook-receiver
     version: '1.8'
@@ -1584,8 +1929,180 @@
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-nginx-php-message-queue-1-8
-  name: 'Log Investigation Lab: exposed message queue v1.8 — nginx + PHP-FPM'
+- id: log-investigation-debian-monitor-api-gateway-2-2
+  name: 'Log Investigation Lab: permissive API gateway v2.2 — Debian monitoring'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - api-gateway
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: log-investigation
+    component: api-gateway
+    version: '2.2'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v2.2).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-legacy-cgi-2-7
+  name: 'Detection Engineering Lab: legacy CGI handler v2.7 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - legacy-cgi
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: legacy-cgi
+    version: '2.7'
+    level: advanced
+  objectives:
+  - Develop and validate detection rules.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v2.7).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - detection
+  - advanced
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-ssh-linux-webhook-receiver-2-8
+  name: 'Incident Investigation Lab: unvalidated webhook receiver v2.8 — Debian + OpenSSH'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: incident
+    component: webhook-receiver
+    version: '2.8'
+    level: advanced
+  objectives:
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.8).'
+  prerequisites:
+  - incident-response
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - ir
+  - advanced
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - incident-response
+- id: threat-hunt-debian-monitor-report-exporter-2-0
+  name: 'Threat Hunting Lab: template-injectable report exporter v2.0 — Debian monitoring'
+  category: defensive
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - report-exporter
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: report-exporter
+    version: '2.0'
+    level: expert
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v2.0).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 180
+  tags:
+  - defensive
+  - hunt
+  - expert
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-nginx-php-backup-agent-2-5
+  name: 'Log Investigation Lab: over-privileged backup agent v2.5 — nginx + PHP-FPM'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -1598,193 +2115,21 @@
   packages:
   - nginx
   - php-fpm
-  - message-queue
+  - backup-agent
   services:
   - nginx
   - php-fpm
   provisioning:
     golden_image: debian-13-web
     role: log-investigation
-    component: message-queue
-    version: '1.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v1.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: incident-ssh-linux-job-runner-1-5
-  name: 'Incident Investigation Lab: injectable job runner v1.5 — Debian + OpenSSH'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - job-runner
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: incident
-    component: job-runner
-    version: '1.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v1.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: log-investigation-ssh-linux-job-runner-1-8
-  name: 'Log Investigation Lab: injectable job runner v1.8 — Debian + OpenSSH'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - job-runner
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: log-investigation
-    component: job-runner
-    version: '1.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v1.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: incident-debian-monitor-backup-agent-1-5
-  name: 'Incident Investigation Lab: over-privileged backup agent v1.5 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - backup-agent
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: incident
     component: backup-agent
-    version: '1.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v1.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: log-investigation-debian-monitor-backup-agent-2-8
-  name: 'Log Investigation Lab: over-privileged backup agent v2.8 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - backup-agent
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: log-investigation
-    component: backup-agent
-    version: '2.8'
+    version: '2.5'
     level: hard
   objectives:
   - Investigate activity from host and service logs.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v2.8).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v2.5).'
   prerequisites:
   - log-analysis
   estimated_minutes: 90
@@ -1800,8 +2145,8 @@
   lab_id: null
   course_ids:
   - log-analysis
-- id: detection-debian-monitor-admin-panel-2-4
-  name: 'Detection Engineering Lab: weak admin panel v2.4 — Debian monitoring'
+- id: detection-debian-monitor-admin-panel-2-1
+  name: 'Detection Engineering Lab: weak admin panel v2.1 — Debian monitoring'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -1821,13 +2166,13 @@
     golden_image: debian-13-monitoring
     role: detection
     component: admin-panel
-    version: '2.4'
+    version: '2.1'
     level: hard
   objectives:
   - Develop and validate detection rules.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v2.4).'
+  - 'Focus: identify and remediate the weak admin panel (v2.1).'
   prerequisites:
   - detection-engineering
   estimated_minutes: 90
@@ -1843,34 +2188,34 @@
   lab_id: null
   course_ids:
   - detection-engineering
-- id: incident-ssh-linux-api-gateway-2-5
-  name: 'Incident Investigation Lab: permissive API gateway v2.5 — Debian + OpenSSH'
+- id: incident-debian-monitor-api-gateway-2-2
+  name: 'Incident Investigation Lab: permissive API gateway v2.2 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
   arch: x86_64
-  base_image_key: debian-13-server
+  base_image_key: debian-13-monitoring
   vcpu: 4
   memory_mb: 4096
   disk_gb: 20
   network_mode: isolated
   packages:
-  - openssh-server
-  - sudo
+  - rsyslog
+  - auditd
   - api-gateway
   services:
-  - ssh
+  - rsyslog
   provisioning:
-    golden_image: debian-13-server
+    golden_image: debian-13-monitoring
     role: incident
     component: api-gateway
-    version: '2.5'
+    version: '2.2'
     level: advanced
   objectives:
   - Reconstruct an incident from available evidence.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v2.5).'
+  - 'Focus: identify and remediate the permissive API gateway (v2.2).'
   prerequisites:
   - incident-response
   estimated_minutes: 120
@@ -1886,8 +2231,8 @@
   lab_id: null
   course_ids:
   - incident-response
-- id: threat-hunt-debian-monitor-file-service-2-6
-  name: 'Threat Hunting Lab: unsafe file service v2.6 — Debian monitoring'
+- id: threat-hunt-debian-monitor-file-service-2-3
+  name: 'Threat Hunting Lab: unsafe file service v2.3 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -1907,13 +2252,13 @@
     golden_image: debian-13-monitoring
     role: threat-hunt
     component: file-service
-    version: '2.6'
+    version: '2.3'
     level: advanced
   objectives:
   - Run hypothesis-driven hunts across host data.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v2.6).'
+  - 'Focus: identify and remediate the unsafe file service (v2.3).'
   prerequisites:
   - threat-hunting
   estimated_minutes: 120
@@ -1929,8 +2274,352 @@
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-nginx-php-api-gateway-2-8
-  name: 'Log Investigation Lab: permissive API gateway v2.8 — nginx + PHP-FPM'
+- id: log-investigation-ssh-linux-job-runner-2-8
+  name: 'Log Investigation Lab: injectable job runner v2.8 — Debian + OpenSSH'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - job-runner
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: log-investigation
+    component: job-runner
+    version: '2.8'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v2.8).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-import-tool-2-4
+  name: 'Detection Engineering Lab: unsafe import tool v2.4 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - import-tool
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: import-tool
+    version: '2.4'
+    level: advanced
+  objectives:
+  - Develop and validate detection rules.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v2.4).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - detection
+  - advanced
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-ssh-linux-backup-agent-2-5
+  name: 'Incident Investigation Lab: over-privileged backup agent v2.5 — Debian + OpenSSH'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: incident
+    component: backup-agent
+    version: '2.5'
+    level: advanced
+  objectives:
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v2.5).'
+  prerequisites:
+  - incident-response
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - ir
+  - advanced
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - incident-response
+- id: threat-hunt-debian-monitor-reverse-proxy-2-6
+  name: 'Threat Hunting Lab: misconfigured reverse proxy v2.6 — Debian monitoring'
+  category: defensive
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - reverse-proxy
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: reverse-proxy
+    version: '2.6'
+    level: expert
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.6).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 180
+  tags:
+  - defensive
+  - hunt
+  - expert
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-debian-monitor-message-queue-2-2
+  name: 'Log Investigation Lab: exposed message queue v2.2 — Debian monitoring'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - message-queue
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: log-investigation
+    component: message-queue
+    version: '2.2'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v2.2).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-auth-proxy-2-7
+  name: 'Detection Engineering Lab: flawed auth proxy v2.7 — Debian monitoring'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - auth-proxy
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: auth-proxy
+    version: '2.7'
+    level: hard
+  objectives:
+  - Develop and validate detection rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v2.7).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - detection
+  - hard
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-debian-monitor-job-runner-2-8
+  name: 'Incident Investigation Lab: injectable job runner v2.8 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - job-runner
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: incident
+    component: job-runner
+    version: '2.8'
+    level: advanced
+  objectives:
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v2.8).'
+  prerequisites:
+  - incident-response
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - ir
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - incident-response
+- id: threat-hunt-debian-monitor-metrics-endpoint-2-0
+  name: 'Threat Hunting Lab: leaky metrics endpoint v2.0 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - metrics-endpoint
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: metrics-endpoint
+    version: '2.0'
+    level: advanced
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.0).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - hunt
+  - advanced
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-nginx-php-webhook-receiver-2-5
+  name: 'Log Investigation Lab: unvalidated webhook receiver v2.5 — nginx + PHP-FPM'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -1943,12 +2632,184 @@
   packages:
   - nginx
   - php-fpm
-  - api-gateway
+  - webhook-receiver
   services:
   - nginx
   - php-fpm
   provisioning:
     golden_image: debian-13-web
+    role: log-investigation
+    component: webhook-receiver
+    version: '2.5'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.5).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-cache-layer-2-1
+  name: 'Detection Engineering Lab: insecure cache layer v2.1 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - cache-layer
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: cache-layer
+    version: '2.1'
+    level: advanced
+  objectives:
+  - Develop and validate detection rules.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v2.1).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - detection
+  - advanced
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-ssh-linux-message-queue-2-2
+  name: 'Incident Investigation Lab: exposed message queue v2.2 — Debian + OpenSSH'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - message-queue
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: incident
+    component: message-queue
+    version: '2.2'
+    level: advanced
+  objectives:
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v2.2).'
+  prerequisites:
+  - incident-response
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - ir
+  - advanced
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - incident-response
+- id: threat-hunt-debian-monitor-search-index-2-3
+  name: 'Threat Hunting Lab: unauthenticated search index v2.3 — Debian monitoring'
+  category: defensive
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - search-index
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: search-index
+    version: '2.3'
+    level: expert
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v2.3).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 180
+  tags:
+  - defensive
+  - hunt
+  - expert
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-ssh-linux-api-gateway-2-8
+  name: 'Log Investigation Lab: permissive API gateway v2.8 — Debian + OpenSSH'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - api-gateway
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
     role: log-investigation
     component: api-gateway
     version: '2.8'
@@ -2102,34 +2963,34 @@
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-ssh-linux-webhook-receiver-2-8
-  name: 'Log Investigation Lab: unvalidated webhook receiver v2.8 — Debian + OpenSSH'
+- id: log-investigation-debian-monitor-backup-agent-2-2
+  name: 'Log Investigation Lab: over-privileged backup agent v2.2 — Debian monitoring'
   category: defensive
   difficulty: hard
   os_family: debian
   arch: x86_64
-  base_image_key: debian-13-server
+  base_image_key: debian-13-monitoring
   vcpu: 2
   memory_mb: 3072
   disk_gb: 16
   network_mode: isolated
   packages:
-  - openssh-server
-  - sudo
-  - webhook-receiver
+  - rsyslog
+  - auditd
+  - backup-agent
   services:
-  - ssh
+  - rsyslog
   provisioning:
-    golden_image: debian-13-server
+    golden_image: debian-13-monitoring
     role: log-investigation
-    component: webhook-receiver
-    version: '2.8'
+    component: backup-agent
+    version: '2.2'
     level: hard
   objectives:
   - Investigate activity from host and service logs.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.8).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v2.2).'
   prerequisites:
   - log-analysis
   estimated_minutes: 90
@@ -2138,58 +2999,58 @@
   - logs
   - hard
   - debian
-  - webhook-receiver
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - log-analysis
-- id: detection-debian-monitor-cache-layer-2-4
-  name: 'Detection Engineering Lab: insecure cache layer v2.4 — Debian monitoring'
+- id: detection-debian-monitor-admin-panel-2-7
+  name: 'Detection Engineering Lab: weak admin panel v2.7 — Debian monitoring'
   category: defensive
-  difficulty: hard
+  difficulty: advanced
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - rsyslog
   - auditd
-  - cache-layer
+  - admin-panel
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: detection
-    component: cache-layer
-    version: '2.4'
-    level: hard
+    component: admin-panel
+    version: '2.7'
+    level: advanced
   objectives:
   - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v2.4).'
+  - 'Focus: identify and remediate the weak admin panel (v2.7).'
   prerequisites:
   - detection-engineering
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - defensive
   - detection
-  - hard
+  - advanced
   - debian
-  - cache-layer
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - detection-engineering
-- id: incident-ssh-linux-message-queue-2-5
-  name: 'Incident Investigation Lab: exposed message queue v2.5 — Debian + OpenSSH'
+- id: incident-ssh-linux-api-gateway-2-8
+  name: 'Incident Investigation Lab: permissive API gateway v2.8 — Debian + OpenSSH'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -2202,192 +3063,20 @@
   packages:
   - openssh-server
   - sudo
-  - message-queue
+  - api-gateway
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: incident
-    component: message-queue
-    version: '2.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v2.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: threat-hunt-debian-monitor-search-index-2-6
-  name: 'Threat Hunting Lab: unauthenticated search index v2.6 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - search-index
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: threat-hunt
-    component: search-index
-    version: '2.6'
-    level: advanced
-  objectives:
-  - Run hypothesis-driven hunts across host data.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v2.6).'
-  prerequisites:
-  - threat-hunting
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - hunt
-  - advanced
-  - debian
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - threat-hunting
-- id: log-investigation-debian-monitor-message-queue-2-8
-  name: 'Log Investigation Lab: exposed message queue v2.8 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - message-queue
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: log-investigation
-    component: message-queue
+    component: api-gateway
     version: '2.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v2.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: detection-debian-monitor-auth-proxy-2-4
-  name: 'Detection Engineering Lab: flawed auth proxy v2.4 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - auth-proxy
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: detection
-    component: auth-proxy
-    version: '2.4'
-    level: hard
-  objectives:
-  - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v2.4).'
-  prerequisites:
-  - detection-engineering
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - detection
-  - hard
-  - debian
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - detection-engineering
-- id: incident-debian-monitor-job-runner-2-5
-  name: 'Incident Investigation Lab: injectable job runner v2.5 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - job-runner
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: incident
-    component: job-runner
-    version: '2.5'
     level: advanced
   objectives:
   - Reconstruct an incident from available evidence.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v2.5).'
+  - 'Focus: identify and remediate the permissive API gateway (v2.8).'
   prerequisites:
   - incident-response
   estimated_minutes: 120
@@ -2396,58 +3085,58 @@
   - ir
   - advanced
   - debian
-  - job-runner
+  - api-gateway
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - incident-response
-- id: threat-hunt-debian-monitor-metrics-endpoint-2-6
-  name: 'Threat Hunting Lab: leaky metrics endpoint v2.6 — Debian monitoring'
+- id: threat-hunt-debian-monitor-file-service-2-0
+  name: 'Threat Hunting Lab: unsafe file service v2.0 — Debian monitoring'
   category: defensive
-  difficulty: advanced
+  difficulty: expert
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
   vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
+  memory_mb: 6144
+  disk_gb: 30
   network_mode: isolated
   packages:
   - rsyslog
   - auditd
-  - metrics-endpoint
+  - file-service
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: threat-hunt
-    component: metrics-endpoint
-    version: '2.6'
-    level: advanced
+    component: file-service
+    version: '2.0'
+    level: expert
   objectives:
   - Run hypothesis-driven hunts across host data.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v2.6).'
+  - 'Focus: identify and remediate the unsafe file service (v2.0).'
   prerequisites:
   - threat-hunting
-  estimated_minutes: 120
+  estimated_minutes: 180
   tags:
   - defensive
   - hunt
-  - advanced
+  - expert
   - debian
-  - metrics-endpoint
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-nginx-php-job-runner-2-8
-  name: 'Log Investigation Lab: injectable job runner v2.8 — nginx + PHP-FPM'
+- id: log-investigation-nginx-php-job-runner-3-5
+  name: 'Log Investigation Lab: injectable job runner v3.5 — nginx + PHP-FPM'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -2468,13 +3157,13 @@
     golden_image: debian-13-web
     role: log-investigation
     component: job-runner
-    version: '2.8'
+    version: '3.5'
     level: hard
   objectives:
   - Investigate activity from host and service logs.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v2.8).'
+  - 'Focus: identify and remediate the injectable job runner (v3.5).'
   prerequisites:
   - log-analysis
   estimated_minutes: 90
@@ -2490,8 +3179,8 @@
   lab_id: null
   course_ids:
   - log-analysis
-- id: detection-debian-monitor-import-tool-2-4
-  name: 'Detection Engineering Lab: unsafe import tool v2.4 — Debian monitoring'
+- id: detection-debian-monitor-import-tool-3-1
+  name: 'Detection Engineering Lab: unsafe import tool v3.1 — Debian monitoring'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -2511,13 +3200,13 @@
     golden_image: debian-13-monitoring
     role: detection
     component: import-tool
-    version: '2.4'
+    version: '3.1'
     level: hard
   objectives:
   - Develop and validate detection rules.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v2.4).'
+  - 'Focus: identify and remediate the unsafe import tool (v3.1).'
   prerequisites:
   - detection-engineering
   estimated_minutes: 90
@@ -2533,34 +3222,34 @@
   lab_id: null
   course_ids:
   - detection-engineering
-- id: incident-ssh-linux-backup-agent-2-5
-  name: 'Incident Investigation Lab: over-privileged backup agent v2.5 — Debian + OpenSSH'
+- id: incident-debian-monitor-backup-agent-3-2
+  name: 'Incident Investigation Lab: over-privileged backup agent v3.2 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
   arch: x86_64
-  base_image_key: debian-13-server
+  base_image_key: debian-13-monitoring
   vcpu: 4
   memory_mb: 4096
   disk_gb: 20
   network_mode: isolated
   packages:
-  - openssh-server
-  - sudo
+  - rsyslog
+  - auditd
   - backup-agent
   services:
-  - ssh
+  - rsyslog
   provisioning:
-    golden_image: debian-13-server
+    golden_image: debian-13-monitoring
     role: incident
     component: backup-agent
-    version: '2.5'
+    version: '3.2'
     level: advanced
   objectives:
   - Reconstruct an incident from available evidence.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v2.5).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.2).'
   prerequisites:
   - incident-response
   estimated_minutes: 120
@@ -2576,8 +3265,8 @@
   lab_id: null
   course_ids:
   - incident-response
-- id: threat-hunt-debian-monitor-reverse-proxy-2-6
-  name: 'Threat Hunting Lab: misconfigured reverse proxy v2.6 — Debian monitoring'
+- id: threat-hunt-debian-monitor-reverse-proxy-3-3
+  name: 'Threat Hunting Lab: misconfigured reverse proxy v3.3 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -2597,13 +3286,13 @@
     golden_image: debian-13-monitoring
     role: threat-hunt
     component: reverse-proxy
-    version: '2.6'
+    version: '3.3'
     level: advanced
   objectives:
   - Run hypothesis-driven hunts across host data.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.6).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.3).'
   prerequisites:
   - threat-hunting
   estimated_minutes: 120
@@ -2613,351 +3302,6 @@
   - advanced
   - debian
   - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - threat-hunting
-- id: log-investigation-ssh-linux-backup-agent-2-8
-  name: 'Log Investigation Lab: over-privileged backup agent v2.8 — Debian + OpenSSH'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - backup-agent
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: log-investigation
-    component: backup-agent
-    version: '2.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v2.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: incident-debian-monitor-api-gateway-2-5
-  name: 'Incident Investigation Lab: permissive API gateway v2.5 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - api-gateway
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: incident
-    component: api-gateway
-    version: '2.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v2.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: log-investigation-debian-monitor-api-gateway-2-8
-  name: 'Log Investigation Lab: permissive API gateway v2.8 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - api-gateway
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: log-investigation
-    component: api-gateway
-    version: '2.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v2.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: incident-ssh-linux-webhook-receiver-2-5
-  name: 'Incident Investigation Lab: unvalidated webhook receiver v2.5 — Debian + OpenSSH'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - webhook-receiver
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: incident
-    component: webhook-receiver
-    version: '2.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: log-investigation-nginx-php-webhook-receiver-3-8
-  name: 'Log Investigation Lab: unvalidated webhook receiver v3.8 — nginx + PHP-FPM'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - webhook-receiver
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: log-investigation
-    component: webhook-receiver
-    version: '3.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: detection-debian-monitor-cache-layer-3-4
-  name: 'Detection Engineering Lab: insecure cache layer v3.4 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - cache-layer
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: detection
-    component: cache-layer
-    version: '3.4'
-    level: hard
-  objectives:
-  - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v3.4).'
-  prerequisites:
-  - detection-engineering
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - detection
-  - hard
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - detection-engineering
-- id: incident-debian-monitor-message-queue-3-5
-  name: 'Incident Investigation Lab: exposed message queue v3.5 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - message-queue
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: incident
-    component: message-queue
-    version: '3.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v3.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: threat-hunt-debian-monitor-search-index-3-6
-  name: 'Threat Hunting Lab: unauthenticated search index v3.6 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - search-index
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: threat-hunt
-    component: search-index
-    version: '3.6'
-    level: advanced
-  objectives:
-  - Run hypothesis-driven hunts across host data.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v3.6).'
-  prerequisites:
-  - threat-hunting
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - hunt
-  - advanced
-  - debian
-  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -3010,13 +3354,13 @@
 - id: detection-debian-monitor-auth-proxy-3-4
   name: 'Detection Engineering Lab: flawed auth proxy v3.4 — Debian monitoring'
   category: defensive
-  difficulty: hard
+  difficulty: advanced
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - rsyslog
@@ -3029,19 +3373,19 @@
     role: detection
     component: auth-proxy
     version: '3.4'
-    level: hard
+    level: advanced
   objectives:
   - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the flawed auth proxy (v3.4).'
   prerequisites:
   - detection-engineering
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - defensive
   - detection
-  - hard
+  - advanced
   - debian
   - auth-proxy
   reset_supported: true
@@ -3096,13 +3440,13 @@
 - id: threat-hunt-debian-monitor-metrics-endpoint-3-6
   name: 'Threat Hunting Lab: leaky metrics endpoint v3.6 — Debian monitoring'
   category: defensive
-  difficulty: advanced
+  difficulty: expert
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
   vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
+  memory_mb: 6144
+  disk_gb: 30
   network_mode: isolated
   packages:
   - rsyslog
@@ -3115,7 +3459,7 @@
     role: threat-hunt
     component: metrics-endpoint
     version: '3.6'
-    level: advanced
+    level: expert
   objectives:
   - Run hypothesis-driven hunts across host data.
   - Work with minimal guidance; justify decisions and document findings.
@@ -3123,11 +3467,11 @@
   - 'Focus: identify and remediate the leaky metrics endpoint (v3.6).'
   prerequisites:
   - threat-hunting
-  estimated_minutes: 120
+  estimated_minutes: 180
   tags:
   - defensive
   - hunt
-  - advanced
+  - expert
   - debian
   - metrics-endpoint
   reset_supported: true
@@ -3136,8 +3480,8 @@
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-debian-monitor-job-runner-3-8
-  name: 'Log Investigation Lab: injectable job runner v3.8 — Debian monitoring'
+- id: log-investigation-debian-monitor-webhook-receiver-3-2
+  name: 'Log Investigation Lab: unvalidated webhook receiver v3.2 — Debian monitoring'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -3150,20 +3494,20 @@
   packages:
   - rsyslog
   - auditd
-  - job-runner
+  - webhook-receiver
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: log-investigation
-    component: job-runner
-    version: '3.8'
+    component: webhook-receiver
+    version: '3.2'
     level: hard
   objectives:
   - Investigate activity from host and service logs.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v3.8).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.2).'
   prerequisites:
   - log-analysis
   estimated_minutes: 90
@@ -3172,15 +3516,15 @@
   - logs
   - hard
   - debian
-  - job-runner
+  - webhook-receiver
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - log-analysis
-- id: detection-debian-monitor-import-tool-3-4
-  name: 'Detection Engineering Lab: unsafe import tool v3.4 — Debian monitoring'
+- id: detection-debian-monitor-cache-layer-3-7
+  name: 'Detection Engineering Lab: insecure cache layer v3.7 — Debian monitoring'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -3193,20 +3537,20 @@
   packages:
   - rsyslog
   - auditd
-  - import-tool
+  - cache-layer
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: detection
-    component: import-tool
-    version: '3.4'
+    component: cache-layer
+    version: '3.7'
     level: hard
   objectives:
   - Develop and validate detection rules.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v3.4).'
+  - 'Focus: identify and remediate the insecure cache layer (v3.7).'
   prerequisites:
   - detection-engineering
   estimated_minutes: 90
@@ -3215,15 +3559,15 @@
   - detection
   - hard
   - debian
-  - import-tool
+  - cache-layer
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - detection-engineering
-- id: incident-debian-monitor-backup-agent-3-5
-  name: 'Incident Investigation Lab: over-privileged backup agent v3.5 — Debian monitoring'
+- id: incident-debian-monitor-message-queue-3-8
+  name: 'Incident Investigation Lab: exposed message queue v3.8 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -3236,20 +3580,20 @@
   packages:
   - rsyslog
   - auditd
-  - backup-agent
+  - message-queue
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: incident
-    component: backup-agent
-    version: '3.5'
+    component: message-queue
+    version: '3.8'
     level: advanced
   objectives:
   - Reconstruct an incident from available evidence.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v3.5).'
+  - 'Focus: identify and remediate the exposed message queue (v3.8).'
   prerequisites:
   - incident-response
   estimated_minutes: 120
@@ -3258,15 +3602,15 @@
   - ir
   - advanced
   - debian
-  - backup-agent
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - incident-response
-- id: threat-hunt-debian-monitor-reverse-proxy-3-6
-  name: 'Threat Hunting Lab: misconfigured reverse proxy v3.6 — Debian monitoring'
+- id: threat-hunt-debian-monitor-search-index-3-0
+  name: 'Threat Hunting Lab: unauthenticated search index v3.0 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -3279,20 +3623,20 @@
   packages:
   - rsyslog
   - auditd
-  - reverse-proxy
+  - search-index
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: threat-hunt
-    component: reverse-proxy
-    version: '3.6'
+    component: search-index
+    version: '3.0'
     level: advanced
   objectives:
   - Run hypothesis-driven hunts across host data.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.6).'
+  - 'Focus: identify and remediate the unauthenticated search index (v3.0).'
   prerequisites:
   - threat-hunting
   estimated_minutes: 120
@@ -3301,15 +3645,15 @@
   - hunt
   - advanced
   - debian
-  - reverse-proxy
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-nginx-php-backup-agent-3-8
-  name: 'Log Investigation Lab: over-privileged backup agent v3.8 — nginx + PHP-FPM'
+- id: log-investigation-nginx-php-api-gateway-3-5
+  name: 'Log Investigation Lab: permissive API gateway v3.5 — nginx + PHP-FPM'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -3322,12 +3666,184 @@
   packages:
   - nginx
   - php-fpm
-  - backup-agent
+  - api-gateway
   services:
   - nginx
   - php-fpm
   provisioning:
     golden_image: debian-13-web
+    role: log-investigation
+    component: api-gateway
+    version: '3.5'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v3.5).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-legacy-cgi-3-1
+  name: 'Detection Engineering Lab: legacy CGI handler v3.1 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - legacy-cgi
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: legacy-cgi
+    version: '3.1'
+    level: advanced
+  objectives:
+  - Develop and validate detection rules.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v3.1).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - detection
+  - advanced
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-ssh-linux-webhook-receiver-3-2
+  name: 'Incident Investigation Lab: unvalidated webhook receiver v3.2 — Debian + OpenSSH'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: incident
+    component: webhook-receiver
+    version: '3.2'
+    level: advanced
+  objectives:
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.2).'
+  prerequisites:
+  - incident-response
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - ir
+  - advanced
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - incident-response
+- id: threat-hunt-debian-monitor-report-exporter-3-3
+  name: 'Threat Hunting Lab: template-injectable report exporter v3.3 — Debian monitoring'
+  category: defensive
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - report-exporter
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: report-exporter
+    version: '3.3'
+    level: expert
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v3.3).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 180
+  tags:
+  - defensive
+  - hunt
+  - expert
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-ssh-linux-backup-agent-3-8
+  name: 'Log Investigation Lab: over-privileged backup agent v3.8 — Debian + OpenSSH'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
     role: log-investigation
     component: backup-agent
     version: '3.8'
@@ -3395,25 +3911,25 @@
   lab_id: null
   course_ids:
   - detection-engineering
-- id: incident-ssh-linux-api-gateway-3-5
-  name: 'Incident Investigation Lab: permissive API gateway v3.5 — Debian + OpenSSH'
+- id: incident-debian-monitor-api-gateway-3-5
+  name: 'Incident Investigation Lab: permissive API gateway v3.5 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
   arch: x86_64
-  base_image_key: debian-13-server
+  base_image_key: debian-13-monitoring
   vcpu: 4
   memory_mb: 4096
   disk_gb: 20
   network_mode: isolated
   packages:
-  - openssh-server
-  - sudo
+  - rsyslog
+  - auditd
   - api-gateway
   services:
-  - ssh
+  - rsyslog
   provisioning:
-    golden_image: debian-13-server
+    golden_image: debian-13-monitoring
     role: incident
     component: api-gateway
     version: '3.5'
@@ -3481,51 +3997,8 @@
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-ssh-linux-api-gateway-3-8
-  name: 'Log Investigation Lab: permissive API gateway v3.8 — Debian + OpenSSH'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - api-gateway
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: log-investigation
-    component: api-gateway
-    version: '3.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v3.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: detection-debian-monitor-legacy-cgi-3-4
-  name: 'Detection Engineering Lab: legacy CGI handler v3.4 — Debian monitoring'
+- id: log-investigation-debian-monitor-job-runner-3-2
+  name: 'Log Investigation Lab: injectable job runner v3.2 — Debian monitoring'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -3538,166 +4011,80 @@
   packages:
   - rsyslog
   - auditd
-  - legacy-cgi
+  - job-runner
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: log-investigation
+    component: job-runner
+    version: '3.2'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v3.2).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-import-tool-3-7
+  name: 'Detection Engineering Lab: unsafe import tool v3.7 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - import-tool
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: detection
-    component: legacy-cgi
-    version: '3.4'
-    level: hard
+    component: import-tool
+    version: '3.7'
+    level: advanced
   objectives:
   - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v3.4).'
+  - 'Focus: identify and remediate the unsafe import tool (v3.7).'
   prerequisites:
   - detection-engineering
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - defensive
   - detection
-  - hard
+  - advanced
   - debian
-  - legacy-cgi
+  - import-tool
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - detection-engineering
-- id: incident-debian-monitor-webhook-receiver-3-5
-  name: 'Incident Investigation Lab: unvalidated webhook receiver v3.5 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - webhook-receiver
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: incident
-    component: webhook-receiver
-    version: '3.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: threat-hunt-debian-monitor-report-exporter-3-6
-  name: 'Threat Hunting Lab: template-injectable report exporter v3.6 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - report-exporter
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: threat-hunt
-    component: report-exporter
-    version: '3.6'
-    level: advanced
-  objectives:
-  - Run hypothesis-driven hunts across host data.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v3.6).'
-  prerequisites:
-  - threat-hunting
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - hunt
-  - advanced
-  - debian
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - threat-hunting
-- id: log-investigation-debian-monitor-webhook-receiver-3-8
-  name: 'Log Investigation Lab: unvalidated webhook receiver v3.8 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - webhook-receiver
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: log-investigation
-    component: webhook-receiver
-    version: '3.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: incident-ssh-linux-message-queue-3-5
-  name: 'Incident Investigation Lab: exposed message queue v3.5 — Debian + OpenSSH'
+- id: incident-ssh-linux-backup-agent-3-8
+  name: 'Incident Investigation Lab: over-privileged backup agent v3.8 — Debian + OpenSSH'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -3710,20 +4097,20 @@
   packages:
   - openssh-server
   - sudo
-  - message-queue
+  - backup-agent
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: incident
-    component: message-queue
-    version: '3.5'
+    component: backup-agent
+    version: '3.8'
     level: advanced
   objectives:
   - Reconstruct an incident from available evidence.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v3.5).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.8).'
   prerequisites:
   - incident-response
   estimated_minutes: 120
@@ -3732,15 +4119,58 @@
   - ir
   - advanced
   - debian
-  - message-queue
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - incident-response
-- id: log-investigation-nginx-php-message-queue-3-8
-  name: 'Log Investigation Lab: exposed message queue v3.8 — nginx + PHP-FPM'
+- id: threat-hunt-debian-monitor-reverse-proxy-3-0
+  name: 'Threat Hunting Lab: misconfigured reverse proxy v3.0 — Debian monitoring'
+  category: defensive
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - reverse-proxy
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: reverse-proxy
+    version: '3.0'
+    level: expert
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.0).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 180
+  tags:
+  - defensive
+  - hunt
+  - expert
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-nginx-php-message-queue-3-5
+  name: 'Log Investigation Lab: exposed message queue v3.5 — nginx + PHP-FPM'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -3761,13 +4191,13 @@
     golden_image: debian-13-web
     role: log-investigation
     component: message-queue
-    version: '3.8'
+    version: '3.5'
     level: hard
   objectives:
   - Investigate activity from host and service logs.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v3.8).'
+  - 'Focus: identify and remediate the exposed message queue (v3.5).'
   prerequisites:
   - log-analysis
   estimated_minutes: 90
@@ -3783,8 +4213,51 @@
   lab_id: null
   course_ids:
   - log-analysis
-- id: incident-debian-monitor-job-runner-3-5
-  name: 'Incident Investigation Lab: injectable job runner v3.5 — Debian monitoring'
+- id: detection-debian-monitor-auth-proxy-3-1
+  name: 'Detection Engineering Lab: flawed auth proxy v3.1 — Debian monitoring'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - auth-proxy
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: auth-proxy
+    version: '3.1'
+    level: hard
+  objectives:
+  - Develop and validate detection rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v3.1).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - detection
+  - hard
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-debian-monitor-job-runner-3-2
+  name: 'Incident Investigation Lab: injectable job runner v3.2 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -3804,13 +4277,13 @@
     golden_image: debian-13-monitoring
     role: incident
     component: job-runner
-    version: '3.5'
+    version: '3.2'
     level: advanced
   objectives:
   - Reconstruct an incident from available evidence.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v3.5).'
+  - 'Focus: identify and remediate the injectable job runner (v3.2).'
   prerequisites:
   - incident-response
   estimated_minutes: 120
@@ -3826,6 +4299,566 @@
   lab_id: null
   course_ids:
   - incident-response
+- id: threat-hunt-debian-monitor-metrics-endpoint-3-3
+  name: 'Threat Hunting Lab: leaky metrics endpoint v3.3 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - metrics-endpoint
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: metrics-endpoint
+    version: '3.3'
+    level: advanced
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v3.3).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - hunt
+  - advanced
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-ssh-linux-webhook-receiver-4-8
+  name: 'Log Investigation Lab: unvalidated webhook receiver v4.8 — Debian + OpenSSH'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: log-investigation
+    component: webhook-receiver
+    version: '4.8'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.8).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-cache-layer-4-4
+  name: 'Detection Engineering Lab: insecure cache layer v4.4 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - cache-layer
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: cache-layer
+    version: '4.4'
+    level: advanced
+  objectives:
+  - Develop and validate detection rules.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v4.4).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - detection
+  - advanced
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-ssh-linux-message-queue-4-5
+  name: 'Incident Investigation Lab: exposed message queue v4.5 — Debian + OpenSSH'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - message-queue
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: incident
+    component: message-queue
+    version: '4.5'
+    level: advanced
+  objectives:
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v4.5).'
+  prerequisites:
+  - incident-response
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - ir
+  - advanced
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - incident-response
+- id: threat-hunt-debian-monitor-search-index-4-6
+  name: 'Threat Hunting Lab: unauthenticated search index v4.6 — Debian monitoring'
+  category: defensive
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - search-index
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: search-index
+    version: '4.6'
+    level: expert
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v4.6).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 180
+  tags:
+  - defensive
+  - hunt
+  - expert
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-debian-monitor-api-gateway-4-2
+  name: 'Log Investigation Lab: permissive API gateway v4.2 — Debian monitoring'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - api-gateway
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: log-investigation
+    component: api-gateway
+    version: '4.2'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v4.2).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-legacy-cgi-4-7
+  name: 'Detection Engineering Lab: legacy CGI handler v4.7 — Debian monitoring'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - legacy-cgi
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: legacy-cgi
+    version: '4.7'
+    level: hard
+  objectives:
+  - Develop and validate detection rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v4.7).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - detection
+  - hard
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-debian-monitor-webhook-receiver-4-8
+  name: 'Incident Investigation Lab: unvalidated webhook receiver v4.8 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - webhook-receiver
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: incident
+    component: webhook-receiver
+    version: '4.8'
+    level: advanced
+  objectives:
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.8).'
+  prerequisites:
+  - incident-response
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - ir
+  - advanced
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - incident-response
+- id: threat-hunt-debian-monitor-report-exporter-4-0
+  name: 'Threat Hunting Lab: template-injectable report exporter v4.0 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - report-exporter
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: report-exporter
+    version: '4.0'
+    level: advanced
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v4.0).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - hunt
+  - advanced
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-nginx-php-backup-agent-4-5
+  name: 'Log Investigation Lab: over-privileged backup agent v4.5 — nginx + PHP-FPM'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nginx
+  - php-fpm
+  - backup-agent
+  services:
+  - nginx
+  - php-fpm
+  provisioning:
+    golden_image: debian-13-web
+    role: log-investigation
+    component: backup-agent
+    version: '4.5'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v4.5).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-admin-panel-4-1
+  name: 'Detection Engineering Lab: weak admin panel v4.1 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - admin-panel
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: admin-panel
+    version: '4.1'
+    level: advanced
+  objectives:
+  - Develop and validate detection rules.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v4.1).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - detection
+  - advanced
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-ssh-linux-api-gateway-4-2
+  name: 'Incident Investigation Lab: permissive API gateway v4.2 — Debian + OpenSSH'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - api-gateway
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: incident
+    component: api-gateway
+    version: '4.2'
+    level: advanced
+  objectives:
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v4.2).'
+  prerequisites:
+  - incident-response
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - ir
+  - advanced
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - incident-response
+- id: threat-hunt-debian-monitor-file-service-4-3
+  name: 'Threat Hunting Lab: unsafe file service v4.3 — Debian monitoring'
+  category: defensive
+  difficulty: expert
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 6144
+  disk_gb: 30
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - file-service
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: file-service
+    version: '4.3'
+    level: expert
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v4.3).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 180
+  tags:
+  - defensive
+  - hunt
+  - expert
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
 - id: log-investigation-ssh-linux-job-runner-4-8
   name: 'Log Investigation Lab: injectable job runner v4.8 — Debian + OpenSSH'
   category: defensive
@@ -3912,25 +4945,25 @@
   lab_id: null
   course_ids:
   - detection-engineering
-- id: incident-ssh-linux-backup-agent-4-5
-  name: 'Incident Investigation Lab: over-privileged backup agent v4.5 — Debian + OpenSSH'
+- id: incident-debian-monitor-backup-agent-4-5
+  name: 'Incident Investigation Lab: over-privileged backup agent v4.5 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
   arch: x86_64
-  base_image_key: debian-13-server
+  base_image_key: debian-13-monitoring
   vcpu: 4
   memory_mb: 4096
   disk_gb: 20
   network_mode: isolated
   packages:
-  - openssh-server
-  - sudo
+  - rsyslog
+  - auditd
   - backup-agent
   services:
-  - ssh
+  - rsyslog
   provisioning:
-    golden_image: debian-13-server
+    golden_image: debian-13-monitoring
     role: incident
     component: backup-agent
     version: '4.5'
@@ -3998,8 +5031,8 @@
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-debian-monitor-backup-agent-4-8
-  name: 'Log Investigation Lab: over-privileged backup agent v4.8 — Debian monitoring'
+- id: log-investigation-debian-monitor-message-queue-4-2
+  name: 'Log Investigation Lab: exposed message queue v4.2 — Debian monitoring'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -4012,20 +5045,20 @@
   packages:
   - rsyslog
   - auditd
-  - backup-agent
+  - message-queue
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: log-investigation
-    component: backup-agent
-    version: '4.8'
+    component: message-queue
+    version: '4.2'
     level: hard
   objectives:
   - Investigate activity from host and service logs.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v4.8).'
+  - 'Focus: identify and remediate the exposed message queue (v4.2).'
   prerequisites:
   - log-analysis
   estimated_minutes: 90
@@ -4034,58 +5067,15 @@
   - logs
   - hard
   - debian
-  - backup-agent
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - log-analysis
-- id: detection-debian-monitor-admin-panel-4-4
-  name: 'Detection Engineering Lab: weak admin panel v4.4 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - admin-panel
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: detection
-    component: admin-panel
-    version: '4.4'
-    level: hard
-  objectives:
-  - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v4.4).'
-  prerequisites:
-  - detection-engineering
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - detection
-  - hard
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - detection-engineering
-- id: incident-debian-monitor-api-gateway-4-5
-  name: 'Incident Investigation Lab: permissive API gateway v4.5 — Debian monitoring'
+- id: detection-debian-monitor-auth-proxy-4-7
+  name: 'Detection Engineering Lab: flawed auth proxy v4.7 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -4098,20 +5088,63 @@
   packages:
   - rsyslog
   - auditd
-  - api-gateway
+  - auth-proxy
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
+    role: detection
+    component: auth-proxy
+    version: '4.7'
+    level: advanced
+  objectives:
+  - Develop and validate detection rules.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v4.7).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - detection
+  - advanced
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-ssh-linux-job-runner-4-8
+  name: 'Incident Investigation Lab: injectable job runner v4.8 — Debian + OpenSSH'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - job-runner
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
     role: incident
-    component: api-gateway
-    version: '4.5'
+    component: job-runner
+    version: '4.8'
     level: advanced
   objectives:
   - Reconstruct an incident from available evidence.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v4.5).'
+  - 'Focus: identify and remediate the injectable job runner (v4.8).'
   prerequisites:
   - incident-response
   estimated_minutes: 120
@@ -4120,58 +5153,58 @@
   - ir
   - advanced
   - debian
-  - api-gateway
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - incident-response
-- id: threat-hunt-debian-monitor-file-service-4-6
-  name: 'Threat Hunting Lab: unsafe file service v4.6 — Debian monitoring'
+- id: threat-hunt-debian-monitor-metrics-endpoint-4-0
+  name: 'Threat Hunting Lab: leaky metrics endpoint v4.0 — Debian monitoring'
   category: defensive
-  difficulty: advanced
+  difficulty: expert
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
   vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
+  memory_mb: 6144
+  disk_gb: 30
   network_mode: isolated
   packages:
   - rsyslog
   - auditd
-  - file-service
+  - metrics-endpoint
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: threat-hunt
-    component: file-service
-    version: '4.6'
-    level: advanced
+    component: metrics-endpoint
+    version: '4.0'
+    level: expert
   objectives:
   - Run hypothesis-driven hunts across host data.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v4.6).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.0).'
   prerequisites:
   - threat-hunting
-  estimated_minutes: 120
+  estimated_minutes: 180
   tags:
   - defensive
   - hunt
-  - advanced
+  - expert
   - debian
-  - file-service
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-nginx-php-api-gateway-4-8
-  name: 'Log Investigation Lab: permissive API gateway v4.8 — nginx + PHP-FPM'
+- id: log-investigation-nginx-php-webhook-receiver-4-5
+  name: 'Log Investigation Lab: unvalidated webhook receiver v4.5 — nginx + PHP-FPM'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -4184,12 +5217,184 @@
   packages:
   - nginx
   - php-fpm
-  - api-gateway
+  - webhook-receiver
   services:
   - nginx
   - php-fpm
   provisioning:
     golden_image: debian-13-web
+    role: log-investigation
+    component: webhook-receiver
+    version: '4.5'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.5).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-cache-layer-4-1
+  name: 'Detection Engineering Lab: insecure cache layer v4.1 — Debian monitoring'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - cache-layer
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: detection
+    component: cache-layer
+    version: '4.1'
+    level: hard
+  objectives:
+  - Develop and validate detection rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v4.1).'
+  prerequisites:
+  - detection-engineering
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - detection
+  - hard
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - detection-engineering
+- id: incident-debian-monitor-message-queue-4-2
+  name: 'Incident Investigation Lab: exposed message queue v4.2 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - message-queue
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: incident
+    component: message-queue
+    version: '4.2'
+    level: advanced
+  objectives:
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v4.2).'
+  prerequisites:
+  - incident-response
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - ir
+  - advanced
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - incident-response
+- id: threat-hunt-debian-monitor-search-index-4-3
+  name: 'Threat Hunting Lab: unauthenticated search index v4.3 — Debian monitoring'
+  category: defensive
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - search-index
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: threat-hunt
+    component: search-index
+    version: '4.3'
+    level: advanced
+  objectives:
+  - Run hypothesis-driven hunts across host data.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v4.3).'
+  prerequisites:
+  - threat-hunting
+  estimated_minutes: 120
+  tags:
+  - defensive
+  - hunt
+  - advanced
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - threat-hunting
+- id: log-investigation-ssh-linux-api-gateway-4-8
+  name: 'Log Investigation Lab: permissive API gateway v4.8 — Debian + OpenSSH'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - api-gateway
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
     role: log-investigation
     component: api-gateway
     version: '4.8'
@@ -4217,13 +5422,13 @@
 - id: detection-debian-monitor-legacy-cgi-4-4
   name: 'Detection Engineering Lab: legacy CGI handler v4.4 — Debian monitoring'
   category: defensive
-  difficulty: hard
+  difficulty: advanced
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - rsyslog
@@ -4236,19 +5441,19 @@
     role: detection
     component: legacy-cgi
     version: '4.4'
-    level: hard
+    level: advanced
   objectives:
   - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the legacy CGI handler (v4.4).'
   prerequisites:
   - detection-engineering
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - defensive
   - detection
-  - hard
+  - advanced
   - debian
   - legacy-cgi
   reset_supported: true
@@ -4303,13 +5508,13 @@
 - id: threat-hunt-debian-monitor-report-exporter-4-6
   name: 'Threat Hunting Lab: template-injectable report exporter v4.6 — Debian monitoring'
   category: defensive
-  difficulty: advanced
+  difficulty: expert
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-monitoring
   vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
+  memory_mb: 6144
+  disk_gb: 30
   network_mode: isolated
   packages:
   - rsyslog
@@ -4322,7 +5527,7 @@
     role: threat-hunt
     component: report-exporter
     version: '4.6'
-    level: advanced
+    level: expert
   objectives:
   - Run hypothesis-driven hunts across host data.
   - Work with minimal guidance; justify decisions and document findings.
@@ -4330,11 +5535,11 @@
   - 'Focus: identify and remediate the template-injectable report exporter (v4.6).'
   prerequisites:
   - threat-hunting
-  estimated_minutes: 120
+  estimated_minutes: 180
   tags:
   - defensive
   - hunt
-  - advanced
+  - expert
   - debian
   - report-exporter
   reset_supported: true
@@ -4343,51 +5548,8 @@
   lab_id: null
   course_ids:
   - threat-hunting
-- id: log-investigation-ssh-linux-webhook-receiver-4-8
-  name: 'Log Investigation Lab: unvalidated webhook receiver v4.8 — Debian + OpenSSH'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - webhook-receiver
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: log-investigation
-    component: webhook-receiver
-    version: '4.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: detection-debian-monitor-cache-layer-4-4
-  name: 'Detection Engineering Lab: insecure cache layer v4.4 — Debian monitoring'
+- id: log-investigation-debian-monitor-backup-agent-5-2
+  name: 'Log Investigation Lab: over-privileged backup agent v5.2 — Debian monitoring'
   category: defensive
   difficulty: hard
   os_family: debian
@@ -4400,20 +5562,63 @@
   packages:
   - rsyslog
   - auditd
-  - cache-layer
+  - backup-agent
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: log-investigation
+    component: backup-agent
+    version: '5.2'
+    level: hard
+  objectives:
+  - Investigate activity from host and service logs.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v5.2).'
+  prerequisites:
+  - log-analysis
+  estimated_minutes: 90
+  tags:
+  - defensive
+  - logs
+  - hard
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - log-analysis
+- id: detection-debian-monitor-admin-panel-5-7
+  name: 'Detection Engineering Lab: weak admin panel v5.7 — Debian monitoring'
+  category: defensive
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - admin-panel
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: detection
-    component: cache-layer
-    version: '4.4'
+    component: admin-panel
+    version: '5.7'
     level: hard
   objectives:
   - Develop and validate detection rules.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v4.4).'
+  - 'Focus: identify and remediate the weak admin panel (v5.7).'
   prerequisites:
   - detection-engineering
   estimated_minutes: 90
@@ -4422,15 +5627,15 @@
   - detection
   - hard
   - debian
-  - cache-layer
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - detection-engineering
-- id: incident-debian-monitor-message-queue-4-5
-  name: 'Incident Investigation Lab: exposed message queue v4.5 — Debian monitoring'
+- id: incident-debian-monitor-api-gateway-5-8
+  name: 'Incident Investigation Lab: permissive API gateway v5.8 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -4439,437 +5644,6 @@
   vcpu: 4
   memory_mb: 4096
   disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - message-queue
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: incident
-    component: message-queue
-    version: '4.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v4.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: threat-hunt-debian-monitor-search-index-4-6
-  name: 'Threat Hunting Lab: unauthenticated search index v4.6 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - search-index
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: threat-hunt
-    component: search-index
-    version: '4.6'
-    level: advanced
-  objectives:
-  - Run hypothesis-driven hunts across host data.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v4.6).'
-  prerequisites:
-  - threat-hunting
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - hunt
-  - advanced
-  - debian
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - threat-hunting
-- id: log-investigation-debian-monitor-message-queue-4-8
-  name: 'Log Investigation Lab: exposed message queue v4.8 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - message-queue
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: log-investigation
-    component: message-queue
-    version: '4.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v4.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: detection-debian-monitor-auth-proxy-4-4
-  name: 'Detection Engineering Lab: flawed auth proxy v4.4 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - auth-proxy
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: detection
-    component: auth-proxy
-    version: '4.4'
-    level: hard
-  objectives:
-  - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v4.4).'
-  prerequisites:
-  - detection-engineering
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - detection
-  - hard
-  - debian
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - detection-engineering
-- id: incident-ssh-linux-job-runner-4-5
-  name: 'Incident Investigation Lab: injectable job runner v4.5 — Debian + OpenSSH'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - job-runner
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: incident
-    component: job-runner
-    version: '4.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v4.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: threat-hunt-debian-monitor-metrics-endpoint-4-6
-  name: 'Threat Hunting Lab: leaky metrics endpoint v4.6 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - metrics-endpoint
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: threat-hunt
-    component: metrics-endpoint
-    version: '4.6'
-    level: advanced
-  objectives:
-  - Run hypothesis-driven hunts across host data.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v4.6).'
-  prerequisites:
-  - threat-hunting
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - hunt
-  - advanced
-  - debian
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - threat-hunting
-- id: log-investigation-nginx-php-job-runner-4-8
-  name: 'Log Investigation Lab: injectable job runner v4.8 — nginx + PHP-FPM'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - job-runner
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: log-investigation
-    component: job-runner
-    version: '4.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v4.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: incident-debian-monitor-backup-agent-4-5
-  name: 'Incident Investigation Lab: over-privileged backup agent v4.5 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - backup-agent
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: incident
-    component: backup-agent
-    version: '4.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v4.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: log-investigation-ssh-linux-backup-agent-4-8
-  name: 'Log Investigation Lab: over-privileged backup agent v4.8 — Debian + OpenSSH'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - backup-agent
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: log-investigation
-    component: backup-agent
-    version: '4.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v4.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: incident-ssh-linux-api-gateway-4-5
-  name: 'Incident Investigation Lab: permissive API gateway v4.5 — Debian + OpenSSH'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - api-gateway
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: incident
-    component: api-gateway
-    version: '4.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v4.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: log-investigation-debian-monitor-api-gateway-5-8
-  name: 'Log Investigation Lab: permissive API gateway v5.8 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
   network_mode: isolated
   packages:
   - rsyslog
@@ -4879,22 +5653,22 @@
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
-    role: log-investigation
+    role: incident
     component: api-gateway
     version: '5.8'
-    level: hard
+    level: advanced
   objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
+  - Reconstruct an incident from available evidence.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the permissive API gateway (v5.8).'
   prerequisites:
-  - log-analysis
-  estimated_minutes: 90
+  - incident-response
+  estimated_minutes: 120
   tags:
   - defensive
-  - logs
-  - hard
+  - ir
+  - advanced
   - debian
   - api-gateway
   reset_supported: true
@@ -4902,52 +5676,9 @@
   disposable: true
   lab_id: null
   course_ids:
-  - log-analysis
-- id: detection-debian-monitor-legacy-cgi-5-4
-  name: 'Detection Engineering Lab: legacy CGI handler v5.4 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - legacy-cgi
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: detection
-    component: legacy-cgi
-    version: '5.4'
-    level: hard
-  objectives:
-  - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v5.4).'
-  prerequisites:
-  - detection-engineering
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - detection
-  - hard
-  - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - detection-engineering
-- id: incident-debian-monitor-webhook-receiver-5-5
-  name: 'Incident Investigation Lab: unvalidated webhook receiver v5.5 — Debian monitoring'
+  - incident-response
+- id: threat-hunt-debian-monitor-file-service-5-0
+  name: 'Threat Hunting Lab: unsafe file service v5.0 — Debian monitoring'
   category: defensive
   difficulty: advanced
   os_family: debian
@@ -4960,63 +5691,20 @@
   packages:
   - rsyslog
   - auditd
-  - webhook-receiver
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: incident
-    component: webhook-receiver
-    version: '5.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v5.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: threat-hunt-debian-monitor-report-exporter-5-6
-  name: 'Threat Hunting Lab: template-injectable report exporter v5.6 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - report-exporter
+  - file-service
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: threat-hunt
-    component: report-exporter
-    version: '5.6'
+    component: file-service
+    version: '5.0'
     level: advanced
   objectives:
   - Run hypothesis-driven hunts across host data.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v5.6).'
+  - 'Focus: identify and remediate the unsafe file service (v5.0).'
   prerequisites:
   - threat-hunting
   estimated_minutes: 120
@@ -5025,180 +5713,7 @@
   - hunt
   - advanced
   - debian
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - threat-hunting
-- id: log-investigation-nginx-php-webhook-receiver-5-8
-  name: 'Log Investigation Lab: unvalidated webhook receiver v5.8 — nginx + PHP-FPM'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - nginx
-  - php-fpm
-  - webhook-receiver
-  services:
-  - nginx
-  - php-fpm
-  provisioning:
-    golden_image: debian-13-web
-    role: log-investigation
-    component: webhook-receiver
-    version: '5.8'
-    level: hard
-  objectives:
-  - Investigate activity from host and service logs.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v5.8).'
-  prerequisites:
-  - log-analysis
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - logs
-  - hard
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - log-analysis
-- id: detection-debian-monitor-cache-layer-5-4
-  name: 'Detection Engineering Lab: insecure cache layer v5.4 — Debian monitoring'
-  category: defensive
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - cache-layer
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: detection
-    component: cache-layer
-    version: '5.4'
-    level: hard
-  objectives:
-  - Develop and validate detection rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v5.4).'
-  prerequisites:
-  - detection-engineering
-  estimated_minutes: 90
-  tags:
-  - defensive
-  - detection
-  - hard
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - detection-engineering
-- id: incident-ssh-linux-message-queue-5-5
-  name: 'Incident Investigation Lab: exposed message queue v5.5 — Debian + OpenSSH'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - message-queue
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: incident
-    component: message-queue
-    version: '5.5'
-    level: advanced
-  objectives:
-  - Reconstruct an incident from available evidence.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v5.5).'
-  prerequisites:
-  - incident-response
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - ir
-  - advanced
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - incident-response
-- id: threat-hunt-debian-monitor-search-index-5-6
-  name: 'Threat Hunting Lab: unauthenticated search index v5.6 — Debian monitoring'
-  category: defensive
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - search-index
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: threat-hunt
-    component: search-index
-    version: '5.6'
-    level: advanced
-  objectives:
-  - Run hypothesis-driven hunts across host data.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v5.6).'
-  prerequisites:
-  - threat-hunting
-  estimated_minutes: 120
-  tags:
-  - defensive
-  - hunt
-  - advanced
-  - debian
-  - search-index
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true

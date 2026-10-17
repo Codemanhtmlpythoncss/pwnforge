@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-MIN_PROFILES = 1160
+MIN_PROFILES = 1400
 
 LEVEL_ORDER = ["beginner", "easy", "intermediate", "hard", "advanced", "expert"]
 LEVEL_SHORT = {"beginner": "b", "easy": "e", "intermediate": "i",
@@ -235,6 +235,21 @@ THEMES: list[Theme] = [
           "osint-corroboration", "osint-techniques",
           "Analyse a simulated public footprint and corroborate findings.",
           ["intermediate", "hard", "advanced"], ["osint-station"], ["osint"]),
+    # --- Tool practice ranges (targets to practise the toolkit against) ---
+    Theme("tool-range", "Tool Practice Range", "tools", "tool-scanning",
+          "service-enumeration",
+          "A diverse, owned target for practising scanning and enumeration tools.",
+          ["easy", "intermediate", "hard"], LINUX_STACKS + WEB_STACKS,
+          ["tools", "range"]),
+    Theme("tool-web-range", "Web Tool Range", "tools", "tool-web-proxy",
+          "web-application-security",
+          "An intentionally-flawed web app to practise proxy and discovery tools.",
+          ["intermediate", "hard"], WEB_STACKS, ["tools", "web"]),
+    Theme("ctf-box", "CTF Practice Box", "ctf", "pentest-methodology",
+          "penetration-testing-methodology",
+          "A mixed challenge box for exercising the full toolkit end to end.",
+          ["intermediate", "hard", "advanced"], WEB_STACKS + LINUX_STACKS,
+          ["ctf", "tools"]),
 ]
 
 

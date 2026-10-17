@@ -1,0 +1,64 @@
+id: tool-cyberchef
+title: CyberChef & Data Decoding
+description: The 'cyber swiss army knife' for encoding, decoding and data analysis.
+difficulty: easy
+category: tools
+specialization: defensive
+estimated_minutes: 35
+objectives:
+- Understand recipes & common operations
+prerequisites:
+- cybersecurity-fundamentals
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Recipes & common operations
+  difficulty: easy
+  minutes: 15
+  competency: tool-data-decoding
+  body: 'CyberChef chains *operations* into a **recipe**: base64 decode, URL decode, from-hex, gunzip,
+    XOR, magic-detect, and hundreds more. Drop data in, build a recipe, read the output. `hashid` or `hashcat
+    --identify` names an unknown hash so you pick the right mode. Essential for CTFs, log triage and quick
+    artefact analysis.'
+  exercises:
+  - kind: mcq
+    prompt: 'A CyberChef chain of operations is called a:'
+    choices:
+    - Payload
+    - Recipe
+    - Module
+    - Session
+    answer: Recipe
+    competency: tool-data-decoding
+    explanation: A recipe.
+    points: 10
+    hints: []
+  hints:
+  - text: The 'Magic' operation guesses encodings for you.
+  walkthrough: []
+assessment:
+  title: CyberChef & Data Decoding Assessment
+  questions:
+  - kind: short_answer
+    prompt: A CyberChef operation chain is a ___.
+    answer: recipe
+    competency: tool-data-decoding
+    explanation: Recipe.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Tool/flag to identify an unknown hash type?
+    answer: hashid
+    competency: tool-data-decoding
+    explanation: hashid / --identify.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

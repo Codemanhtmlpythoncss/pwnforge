@@ -1,0 +1,81 @@
+id: tool-bloodhound
+title: 'BloodHound: AD Attack-Path Analysis (Lab)'
+description: Visualise and reason about Active Directory privilege relationships.
+difficulty: advanced
+category: tools
+specialization: active-directory
+estimated_minutes: 40
+objectives:
+- Understand collect & analyse
+prerequisites:
+- tool-crackmapexec
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: enterprise-identity-lab
+version: 1.0.0
+lessons:
+- title: Collect & analyse
+  difficulty: advanced
+  minutes: 20
+  competency: tool-ad-tooling
+  body: 'A collector (e.g. SharpHound/bloodhound-python) gathers directory relationships; BloodHound graphs
+    them so you can see paths from a low-privilege object to high-value ones.
+
+
+    ```
+
+    bloodhound-python -u user -p pass -d lab.local -ns 10.200.0.10 -c all
+
+    ```
+
+    Then run queries like *Shortest Path to Domain Admins*. For defenders, this is the single best way
+    to find and cut dangerous privilege paths before an attacker uses them.
+
+
+    > Only run these tools against systems you own or are explicitly authorised to test — the Pwnforge
+    labs are built for exactly this. Unauthorised scanning or access is unethical and usually unlawful.'
+  exercises:
+  - kind: mcq
+    prompt: 'BloodHound helps you see AD:'
+    choices:
+    - Packet loss
+    - Privilege/attack paths
+    - Web bugs
+    - Hashes
+    answer: Privilege/attack paths
+    competency: tool-ad-tooling
+    explanation: It graphs privilege relationships.
+    points: 10
+    hints: []
+  hints:
+  - text: '''Shortest Path to Domain Admins'' is the classic query.'
+  walkthrough: []
+assessment:
+  title: 'BloodHound: AD Attack-Path Analysis (Lab) Assessment'
+  questions:
+  - kind: mcq
+    prompt: 'BloodHound visualises:'
+    choices:
+    - Traffic
+    - AD privilege paths
+    - Memory
+    - Disks
+    answer: AD privilege paths
+    competency: tool-ad-tooling
+    explanation: Privilege graphs.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: 'Python collector for BloodHound: bloodhound-___?'
+    answer: python
+    competency: tool-ad-tooling
+    explanation: bloodhound-python.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

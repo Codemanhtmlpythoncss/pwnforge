@@ -1,0 +1,87 @@
+id: tool-ghidra
+title: 'Ghidra: Reverse Engineering'
+description: Disassemble and decompile binaries with the NSA's open-source SRE suite.
+difficulty: advanced
+category: tools
+specialization: reverse
+estimated_minutes: 55
+objectives:
+- Understand projects, disassembly & decompiler
+- Understand strings, xrefs & patching
+prerequisites:
+- reverse-engineering-fundamentals
+competency_prereqs: []
+tags:
+- tool
+- hands-on
+references: []
+os_requirements: []
+lab_id: reverse-engineering-lab
+version: 1.0.0
+lessons:
+- title: Projects, disassembly & decompiler
+  difficulty: advanced
+  minutes: 20
+  competency: tool-re-tooling
+  body: Ghidra imports a binary, auto-analyses it, and shows disassembly alongside a C-like **decompiler**
+    view. Navigate the Symbol Tree and function list; rename variables and add comments as you understand
+    them. The decompiler is the fastest way to grasp logic before diving into assembly. Analyse only binaries
+    you're permitted to, inside isolation.
+  exercises:
+  - kind: mcq
+    prompt: 'Ghidra''s standout feature vs a plain disassembler:'
+    choices:
+    - GPU cracking
+    - A decompiler (C-like view)
+    - A web proxy
+    - Packet capture
+    answer: A decompiler (C-like view)
+    competency: tool-re-tooling
+    explanation: The decompiler.
+    points: 10
+    hints: []
+  hints:
+  - text: Rename symbols as you learn them — future-you will thank you.
+  walkthrough: []
+- title: Strings, xrefs & patching
+  difficulty: advanced
+  minutes: 15
+  competency: tool-re-tooling
+  body: '`Window → Defined Strings` finds literals; cross-references (xrefs) show who calls/uses a function
+    or string — the fastest path to the interesting code. Ghidra can also patch instructions and export,
+    useful for CrackMe-style lab challenges.'
+  exercises:
+  - kind: short_answer
+    prompt: 'Show who references a function/string: x___.'
+    answer: refs
+    competency: tool-re-tooling
+    explanation: Cross-references (xrefs).
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: 'Ghidra: Reverse Engineering Assessment'
+  questions:
+  - kind: mcq
+    prompt: 'Ghidra provides a:'
+    choices:
+    - Decompiler
+    - GPU cracker
+    - Proxy
+    - Fuzzer
+    answer: Decompiler
+    competency: tool-re-tooling
+    explanation: C-like decompiler.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Follow who uses a function via cross-___.
+    answer: references
+    competency: tool-re-tooling
+    explanation: Cross-references.
+    points: 10
+    hints: []
+  difficulty: advanced
+  passing_score: 70
+  description: ''

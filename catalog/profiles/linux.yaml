@@ -1436,92 +1436,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: linux-enum-smb-linux-admin-panel-1-4
-  name: 'Linux Enumeration Lab: weak admin panel v1.4 — Debian + Samba'
-  category: linux
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - samba
-  - admin-panel
-  services:
-  - smbd
-  provisioning:
-    golden_image: debian-13-server
-    role: linux-enum
-    component: admin-panel
-    version: '1.4'
-    level: intermediate
-  objectives:
-  - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v1.4).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - linux
-  - enum
-  - intermediate
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: linux-privesc-smb-linux-api-gateway-1-5
-  name: 'Linux Privilege Concepts Lab: permissive API gateway v1.5 — Debian + Samba'
-  category: linux
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - samba
-  - api-gateway
-  services:
-  - smbd
-  provisioning:
-    golden_image: debian-13-server
-    role: linux-privesc
-    component: api-gateway
-    version: '1.5'
-    level: hard
-  objectives:
-  - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v1.5).'
-  prerequisites:
-  - linux-privilege-escalation-concepts
-  estimated_minutes: 90
-  tags:
-  - linux
-  - privesc
-  - hard
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - linux-privilege-escalation-concepts
-- id: linux-hardening-smb-linux-file-service-1-6
-  name: 'Linux Hardening Lab: unsafe file service v1.6 — Debian + Samba'
+- id: linux-enum-smb-linux-auth-proxy-1-7
+  name: 'Linux Enumeration Lab: flawed auth proxy v1.7 — Debian + Samba'
   category: linux
   difficulty: easy
   os_family: debian
@@ -1533,20 +1449,104 @@
   network_mode: isolated
   packages:
   - samba
-  - file-service
+  - auth-proxy
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-enum
+    component: auth-proxy
+    version: '1.7'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v1.7).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-smb-linux-job-runner-1-8
+  name: 'Linux Privilege Concepts Lab: injectable job runner v1.8 — Debian + Samba'
+  category: linux
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - samba
+  - job-runner
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-privesc
+    component: job-runner
+    version: '1.8'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v1.8).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-smb-linux-metrics-endpoint-1-0
+  name: 'Linux Hardening Lab: leaky metrics endpoint v1.0 — Debian + Samba'
+  category: linux
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - samba
+  - metrics-endpoint
   services:
   - smbd
   provisioning:
     golden_image: debian-13-server
     role: linux-hardening
-    component: file-service
-    version: '1.6'
+    component: metrics-endpoint
+    version: '1.0'
     level: easy
   objectives:
   - Reduce a Linux host's attack surface.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v1.6).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v1.0).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 40
@@ -1555,15 +1555,15 @@
   - hardening
   - easy
   - debian
-  - file-service
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: linux-enum-alpine-min-legacy-cgi-1-4
-  name: 'Linux Enumeration Lab: legacy CGI handler v1.4 — Alpine minimal'
+- id: linux-enum-alpine-min-cache-layer-1-1
+  name: 'Linux Enumeration Lab: insecure cache layer v1.1 — Alpine minimal'
   category: linux
   difficulty: intermediate
   os_family: alpine
@@ -1576,20 +1576,20 @@
   packages:
   - openrc
   - openssh
-  - legacy-cgi
+  - cache-layer
   services:
   - sshd
   provisioning:
     golden_image: alpine-base
     role: linux-enum
-    component: legacy-cgi
-    version: '1.4'
+    component: cache-layer
+    version: '1.1'
     level: intermediate
   objectives:
   - Enumerate services and misconfiguration on Linux.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v1.4).'
+  - 'Focus: identify and remediate the insecure cache layer (v1.1).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -1598,15 +1598,15 @@
   - enum
   - intermediate
   - alpine
-  - legacy-cgi
+  - cache-layer
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: linux-privesc-alpine-min-webhook-receiver-1-5
-  name: 'Linux Privilege Concepts Lab: unvalidated webhook receiver v1.5 — Alpine minimal'
+- id: linux-privesc-alpine-min-message-queue-1-2
+  name: 'Linux Privilege Concepts Lab: exposed message queue v1.2 — Alpine minimal'
   category: linux
   difficulty: hard
   os_family: alpine
@@ -1619,20 +1619,20 @@
   packages:
   - openrc
   - openssh
-  - webhook-receiver
+  - message-queue
   services:
   - sshd
   provisioning:
     golden_image: alpine-base
     role: linux-privesc
-    component: webhook-receiver
-    version: '1.5'
+    component: message-queue
+    version: '1.2'
     level: hard
   objectives:
   - Identify and remediate Linux privilege-boundary weaknesses.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.5).'
+  - 'Focus: identify and remediate the exposed message queue (v1.2).'
   prerequisites:
   - linux-privilege-escalation-concepts
   estimated_minutes: 90
@@ -1641,15 +1641,15 @@
   - privesc
   - hard
   - alpine
-  - webhook-receiver
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - linux-privilege-escalation-concepts
-- id: linux-hardening-alpine-min-report-exporter-1-6
-  name: 'Linux Hardening Lab: template-injectable report exporter v1.6 — Alpine minimal'
+- id: linux-hardening-alpine-min-search-index-1-3
+  name: 'Linux Hardening Lab: unauthenticated search index v1.3 — Alpine minimal'
   category: linux
   difficulty: easy
   os_family: alpine
@@ -1662,11 +1662,137 @@
   packages:
   - openrc
   - openssh
-  - report-exporter
+  - search-index
   services:
   - sshd
   provisioning:
     golden_image: alpine-base
+    role: linux-hardening
+    component: search-index
+    version: '1.3'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v1.3).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - alpine
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-ubuntu-srv-legacy-cgi-1-4
+  name: 'Linux Enumeration Lab: legacy CGI handler v1.4 — Ubuntu Server'
+  category: linux
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-enum
+    component: legacy-cgi
+    version: '1.4'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v1.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - ubuntu
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-ubuntu-srv-webhook-receiver-1-5
+  name: 'Linux Privilege Concepts Lab: unvalidated webhook receiver v1.5 — Ubuntu Server'
+  category: linux
+  difficulty: advanced
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-privesc
+    component: webhook-receiver
+    version: '1.5'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.5).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
+  - ubuntu
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-ubuntu-srv-report-exporter-1-6
+  name: 'Linux Hardening Lab: template-injectable report exporter v1.6 — Ubuntu Server'
+  category: linux
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - report-exporter
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
     role: linux-hardening
     component: report-exporter
     version: '1.6'
@@ -1683,7 +1809,7 @@
   - linux
   - hardening
   - easy
-  - alpine
+  - ubuntu
   - report-exporter
   reset_supported: true
   snapshots_supported: true
@@ -1691,134 +1817,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: linux-enum-ubuntu-srv-cache-layer-1-4
-  name: 'Linux Enumeration Lab: insecure cache layer v1.4 — Ubuntu Server'
-  category: linux
-  difficulty: intermediate
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - cache-layer
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-enum
-    component: cache-layer
-    version: '1.4'
-    level: intermediate
-  objectives:
-  - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v1.4).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - linux
-  - enum
-  - intermediate
-  - ubuntu
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: linux-privesc-ubuntu-srv-message-queue-1-5
-  name: 'Linux Privilege Concepts Lab: exposed message queue v1.5 — Ubuntu Server'
-  category: linux
-  difficulty: hard
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - message-queue
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-privesc
-    component: message-queue
-    version: '1.5'
-    level: hard
-  objectives:
-  - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v1.5).'
-  prerequisites:
-  - linux-privilege-escalation-concepts
-  estimated_minutes: 90
-  tags:
-  - linux
-  - privesc
-  - hard
-  - ubuntu
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - linux-privilege-escalation-concepts
-- id: linux-hardening-ubuntu-srv-search-index-1-6
-  name: 'Linux Hardening Lab: unauthenticated search index v1.6 — Ubuntu Server'
-  category: linux
-  difficulty: easy
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-hardening
-    component: search-index
-    version: '1.6'
-    level: easy
-  objectives:
-  - Reduce a Linux host's attack surface.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v1.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 40
-  tags:
-  - linux
-  - hardening
-  - easy
-  - ubuntu
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: linux-enum-freebsd-srv-auth-proxy-1-4
-  name: 'Linux Enumeration Lab: flawed auth proxy v1.4 — FreeBSD Server'
+- id: linux-enum-freebsd-srv-admin-panel-1-7
+  name: 'Linux Enumeration Lab: weak admin panel v1.7 — FreeBSD Server'
   category: linux
   difficulty: intermediate
   os_family: freebsd
@@ -1830,20 +1830,20 @@
   network_mode: isolated
   packages:
   - openssh-portable
-  - auth-proxy
+  - admin-panel
   services:
   - sshd
   provisioning:
     golden_image: freebsd-base
     role: linux-enum
-    component: auth-proxy
-    version: '1.4'
+    component: admin-panel
+    version: '1.7'
     level: intermediate
   objectives:
   - Enumerate services and misconfiguration on Linux.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v1.4).'
+  - 'Focus: identify and remediate the weak admin panel (v1.7).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -1852,15 +1852,15 @@
   - enum
   - intermediate
   - freebsd
-  - auth-proxy
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: linux-privesc-freebsd-srv-job-runner-1-5
-  name: 'Linux Privilege Concepts Lab: injectable job runner v1.5 — FreeBSD Server'
+- id: linux-privesc-freebsd-srv-api-gateway-1-8
+  name: 'Linux Privilege Concepts Lab: permissive API gateway v1.8 — FreeBSD Server'
   category: linux
   difficulty: hard
   os_family: freebsd
@@ -1872,20 +1872,20 @@
   network_mode: isolated
   packages:
   - openssh-portable
-  - job-runner
+  - api-gateway
   services:
   - sshd
   provisioning:
     golden_image: freebsd-base
     role: linux-privesc
-    component: job-runner
-    version: '1.5'
+    component: api-gateway
+    version: '1.8'
     level: hard
   objectives:
   - Identify and remediate Linux privilege-boundary weaknesses.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v1.5).'
+  - 'Focus: identify and remediate the permissive API gateway (v1.8).'
   prerequisites:
   - linux-privilege-escalation-concepts
   estimated_minutes: 90
@@ -1894,15 +1894,15 @@
   - privesc
   - hard
   - freebsd
-  - job-runner
+  - api-gateway
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - linux-privilege-escalation-concepts
-- id: linux-hardening-freebsd-srv-metrics-endpoint-1-6
-  name: 'Linux Hardening Lab: leaky metrics endpoint v1.6 — FreeBSD Server'
+- id: linux-hardening-freebsd-srv-file-service-1-0
+  name: 'Linux Hardening Lab: unsafe file service v1.0 — FreeBSD Server'
   category: linux
   difficulty: easy
   os_family: freebsd
@@ -1914,20 +1914,20 @@
   network_mode: isolated
   packages:
   - openssh-portable
-  - metrics-endpoint
+  - file-service
   services:
   - sshd
   provisioning:
     golden_image: freebsd-base
     role: linux-hardening
-    component: metrics-endpoint
-    version: '1.6'
+    component: file-service
+    version: '1.0'
     level: easy
   objectives:
   - Reduce a Linux host's attack surface.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v1.6).'
+  - 'Focus: identify and remediate the unsafe file service (v1.0).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 40
@@ -1936,404 +1936,23 @@
   - hardening
   - easy
   - freebsd
-  - metrics-endpoint
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: linux-enum-alpine-min-legacy-cgi-2-4
-  name: 'Linux Enumeration Lab: legacy CGI handler v2.4 — Alpine minimal'
-  category: linux
-  difficulty: intermediate
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openrc
-  - openssh
-  - legacy-cgi
-  services:
-  - sshd
-  provisioning:
-    golden_image: alpine-base
-    role: linux-enum
-    component: legacy-cgi
-    version: '2.4'
-    level: intermediate
-  objectives:
-  - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v2.4).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - linux
-  - enum
-  - intermediate
-  - alpine
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: linux-privesc-alpine-min-webhook-receiver-2-5
-  name: 'Linux Privilege Concepts Lab: unvalidated webhook receiver v2.5 — Alpine minimal'
-  category: linux
-  difficulty: hard
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openrc
-  - openssh
-  - webhook-receiver
-  services:
-  - sshd
-  provisioning:
-    golden_image: alpine-base
-    role: linux-privesc
-    component: webhook-receiver
-    version: '2.5'
-    level: hard
-  objectives:
-  - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.5).'
-  prerequisites:
-  - linux-privilege-escalation-concepts
-  estimated_minutes: 90
-  tags:
-  - linux
-  - privesc
-  - hard
-  - alpine
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - linux-privilege-escalation-concepts
-- id: linux-hardening-alpine-min-report-exporter-2-6
-  name: 'Linux Hardening Lab: template-injectable report exporter v2.6 — Alpine minimal'
+- id: linux-enum-ssh-linux-import-tool-1-1
+  name: 'Linux Enumeration Lab: unsafe import tool v1.1 — Debian + OpenSSH'
   category: linux
   difficulty: easy
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openrc
-  - openssh
-  - report-exporter
-  services:
-  - sshd
-  provisioning:
-    golden_image: alpine-base
-    role: linux-hardening
-    component: report-exporter
-    version: '2.6'
-    level: easy
-  objectives:
-  - Reduce a Linux host's attack surface.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v2.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 40
-  tags:
-  - linux
-  - hardening
-  - easy
-  - alpine
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: linux-enum-ubuntu-srv-cache-layer-2-4
-  name: 'Linux Enumeration Lab: insecure cache layer v2.4 — Ubuntu Server'
-  category: linux
-  difficulty: intermediate
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - cache-layer
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-enum
-    component: cache-layer
-    version: '2.4'
-    level: intermediate
-  objectives:
-  - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v2.4).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - linux
-  - enum
-  - intermediate
-  - ubuntu
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: linux-privesc-ubuntu-srv-message-queue-2-5
-  name: 'Linux Privilege Concepts Lab: exposed message queue v2.5 — Ubuntu Server'
-  category: linux
-  difficulty: hard
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - message-queue
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-privesc
-    component: message-queue
-    version: '2.5'
-    level: hard
-  objectives:
-  - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v2.5).'
-  prerequisites:
-  - linux-privilege-escalation-concepts
-  estimated_minutes: 90
-  tags:
-  - linux
-  - privesc
-  - hard
-  - ubuntu
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - linux-privilege-escalation-concepts
-- id: linux-hardening-ubuntu-srv-search-index-2-6
-  name: 'Linux Hardening Lab: unauthenticated search index v2.6 — Ubuntu Server'
-  category: linux
-  difficulty: easy
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-hardening
-    component: search-index
-    version: '2.6'
-    level: easy
-  objectives:
-  - Reduce a Linux host's attack surface.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v2.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 40
-  tags:
-  - linux
-  - hardening
-  - easy
-  - ubuntu
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: linux-enum-freebsd-srv-auth-proxy-2-4
-  name: 'Linux Enumeration Lab: flawed auth proxy v2.4 — FreeBSD Server'
-  category: linux
-  difficulty: intermediate
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-portable
-  - auth-proxy
-  services:
-  - sshd
-  provisioning:
-    golden_image: freebsd-base
-    role: linux-enum
-    component: auth-proxy
-    version: '2.4'
-    level: intermediate
-  objectives:
-  - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v2.4).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - linux
-  - enum
-  - intermediate
-  - freebsd
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: linux-privesc-freebsd-srv-job-runner-2-5
-  name: 'Linux Privilege Concepts Lab: injectable job runner v2.5 — FreeBSD Server'
-  category: linux
-  difficulty: hard
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-portable
-  - job-runner
-  services:
-  - sshd
-  provisioning:
-    golden_image: freebsd-base
-    role: linux-privesc
-    component: job-runner
-    version: '2.5'
-    level: hard
-  objectives:
-  - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v2.5).'
-  prerequisites:
-  - linux-privilege-escalation-concepts
-  estimated_minutes: 90
-  tags:
-  - linux
-  - privesc
-  - hard
-  - freebsd
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - linux-privilege-escalation-concepts
-- id: linux-hardening-freebsd-srv-metrics-endpoint-2-6
-  name: 'Linux Hardening Lab: leaky metrics endpoint v2.6 — FreeBSD Server'
-  category: linux
-  difficulty: easy
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openssh-portable
-  - metrics-endpoint
-  services:
-  - sshd
-  provisioning:
-    golden_image: freebsd-base
-    role: linux-hardening
-    component: metrics-endpoint
-    version: '2.6'
-    level: easy
-  objectives:
-  - Reduce a Linux host's attack surface.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v2.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 40
-  tags:
-  - linux
-  - hardening
-  - easy
-  - freebsd
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: linux-enum-ssh-linux-import-tool-2-4
-  name: 'Linux Enumeration Lab: unsafe import tool v2.4 — Debian + OpenSSH'
-  category: linux
-  difficulty: intermediate
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
   network_mode: isolated
   packages:
   - openssh-server
@@ -2345,20 +1964,20 @@
     golden_image: debian-13-server
     role: linux-enum
     component: import-tool
-    version: '2.4'
-    level: intermediate
+    version: '1.1'
+    level: easy
   objectives:
   - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
+  - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v2.4).'
+  - 'Focus: identify and remediate the unsafe import tool (v1.1).'
   prerequisites:
   - service-enumeration
-  estimated_minutes: 60
+  estimated_minutes: 40
   tags:
   - linux
   - enum
-  - intermediate
+  - easy
   - debian
   - import-tool
   reset_supported: true
@@ -2367,16 +1986,16 @@
   lab_id: null
   course_ids:
   - service-enumeration
-- id: linux-privesc-ssh-linux-backup-agent-2-5
-  name: 'Linux Privilege Concepts Lab: over-privileged backup agent v2.5 — Debian + OpenSSH'
+- id: linux-privesc-ssh-linux-backup-agent-1-2
+  name: 'Linux Privilege Concepts Lab: over-privileged backup agent v1.2 — Debian + OpenSSH'
   category: linux
-  difficulty: hard
+  difficulty: advanced
   os_family: debian
   arch: x86_64
   base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
   - openssh-server
@@ -2388,20 +2007,20 @@
     golden_image: debian-13-server
     role: linux-privesc
     component: backup-agent
-    version: '2.5'
-    level: hard
+    version: '1.2'
+    level: advanced
   objectives:
   - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v2.5).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v1.2).'
   prerequisites:
   - linux-privilege-escalation-concepts
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - linux
   - privesc
-  - hard
+  - advanced
   - debian
   - backup-agent
   reset_supported: true
@@ -2410,8 +2029,8 @@
   lab_id: null
   course_ids:
   - linux-privilege-escalation-concepts
-- id: linux-hardening-ssh-linux-reverse-proxy-2-6
-  name: 'Linux Hardening Lab: misconfigured reverse proxy v2.6 — Debian + OpenSSH'
+- id: linux-hardening-ssh-linux-reverse-proxy-1-3
+  name: 'Linux Hardening Lab: misconfigured reverse proxy v1.3 — Debian + OpenSSH'
   category: linux
   difficulty: easy
   os_family: debian
@@ -2431,13 +2050,13 @@
     golden_image: debian-13-server
     role: linux-hardening
     component: reverse-proxy
-    version: '2.6'
+    version: '1.3'
     level: easy
   objectives:
   - Reduce a Linux host's attack surface.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.6).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.3).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 40
@@ -2453,8 +2072,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: linux-enum-smb-linux-admin-panel-2-4
-  name: 'Linux Enumeration Lab: weak admin panel v2.4 — Debian + Samba'
+- id: linux-enum-smb-linux-auth-proxy-1-4
+  name: 'Linux Enumeration Lab: flawed auth proxy v1.4 — Debian + Samba'
   category: linux
   difficulty: intermediate
   os_family: debian
@@ -2466,20 +2085,20 @@
   network_mode: isolated
   packages:
   - samba
-  - admin-panel
+  - auth-proxy
   services:
   - smbd
   provisioning:
     golden_image: debian-13-server
     role: linux-enum
-    component: admin-panel
-    version: '2.4'
+    component: auth-proxy
+    version: '1.4'
     level: intermediate
   objectives:
   - Enumerate services and misconfiguration on Linux.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v2.4).'
+  - 'Focus: identify and remediate the flawed auth proxy (v1.4).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -2488,15 +2107,15 @@
   - enum
   - intermediate
   - debian
-  - admin-panel
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: linux-privesc-smb-linux-api-gateway-2-5
-  name: 'Linux Privilege Concepts Lab: permissive API gateway v2.5 — Debian + Samba'
+- id: linux-privesc-smb-linux-job-runner-1-5
+  name: 'Linux Privilege Concepts Lab: injectable job runner v1.5 — Debian + Samba'
   category: linux
   difficulty: hard
   os_family: debian
@@ -2508,20 +2127,20 @@
   network_mode: isolated
   packages:
   - samba
-  - api-gateway
+  - job-runner
   services:
   - smbd
   provisioning:
     golden_image: debian-13-server
     role: linux-privesc
-    component: api-gateway
-    version: '2.5'
+    component: job-runner
+    version: '1.5'
     level: hard
   objectives:
   - Identify and remediate Linux privilege-boundary weaknesses.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v2.5).'
+  - 'Focus: identify and remediate the injectable job runner (v1.5).'
   prerequisites:
   - linux-privilege-escalation-concepts
   estimated_minutes: 90
@@ -2530,15 +2149,15 @@
   - privesc
   - hard
   - debian
-  - api-gateway
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - linux-privilege-escalation-concepts
-- id: linux-hardening-smb-linux-file-service-2-6
-  name: 'Linux Hardening Lab: unsafe file service v2.6 — Debian + Samba'
+- id: linux-hardening-smb-linux-metrics-endpoint-1-6
+  name: 'Linux Hardening Lab: leaky metrics endpoint v1.6 — Debian + Samba'
   category: linux
   difficulty: easy
   os_family: debian
@@ -2550,11 +2169,392 @@
   network_mode: isolated
   packages:
   - samba
-  - file-service
+  - metrics-endpoint
   services:
   - smbd
   provisioning:
     golden_image: debian-13-server
+    role: linux-hardening
+    component: metrics-endpoint
+    version: '1.6'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v1.6).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-alpine-min-cache-layer-2-7
+  name: 'Linux Enumeration Lab: insecure cache layer v2.7 — Alpine minimal'
+  category: linux
+  difficulty: easy
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - cache-layer
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-enum
+    component: cache-layer
+    version: '2.7'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v2.7).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - alpine
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-alpine-min-message-queue-2-8
+  name: 'Linux Privilege Concepts Lab: exposed message queue v2.8 — Alpine minimal'
+  category: linux
+  difficulty: advanced
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - message-queue
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-privesc
+    component: message-queue
+    version: '2.8'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v2.8).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
+  - alpine
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-alpine-min-search-index-2-0
+  name: 'Linux Hardening Lab: unauthenticated search index v2.0 — Alpine minimal'
+  category: linux
+  difficulty: easy
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - search-index
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-hardening
+    component: search-index
+    version: '2.0'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v2.0).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - alpine
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-ubuntu-srv-legacy-cgi-2-1
+  name: 'Linux Enumeration Lab: legacy CGI handler v2.1 — Ubuntu Server'
+  category: linux
+  difficulty: intermediate
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-enum
+    component: legacy-cgi
+    version: '2.1'
+    level: intermediate
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v2.1).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - linux
+  - enum
+  - intermediate
+  - ubuntu
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-ubuntu-srv-webhook-receiver-2-2
+  name: 'Linux Privilege Concepts Lab: unvalidated webhook receiver v2.2 — Ubuntu Server'
+  category: linux
+  difficulty: hard
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-privesc
+    component: webhook-receiver
+    version: '2.2'
+    level: hard
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.2).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 90
+  tags:
+  - linux
+  - privesc
+  - hard
+  - ubuntu
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-ubuntu-srv-report-exporter-2-3
+  name: 'Linux Hardening Lab: template-injectable report exporter v2.3 — Ubuntu Server'
+  category: linux
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - report-exporter
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-hardening
+    component: report-exporter
+    version: '2.3'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v2.3).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - ubuntu
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-freebsd-srv-admin-panel-2-4
+  name: 'Linux Enumeration Lab: weak admin panel v2.4 — FreeBSD Server'
+  category: linux
+  difficulty: easy
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - admin-panel
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: linux-enum
+    component: admin-panel
+    version: '2.4'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v2.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - freebsd
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-freebsd-srv-api-gateway-2-5
+  name: 'Linux Privilege Concepts Lab: permissive API gateway v2.5 — FreeBSD Server'
+  category: linux
+  difficulty: advanced
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - api-gateway
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: linux-privesc
+    component: api-gateway
+    version: '2.5'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v2.5).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
+  - freebsd
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-freebsd-srv-file-service-2-6
+  name: 'Linux Hardening Lab: unsafe file service v2.6 — FreeBSD Server'
+  category: linux
+  difficulty: easy
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - file-service
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
     role: linux-hardening
     component: file-service
     version: '2.6'
@@ -2571,7 +2571,7 @@
   - linux
   - hardening
   - easy
-  - debian
+  - freebsd
   - file-service
   reset_supported: true
   snapshots_supported: true
@@ -2579,134 +2579,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: linux-enum-freebsd-srv-auth-proxy-3-4
-  name: 'Linux Enumeration Lab: flawed auth proxy v3.4 — FreeBSD Server'
-  category: linux
-  difficulty: intermediate
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-portable
-  - auth-proxy
-  services:
-  - sshd
-  provisioning:
-    golden_image: freebsd-base
-    role: linux-enum
-    component: auth-proxy
-    version: '3.4'
-    level: intermediate
-  objectives:
-  - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v3.4).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - linux
-  - enum
-  - intermediate
-  - freebsd
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: linux-privesc-freebsd-srv-job-runner-3-5
-  name: 'Linux Privilege Concepts Lab: injectable job runner v3.5 — FreeBSD Server'
-  category: linux
-  difficulty: hard
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-portable
-  - job-runner
-  services:
-  - sshd
-  provisioning:
-    golden_image: freebsd-base
-    role: linux-privesc
-    component: job-runner
-    version: '3.5'
-    level: hard
-  objectives:
-  - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v3.5).'
-  prerequisites:
-  - linux-privilege-escalation-concepts
-  estimated_minutes: 90
-  tags:
-  - linux
-  - privesc
-  - hard
-  - freebsd
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - linux-privilege-escalation-concepts
-- id: linux-hardening-freebsd-srv-metrics-endpoint-3-6
-  name: 'Linux Hardening Lab: leaky metrics endpoint v3.6 — FreeBSD Server'
-  category: linux
-  difficulty: easy
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openssh-portable
-  - metrics-endpoint
-  services:
-  - sshd
-  provisioning:
-    golden_image: freebsd-base
-    role: linux-hardening
-    component: metrics-endpoint
-    version: '3.6'
-    level: easy
-  objectives:
-  - Reduce a Linux host's attack surface.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v3.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 40
-  tags:
-  - linux
-  - hardening
-  - easy
-  - freebsd
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: linux-enum-ssh-linux-import-tool-3-4
-  name: 'Linux Enumeration Lab: unsafe import tool v3.4 — Debian + OpenSSH'
+- id: linux-enum-ssh-linux-import-tool-2-7
+  name: 'Linux Enumeration Lab: unsafe import tool v2.7 — Debian + OpenSSH'
   category: linux
   difficulty: intermediate
   os_family: debian
@@ -2726,13 +2600,13 @@
     golden_image: debian-13-server
     role: linux-enum
     component: import-tool
-    version: '3.4'
+    version: '2.7'
     level: intermediate
   objectives:
   - Enumerate services and misconfiguration on Linux.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v3.4).'
+  - 'Focus: identify and remediate the unsafe import tool (v2.7).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -2748,8 +2622,8 @@
   lab_id: null
   course_ids:
   - service-enumeration
-- id: linux-privesc-ssh-linux-backup-agent-3-5
-  name: 'Linux Privilege Concepts Lab: over-privileged backup agent v3.5 — Debian + OpenSSH'
+- id: linux-privesc-ssh-linux-backup-agent-2-8
+  name: 'Linux Privilege Concepts Lab: over-privileged backup agent v2.8 — Debian + OpenSSH'
   category: linux
   difficulty: hard
   os_family: debian
@@ -2769,13 +2643,13 @@
     golden_image: debian-13-server
     role: linux-privesc
     component: backup-agent
-    version: '3.5'
+    version: '2.8'
     level: hard
   objectives:
   - Identify and remediate Linux privilege-boundary weaknesses.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v3.5).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v2.8).'
   prerequisites:
   - linux-privilege-escalation-concepts
   estimated_minutes: 90
@@ -2783,6 +2657,642 @@
   - linux
   - privesc
   - hard
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-ssh-linux-reverse-proxy-2-0
+  name: 'Linux Hardening Lab: misconfigured reverse proxy v2.0 — Debian + OpenSSH'
+  category: linux
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - reverse-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-hardening
+    component: reverse-proxy
+    version: '2.0'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.0).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-smb-linux-auth-proxy-2-1
+  name: 'Linux Enumeration Lab: flawed auth proxy v2.1 — Debian + Samba'
+  category: linux
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - samba
+  - auth-proxy
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-enum
+    component: auth-proxy
+    version: '2.1'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v2.1).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-smb-linux-job-runner-2-2
+  name: 'Linux Privilege Concepts Lab: injectable job runner v2.2 — Debian + Samba'
+  category: linux
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - samba
+  - job-runner
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-privesc
+    component: job-runner
+    version: '2.2'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v2.2).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-smb-linux-metrics-endpoint-2-3
+  name: 'Linux Hardening Lab: leaky metrics endpoint v2.3 — Debian + Samba'
+  category: linux
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - samba
+  - metrics-endpoint
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-hardening
+    component: metrics-endpoint
+    version: '2.3'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.3).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-alpine-min-cache-layer-2-4
+  name: 'Linux Enumeration Lab: insecure cache layer v2.4 — Alpine minimal'
+  category: linux
+  difficulty: intermediate
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - cache-layer
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-enum
+    component: cache-layer
+    version: '2.4'
+    level: intermediate
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v2.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - linux
+  - enum
+  - intermediate
+  - alpine
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-alpine-min-message-queue-2-5
+  name: 'Linux Privilege Concepts Lab: exposed message queue v2.5 — Alpine minimal'
+  category: linux
+  difficulty: hard
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - message-queue
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-privesc
+    component: message-queue
+    version: '2.5'
+    level: hard
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v2.5).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 90
+  tags:
+  - linux
+  - privesc
+  - hard
+  - alpine
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-alpine-min-search-index-2-6
+  name: 'Linux Hardening Lab: unauthenticated search index v2.6 — Alpine minimal'
+  category: linux
+  difficulty: easy
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - search-index
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-hardening
+    component: search-index
+    version: '2.6'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v2.6).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - alpine
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-ubuntu-srv-legacy-cgi-2-7
+  name: 'Linux Enumeration Lab: legacy CGI handler v2.7 — Ubuntu Server'
+  category: linux
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-enum
+    component: legacy-cgi
+    version: '2.7'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v2.7).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - ubuntu
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-ubuntu-srv-webhook-receiver-2-8
+  name: 'Linux Privilege Concepts Lab: unvalidated webhook receiver v2.8 — Ubuntu Server'
+  category: linux
+  difficulty: advanced
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-privesc
+    component: webhook-receiver
+    version: '2.8'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.8).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
+  - ubuntu
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-ubuntu-srv-report-exporter-2-0
+  name: 'Linux Hardening Lab: template-injectable report exporter v2.0 — Ubuntu Server'
+  category: linux
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - report-exporter
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-hardening
+    component: report-exporter
+    version: '2.0'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v2.0).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - ubuntu
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-freebsd-srv-admin-panel-3-1
+  name: 'Linux Enumeration Lab: weak admin panel v3.1 — FreeBSD Server'
+  category: linux
+  difficulty: intermediate
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - admin-panel
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: linux-enum
+    component: admin-panel
+    version: '3.1'
+    level: intermediate
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v3.1).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - linux
+  - enum
+  - intermediate
+  - freebsd
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-freebsd-srv-api-gateway-3-2
+  name: 'Linux Privilege Concepts Lab: permissive API gateway v3.2 — FreeBSD Server'
+  category: linux
+  difficulty: hard
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - api-gateway
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: linux-privesc
+    component: api-gateway
+    version: '3.2'
+    level: hard
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v3.2).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 90
+  tags:
+  - linux
+  - privesc
+  - hard
+  - freebsd
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-freebsd-srv-file-service-3-3
+  name: 'Linux Hardening Lab: unsafe file service v3.3 — FreeBSD Server'
+  category: linux
+  difficulty: easy
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - file-service
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: linux-hardening
+    component: file-service
+    version: '3.3'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v3.3).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - freebsd
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-ssh-linux-import-tool-3-4
+  name: 'Linux Enumeration Lab: unsafe import tool v3.4 — Debian + OpenSSH'
+  category: linux
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - import-tool
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-enum
+    component: import-tool
+    version: '3.4'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v3.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-ssh-linux-backup-agent-3-5
+  name: 'Linux Privilege Concepts Lab: over-privileged backup agent v3.5 — Debian + OpenSSH'
+  category: linux
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-privesc
+    component: backup-agent
+    version: '3.5'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.5).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
   - debian
   - backup-agent
   reset_supported: true
@@ -2834,8 +3344,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: linux-enum-smb-linux-admin-panel-3-4
-  name: 'Linux Enumeration Lab: weak admin panel v3.4 — Debian + Samba'
+- id: linux-enum-smb-linux-auth-proxy-3-7
+  name: 'Linux Enumeration Lab: flawed auth proxy v3.7 — Debian + Samba'
   category: linux
   difficulty: intermediate
   os_family: debian
@@ -2847,20 +3357,20 @@
   network_mode: isolated
   packages:
   - samba
-  - admin-panel
+  - auth-proxy
   services:
   - smbd
   provisioning:
     golden_image: debian-13-server
     role: linux-enum
-    component: admin-panel
-    version: '3.4'
+    component: auth-proxy
+    version: '3.7'
     level: intermediate
   objectives:
   - Enumerate services and misconfiguration on Linux.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v3.4).'
+  - 'Focus: identify and remediate the flawed auth proxy (v3.7).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -2869,15 +3379,15 @@
   - enum
   - intermediate
   - debian
-  - admin-panel
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: linux-privesc-smb-linux-api-gateway-3-5
-  name: 'Linux Privilege Concepts Lab: permissive API gateway v3.5 — Debian + Samba'
+- id: linux-privesc-smb-linux-job-runner-3-8
+  name: 'Linux Privilege Concepts Lab: injectable job runner v3.8 — Debian + Samba'
   category: linux
   difficulty: hard
   os_family: debian
@@ -2889,20 +3399,20 @@
   network_mode: isolated
   packages:
   - samba
-  - api-gateway
+  - job-runner
   services:
   - smbd
   provisioning:
     golden_image: debian-13-server
     role: linux-privesc
-    component: api-gateway
-    version: '3.5'
+    component: job-runner
+    version: '3.8'
     level: hard
   objectives:
   - Identify and remediate Linux privilege-boundary weaknesses.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v3.5).'
+  - 'Focus: identify and remediate the injectable job runner (v3.8).'
   prerequisites:
   - linux-privilege-escalation-concepts
   estimated_minutes: 90
@@ -2911,15 +3421,15 @@
   - privesc
   - hard
   - debian
-  - api-gateway
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - linux-privilege-escalation-concepts
-- id: linux-hardening-smb-linux-file-service-3-6
-  name: 'Linux Hardening Lab: unsafe file service v3.6 — Debian + Samba'
+- id: linux-hardening-smb-linux-metrics-endpoint-3-0
+  name: 'Linux Hardening Lab: leaky metrics endpoint v3.0 — Debian + Samba'
   category: linux
   difficulty: easy
   os_family: debian
@@ -2931,20 +3441,20 @@
   network_mode: isolated
   packages:
   - samba
-  - file-service
+  - metrics-endpoint
   services:
   - smbd
   provisioning:
     golden_image: debian-13-server
     role: linux-hardening
-    component: file-service
-    version: '3.6'
+    component: metrics-endpoint
+    version: '3.0'
     level: easy
   objectives:
   - Reduce a Linux host's attack surface.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v3.6).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v3.0).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 40
@@ -2953,32 +3463,160 @@
   - hardening
   - easy
   - debian
-  - file-service
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: linux-enum-alpine-min-legacy-cgi-3-4
-  name: 'Linux Enumeration Lab: legacy CGI handler v3.4 — Alpine minimal'
+- id: linux-enum-alpine-min-cache-layer-3-1
+  name: 'Linux Enumeration Lab: insecure cache layer v3.1 — Alpine minimal'
   category: linux
-  difficulty: intermediate
+  difficulty: easy
   os_family: alpine
   arch: x86_64
   base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - cache-layer
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-enum
+    component: cache-layer
+    version: '3.1'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v3.1).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - alpine
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-alpine-min-message-queue-3-2
+  name: 'Linux Privilege Concepts Lab: exposed message queue v3.2 — Alpine minimal'
+  category: linux
+  difficulty: advanced
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - message-queue
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-privesc
+    component: message-queue
+    version: '3.2'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v3.2).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
+  - alpine
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-alpine-min-search-index-3-3
+  name: 'Linux Hardening Lab: unauthenticated search index v3.3 — Alpine minimal'
+  category: linux
+  difficulty: easy
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - search-index
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-hardening
+    component: search-index
+    version: '3.3'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v3.3).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - alpine
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-ubuntu-srv-legacy-cgi-3-4
+  name: 'Linux Enumeration Lab: legacy CGI handler v3.4 — Ubuntu Server'
+  category: linux
+  difficulty: intermediate
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
   vcpu: 2
   memory_mb: 2048
   disk_gb: 12
   network_mode: isolated
   packages:
-  - openrc
-  - openssh
+  - openssh-server
   - legacy-cgi
   services:
-  - sshd
+  - ssh
   provisioning:
-    golden_image: alpine-base
+    golden_image: ubuntu-2404-base
     role: linux-enum
     component: legacy-cgi
     version: '3.4'
@@ -2995,7 +3633,7 @@
   - linux
   - enum
   - intermediate
-  - alpine
+  - ubuntu
   - legacy-cgi
   reset_supported: true
   snapshots_supported: true
@@ -3003,25 +3641,24 @@
   lab_id: null
   course_ids:
   - service-enumeration
-- id: linux-privesc-alpine-min-webhook-receiver-3-5
-  name: 'Linux Privilege Concepts Lab: unvalidated webhook receiver v3.5 — Alpine minimal'
+- id: linux-privesc-ubuntu-srv-webhook-receiver-3-5
+  name: 'Linux Privilege Concepts Lab: unvalidated webhook receiver v3.5 — Ubuntu Server'
   category: linux
   difficulty: hard
-  os_family: alpine
+  os_family: ubuntu
   arch: x86_64
-  base_image_key: alpine-base
+  base_image_key: ubuntu-2404-base
   vcpu: 2
   memory_mb: 3072
   disk_gb: 16
   network_mode: isolated
   packages:
-  - openrc
-  - openssh
+  - openssh-server
   - webhook-receiver
   services:
-  - sshd
+  - ssh
   provisioning:
-    golden_image: alpine-base
+    golden_image: ubuntu-2404-base
     role: linux-privesc
     component: webhook-receiver
     version: '3.5'
@@ -3038,7 +3675,7 @@
   - linux
   - privesc
   - hard
-  - alpine
+  - ubuntu
   - webhook-receiver
   reset_supported: true
   snapshots_supported: true
@@ -3046,25 +3683,24 @@
   lab_id: null
   course_ids:
   - linux-privilege-escalation-concepts
-- id: linux-hardening-alpine-min-report-exporter-3-6
-  name: 'Linux Hardening Lab: template-injectable report exporter v3.6 — Alpine minimal'
+- id: linux-hardening-ubuntu-srv-report-exporter-3-6
+  name: 'Linux Hardening Lab: template-injectable report exporter v3.6 — Ubuntu Server'
   category: linux
   difficulty: easy
-  os_family: alpine
+  os_family: ubuntu
   arch: x86_64
-  base_image_key: alpine-base
+  base_image_key: ubuntu-2404-base
   vcpu: 1
   memory_mb: 1024
   disk_gb: 10
   network_mode: isolated
   packages:
-  - openrc
-  - openssh
+  - openssh-server
   - report-exporter
   services:
-  - sshd
+  - ssh
   provisioning:
-    golden_image: alpine-base
+    golden_image: ubuntu-2404-base
     role: linux-hardening
     component: report-exporter
     version: '3.6'
@@ -3081,7 +3717,7 @@
   - linux
   - hardening
   - easy
-  - alpine
+  - ubuntu
   - report-exporter
   reset_supported: true
   snapshots_supported: true
@@ -3089,167 +3725,41 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: linux-enum-ubuntu-srv-cache-layer-3-4
-  name: 'Linux Enumeration Lab: insecure cache layer v3.4 — Ubuntu Server'
-  category: linux
-  difficulty: intermediate
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - cache-layer
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-enum
-    component: cache-layer
-    version: '3.4'
-    level: intermediate
-  objectives:
-  - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v3.4).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - linux
-  - enum
-  - intermediate
-  - ubuntu
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: linux-privesc-ubuntu-srv-message-queue-3-5
-  name: 'Linux Privilege Concepts Lab: exposed message queue v3.5 — Ubuntu Server'
-  category: linux
-  difficulty: hard
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - message-queue
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-privesc
-    component: message-queue
-    version: '3.5'
-    level: hard
-  objectives:
-  - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v3.5).'
-  prerequisites:
-  - linux-privilege-escalation-concepts
-  estimated_minutes: 90
-  tags:
-  - linux
-  - privesc
-  - hard
-  - ubuntu
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - linux-privilege-escalation-concepts
-- id: linux-hardening-ubuntu-srv-search-index-3-6
-  name: 'Linux Hardening Lab: unauthenticated search index v3.6 — Ubuntu Server'
+- id: linux-enum-freebsd-srv-admin-panel-3-7
+  name: 'Linux Enumeration Lab: weak admin panel v3.7 — FreeBSD Server'
   category: linux
   difficulty: easy
-  os_family: ubuntu
+  os_family: freebsd
   arch: x86_64
-  base_image_key: ubuntu-2404-base
+  base_image_key: freebsd-base
   vcpu: 1
   memory_mb: 1024
   disk_gb: 10
   network_mode: isolated
   packages:
-  - openssh-server
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-hardening
-    component: search-index
-    version: '3.6'
-    level: easy
-  objectives:
-  - Reduce a Linux host's attack surface.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v3.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 40
-  tags:
-  - linux
-  - hardening
-  - easy
-  - ubuntu
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: linux-enum-smb-linux-admin-panel-4-4
-  name: 'Linux Enumeration Lab: weak admin panel v4.4 — Debian + Samba'
-  category: linux
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - samba
+  - openssh-portable
   - admin-panel
   services:
-  - smbd
+  - sshd
   provisioning:
-    golden_image: debian-13-server
+    golden_image: freebsd-base
     role: linux-enum
     component: admin-panel
-    version: '4.4'
-    level: intermediate
+    version: '3.7'
+    level: easy
   objectives:
   - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
+  - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v4.4).'
+  - 'Focus: identify and remediate the weak admin panel (v3.7).'
   prerequisites:
   - service-enumeration
-  estimated_minutes: 60
+  estimated_minutes: 40
   tags:
   - linux
   - enum
-  - intermediate
-  - debian
+  - easy
+  - freebsd
   - admin-panel
   reset_supported: true
   snapshots_supported: true
@@ -3257,41 +3767,41 @@
   lab_id: null
   course_ids:
   - service-enumeration
-- id: linux-privesc-smb-linux-api-gateway-4-5
-  name: 'Linux Privilege Concepts Lab: permissive API gateway v4.5 — Debian + Samba'
+- id: linux-privesc-freebsd-srv-api-gateway-3-8
+  name: 'Linux Privilege Concepts Lab: permissive API gateway v3.8 — FreeBSD Server'
   category: linux
-  difficulty: hard
-  os_family: debian
+  difficulty: advanced
+  os_family: freebsd
   arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  base_image_key: freebsd-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
   network_mode: isolated
   packages:
-  - samba
+  - openssh-portable
   - api-gateway
   services:
-  - smbd
+  - sshd
   provisioning:
-    golden_image: debian-13-server
+    golden_image: freebsd-base
     role: linux-privesc
     component: api-gateway
-    version: '4.5'
-    level: hard
+    version: '3.8'
+    level: advanced
   objectives:
   - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v4.5).'
+  - 'Focus: identify and remediate the permissive API gateway (v3.8).'
   prerequisites:
   - linux-privilege-escalation-concepts
-  estimated_minutes: 90
+  estimated_minutes: 120
   tags:
   - linux
   - privesc
-  - hard
-  - debian
+  - advanced
+  - freebsd
   - api-gateway
   reset_supported: true
   snapshots_supported: true
@@ -3299,33 +3809,33 @@
   lab_id: null
   course_ids:
   - linux-privilege-escalation-concepts
-- id: linux-hardening-smb-linux-file-service-4-6
-  name: 'Linux Hardening Lab: unsafe file service v4.6 — Debian + Samba'
+- id: linux-hardening-freebsd-srv-file-service-3-0
+  name: 'Linux Hardening Lab: unsafe file service v3.0 — FreeBSD Server'
   category: linux
   difficulty: easy
-  os_family: debian
+  os_family: freebsd
   arch: x86_64
-  base_image_key: debian-13-server
+  base_image_key: freebsd-base
   vcpu: 1
   memory_mb: 1024
   disk_gb: 10
   network_mode: isolated
   packages:
-  - samba
+  - openssh-portable
   - file-service
   services:
-  - smbd
+  - sshd
   provisioning:
-    golden_image: debian-13-server
+    golden_image: freebsd-base
     role: linux-hardening
     component: file-service
-    version: '4.6'
+    version: '3.0'
     level: easy
   objectives:
   - Reduce a Linux host's attack surface.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v4.6).'
+  - 'Focus: identify and remediate the unsafe file service (v3.0).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 40
@@ -3333,7 +3843,7 @@
   - linux
   - hardening
   - easy
-  - debian
+  - freebsd
   - file-service
   reset_supported: true
   snapshots_supported: true
@@ -3341,389 +3851,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: linux-enum-alpine-min-legacy-cgi-4-4
-  name: 'Linux Enumeration Lab: legacy CGI handler v4.4 — Alpine minimal'
-  category: linux
-  difficulty: intermediate
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openrc
-  - openssh
-  - legacy-cgi
-  services:
-  - sshd
-  provisioning:
-    golden_image: alpine-base
-    role: linux-enum
-    component: legacy-cgi
-    version: '4.4'
-    level: intermediate
-  objectives:
-  - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v4.4).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - linux
-  - enum
-  - intermediate
-  - alpine
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: linux-privesc-alpine-min-webhook-receiver-4-5
-  name: 'Linux Privilege Concepts Lab: unvalidated webhook receiver v4.5 — Alpine minimal'
-  category: linux
-  difficulty: hard
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openrc
-  - openssh
-  - webhook-receiver
-  services:
-  - sshd
-  provisioning:
-    golden_image: alpine-base
-    role: linux-privesc
-    component: webhook-receiver
-    version: '4.5'
-    level: hard
-  objectives:
-  - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.5).'
-  prerequisites:
-  - linux-privilege-escalation-concepts
-  estimated_minutes: 90
-  tags:
-  - linux
-  - privesc
-  - hard
-  - alpine
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - linux-privilege-escalation-concepts
-- id: linux-hardening-alpine-min-report-exporter-4-6
-  name: 'Linux Hardening Lab: template-injectable report exporter v4.6 — Alpine minimal'
-  category: linux
-  difficulty: easy
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openrc
-  - openssh
-  - report-exporter
-  services:
-  - sshd
-  provisioning:
-    golden_image: alpine-base
-    role: linux-hardening
-    component: report-exporter
-    version: '4.6'
-    level: easy
-  objectives:
-  - Reduce a Linux host's attack surface.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v4.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 40
-  tags:
-  - linux
-  - hardening
-  - easy
-  - alpine
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: linux-enum-ubuntu-srv-cache-layer-4-4
-  name: 'Linux Enumeration Lab: insecure cache layer v4.4 — Ubuntu Server'
-  category: linux
-  difficulty: intermediate
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - cache-layer
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-enum
-    component: cache-layer
-    version: '4.4'
-    level: intermediate
-  objectives:
-  - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v4.4).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - linux
-  - enum
-  - intermediate
-  - ubuntu
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: linux-privesc-ubuntu-srv-message-queue-4-5
-  name: 'Linux Privilege Concepts Lab: exposed message queue v4.5 — Ubuntu Server'
-  category: linux
-  difficulty: hard
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - message-queue
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-privesc
-    component: message-queue
-    version: '4.5'
-    level: hard
-  objectives:
-  - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v4.5).'
-  prerequisites:
-  - linux-privilege-escalation-concepts
-  estimated_minutes: 90
-  tags:
-  - linux
-  - privesc
-  - hard
-  - ubuntu
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - linux-privilege-escalation-concepts
-- id: linux-hardening-ubuntu-srv-search-index-4-6
-  name: 'Linux Hardening Lab: unauthenticated search index v4.6 — Ubuntu Server'
-  category: linux
-  difficulty: easy
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-hardening
-    component: search-index
-    version: '4.6'
-    level: easy
-  objectives:
-  - Reduce a Linux host's attack surface.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v4.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 40
-  tags:
-  - linux
-  - hardening
-  - easy
-  - ubuntu
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: linux-enum-freebsd-srv-auth-proxy-4-4
-  name: 'Linux Enumeration Lab: flawed auth proxy v4.4 — FreeBSD Server'
-  category: linux
-  difficulty: intermediate
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-portable
-  - auth-proxy
-  services:
-  - sshd
-  provisioning:
-    golden_image: freebsd-base
-    role: linux-enum
-    component: auth-proxy
-    version: '4.4'
-    level: intermediate
-  objectives:
-  - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v4.4).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - linux
-  - enum
-  - intermediate
-  - freebsd
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: linux-privesc-freebsd-srv-job-runner-4-5
-  name: 'Linux Privilege Concepts Lab: injectable job runner v4.5 — FreeBSD Server'
-  category: linux
-  difficulty: hard
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-portable
-  - job-runner
-  services:
-  - sshd
-  provisioning:
-    golden_image: freebsd-base
-    role: linux-privesc
-    component: job-runner
-    version: '4.5'
-    level: hard
-  objectives:
-  - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v4.5).'
-  prerequisites:
-  - linux-privilege-escalation-concepts
-  estimated_minutes: 90
-  tags:
-  - linux
-  - privesc
-  - hard
-  - freebsd
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - linux-privilege-escalation-concepts
-- id: linux-hardening-freebsd-srv-metrics-endpoint-4-6
-  name: 'Linux Hardening Lab: leaky metrics endpoint v4.6 — FreeBSD Server'
-  category: linux
-  difficulty: easy
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openssh-portable
-  - metrics-endpoint
-  services:
-  - sshd
-  provisioning:
-    golden_image: freebsd-base
-    role: linux-hardening
-    component: metrics-endpoint
-    version: '4.6'
-    level: easy
-  objectives:
-  - Reduce a Linux host's attack surface.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v4.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 40
-  tags:
-  - linux
-  - hardening
-  - easy
-  - freebsd
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: linux-enum-ssh-linux-import-tool-4-4
-  name: 'Linux Enumeration Lab: unsafe import tool v4.4 — Debian + OpenSSH'
+- id: linux-enum-ssh-linux-import-tool-3-1
+  name: 'Linux Enumeration Lab: unsafe import tool v3.1 — Debian + OpenSSH'
   category: linux
   difficulty: intermediate
   os_family: debian
@@ -3743,13 +3872,13 @@
     golden_image: debian-13-server
     role: linux-enum
     component: import-tool
-    version: '4.4'
+    version: '3.1'
     level: intermediate
   objectives:
   - Enumerate services and misconfiguration on Linux.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v4.4).'
+  - 'Focus: identify and remediate the unsafe import tool (v3.1).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -3765,8 +3894,8 @@
   lab_id: null
   course_ids:
   - service-enumeration
-- id: linux-privesc-ssh-linux-backup-agent-4-5
-  name: 'Linux Privilege Concepts Lab: over-privileged backup agent v4.5 — Debian + OpenSSH'
+- id: linux-privesc-ssh-linux-backup-agent-3-2
+  name: 'Linux Privilege Concepts Lab: over-privileged backup agent v3.2 — Debian + OpenSSH'
   category: linux
   difficulty: hard
   os_family: debian
@@ -3786,13 +3915,13 @@
     golden_image: debian-13-server
     role: linux-privesc
     component: backup-agent
-    version: '4.5'
+    version: '3.2'
     level: hard
   objectives:
   - Identify and remediate Linux privilege-boundary weaknesses.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v4.5).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.2).'
   prerequisites:
   - linux-privilege-escalation-concepts
   estimated_minutes: 90
@@ -3808,8 +3937,8 @@
   lab_id: null
   course_ids:
   - linux-privilege-escalation-concepts
-- id: linux-hardening-ssh-linux-reverse-proxy-4-6
-  name: 'Linux Hardening Lab: misconfigured reverse proxy v4.6 — Debian + OpenSSH'
+- id: linux-hardening-ssh-linux-reverse-proxy-3-3
+  name: 'Linux Hardening Lab: misconfigured reverse proxy v3.3 — Debian + OpenSSH'
   category: linux
   difficulty: easy
   os_family: debian
@@ -3829,13 +3958,13 @@
     golden_image: debian-13-server
     role: linux-hardening
     component: reverse-proxy
-    version: '4.6'
+    version: '3.3'
     level: easy
   objectives:
   - Reduce a Linux host's attack surface.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.6).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.3).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 40
@@ -3851,159 +3980,414 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: linux-enum-ubuntu-srv-cache-layer-5-4
-  name: 'Linux Enumeration Lab: insecure cache layer v5.4 — Ubuntu Server'
-  category: linux
-  difficulty: intermediate
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - cache-layer
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-enum
-    component: cache-layer
-    version: '5.4'
-    level: intermediate
-  objectives:
-  - Enumerate services and misconfiguration on Linux.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v5.4).'
-  prerequisites:
-  - service-enumeration
-  estimated_minutes: 60
-  tags:
-  - linux
-  - enum
-  - intermediate
-  - ubuntu
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - service-enumeration
-- id: linux-privesc-ubuntu-srv-message-queue-5-5
-  name: 'Linux Privilege Concepts Lab: exposed message queue v5.5 — Ubuntu Server'
-  category: linux
-  difficulty: hard
-  os_family: ubuntu
-  arch: x86_64
-  base_image_key: ubuntu-2404-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - message-queue
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-privesc
-    component: message-queue
-    version: '5.5'
-    level: hard
-  objectives:
-  - Identify and remediate Linux privilege-boundary weaknesses.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v5.5).'
-  prerequisites:
-  - linux-privilege-escalation-concepts
-  estimated_minutes: 90
-  tags:
-  - linux
-  - privesc
-  - hard
-  - ubuntu
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - linux-privilege-escalation-concepts
-- id: linux-hardening-ubuntu-srv-search-index-5-6
-  name: 'Linux Hardening Lab: unauthenticated search index v5.6 — Ubuntu Server'
+- id: linux-enum-smb-linux-auth-proxy-4-4
+  name: 'Linux Enumeration Lab: flawed auth proxy v4.4 — Debian + Samba'
   category: linux
   difficulty: easy
-  os_family: ubuntu
+  os_family: debian
   arch: x86_64
-  base_image_key: ubuntu-2404-base
+  base_image_key: debian-13-server
   vcpu: 1
   memory_mb: 1024
   disk_gb: 10
   network_mode: isolated
   packages:
-  - openssh-server
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: ubuntu-2404-base
-    role: linux-hardening
-    component: search-index
-    version: '5.6'
-    level: easy
-  objectives:
-  - Reduce a Linux host's attack surface.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v5.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 40
-  tags:
-  - linux
-  - hardening
-  - easy
-  - ubuntu
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: linux-enum-freebsd-srv-auth-proxy-5-4
-  name: 'Linux Enumeration Lab: flawed auth proxy v5.4 — FreeBSD Server'
-  category: linux
-  difficulty: intermediate
-  os_family: freebsd
-  arch: x86_64
-  base_image_key: freebsd-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-portable
+  - samba
   - auth-proxy
   services:
-  - sshd
+  - smbd
   provisioning:
-    golden_image: freebsd-base
+    golden_image: debian-13-server
     role: linux-enum
     component: auth-proxy
-    version: '5.4'
+    version: '4.4'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v4.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-smb-linux-job-runner-4-5
+  name: 'Linux Privilege Concepts Lab: injectable job runner v4.5 — Debian + Samba'
+  category: linux
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - samba
+  - job-runner
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-privesc
+    component: job-runner
+    version: '4.5'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v4.5).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-smb-linux-metrics-endpoint-4-6
+  name: 'Linux Hardening Lab: leaky metrics endpoint v4.6 — Debian + Samba'
+  category: linux
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - samba
+  - metrics-endpoint
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-hardening
+    component: metrics-endpoint
+    version: '4.6'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.6).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-alpine-min-cache-layer-4-7
+  name: 'Linux Enumeration Lab: insecure cache layer v4.7 — Alpine minimal'
+  category: linux
+  difficulty: intermediate
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - cache-layer
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-enum
+    component: cache-layer
+    version: '4.7'
     level: intermediate
   objectives:
   - Enumerate services and misconfiguration on Linux.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v5.4).'
+  - 'Focus: identify and remediate the insecure cache layer (v4.7).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - linux
+  - enum
+  - intermediate
+  - alpine
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-alpine-min-message-queue-4-8
+  name: 'Linux Privilege Concepts Lab: exposed message queue v4.8 — Alpine minimal'
+  category: linux
+  difficulty: hard
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - message-queue
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-privesc
+    component: message-queue
+    version: '4.8'
+    level: hard
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v4.8).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 90
+  tags:
+  - linux
+  - privesc
+  - hard
+  - alpine
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-alpine-min-search-index-4-0
+  name: 'Linux Hardening Lab: unauthenticated search index v4.0 — Alpine minimal'
+  category: linux
+  difficulty: easy
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - search-index
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-hardening
+    component: search-index
+    version: '4.0'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v4.0).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - alpine
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-ubuntu-srv-legacy-cgi-4-1
+  name: 'Linux Enumeration Lab: legacy CGI handler v4.1 — Ubuntu Server'
+  category: linux
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-enum
+    component: legacy-cgi
+    version: '4.1'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v4.1).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - ubuntu
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-ubuntu-srv-webhook-receiver-4-2
+  name: 'Linux Privilege Concepts Lab: unvalidated webhook receiver v4.2 — Ubuntu Server'
+  category: linux
+  difficulty: advanced
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-privesc
+    component: webhook-receiver
+    version: '4.2'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.2).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
+  - ubuntu
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-ubuntu-srv-report-exporter-4-3
+  name: 'Linux Hardening Lab: template-injectable report exporter v4.3 — Ubuntu Server'
+  category: linux
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - report-exporter
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-hardening
+    component: report-exporter
+    version: '4.3'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v4.3).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - ubuntu
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-freebsd-srv-admin-panel-4-4
+  name: 'Linux Enumeration Lab: weak admin panel v4.4 — FreeBSD Server'
+  category: linux
+  difficulty: intermediate
+  os_family: freebsd
+  arch: x86_64
+  base_image_key: freebsd-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-portable
+  - admin-panel
+  services:
+  - sshd
+  provisioning:
+    golden_image: freebsd-base
+    role: linux-enum
+    component: admin-panel
+    version: '4.4'
+    level: intermediate
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v4.4).'
   prerequisites:
   - service-enumeration
   estimated_minutes: 60
@@ -4012,15 +4396,15 @@
   - enum
   - intermediate
   - freebsd
-  - auth-proxy
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - service-enumeration
-- id: linux-privesc-freebsd-srv-job-runner-5-5
-  name: 'Linux Privilege Concepts Lab: injectable job runner v5.5 — FreeBSD Server'
+- id: linux-privesc-freebsd-srv-api-gateway-4-5
+  name: 'Linux Privilege Concepts Lab: permissive API gateway v4.5 — FreeBSD Server'
   category: linux
   difficulty: hard
   os_family: freebsd
@@ -4032,20 +4416,20 @@
   network_mode: isolated
   packages:
   - openssh-portable
-  - job-runner
+  - api-gateway
   services:
   - sshd
   provisioning:
     golden_image: freebsd-base
     role: linux-privesc
-    component: job-runner
-    version: '5.5'
+    component: api-gateway
+    version: '4.5'
     level: hard
   objectives:
   - Identify and remediate Linux privilege-boundary weaknesses.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v5.5).'
+  - 'Focus: identify and remediate the permissive API gateway (v4.5).'
   prerequisites:
   - linux-privilege-escalation-concepts
   estimated_minutes: 90
@@ -4054,15 +4438,15 @@
   - privesc
   - hard
   - freebsd
-  - job-runner
+  - api-gateway
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - linux-privilege-escalation-concepts
-- id: linux-hardening-freebsd-srv-metrics-endpoint-5-6
-  name: 'Linux Hardening Lab: leaky metrics endpoint v5.6 — FreeBSD Server'
+- id: linux-hardening-freebsd-srv-file-service-4-6
+  name: 'Linux Hardening Lab: unsafe file service v4.6 — FreeBSD Server'
   category: linux
   difficulty: easy
   os_family: freebsd
@@ -4074,20 +4458,20 @@
   network_mode: isolated
   packages:
   - openssh-portable
-  - metrics-endpoint
+  - file-service
   services:
   - sshd
   provisioning:
     golden_image: freebsd-base
     role: linux-hardening
-    component: metrics-endpoint
-    version: '5.6'
+    component: file-service
+    version: '4.6'
     level: easy
   objectives:
   - Reduce a Linux host's attack surface.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v5.6).'
+  - 'Focus: identify and remediate the unsafe file service (v4.6).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 40
@@ -4096,7 +4480,517 @@
   - hardening
   - easy
   - freebsd
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-ssh-linux-import-tool-4-7
+  name: 'Linux Enumeration Lab: unsafe import tool v4.7 — Debian + OpenSSH'
+  category: linux
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - import-tool
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-enum
+    component: import-tool
+    version: '4.7'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v4.7).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-ssh-linux-backup-agent-4-8
+  name: 'Linux Privilege Concepts Lab: over-privileged backup agent v4.8 — Debian + OpenSSH'
+  category: linux
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-privesc
+    component: backup-agent
+    version: '4.8'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v4.8).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-ssh-linux-reverse-proxy-4-0
+  name: 'Linux Hardening Lab: misconfigured reverse proxy v4.0 — Debian + OpenSSH'
+  category: linux
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - reverse-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-hardening
+    component: reverse-proxy
+    version: '4.0'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.0).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-smb-linux-auth-proxy-4-1
+  name: 'Linux Enumeration Lab: flawed auth proxy v4.1 — Debian + Samba'
+  category: linux
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - samba
+  - auth-proxy
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-enum
+    component: auth-proxy
+    version: '4.1'
+    level: intermediate
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v4.1).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - linux
+  - enum
+  - intermediate
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-smb-linux-job-runner-4-2
+  name: 'Linux Privilege Concepts Lab: injectable job runner v4.2 — Debian + Samba'
+  category: linux
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - samba
+  - job-runner
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-privesc
+    component: job-runner
+    version: '4.2'
+    level: hard
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v4.2).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 90
+  tags:
+  - linux
+  - privesc
+  - hard
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-smb-linux-metrics-endpoint-4-3
+  name: 'Linux Hardening Lab: leaky metrics endpoint v4.3 — Debian + Samba'
+  category: linux
+  difficulty: easy
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - samba
   - metrics-endpoint
+  services:
+  - smbd
+  provisioning:
+    golden_image: debian-13-server
+    role: linux-hardening
+    component: metrics-endpoint
+    version: '4.3'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.3).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-alpine-min-cache-layer-4-4
+  name: 'Linux Enumeration Lab: insecure cache layer v4.4 — Alpine minimal'
+  category: linux
+  difficulty: easy
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - cache-layer
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-enum
+    component: cache-layer
+    version: '4.4'
+    level: easy
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v4.4).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 40
+  tags:
+  - linux
+  - enum
+  - easy
+  - alpine
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-alpine-min-message-queue-4-5
+  name: 'Linux Privilege Concepts Lab: exposed message queue v4.5 — Alpine minimal'
+  category: linux
+  difficulty: advanced
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - message-queue
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-privesc
+    component: message-queue
+    version: '4.5'
+    level: advanced
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v4.5).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - linux
+  - privesc
+  - advanced
+  - alpine
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-alpine-min-search-index-4-6
+  name: 'Linux Hardening Lab: unauthenticated search index v4.6 — Alpine minimal'
+  category: linux
+  difficulty: easy
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - search-index
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: linux-hardening
+    component: search-index
+    version: '4.6'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v4.6).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - alpine
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: linux-enum-ubuntu-srv-legacy-cgi-5-7
+  name: 'Linux Enumeration Lab: legacy CGI handler v5.7 — Ubuntu Server'
+  category: linux
+  difficulty: intermediate
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-enum
+    component: legacy-cgi
+    version: '5.7'
+    level: intermediate
+  objectives:
+  - Enumerate services and misconfiguration on Linux.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v5.7).'
+  prerequisites:
+  - service-enumeration
+  estimated_minutes: 60
+  tags:
+  - linux
+  - enum
+  - intermediate
+  - ubuntu
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - service-enumeration
+- id: linux-privesc-ubuntu-srv-webhook-receiver-5-8
+  name: 'Linux Privilege Concepts Lab: unvalidated webhook receiver v5.8 — Ubuntu Server'
+  category: linux
+  difficulty: hard
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-privesc
+    component: webhook-receiver
+    version: '5.8'
+    level: hard
+  objectives:
+  - Identify and remediate Linux privilege-boundary weaknesses.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v5.8).'
+  prerequisites:
+  - linux-privilege-escalation-concepts
+  estimated_minutes: 90
+  tags:
+  - linux
+  - privesc
+  - hard
+  - ubuntu
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - linux-privilege-escalation-concepts
+- id: linux-hardening-ubuntu-srv-report-exporter-5-0
+  name: 'Linux Hardening Lab: template-injectable report exporter v5.0 — Ubuntu Server'
+  category: linux
+  difficulty: easy
+  os_family: ubuntu
+  arch: x86_64
+  base_image_key: ubuntu-2404-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - report-exporter
+  services:
+  - ssh
+  provisioning:
+    golden_image: ubuntu-2404-base
+    role: linux-hardening
+    component: report-exporter
+    version: '5.0'
+    level: easy
+  objectives:
+  - Reduce a Linux host's attack surface.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v5.0).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 40
+  tags:
+  - linux
+  - hardening
+  - easy
+  - ubuntu
+  - report-exporter
   reset_supported: true
   snapshots_supported: true
   disposable: true
