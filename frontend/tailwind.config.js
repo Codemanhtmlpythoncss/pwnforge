@@ -5,8 +5,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: "var(--bg)", panel: "var(--panel)", panel2: "var(--panel2)",
-        ink: "var(--ink)", muted: "var(--muted)", line: "var(--line)",
+        bg: "var(--bg)", bg2: "var(--bg2)",
+        panel: "var(--panel)", panel2: "var(--panel2)", panel3: "var(--panel3)",
+        ink: "var(--ink)", ink2: "var(--ink2)", muted: "var(--muted)",
+        line: "var(--line)", line2: "var(--line2)", accent: "var(--accent)",
         brand: "var(--brand)", brand2: "var(--brand2)", ok: "var(--ok)",
         warn: "var(--warn)", bad: "var(--bad)",
       },
