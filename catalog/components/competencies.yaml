@@ -306,3 +306,19 @@
   key: wireless-security
   name: Wireless Security
   description: Wi-Fi security concepts.
+- domain: osint
+  key: osint-fundamentals
+  name: OSINT Fundamentals
+  description: Sources, the intelligence cycle, ethics and legality.
+- domain: osint
+  key: osint-techniques
+  name: OSINT Techniques
+  description: Search operators, metadata, geolocation, verification.
+- domain: osint
+  key: osint-ethics
+  name: OSINT Ethics & OPSEC
+  description: Legal/ethical boundaries and investigator OPSEC.
+- domain: osint
+  key: osint-corroboration
+  name: Source Corroboration
+  description: Cross-checking and assessing source reliability.

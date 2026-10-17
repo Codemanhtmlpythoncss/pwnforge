@@ -1,0 +1,127 @@
+id: osint-fundamentals
+title: OSINT Fundamentals
+description: What open-source intelligence is, where it comes from, and the ethics and legality that must
+  govern every investigation.
+difficulty: easy
+category: osint
+specialization: osint
+estimated_minutes: 65
+objectives:
+- Understand what osint is (and isn't)
+- Understand the intelligence cycle
+- Understand ethics, legality and privacy
+prerequisites:
+- cybersecurity-fundamentals
+competency_prereqs: []
+tags:
+- osint
+- recon
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: What OSINT is (and isn't)
+  difficulty: easy
+  minutes: 15
+  competency: osint-fundamentals
+  body: 'Open-source intelligence (OSINT) is intelligence produced from **publicly available** information:
+    websites, public records, maps, public social posts, press, and technical sources like DNS and certificate
+    transparency logs. OSINT does **not** mean accessing private accounts, bypassing authentication, or
+    social-engineering people — those are out of scope and often unlawful. Good OSINT is disciplined collection
+    and analysis of information anyone could lawfully see.'
+  exercises:
+  - kind: mcq
+    prompt: Which is within OSINT scope?
+    choices:
+    - Logging into someone's private account
+    - Reading a public certificate-transparency log
+    - Guessing a password
+    - Phishing a target
+    answer: Reading a public certificate-transparency log
+    competency: osint-fundamentals
+    explanation: OSINT uses genuinely public sources only.
+    points: 10
+    hints: []
+  hints:
+  - text: If it requires defeating a control or deceiving a person, it isn't OSINT.
+  walkthrough: []
+- title: The intelligence cycle
+  difficulty: easy
+  minutes: 15
+  competency: osint-fundamentals
+  body: 'Professional OSINT follows a cycle: **plan** (define the question and scope) → **collect** (gather
+    from public sources) → **process** (organise and de-duplicate) → **analyse** (corroborate, assess
+    reliability) → **report** (communicate clearly, with sources). Jumping straight to collection without
+    a question produces noise; skipping corroboration produces false conclusions.'
+  exercises:
+  - kind: short_answer
+    prompt: The cycle step that defines the question and scope is ___.
+    answer: plan
+    competency: osint-fundamentals
+    explanation: Planning comes first.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+- title: Ethics, legality and privacy
+  difficulty: easy
+  minutes: 15
+  competency: osint-ethics
+  body: OSINT operates under law and ethics. Respect terms of service, data-protection law (e.g. GDPR),
+    and the difference between *public* and *private*. Minimise collection to what the authorised question
+    needs, avoid harassment, and never repurpose personal data. A lawful source does not make every use
+    lawful — purpose and proportionality matter.
+  exercises:
+  - kind: mcq
+    prompt: 'A record is public. Collecting everything about a private individual ''just in case'' is:'
+    choices:
+    - Fine — it's public
+    - Disproportionate and likely unlawful
+    - Required
+    - Good practice
+    answer: Disproportionate and likely unlawful
+    competency: osint-ethics
+    explanation: Minimise to the authorised question; proportionality matters.
+    points: 10
+    hints: []
+  hints:
+  - text: Public source ≠ unlimited use. Mind purpose and proportionality.
+  walkthrough: []
+assessment:
+  title: OSINT Fundamentals Assessment
+  questions:
+  - kind: mcq
+    prompt: 'OSINT is intelligence from:'
+    choices:
+    - Private accounts
+    - Publicly available sources
+    - Phishing
+    - Malware
+    answer: Publicly available sources
+    competency: osint-fundamentals
+    explanation: Public sources only.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: First step of the intelligence cycle?
+    answer: plan
+    competency: osint-fundamentals
+    explanation: Plan the question and scope.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: Which principle limits what you collect?
+    choices:
+    - Maximisation
+    - Proportionality
+    - Obfuscation
+    - Persistence
+    answer: Proportionality
+    competency: osint-ethics
+    explanation: Collect only what the authorised question needs.
+    points: 10
+    hints: []
+  difficulty: easy
+  passing_score: 70
+  description: ''

@@ -1,0 +1,127 @@
+id: osint-techniques
+title: OSINT Investigation Techniques
+description: 'Practical, source-safe techniques: advanced search, metadata, geolocation basics, and the
+  discipline of verification.'
+difficulty: intermediate
+category: osint
+specialization: osint
+estimated_minutes: 75
+objectives:
+- Understand advanced search & pivoting
+- Understand metadata and media
+- Understand verification & corroboration
+prerequisites:
+- osint-fundamentals
+competency_prereqs:
+- osint-fundamentals
+tags:
+- osint
+- recon
+references: []
+os_requirements: []
+lab_id: osint-investigation-lab
+version: 1.0.0
+lessons:
+- title: Advanced search & pivoting
+  difficulty: intermediate
+  minutes: 20
+  competency: osint-techniques
+  body: 'Search operators focus results: site/domain filters, exact phrases, file-type filters and date
+    ranges turn a vague query into a precise one. *Pivoting* means using one confirmed fact (a domain,
+    a handle, an organisation) to find related public records — then confirming each new fact independently
+    rather than assuming the link.'
+  exercises:
+  - kind: short_answer
+    prompt: Using one confirmed fact to find related public data is called ___.
+    answer: pivoting
+    competency: osint-techniques
+    explanation: Pivoting expands from confirmed facts.
+    points: 10
+    hints: []
+  hints:
+  - text: Narrow first (operators), then pivot from confirmed facts.
+  walkthrough: []
+- title: Metadata and media
+  difficulty: intermediate
+  minutes: 15
+  competency: osint-techniques
+  body: Public files and images can carry metadata (e.g. EXIF) such as timestamps or camera details. In
+    the sandbox you examine provided sample files with tools like `exiftool` to understand what metadata
+    reveals — and, defensively, why publishers should strip it. Treat any personal data found under the
+    same ethics and minimisation rules.
+  exercises:
+  - kind: mcq
+    prompt: 'Image metadata that may include timestamps is called:'
+    choices:
+    - DNS
+    - EXIF
+    - TLS
+    - CSP
+    answer: EXIF
+    competency: osint-techniques
+    explanation: EXIF metadata can accompany images.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough:
+  - title: Inspect the sample
+    detail: Run `exiftool sample.jpg` on the provided file.
+  - title: Read the fields
+    detail: Note any timestamp/device fields present.
+  - title: Draw the defensive lesson
+    detail: Note why publishers strip metadata.
+- title: Verification & corroboration
+  difficulty: intermediate
+  minutes: 20
+  competency: osint-corroboration
+  body: A single source is a lead, not a fact. Corroborate with **independent** sources, assess each source's
+    reliability and recency, and record the provenance of every claim. State confidence explicitly and
+    distinguish what you *know* from what you *infer*. Unverified findings must be labelled as such in
+    the report.
+  exercises:
+  - kind: short_answer
+    prompt: A single unverified source is a ___, not a fact.
+    answer: lead
+    competency: osint-corroboration
+    explanation: Corroborate before asserting.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: OSINT Investigation Techniques Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Pivoting should expand from:'
+    choices:
+    - Any guess
+    - Confirmed facts
+    - Private data
+    - Assumptions
+    answer: Confirmed facts
+    competency: osint-techniques
+    explanation: Pivot from confirmed facts, re-verifying each step.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Image metadata standard mentioned (acronym)?
+    answer: EXIF
+    competency: osint-techniques
+    explanation: EXIF.
+    points: 10
+    hints: []
+  - kind: mcq
+    prompt: 'Before asserting a finding you must:'
+    choices:
+    - Publish it
+    - Corroborate independently
+    - Delete sources
+    - Assume it
+    answer: Corroborate independently
+    competency: osint-corroboration
+    explanation: Independent corroboration first.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

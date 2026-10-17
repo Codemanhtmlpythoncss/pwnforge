@@ -292,3 +292,33 @@
   tags:
   - forensics
   - malware
+- id: osint-investigation-lab
+  title: OSINT Investigation Lab
+  description: An OSINT workstation plus a sandboxed 'public footprint' host to collect from and corroborate
+    against — safely and ethically.
+  difficulty: intermediate
+  category: osint
+  machines:
+  - role: workstation
+    profile_id: osint-recon-osint-station-i
+    network: lab
+  - role: footprint
+    profile_id: osint-investigation-osint-station-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - footprint
+  - workstation
+  readiness_checks: []
+  course_id: osint-techniques
+  estimated_minutes: 90
+  reset_behavior: disposable
+  objectives:
+  - Plan the question
+  - Collect from public sources
+  - Corroborate and report with confidence levels
+  tags:
+  - osint
+  - multi-machine

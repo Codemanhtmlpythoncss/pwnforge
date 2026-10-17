@@ -1,0 +1,88 @@
+id: osint-opsec-reporting
+title: OSINT OPSEC & Reporting
+description: Protect the investigation and the investigator, and communicate findings responsibly.
+difficulty: intermediate
+category: osint
+specialization: osint
+estimated_minutes: 50
+objectives:
+- Understand investigator opsec
+- Understand responsible reporting
+prerequisites:
+- osint-techniques
+competency_prereqs:
+- osint-techniques
+tags:
+- osint
+- recon
+references: []
+os_requirements: []
+lab_id: null
+version: 1.0.0
+lessons:
+- title: Investigator OPSEC
+  difficulty: intermediate
+  minutes: 15
+  competency: osint-ethics
+  body: Collection can reveal *you* to the subject. OPSEC for OSINT means not tipping off a target (e.g.
+    by interacting with their content), keeping research accounts separate from personal ones, and documenting
+    your own actions for accountability. Passive observation of public data is preferred over any interaction.
+  exercises:
+  - kind: mcq
+    prompt: Which best preserves OPSEC?
+    choices:
+    - Liking the target's posts
+    - Passive observation of public data
+    - Messaging the target
+    - Logging into their account
+    answer: Passive observation of public data
+    competency: osint-ethics
+    explanation: Avoid interaction that tips off the subject.
+    points: 10
+    hints: []
+  hints:
+  - text: Interacting with a target's content can reveal your interest.
+  walkthrough: []
+- title: Responsible reporting
+  difficulty: intermediate
+  minutes: 15
+  competency: security-reporting
+  body: An OSINT report states the authorised question, the sources (with provenance and dates), the analysis,
+    an explicit confidence level, and the limits of the findings. Separate fact from inference, redact
+    unnecessary personal data, and note anything that could not be verified. The reader must be able to
+    retrace your reasoning.
+  exercises:
+  - kind: short_answer
+    prompt: Reports must separate fact from ___.
+    answer: inference
+    competency: security-reporting
+    explanation: Distinguish knowledge from inference.
+    points: 10
+    hints: []
+  hints: []
+  walkthrough: []
+assessment:
+  title: OSINT OPSEC & Reporting Assessment
+  questions:
+  - kind: mcq
+    prompt: 'Best OPSEC choice:'
+    choices:
+    - Interact with the target
+    - Observe public data passively
+    - Use your personal account
+    - Contact the subject
+    answer: Observe public data passively
+    competency: osint-ethics
+    explanation: Passive, non-tipping observation.
+    points: 10
+    hints: []
+  - kind: short_answer
+    prompt: Reports state an explicit ___ level.
+    answer: confidence
+    competency: security-reporting
+    explanation: State confidence explicitly.
+    points: 10
+    hints: []
+  difficulty: intermediate
+  passing_score: 70
+  description: ''

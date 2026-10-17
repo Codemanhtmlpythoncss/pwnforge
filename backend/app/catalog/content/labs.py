@@ -138,4 +138,18 @@ LABS = [
          startup_order=["analysis"], course="malware-analysis-fundamentals",
          objectives=["Contain the sample", "Record indicators", "Produce detections"],
          tags=["forensics", "malware"]),
+
+    _lab("osint-investigation-lab", "OSINT Investigation Lab",
+         "An OSINT workstation plus a sandboxed 'public footprint' host to "
+         "collect from and corroborate against — safely and ethically.",
+         "intermediate", "osint",
+         machines=[
+             {"role": "workstation", "profile_id": "osint-recon-osint-station-i", "network": "lab"},
+             {"role": "footprint", "profile_id": "osint-investigation-osint-station-i", "network": "lab"},
+         ],
+         networks=[{"name": "lab", "mode": "isolated"}],
+         startup_order=["footprint", "workstation"], course="osint-techniques",
+         objectives=["Plan the question", "Collect from public sources",
+                     "Corroborate and report with confidence levels"],
+         tags=["osint", "multi-machine"]),
 ]

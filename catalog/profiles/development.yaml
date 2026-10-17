@@ -195,8 +195,8 @@
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-apache-python-auth-proxy-1-4
-  name: 'Secure Coding Target: flawed auth proxy v1.4 — Apache + Python/WSGI'
+- id: secure-coding-apache-python-metrics-endpoint-1-6
+  name: 'Secure Coding Target: leaky metrics endpoint v1.6 — Apache + Python/WSGI'
   category: development
   difficulty: hard
   os_family: debian
@@ -210,20 +210,20 @@
   - apache2
   - python3
   - libapache2-mod-wsgi-py3
-  - auth-proxy
+  - metrics-endpoint
   services:
   - apache2
   provisioning:
     golden_image: debian-13-web
     role: secure-coding
-    component: auth-proxy
-    version: '1.4'
+    component: metrics-endpoint
+    version: '1.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v1.4).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v1.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -232,15 +232,15 @@
   - appsec
   - hard
   - debian
-  - auth-proxy
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-node-express-webhook-receiver-1-2
-  name: 'Secure Coding Target: unvalidated webhook receiver v1.2 — Node.js + Express'
+- id: secure-coding-node-express-reverse-proxy-1-6
+  name: 'Secure Coding Target: misconfigured reverse proxy v1.6 — Node.js + Express'
   category: development
   difficulty: hard
   os_family: debian
@@ -253,20 +253,20 @@
   packages:
   - nodejs
   - npm
-  - webhook-receiver
+  - reverse-proxy
   services:
   - app-node
   provisioning:
     golden_image: debian-13-server
     role: secure-coding
-    component: webhook-receiver
-    version: '1.2'
+    component: reverse-proxy
+    version: '1.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.2).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -275,15 +275,189 @@
   - appsec
   - hard
   - debian
-  - webhook-receiver
+  - reverse-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-apache-python-reverse-proxy-1-0
-  name: 'Secure Coding Target: misconfigured reverse proxy v1.0 — Apache + Python/WSGI'
+- id: secure-coding-apache-python-file-service-1-6
+  name: 'Secure Coding Target: unsafe file service v1.6 — Apache + Python/WSGI'
+  category: development
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - file-service
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: secure-coding
+    component: file-service
+    version: '1.6'
+    level: hard
+  objectives:
+  - Review application code and fix insecure patterns.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v1.6).'
+  prerequisites:
+  - secure-coding
+  estimated_minutes: 90
+  tags:
+  - dev
+  - appsec
+  - hard
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - secure-coding
+- id: secure-coding-node-express-report-exporter-1-6
+  name: 'Secure Coding Target: template-injectable report exporter v1.6 — Node.js + Express'
+  category: development
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - report-exporter
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: secure-coding
+    component: report-exporter
+    version: '1.6'
+    level: hard
+  objectives:
+  - Review application code and fix insecure patterns.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v1.6).'
+  prerequisites:
+  - secure-coding
+  estimated_minutes: 90
+  tags:
+  - dev
+  - appsec
+  - hard
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - secure-coding
+- id: secure-coding-apache-python-search-index-1-6
+  name: 'Secure Coding Target: unauthenticated search index v1.6 — Apache + Python/WSGI'
+  category: development
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - search-index
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: secure-coding
+    component: search-index
+    version: '1.6'
+    level: hard
+  objectives:
+  - Review application code and fix insecure patterns.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v1.6).'
+  prerequisites:
+  - secure-coding
+  estimated_minutes: 90
+  tags:
+  - dev
+  - appsec
+  - hard
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - secure-coding
+- id: secure-coding-node-express-metrics-endpoint-1-6
+  name: 'Secure Coding Target: leaky metrics endpoint v1.6 — Node.js + Express'
+  category: development
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - metrics-endpoint
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: secure-coding
+    component: metrics-endpoint
+    version: '1.6'
+    level: hard
+  objectives:
+  - Review application code and fix insecure patterns.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v1.6).'
+  prerequisites:
+  - secure-coding
+  estimated_minutes: 90
+  tags:
+  - dev
+  - appsec
+  - hard
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - secure-coding
+- id: secure-coding-apache-python-reverse-proxy-2-6
+  name: 'Secure Coding Target: misconfigured reverse proxy v2.6 — Apache + Python/WSGI'
   category: development
   difficulty: hard
   os_family: debian
@@ -304,13 +478,13 @@
     golden_image: debian-13-web
     role: secure-coding
     component: reverse-proxy
-    version: '1.0'
+    version: '2.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.0).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -326,8 +500,8 @@
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-node-express-admin-panel-1-7
-  name: 'Secure Coding Target: weak admin panel v1.7 — Node.js + Express'
+- id: secure-coding-node-express-file-service-2-6
+  name: 'Secure Coding Target: unsafe file service v2.6 — Node.js + Express'
   category: development
   difficulty: hard
   os_family: debian
@@ -340,20 +514,20 @@
   packages:
   - nodejs
   - npm
-  - admin-panel
+  - file-service
   services:
   - app-node
   provisioning:
     golden_image: debian-13-server
     role: secure-coding
-    component: admin-panel
-    version: '1.7'
+    component: file-service
+    version: '2.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v1.7).'
+  - 'Focus: identify and remediate the unsafe file service (v2.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -362,15 +536,15 @@
   - appsec
   - hard
   - debian
-  - admin-panel
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-apache-python-job-runner-1-5
-  name: 'Secure Coding Target: injectable job runner v1.5 — Apache + Python/WSGI'
+- id: secure-coding-apache-python-report-exporter-2-6
+  name: 'Secure Coding Target: template-injectable report exporter v2.6 — Apache + Python/WSGI'
   category: development
   difficulty: hard
   os_family: debian
@@ -384,63 +558,20 @@
   - apache2
   - python3
   - libapache2-mod-wsgi-py3
-  - job-runner
+  - report-exporter
   services:
   - apache2
   provisioning:
     golden_image: debian-13-web
-    role: secure-coding
-    component: job-runner
-    version: '1.5'
-    level: hard
-  objectives:
-  - Review application code and fix insecure patterns.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v1.5).'
-  prerequisites:
-  - secure-coding
-  estimated_minutes: 90
-  tags:
-  - dev
-  - appsec
-  - hard
-  - debian
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - secure-coding
-- id: secure-coding-node-express-report-exporter-1-3
-  name: 'Secure Coding Target: template-injectable report exporter v1.3 — Node.js + Express'
-  category: development
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - nodejs
-  - npm
-  - report-exporter
-  services:
-  - app-node
-  provisioning:
-    golden_image: debian-13-server
     role: secure-coding
     component: report-exporter
-    version: '1.3'
+    version: '2.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v1.3).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v2.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -456,52 +587,8 @@
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-apache-python-cache-layer-2-1
-  name: 'Secure Coding Target: insecure cache layer v2.1 — Apache + Python/WSGI'
-  category: development
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - apache2
-  - python3
-  - libapache2-mod-wsgi-py3
-  - cache-layer
-  services:
-  - apache2
-  provisioning:
-    golden_image: debian-13-web
-    role: secure-coding
-    component: cache-layer
-    version: '2.1'
-    level: hard
-  objectives:
-  - Review application code and fix insecure patterns.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v2.1).'
-  prerequisites:
-  - secure-coding
-  estimated_minutes: 90
-  tags:
-  - dev
-  - appsec
-  - hard
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - secure-coding
-- id: secure-coding-node-express-api-gateway-2-8
-  name: 'Secure Coding Target: permissive API gateway v2.8 — Node.js + Express'
+- id: secure-coding-node-express-search-index-2-6
+  name: 'Secure Coding Target: unauthenticated search index v2.6 — Node.js + Express'
   category: development
   difficulty: hard
   os_family: debian
@@ -514,20 +601,20 @@
   packages:
   - nodejs
   - npm
-  - api-gateway
+  - search-index
   services:
   - app-node
   provisioning:
     golden_image: debian-13-server
     role: secure-coding
-    component: api-gateway
-    version: '2.8'
+    component: search-index
+    version: '2.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v2.8).'
+  - 'Focus: identify and remediate the unauthenticated search index (v2.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -536,7 +623,7 @@
   - appsec
   - hard
   - debian
-  - api-gateway
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -587,8 +674,8 @@
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-node-express-import-tool-2-4
-  name: 'Secure Coding Target: unsafe import tool v2.4 — Node.js + Express'
+- id: secure-coding-node-express-reverse-proxy-2-6
+  name: 'Secure Coding Target: misconfigured reverse proxy v2.6 — Node.js + Express'
   category: development
   difficulty: hard
   os_family: debian
@@ -601,20 +688,20 @@
   packages:
   - nodejs
   - npm
-  - import-tool
+  - reverse-proxy
   services:
   - app-node
   provisioning:
     golden_image: debian-13-server
     role: secure-coding
-    component: import-tool
-    version: '2.4'
+    component: reverse-proxy
+    version: '2.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v2.4).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -623,15 +710,15 @@
   - appsec
   - hard
   - debian
-  - import-tool
+  - reverse-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-apache-python-message-queue-2-2
-  name: 'Secure Coding Target: exposed message queue v2.2 — Apache + Python/WSGI'
+- id: secure-coding-apache-python-file-service-2-6
+  name: 'Secure Coding Target: unsafe file service v2.6 — Apache + Python/WSGI'
   category: development
   difficulty: hard
   os_family: debian
@@ -645,63 +732,20 @@
   - apache2
   - python3
   - libapache2-mod-wsgi-py3
-  - message-queue
+  - file-service
   services:
   - apache2
   provisioning:
     golden_image: debian-13-web
-    role: secure-coding
-    component: message-queue
-    version: '2.2'
-    level: hard
-  objectives:
-  - Review application code and fix insecure patterns.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v2.2).'
-  prerequisites:
-  - secure-coding
-  estimated_minutes: 90
-  tags:
-  - dev
-  - appsec
-  - hard
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - secure-coding
-- id: secure-coding-node-express-file-service-2-0
-  name: 'Secure Coding Target: unsafe file service v2.0 — Node.js + Express'
-  category: development
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - nodejs
-  - npm
-  - file-service
-  services:
-  - app-node
-  provisioning:
-    golden_image: debian-13-server
     role: secure-coding
     component: file-service
-    version: '2.0'
+    version: '2.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v2.0).'
+  - 'Focus: identify and remediate the unsafe file service (v2.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -717,52 +761,8 @@
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-apache-python-legacy-cgi-2-7
-  name: 'Secure Coding Target: legacy CGI handler v2.7 — Apache + Python/WSGI'
-  category: development
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - apache2
-  - python3
-  - libapache2-mod-wsgi-py3
-  - legacy-cgi
-  services:
-  - apache2
-  provisioning:
-    golden_image: debian-13-web
-    role: secure-coding
-    component: legacy-cgi
-    version: '2.7'
-    level: hard
-  objectives:
-  - Review application code and fix insecure patterns.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v2.7).'
-  prerequisites:
-  - secure-coding
-  estimated_minutes: 90
-  tags:
-  - dev
-  - appsec
-  - hard
-  - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - secure-coding
-- id: secure-coding-node-express-backup-agent-3-5
-  name: 'Secure Coding Target: over-privileged backup agent v3.5 — Node.js + Express'
+- id: secure-coding-node-express-report-exporter-3-6
+  name: 'Secure Coding Target: template-injectable report exporter v3.6 — Node.js + Express'
   category: development
   difficulty: hard
   os_family: debian
@@ -775,20 +775,20 @@
   packages:
   - nodejs
   - npm
-  - backup-agent
+  - report-exporter
   services:
   - app-node
   provisioning:
     golden_image: debian-13-server
     role: secure-coding
-    component: backup-agent
-    version: '3.5'
+    component: report-exporter
+    version: '3.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v3.5).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v3.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -797,15 +797,15 @@
   - appsec
   - hard
   - debian
-  - backup-agent
+  - report-exporter
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-apache-python-search-index-3-3
-  name: 'Secure Coding Target: unauthenticated search index v3.3 — Apache + Python/WSGI'
+- id: secure-coding-apache-python-search-index-3-6
+  name: 'Secure Coding Target: unauthenticated search index v3.6 — Apache + Python/WSGI'
   category: development
   difficulty: hard
   os_family: debian
@@ -826,13 +826,13 @@
     golden_image: debian-13-web
     role: secure-coding
     component: search-index
-    version: '3.3'
+    version: '3.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v3.3).'
+  - 'Focus: identify and remediate the unauthenticated search index (v3.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -848,8 +848,8 @@
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-node-express-auth-proxy-3-1
-  name: 'Secure Coding Target: flawed auth proxy v3.1 — Node.js + Express'
+- id: secure-coding-node-express-metrics-endpoint-3-6
+  name: 'Secure Coding Target: leaky metrics endpoint v3.6 — Node.js + Express'
   category: development
   difficulty: hard
   os_family: debian
@@ -862,20 +862,20 @@
   packages:
   - nodejs
   - npm
-  - auth-proxy
+  - metrics-endpoint
   services:
   - app-node
   provisioning:
     golden_image: debian-13-server
     role: secure-coding
-    component: auth-proxy
-    version: '3.1'
+    component: metrics-endpoint
+    version: '3.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v3.1).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v3.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -884,15 +884,15 @@
   - appsec
   - hard
   - debian
-  - auth-proxy
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-apache-python-webhook-receiver-3-8
-  name: 'Secure Coding Target: unvalidated webhook receiver v3.8 — Apache + Python/WSGI'
+- id: secure-coding-apache-python-reverse-proxy-3-6
+  name: 'Secure Coding Target: misconfigured reverse proxy v3.6 — Apache + Python/WSGI'
   category: development
   difficulty: hard
   os_family: debian
@@ -906,54 +906,11 @@
   - apache2
   - python3
   - libapache2-mod-wsgi-py3
-  - webhook-receiver
+  - reverse-proxy
   services:
   - apache2
   provisioning:
     golden_image: debian-13-web
-    role: secure-coding
-    component: webhook-receiver
-    version: '3.8'
-    level: hard
-  objectives:
-  - Review application code and fix insecure patterns.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.8).'
-  prerequisites:
-  - secure-coding
-  estimated_minutes: 90
-  tags:
-  - dev
-  - appsec
-  - hard
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - secure-coding
-- id: secure-coding-node-express-reverse-proxy-3-6
-  name: 'Secure Coding Target: misconfigured reverse proxy v3.6 — Node.js + Express'
-  category: development
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - nodejs
-  - npm
-  - reverse-proxy
-  services:
-  - app-node
-  provisioning:
-    golden_image: debian-13-server
     role: secure-coding
     component: reverse-proxy
     version: '3.6'
@@ -978,52 +935,8 @@
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-apache-python-admin-panel-3-4
-  name: 'Secure Coding Target: weak admin panel v3.4 — Apache + Python/WSGI'
-  category: development
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-web
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - apache2
-  - python3
-  - libapache2-mod-wsgi-py3
-  - admin-panel
-  services:
-  - apache2
-  provisioning:
-    golden_image: debian-13-web
-    role: secure-coding
-    component: admin-panel
-    version: '3.4'
-    level: hard
-  objectives:
-  - Review application code and fix insecure patterns.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v3.4).'
-  prerequisites:
-  - secure-coding
-  estimated_minutes: 90
-  tags:
-  - dev
-  - appsec
-  - hard
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - secure-coding
-- id: secure-coding-node-express-job-runner-3-2
-  name: 'Secure Coding Target: injectable job runner v3.2 — Node.js + Express'
+- id: secure-coding-node-express-file-service-3-6
+  name: 'Secure Coding Target: unsafe file service v3.6 — Node.js + Express'
   category: development
   difficulty: hard
   os_family: debian
@@ -1036,20 +949,20 @@
   packages:
   - nodejs
   - npm
-  - job-runner
+  - file-service
   services:
   - app-node
   provisioning:
     golden_image: debian-13-server
     role: secure-coding
-    component: job-runner
-    version: '3.2'
+    component: file-service
+    version: '3.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v3.2).'
+  - 'Focus: identify and remediate the unsafe file service (v3.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -1058,15 +971,15 @@
   - appsec
   - hard
   - debian
-  - job-runner
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-apache-python-report-exporter-4-0
-  name: 'Secure Coding Target: template-injectable report exporter v4.0 — Apache + Python/WSGI'
+- id: secure-coding-apache-python-report-exporter-3-6
+  name: 'Secure Coding Target: template-injectable report exporter v3.6 — Apache + Python/WSGI'
   category: development
   difficulty: hard
   os_family: debian
@@ -1087,13 +1000,13 @@
     golden_image: debian-13-web
     role: secure-coding
     component: report-exporter
-    version: '4.0'
+    version: '3.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v4.0).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v3.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -1109,8 +1022,8 @@
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-node-express-cache-layer-4-7
-  name: 'Secure Coding Target: insecure cache layer v4.7 — Node.js + Express'
+- id: secure-coding-node-express-search-index-3-6
+  name: 'Secure Coding Target: unauthenticated search index v3.6 — Node.js + Express'
   category: development
   difficulty: hard
   os_family: debian
@@ -1123,20 +1036,20 @@
   packages:
   - nodejs
   - npm
-  - cache-layer
+  - search-index
   services:
   - app-node
   provisioning:
     golden_image: debian-13-server
     role: secure-coding
-    component: cache-layer
-    version: '4.7'
+    component: search-index
+    version: '3.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v4.7).'
+  - 'Focus: identify and remediate the unauthenticated search index (v3.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -1145,15 +1058,15 @@
   - appsec
   - hard
   - debian
-  - cache-layer
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - secure-coding
-- id: secure-coding-apache-python-api-gateway-4-5
-  name: 'Secure Coding Target: permissive API gateway v4.5 — Apache + Python/WSGI'
+- id: secure-coding-apache-python-metrics-endpoint-4-6
+  name: 'Secure Coding Target: leaky metrics endpoint v4.6 — Apache + Python/WSGI'
   category: development
   difficulty: hard
   os_family: debian
@@ -1167,20 +1080,20 @@
   - apache2
   - python3
   - libapache2-mod-wsgi-py3
-  - api-gateway
+  - metrics-endpoint
   services:
   - apache2
   provisioning:
     golden_image: debian-13-web
     role: secure-coding
-    component: api-gateway
-    version: '4.5'
+    component: metrics-endpoint
+    version: '4.6'
     level: hard
   objectives:
   - Review application code and fix insecure patterns.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v4.5).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.6).'
   prerequisites:
   - secure-coding
   estimated_minutes: 90
@@ -1189,7 +1102,311 @@
   - appsec
   - hard
   - debian
-  - api-gateway
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - secure-coding
+- id: secure-coding-node-express-reverse-proxy-4-6
+  name: 'Secure Coding Target: misconfigured reverse proxy v4.6 — Node.js + Express'
+  category: development
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - reverse-proxy
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: secure-coding
+    component: reverse-proxy
+    version: '4.6'
+    level: hard
+  objectives:
+  - Review application code and fix insecure patterns.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.6).'
+  prerequisites:
+  - secure-coding
+  estimated_minutes: 90
+  tags:
+  - dev
+  - appsec
+  - hard
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - secure-coding
+- id: secure-coding-apache-python-file-service-4-6
+  name: 'Secure Coding Target: unsafe file service v4.6 — Apache + Python/WSGI'
+  category: development
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - file-service
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: secure-coding
+    component: file-service
+    version: '4.6'
+    level: hard
+  objectives:
+  - Review application code and fix insecure patterns.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v4.6).'
+  prerequisites:
+  - secure-coding
+  estimated_minutes: 90
+  tags:
+  - dev
+  - appsec
+  - hard
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - secure-coding
+- id: secure-coding-node-express-report-exporter-4-6
+  name: 'Secure Coding Target: template-injectable report exporter v4.6 — Node.js + Express'
+  category: development
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - report-exporter
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: secure-coding
+    component: report-exporter
+    version: '4.6'
+    level: hard
+  objectives:
+  - Review application code and fix insecure patterns.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v4.6).'
+  prerequisites:
+  - secure-coding
+  estimated_minutes: 90
+  tags:
+  - dev
+  - appsec
+  - hard
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - secure-coding
+- id: secure-coding-apache-python-search-index-4-6
+  name: 'Secure Coding Target: unauthenticated search index v4.6 — Apache + Python/WSGI'
+  category: development
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - search-index
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: secure-coding
+    component: search-index
+    version: '4.6'
+    level: hard
+  objectives:
+  - Review application code and fix insecure patterns.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v4.6).'
+  prerequisites:
+  - secure-coding
+  estimated_minutes: 90
+  tags:
+  - dev
+  - appsec
+  - hard
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - secure-coding
+- id: secure-coding-node-express-metrics-endpoint-4-6
+  name: 'Secure Coding Target: leaky metrics endpoint v4.6 — Node.js + Express'
+  category: development
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - metrics-endpoint
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: secure-coding
+    component: metrics-endpoint
+    version: '4.6'
+    level: hard
+  objectives:
+  - Review application code and fix insecure patterns.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.6).'
+  prerequisites:
+  - secure-coding
+  estimated_minutes: 90
+  tags:
+  - dev
+  - appsec
+  - hard
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - secure-coding
+- id: secure-coding-apache-python-reverse-proxy-4-6
+  name: 'Secure Coding Target: misconfigured reverse proxy v4.6 — Apache + Python/WSGI'
+  category: development
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-web
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - apache2
+  - python3
+  - libapache2-mod-wsgi-py3
+  - reverse-proxy
+  services:
+  - apache2
+  provisioning:
+    golden_image: debian-13-web
+    role: secure-coding
+    component: reverse-proxy
+    version: '4.6'
+    level: hard
+  objectives:
+  - Review application code and fix insecure patterns.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.6).'
+  prerequisites:
+  - secure-coding
+  estimated_minutes: 90
+  tags:
+  - dev
+  - appsec
+  - hard
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - secure-coding
+- id: secure-coding-node-express-file-service-5-6
+  name: 'Secure Coding Target: unsafe file service v5.6 — Node.js + Express'
+  category: development
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - nodejs
+  - npm
+  - file-service
+  services:
+  - app-node
+  provisioning:
+    golden_image: debian-13-server
+    role: secure-coding
+    component: file-service
+    version: '5.6'
+    level: hard
+  objectives:
+  - Review application code and fix insecure patterns.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v5.6).'
+  prerequisites:
+  - secure-coding
+  estimated_minutes: 90
+  tags:
+  - dev
+  - appsec
+  - hard
+  - debian
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true

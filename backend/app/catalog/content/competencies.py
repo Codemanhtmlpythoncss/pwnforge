@@ -92,6 +92,11 @@ COMPETENCIES: list[tuple[str, str, str, str]] = [
     ("general", "security-terminology", "Security Terminology", "Core vocabulary and concepts."),
     ("general", "platform-orientation", "Platform Orientation", "Using the Pwnforge platform."),
     ("general", "wireless-security", "Wireless Security", "Wi-Fi security concepts."),
+    # OSINT (open-source intelligence — authorised, public-source, ethics-first)
+    ("osint", "osint-fundamentals", "OSINT Fundamentals", "Sources, the intelligence cycle, ethics and legality."),
+    ("osint", "osint-techniques", "OSINT Techniques", "Search operators, metadata, geolocation, verification."),
+    ("osint", "osint-ethics", "OSINT Ethics & OPSEC", "Legal/ethical boundaries and investigator OPSEC."),
+    ("osint", "osint-corroboration", "Source Corroboration", "Cross-checking and assessing source reliability."),
 ]
 
 

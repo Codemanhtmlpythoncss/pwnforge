@@ -355,8 +355,8 @@
   lab_id: null
   course_ids:
   - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-backup-agent-1-5
-  name: 'Disk Forensics Lab: over-privileged backup agent v1.5 — Debian + OpenSSH'
+- id: disk-forensics-ssh-linux-cache-layer-1-7
+  name: 'Disk Forensics Lab: insecure cache layer v1.7 — Debian + OpenSSH'
   category: forensics
   difficulty: hard
   os_family: debian
@@ -369,20 +369,20 @@
   packages:
   - openssh-server
   - sudo
-  - backup-agent
+  - cache-layer
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: disk-forensics
-    component: backup-agent
-    version: '1.5'
+    component: cache-layer
+    version: '1.7'
     level: hard
   objectives:
   - Examine disk artefacts and build a timeline.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v1.5).'
+  - 'Focus: identify and remediate the insecure cache layer (v1.7).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 90
@@ -391,15 +391,15 @@
   - disk
   - hard
   - debian
-  - backup-agent
+  - cache-layer
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - digital-forensics
-- id: network-forensics-debian-monitor-reverse-proxy-1-6
-  name: 'Network Forensics Lab: misconfigured reverse proxy v1.6 — Debian monitoring'
+- id: network-forensics-debian-monitor-message-queue-1-8
+  name: 'Network Forensics Lab: exposed message queue v1.8 — Debian monitoring'
   category: forensics
   difficulty: intermediate
   os_family: debian
@@ -412,192 +412,63 @@
   packages:
   - rsyslog
   - auditd
-  - reverse-proxy
+  - message-queue
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: network-forensics
-    component: reverse-proxy
-    version: '1.6'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.6).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-admin-panel-1-1
-  name: 'Malware Triage Lab: weak admin panel v1.1 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - admin-panel
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: admin-panel
-    version: '1.1'
-    level: advanced
-  objectives:
-  - Safely triage a sample in a contained environment.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v1.1).'
-  prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-search-index-1-3
-  name: 'Disk Forensics Lab: unauthenticated search index v1.3 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: search-index
-    version: '1.3'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v1.3).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-admin-panel-1-4
-  name: 'Network Forensics Lab: weak admin panel v1.4 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - admin-panel
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: admin-panel
-    version: '1.4'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v1.4).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-job-runner-1-8
-  name: 'Malware Triage Lab: injectable job runner v1.8 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - job-runner
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: job-runner
+    component: message-queue
     version: '1.8'
+    level: intermediate
+  objectives:
+  - Analyse captured traffic as evidence.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v1.8).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 60
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: malware-triage-ssh-linux-file-service-1-3
+  name: 'Malware Triage Lab: unsafe file service v1.3 — Debian + OpenSSH'
+  category: forensics
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - file-service
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: malware-triage
+    component: file-service
+    version: '1.3'
     level: advanced
   objectives:
   - Safely triage a sample in a contained environment.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v1.8).'
+  - 'Focus: identify and remediate the unsafe file service (v1.3).'
   prerequisites:
   - malware-analysis-fundamentals
   estimated_minutes: 120
@@ -606,15 +477,15 @@
   - malware
   - advanced
   - debian
-  - job-runner
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-auth-proxy-1-1
-  name: 'Disk Forensics Lab: flawed auth proxy v1.1 — Debian + OpenSSH'
+- id: disk-forensics-ssh-linux-auth-proxy-1-7
+  name: 'Disk Forensics Lab: flawed auth proxy v1.7 — Debian + OpenSSH'
   category: forensics
   difficulty: hard
   os_family: debian
@@ -634,13 +505,13 @@
     golden_image: debian-13-server
     role: disk-forensics
     component: auth-proxy
-    version: '1.1'
+    version: '1.7'
     level: hard
   objectives:
   - Examine disk artefacts and build a timeline.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v1.1).'
+  - 'Focus: identify and remediate the flawed auth proxy (v1.7).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 90
@@ -656,8 +527,8 @@
   lab_id: null
   course_ids:
   - digital-forensics
-- id: network-forensics-debian-monitor-job-runner-1-2
-  name: 'Network Forensics Lab: injectable job runner v1.2 — Debian monitoring'
+- id: network-forensics-debian-monitor-job-runner-1-8
+  name: 'Network Forensics Lab: injectable job runner v1.8 — Debian monitoring'
   category: forensics
   difficulty: intermediate
   os_family: debian
@@ -677,13 +548,13 @@
     golden_image: debian-13-monitoring
     role: network-forensics
     component: job-runner
-    version: '1.2'
+    version: '1.8'
     level: intermediate
   objectives:
   - Analyse captured traffic as evidence.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v1.2).'
+  - 'Focus: identify and remediate the injectable job runner (v1.8).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 60
@@ -699,8 +570,8 @@
   lab_id: null
   course_ids:
   - digital-forensics
-- id: malware-triage-ssh-linux-report-exporter-1-6
-  name: 'Malware Triage Lab: template-injectable report exporter v1.6 — Debian + OpenSSH'
+- id: malware-triage-ssh-linux-report-exporter-1-3
+  name: 'Malware Triage Lab: template-injectable report exporter v1.3 — Debian + OpenSSH'
   category: forensics
   difficulty: advanced
   os_family: debian
@@ -720,13 +591,13 @@
     golden_image: debian-13-server
     role: malware-triage
     component: report-exporter
-    version: '1.6'
+    version: '1.3'
     level: advanced
   objectives:
   - Safely triage a sample in a contained environment.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v1.6).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v1.3).'
   prerequisites:
   - malware-analysis-fundamentals
   estimated_minutes: 120
@@ -742,8 +613,8 @@
   lab_id: null
   course_ids:
   - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-webhook-receiver-1-8
-  name: 'Disk Forensics Lab: unvalidated webhook receiver v1.8 — Debian + OpenSSH'
+- id: disk-forensics-ssh-linux-import-tool-1-7
+  name: 'Disk Forensics Lab: unsafe import tool v1.7 — Debian + OpenSSH'
   category: forensics
   difficulty: hard
   os_family: debian
@@ -756,192 +627,63 @@
   packages:
   - openssh-server
   - sudo
-  - webhook-receiver
+  - import-tool
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: disk-forensics
-    component: webhook-receiver
-    version: '1.8'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.8).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-report-exporter-1-0
-  name: 'Network Forensics Lab: template-injectable report exporter v1.0 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - report-exporter
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: report-exporter
-    version: '1.0'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v1.0).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-cache-layer-1-4
-  name: 'Malware Triage Lab: insecure cache layer v1.4 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - cache-layer
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: cache-layer
-    version: '1.4'
-    level: advanced
-  objectives:
-  - Safely triage a sample in a contained environment.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v1.4).'
-  prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-reverse-proxy-1-6
-  name: 'Disk Forensics Lab: misconfigured reverse proxy v1.6 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - reverse-proxy
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: reverse-proxy
-    version: '1.6'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.6).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-cache-layer-1-7
-  name: 'Network Forensics Lab: insecure cache layer v1.7 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - cache-layer
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: cache-layer
+    component: import-tool
     version: '1.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v1.7).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 90
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: network-forensics-debian-monitor-backup-agent-1-8
+  name: 'Network Forensics Lab: over-privileged backup agent v1.8 — Debian monitoring'
+  category: forensics
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - backup-agent
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: network-forensics
+    component: backup-agent
+    version: '1.8'
     level: intermediate
   objectives:
   - Analyse captured traffic as evidence.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v1.7).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v1.8).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 60
@@ -950,15 +692,15 @@
   - pcap
   - intermediate
   - debian
-  - cache-layer
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - digital-forensics
-- id: malware-triage-ssh-linux-api-gateway-1-2
-  name: 'Malware Triage Lab: permissive API gateway v1.2 — Debian + OpenSSH'
+- id: malware-triage-ssh-linux-search-index-1-3
+  name: 'Malware Triage Lab: unauthenticated search index v1.3 — Debian + OpenSSH'
   category: forensics
   difficulty: advanced
   os_family: debian
@@ -971,20 +713,20 @@
   packages:
   - openssh-server
   - sudo
-  - api-gateway
+  - search-index
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: malware-triage
-    component: api-gateway
-    version: '1.2'
+    component: search-index
+    version: '1.3'
     level: advanced
   objectives:
   - Safely triage a sample in a contained environment.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v1.2).'
+  - 'Focus: identify and remediate the unauthenticated search index (v1.3).'
   prerequisites:
   - malware-analysis-fundamentals
   estimated_minutes: 120
@@ -993,15 +735,15 @@
   - malware
   - advanced
   - debian
-  - api-gateway
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-admin-panel-1-4
-  name: 'Disk Forensics Lab: weak admin panel v1.4 — Debian + OpenSSH'
+- id: disk-forensics-ssh-linux-admin-panel-1-7
+  name: 'Disk Forensics Lab: weak admin panel v1.7 — Debian + OpenSSH'
   category: forensics
   difficulty: hard
   os_family: debian
@@ -1021,13 +763,13 @@
     golden_image: debian-13-server
     role: disk-forensics
     component: admin-panel
-    version: '1.4'
+    version: '1.7'
     level: hard
   objectives:
   - Examine disk artefacts and build a timeline.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v1.4).'
+  - 'Focus: identify and remediate the weak admin panel (v1.7).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 90
@@ -1043,8 +785,8 @@
   lab_id: null
   course_ids:
   - digital-forensics
-- id: network-forensics-debian-monitor-api-gateway-1-5
-  name: 'Network Forensics Lab: permissive API gateway v1.5 — Debian monitoring'
+- id: network-forensics-debian-monitor-api-gateway-1-8
+  name: 'Network Forensics Lab: permissive API gateway v1.8 — Debian monitoring'
   category: forensics
   difficulty: intermediate
   os_family: debian
@@ -1064,13 +806,13 @@
     golden_image: debian-13-monitoring
     role: network-forensics
     component: api-gateway
-    version: '1.5'
+    version: '1.8'
     level: intermediate
   objectives:
   - Analyse captured traffic as evidence.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v1.5).'
+  - 'Focus: identify and remediate the permissive API gateway (v1.8).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 60
@@ -1086,8 +828,8 @@
   lab_id: null
   course_ids:
   - digital-forensics
-- id: malware-triage-ssh-linux-metrics-endpoint-1-0
-  name: 'Malware Triage Lab: leaky metrics endpoint v1.0 — Debian + OpenSSH'
+- id: malware-triage-ssh-linux-metrics-endpoint-1-3
+  name: 'Malware Triage Lab: leaky metrics endpoint v1.3 — Debian + OpenSSH'
   category: forensics
   difficulty: advanced
   os_family: debian
@@ -1107,13 +849,13 @@
     golden_image: debian-13-server
     role: malware-triage
     component: metrics-endpoint
-    version: '1.0'
+    version: '1.3'
     level: advanced
   objectives:
   - Safely triage a sample in a contained environment.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v1.0).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v1.3).'
   prerequisites:
   - malware-analysis-fundamentals
   estimated_minutes: 120
@@ -1129,8 +871,8 @@
   lab_id: null
   course_ids:
   - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-job-runner-2-2
-  name: 'Disk Forensics Lab: injectable job runner v2.2 — Debian + OpenSSH'
+- id: disk-forensics-ssh-linux-auth-proxy-2-7
+  name: 'Disk Forensics Lab: flawed auth proxy v2.7 — Debian + OpenSSH'
   category: forensics
   difficulty: hard
   os_family: debian
@@ -1143,20 +885,20 @@
   packages:
   - openssh-server
   - sudo
-  - job-runner
+  - auth-proxy
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: disk-forensics
-    component: job-runner
-    version: '2.2'
+    component: auth-proxy
+    version: '2.7'
     level: hard
   objectives:
   - Examine disk artefacts and build a timeline.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v2.2).'
+  - 'Focus: identify and remediate the flawed auth proxy (v2.7).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 90
@@ -1165,15 +907,15 @@
   - disk
   - hard
   - debian
-  - job-runner
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - digital-forensics
-- id: network-forensics-debian-monitor-metrics-endpoint-2-3
-  name: 'Network Forensics Lab: leaky metrics endpoint v2.3 — Debian monitoring'
+- id: network-forensics-debian-monitor-job-runner-2-8
+  name: 'Network Forensics Lab: injectable job runner v2.8 — Debian monitoring'
   category: forensics
   difficulty: intermediate
   os_family: debian
@@ -1186,20 +928,20 @@
   packages:
   - rsyslog
   - auditd
-  - metrics-endpoint
+  - job-runner
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: network-forensics
-    component: metrics-endpoint
-    version: '2.3'
+    component: job-runner
+    version: '2.8'
     level: intermediate
   objectives:
   - Analyse captured traffic as evidence.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v2.3).'
+  - 'Focus: identify and remediate the injectable job runner (v2.8).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 60
@@ -1208,15 +950,15 @@
   - pcap
   - intermediate
   - debian
-  - metrics-endpoint
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - digital-forensics
-- id: malware-triage-ssh-linux-import-tool-2-7
-  name: 'Malware Triage Lab: unsafe import tool v2.7 — Debian + OpenSSH'
+- id: malware-triage-ssh-linux-report-exporter-2-3
+  name: 'Malware Triage Lab: template-injectable report exporter v2.3 — Debian + OpenSSH'
   category: forensics
   difficulty: advanced
   os_family: debian
@@ -1229,64 +971,64 @@
   packages:
   - openssh-server
   - sudo
-  - import-tool
+  - report-exporter
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: malware-triage
-    component: import-tool
-    version: '2.7'
+    component: report-exporter
+    version: '2.3'
     level: advanced
   objectives:
   - Safely triage a sample in a contained environment.
   - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v2.3).'
+  prerequisites:
+  - malware-analysis-fundamentals
+  estimated_minutes: 120
+  tags:
+  - forensics
+  - malware
+  - advanced
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - malware-analysis-fundamentals
+- id: disk-forensics-ssh-linux-import-tool-2-7
+  name: 'Disk Forensics Lab: unsafe import tool v2.7 — Debian + OpenSSH'
+  category: forensics
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - import-tool
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: disk-forensics
+    component: import-tool
+    version: '2.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the unsafe import tool (v2.7).'
   prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-report-exporter-2-0
-  name: 'Disk Forensics Lab: template-injectable report exporter v2.0 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - report-exporter
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: report-exporter
-    version: '2.0'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v2.0).'
-  prerequisites:
   - digital-forensics
   estimated_minutes: 90
   tags:
@@ -1294,15 +1036,15 @@
   - disk
   - hard
   - debian
-  - report-exporter
+  - import-tool
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - digital-forensics
-- id: network-forensics-debian-monitor-import-tool-2-1
-  name: 'Network Forensics Lab: unsafe import tool v2.1 — Debian monitoring'
+- id: network-forensics-debian-monitor-backup-agent-2-8
+  name: 'Network Forensics Lab: over-privileged backup agent v2.8 — Debian monitoring'
   category: forensics
   difficulty: intermediate
   os_family: debian
@@ -1315,20 +1057,20 @@
   packages:
   - rsyslog
   - auditd
-  - import-tool
+  - backup-agent
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: network-forensics
-    component: import-tool
-    version: '2.1'
+    component: backup-agent
+    version: '2.8'
     level: intermediate
   objectives:
   - Analyse captured traffic as evidence.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v2.1).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v2.8).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 60
@@ -1337,15 +1079,15 @@
   - pcap
   - intermediate
   - debian
-  - import-tool
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - digital-forensics
-- id: malware-triage-ssh-linux-message-queue-2-5
-  name: 'Malware Triage Lab: exposed message queue v2.5 — Debian + OpenSSH'
+- id: malware-triage-ssh-linux-search-index-2-3
+  name: 'Malware Triage Lab: unauthenticated search index v2.3 — Debian + OpenSSH'
   category: forensics
   difficulty: advanced
   os_family: debian
@@ -1358,20 +1100,20 @@
   packages:
   - openssh-server
   - sudo
-  - message-queue
+  - search-index
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: malware-triage
-    component: message-queue
-    version: '2.5'
+    component: search-index
+    version: '2.3'
     level: advanced
   objectives:
   - Safely triage a sample in a contained environment.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v2.5).'
+  - 'Focus: identify and remediate the unauthenticated search index (v2.3).'
   prerequisites:
   - malware-analysis-fundamentals
   estimated_minutes: 120
@@ -1380,7 +1122,265 @@
   - malware
   - advanced
   - debian
-  - message-queue
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - malware-analysis-fundamentals
+- id: disk-forensics-ssh-linux-admin-panel-2-7
+  name: 'Disk Forensics Lab: weak admin panel v2.7 — Debian + OpenSSH'
+  category: forensics
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - admin-panel
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: disk-forensics
+    component: admin-panel
+    version: '2.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v2.7).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 90
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: network-forensics-debian-monitor-api-gateway-2-8
+  name: 'Network Forensics Lab: permissive API gateway v2.8 — Debian monitoring'
+  category: forensics
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - api-gateway
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: network-forensics
+    component: api-gateway
+    version: '2.8'
+    level: intermediate
+  objectives:
+  - Analyse captured traffic as evidence.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v2.8).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 60
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: malware-triage-ssh-linux-metrics-endpoint-2-3
+  name: 'Malware Triage Lab: leaky metrics endpoint v2.3 — Debian + OpenSSH'
+  category: forensics
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - metrics-endpoint
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: malware-triage
+    component: metrics-endpoint
+    version: '2.3'
+    level: advanced
+  objectives:
+  - Safely triage a sample in a contained environment.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v2.3).'
+  prerequisites:
+  - malware-analysis-fundamentals
+  estimated_minutes: 120
+  tags:
+  - forensics
+  - malware
+  - advanced
+  - debian
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - malware-analysis-fundamentals
+- id: disk-forensics-ssh-linux-legacy-cgi-2-7
+  name: 'Disk Forensics Lab: legacy CGI handler v2.7 — Debian + OpenSSH'
+  category: forensics
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: disk-forensics
+    component: legacy-cgi
+    version: '2.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v2.7).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 90
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: network-forensics-debian-monitor-webhook-receiver-2-8
+  name: 'Network Forensics Lab: unvalidated webhook receiver v2.8 — Debian monitoring'
+  category: forensics
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - webhook-receiver
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: network-forensics
+    component: webhook-receiver
+    version: '2.8'
+    level: intermediate
+  objectives:
+  - Analyse captured traffic as evidence.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.8).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 60
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: malware-triage-ssh-linux-reverse-proxy-2-3
+  name: 'Malware Triage Lab: misconfigured reverse proxy v2.3 — Debian + OpenSSH'
+  category: forensics
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - reverse-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: malware-triage
+    component: reverse-proxy
+    version: '2.3'
+    level: advanced
+  objectives:
+  - Safely triage a sample in a contained environment.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.3).'
+  prerequisites:
+  - malware-analysis-fundamentals
+  estimated_minutes: 120
+  tags:
+  - forensics
+  - malware
+  - advanced
+  - debian
+  - reverse-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -1516,8 +1516,8 @@
   lab_id: null
   course_ids:
   - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-api-gateway-2-5
-  name: 'Disk Forensics Lab: permissive API gateway v2.5 — Debian + OpenSSH'
+- id: disk-forensics-ssh-linux-admin-panel-3-7
+  name: 'Disk Forensics Lab: weak admin panel v3.7 — Debian + OpenSSH'
   category: forensics
   difficulty: hard
   os_family: debian
@@ -1526,866 +1526,6 @@
   vcpu: 2
   memory_mb: 3072
   disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - api-gateway
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: api-gateway
-    version: '2.5'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v2.5).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-file-service-2-6
-  name: 'Network Forensics Lab: unsafe file service v2.6 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - file-service
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: file-service
-    version: '2.6'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v2.6).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - file-service
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-legacy-cgi-2-1
-  name: 'Malware Triage Lab: legacy CGI handler v2.1 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - legacy-cgi
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: legacy-cgi
-    version: '2.1'
-    level: advanced
-  objectives:
-  - Safely triage a sample in a contained environment.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v2.1).'
-  prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-metrics-endpoint-2-3
-  name: 'Disk Forensics Lab: leaky metrics endpoint v2.3 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - metrics-endpoint
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: metrics-endpoint
-    version: '2.3'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v2.3).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-legacy-cgi-2-4
-  name: 'Network Forensics Lab: legacy CGI handler v2.4 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - legacy-cgi
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: legacy-cgi
-    version: '2.4'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v2.4).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-backup-agent-2-8
-  name: 'Malware Triage Lab: over-privileged backup agent v2.8 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - backup-agent
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: backup-agent
-    version: '2.8'
-    level: advanced
-  objectives:
-  - Safely triage a sample in a contained environment.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v2.8).'
-  prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-import-tool-2-1
-  name: 'Disk Forensics Lab: unsafe import tool v2.1 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - import-tool
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: import-tool
-    version: '2.1'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v2.1).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-backup-agent-2-2
-  name: 'Network Forensics Lab: over-privileged backup agent v2.2 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - backup-agent
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: backup-agent
-    version: '2.2'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v2.2).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-search-index-2-6
-  name: 'Malware Triage Lab: unauthenticated search index v2.6 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: search-index
-    version: '2.6'
-    level: advanced
-  objectives:
-  - Safely triage a sample in a contained environment.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v2.6).'
-  prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-message-queue-2-8
-  name: 'Disk Forensics Lab: exposed message queue v2.8 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - message-queue
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: message-queue
-    version: '2.8'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v2.8).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-search-index-2-0
-  name: 'Network Forensics Lab: unauthenticated search index v2.0 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - search-index
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: search-index
-    version: '2.0'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v2.0).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-auth-proxy-2-4
-  name: 'Malware Triage Lab: flawed auth proxy v2.4 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - auth-proxy
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: auth-proxy
-    version: '2.4'
-    level: advanced
-  objectives:
-  - Safely triage a sample in a contained environment.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v2.4).'
-  prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-file-service-3-6
-  name: 'Disk Forensics Lab: unsafe file service v3.6 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - file-service
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: file-service
-    version: '3.6'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v3.6).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - file-service
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-auth-proxy-3-7
-  name: 'Network Forensics Lab: flawed auth proxy v3.7 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - auth-proxy
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: auth-proxy
-    version: '3.7'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v3.7).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-webhook-receiver-3-2
-  name: 'Malware Triage Lab: unvalidated webhook receiver v3.2 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - webhook-receiver
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: webhook-receiver
-    version: '3.2'
-    level: advanced
-  objectives:
-  - Safely triage a sample in a contained environment.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.2).'
-  prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-legacy-cgi-3-4
-  name: 'Disk Forensics Lab: legacy CGI handler v3.4 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - legacy-cgi
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: legacy-cgi
-    version: '3.4'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v3.4).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-webhook-receiver-3-5
-  name: 'Network Forensics Lab: unvalidated webhook receiver v3.5 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - webhook-receiver
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: webhook-receiver
-    version: '3.5'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.5).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-reverse-proxy-3-0
-  name: 'Malware Triage Lab: misconfigured reverse proxy v3.0 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - reverse-proxy
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: reverse-proxy
-    version: '3.0'
-    level: advanced
-  objectives:
-  - Safely triage a sample in a contained environment.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.0).'
-  prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-backup-agent-3-2
-  name: 'Disk Forensics Lab: over-privileged backup agent v3.2 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - backup-agent
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: backup-agent
-    version: '3.2'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v3.2).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-reverse-proxy-3-3
-  name: 'Network Forensics Lab: misconfigured reverse proxy v3.3 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - reverse-proxy
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: reverse-proxy
-    version: '3.3'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.3).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-admin-panel-3-7
-  name: 'Malware Triage Lab: weak admin panel v3.7 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
   network_mode: isolated
   packages:
   - openssh-server
@@ -2395,59 +1535,16 @@
   - ssh
   provisioning:
     golden_image: debian-13-server
-    role: malware-triage
+    role: disk-forensics
     component: admin-panel
     version: '3.7'
-    level: advanced
+    level: hard
   objectives:
-  - Safely triage a sample in a contained environment.
-  - Work with minimal guidance; justify decisions and document findings.
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the weak admin panel (v3.7).'
   prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-search-index-3-0
-  name: 'Disk Forensics Lab: unauthenticated search index v3.0 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: search-index
-    version: '3.0'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v3.0).'
-  prerequisites:
   - digital-forensics
   estimated_minutes: 90
   tags:
@@ -2455,15 +1552,15 @@
   - disk
   - hard
   - debian
-  - search-index
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - digital-forensics
-- id: network-forensics-debian-monitor-admin-panel-3-1
-  name: 'Network Forensics Lab: weak admin panel v3.1 — Debian monitoring'
+- id: network-forensics-debian-monitor-api-gateway-3-8
+  name: 'Network Forensics Lab: permissive API gateway v3.8 — Debian monitoring'
   category: forensics
   difficulty: intermediate
   os_family: debian
@@ -2476,20 +1573,20 @@
   packages:
   - rsyslog
   - auditd
-  - admin-panel
+  - api-gateway
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: network-forensics
-    component: admin-panel
-    version: '3.1'
+    component: api-gateway
+    version: '3.8'
     level: intermediate
   objectives:
   - Analyse captured traffic as evidence.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v3.1).'
+  - 'Focus: identify and remediate the permissive API gateway (v3.8).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 60
@@ -2498,15 +1595,15 @@
   - pcap
   - intermediate
   - debian
-  - admin-panel
+  - api-gateway
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - digital-forensics
-- id: malware-triage-ssh-linux-job-runner-3-5
-  name: 'Malware Triage Lab: injectable job runner v3.5 — Debian + OpenSSH'
+- id: malware-triage-ssh-linux-metrics-endpoint-3-3
+  name: 'Malware Triage Lab: leaky metrics endpoint v3.3 — Debian + OpenSSH'
   category: forensics
   difficulty: advanced
   os_family: debian
@@ -2519,20 +1616,20 @@
   packages:
   - openssh-server
   - sudo
-  - job-runner
+  - metrics-endpoint
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: malware-triage
-    component: job-runner
-    version: '3.5'
+    component: metrics-endpoint
+    version: '3.3'
     level: advanced
   objectives:
   - Safely triage a sample in a contained environment.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v3.5).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v3.3).'
   prerequisites:
   - malware-analysis-fundamentals
   estimated_minutes: 120
@@ -2541,7 +1638,265 @@
   - malware
   - advanced
   - debian
-  - job-runner
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - malware-analysis-fundamentals
+- id: disk-forensics-ssh-linux-legacy-cgi-3-7
+  name: 'Disk Forensics Lab: legacy CGI handler v3.7 — Debian + OpenSSH'
+  category: forensics
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: disk-forensics
+    component: legacy-cgi
+    version: '3.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v3.7).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 90
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: network-forensics-debian-monitor-webhook-receiver-3-8
+  name: 'Network Forensics Lab: unvalidated webhook receiver v3.8 — Debian monitoring'
+  category: forensics
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - webhook-receiver
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: network-forensics
+    component: webhook-receiver
+    version: '3.8'
+    level: intermediate
+  objectives:
+  - Analyse captured traffic as evidence.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.8).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 60
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: malware-triage-ssh-linux-reverse-proxy-3-3
+  name: 'Malware Triage Lab: misconfigured reverse proxy v3.3 — Debian + OpenSSH'
+  category: forensics
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - reverse-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: malware-triage
+    component: reverse-proxy
+    version: '3.3'
+    level: advanced
+  objectives:
+  - Safely triage a sample in a contained environment.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.3).'
+  prerequisites:
+  - malware-analysis-fundamentals
+  estimated_minutes: 120
+  tags:
+  - forensics
+  - malware
+  - advanced
+  - debian
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - malware-analysis-fundamentals
+- id: disk-forensics-ssh-linux-cache-layer-3-7
+  name: 'Disk Forensics Lab: insecure cache layer v3.7 — Debian + OpenSSH'
+  category: forensics
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - cache-layer
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: disk-forensics
+    component: cache-layer
+    version: '3.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v3.7).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 90
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: network-forensics-debian-monitor-message-queue-3-8
+  name: 'Network Forensics Lab: exposed message queue v3.8 — Debian monitoring'
+  category: forensics
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - message-queue
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: network-forensics
+    component: message-queue
+    version: '3.8'
+    level: intermediate
+  objectives:
+  - Analyse captured traffic as evidence.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v3.8).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 60
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: malware-triage-ssh-linux-file-service-3-3
+  name: 'Malware Triage Lab: unsafe file service v3.3 — Debian + OpenSSH'
+  category: forensics
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - file-service
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: malware-triage
+    component: file-service
+    version: '3.3'
+    level: advanced
+  objectives:
+  - Safely triage a sample in a contained environment.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v3.3).'
+  prerequisites:
+  - malware-analysis-fundamentals
+  estimated_minutes: 120
+  tags:
+  - forensics
+  - malware
+  - advanced
+  - debian
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -2677,8 +2032,8 @@
   lab_id: null
   course_ids:
   - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-webhook-receiver-3-5
-  name: 'Disk Forensics Lab: unvalidated webhook receiver v3.5 — Debian + OpenSSH'
+- id: disk-forensics-ssh-linux-import-tool-3-7
+  name: 'Disk Forensics Lab: unsafe import tool v3.7 — Debian + OpenSSH'
   category: forensics
   difficulty: hard
   os_family: debian
@@ -2691,20 +2046,20 @@
   packages:
   - openssh-server
   - sudo
-  - webhook-receiver
+  - import-tool
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: disk-forensics
-    component: webhook-receiver
-    version: '3.5'
+    component: import-tool
+    version: '3.7'
     level: hard
   objectives:
   - Examine disk artefacts and build a timeline.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.5).'
+  - 'Focus: identify and remediate the unsafe import tool (v3.7).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 90
@@ -2713,15 +2068,15 @@
   - disk
   - hard
   - debian
-  - webhook-receiver
+  - import-tool
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - digital-forensics
-- id: network-forensics-debian-monitor-report-exporter-3-6
-  name: 'Network Forensics Lab: template-injectable report exporter v3.6 — Debian monitoring'
+- id: network-forensics-debian-monitor-backup-agent-3-8
+  name: 'Network Forensics Lab: over-privileged backup agent v3.8 — Debian monitoring'
   category: forensics
   difficulty: intermediate
   os_family: debian
@@ -2734,192 +2089,63 @@
   packages:
   - rsyslog
   - auditd
-  - report-exporter
+  - backup-agent
   services:
   - rsyslog
   provisioning:
     golden_image: debian-13-monitoring
     role: network-forensics
-    component: report-exporter
-    version: '3.6'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v3.6).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-cache-layer-3-1
-  name: 'Malware Triage Lab: insecure cache layer v3.1 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - cache-layer
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: cache-layer
-    version: '3.1'
-    level: advanced
-  objectives:
-  - Safely triage a sample in a contained environment.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v3.1).'
-  prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-reverse-proxy-3-3
-  name: 'Disk Forensics Lab: misconfigured reverse proxy v3.3 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - reverse-proxy
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: reverse-proxy
-    version: '3.3'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.3).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-cache-layer-3-4
-  name: 'Network Forensics Lab: insecure cache layer v3.4 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - cache-layer
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: cache-layer
-    version: '3.4'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v3.4).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-api-gateway-3-8
-  name: 'Malware Triage Lab: permissive API gateway v3.8 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - api-gateway
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: api-gateway
+    component: backup-agent
     version: '3.8'
+    level: intermediate
+  objectives:
+  - Analyse captured traffic as evidence.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.8).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 60
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: malware-triage-ssh-linux-search-index-3-3
+  name: 'Malware Triage Lab: unauthenticated search index v3.3 — Debian + OpenSSH'
+  category: forensics
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - search-index
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: malware-triage
+    component: search-index
+    version: '3.3'
     level: advanced
   objectives:
   - Safely triage a sample in a contained environment.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v3.8).'
+  - 'Focus: identify and remediate the unauthenticated search index (v3.3).'
   prerequisites:
   - malware-analysis-fundamentals
   estimated_minutes: 120
@@ -2928,15 +2154,402 @@
   - malware
   - advanced
   - debian
-  - api-gateway
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-admin-panel-4-1
-  name: 'Disk Forensics Lab: weak admin panel v4.1 — Debian + OpenSSH'
+- id: disk-forensics-ssh-linux-cache-layer-4-7
+  name: 'Disk Forensics Lab: insecure cache layer v4.7 — Debian + OpenSSH'
+  category: forensics
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - cache-layer
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: disk-forensics
+    component: cache-layer
+    version: '4.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v4.7).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 90
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: network-forensics-debian-monitor-message-queue-4-8
+  name: 'Network Forensics Lab: exposed message queue v4.8 — Debian monitoring'
+  category: forensics
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - message-queue
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: network-forensics
+    component: message-queue
+    version: '4.8'
+    level: intermediate
+  objectives:
+  - Analyse captured traffic as evidence.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v4.8).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 60
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: malware-triage-ssh-linux-file-service-4-3
+  name: 'Malware Triage Lab: unsafe file service v4.3 — Debian + OpenSSH'
+  category: forensics
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - file-service
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: malware-triage
+    component: file-service
+    version: '4.3'
+    level: advanced
+  objectives:
+  - Safely triage a sample in a contained environment.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v4.3).'
+  prerequisites:
+  - malware-analysis-fundamentals
+  estimated_minutes: 120
+  tags:
+  - forensics
+  - malware
+  - advanced
+  - debian
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - malware-analysis-fundamentals
+- id: disk-forensics-ssh-linux-auth-proxy-4-7
+  name: 'Disk Forensics Lab: flawed auth proxy v4.7 — Debian + OpenSSH'
+  category: forensics
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - auth-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: disk-forensics
+    component: auth-proxy
+    version: '4.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v4.7).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 90
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: network-forensics-debian-monitor-job-runner-4-8
+  name: 'Network Forensics Lab: injectable job runner v4.8 — Debian monitoring'
+  category: forensics
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - job-runner
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: network-forensics
+    component: job-runner
+    version: '4.8'
+    level: intermediate
+  objectives:
+  - Analyse captured traffic as evidence.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v4.8).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 60
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: malware-triage-ssh-linux-report-exporter-4-3
+  name: 'Malware Triage Lab: template-injectable report exporter v4.3 — Debian + OpenSSH'
+  category: forensics
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - report-exporter
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: malware-triage
+    component: report-exporter
+    version: '4.3'
+    level: advanced
+  objectives:
+  - Safely triage a sample in a contained environment.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v4.3).'
+  prerequisites:
+  - malware-analysis-fundamentals
+  estimated_minutes: 120
+  tags:
+  - forensics
+  - malware
+  - advanced
+  - debian
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - malware-analysis-fundamentals
+- id: disk-forensics-ssh-linux-import-tool-4-7
+  name: 'Disk Forensics Lab: unsafe import tool v4.7 — Debian + OpenSSH'
+  category: forensics
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - import-tool
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: disk-forensics
+    component: import-tool
+    version: '4.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v4.7).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 90
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: network-forensics-debian-monitor-backup-agent-4-8
+  name: 'Network Forensics Lab: over-privileged backup agent v4.8 — Debian monitoring'
+  category: forensics
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - backup-agent
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: network-forensics
+    component: backup-agent
+    version: '4.8'
+    level: intermediate
+  objectives:
+  - Analyse captured traffic as evidence.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v4.8).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 60
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: malware-triage-ssh-linux-search-index-4-3
+  name: 'Malware Triage Lab: unauthenticated search index v4.3 — Debian + OpenSSH'
+  category: forensics
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - search-index
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: malware-triage
+    component: search-index
+    version: '4.3'
+    level: advanced
+  objectives:
+  - Safely triage a sample in a contained environment.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v4.3).'
+  prerequisites:
+  - malware-analysis-fundamentals
+  estimated_minutes: 120
+  tags:
+  - forensics
+  - malware
+  - advanced
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - malware-analysis-fundamentals
+- id: disk-forensics-ssh-linux-admin-panel-4-7
+  name: 'Disk Forensics Lab: weak admin panel v4.7 — Debian + OpenSSH'
   category: forensics
   difficulty: hard
   os_family: debian
@@ -2956,13 +2569,13 @@
     golden_image: debian-13-server
     role: disk-forensics
     component: admin-panel
-    version: '4.1'
+    version: '4.7'
     level: hard
   objectives:
   - Examine disk artefacts and build a timeline.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v4.1).'
+  - 'Focus: identify and remediate the weak admin panel (v4.7).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 90
@@ -2978,8 +2591,8 @@
   lab_id: null
   course_ids:
   - digital-forensics
-- id: network-forensics-debian-monitor-api-gateway-4-2
-  name: 'Network Forensics Lab: permissive API gateway v4.2 — Debian monitoring'
+- id: network-forensics-debian-monitor-api-gateway-4-8
+  name: 'Network Forensics Lab: permissive API gateway v4.8 — Debian monitoring'
   category: forensics
   difficulty: intermediate
   os_family: debian
@@ -2999,13 +2612,13 @@
     golden_image: debian-13-monitoring
     role: network-forensics
     component: api-gateway
-    version: '4.2'
+    version: '4.8'
     level: intermediate
   objectives:
   - Analyse captured traffic as evidence.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v4.2).'
+  - 'Focus: identify and remediate the permissive API gateway (v4.8).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 60
@@ -3021,8 +2634,8 @@
   lab_id: null
   course_ids:
   - digital-forensics
-- id: malware-triage-ssh-linux-metrics-endpoint-4-6
-  name: 'Malware Triage Lab: leaky metrics endpoint v4.6 — Debian + OpenSSH'
+- id: malware-triage-ssh-linux-metrics-endpoint-4-3
+  name: 'Malware Triage Lab: leaky metrics endpoint v4.3 — Debian + OpenSSH'
   category: forensics
   difficulty: advanced
   os_family: debian
@@ -3042,13 +2655,13 @@
     golden_image: debian-13-server
     role: malware-triage
     component: metrics-endpoint
-    version: '4.6'
+    version: '4.3'
     level: advanced
   objectives:
   - Safely triage a sample in a contained environment.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v4.6).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.3).'
   prerequisites:
   - malware-analysis-fundamentals
   estimated_minutes: 120
@@ -3064,8 +2677,8 @@
   lab_id: null
   course_ids:
   - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-job-runner-4-8
-  name: 'Disk Forensics Lab: injectable job runner v4.8 — Debian + OpenSSH'
+- id: disk-forensics-ssh-linux-legacy-cgi-4-7
+  name: 'Disk Forensics Lab: legacy CGI handler v4.7 — Debian + OpenSSH'
   category: forensics
   difficulty: hard
   os_family: debian
@@ -3078,192 +2691,63 @@
   packages:
   - openssh-server
   - sudo
-  - job-runner
+  - legacy-cgi
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: disk-forensics
-    component: job-runner
-    version: '4.8'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v4.8).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-metrics-endpoint-4-0
-  name: 'Network Forensics Lab: leaky metrics endpoint v4.0 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - metrics-endpoint
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: metrics-endpoint
-    version: '4.0'
-    level: intermediate
-  objectives:
-  - Analyse captured traffic as evidence.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v4.0).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 60
-  tags:
-  - forensics
-  - pcap
-  - intermediate
-  - debian
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: malware-triage-ssh-linux-import-tool-4-4
-  name: 'Malware Triage Lab: unsafe import tool v4.4 — Debian + OpenSSH'
-  category: forensics
-  difficulty: advanced
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - import-tool
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: malware-triage
-    component: import-tool
-    version: '4.4'
-    level: advanced
-  objectives:
-  - Safely triage a sample in a contained environment.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v4.4).'
-  prerequisites:
-  - malware-analysis-fundamentals
-  estimated_minutes: 120
-  tags:
-  - forensics
-  - malware
-  - advanced
-  - debian
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - malware-analysis-fundamentals
-- id: disk-forensics-ssh-linux-report-exporter-4-6
-  name: 'Disk Forensics Lab: template-injectable report exporter v4.6 — Debian + OpenSSH'
-  category: forensics
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - report-exporter
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: disk-forensics
-    component: report-exporter
-    version: '4.6'
-    level: hard
-  objectives:
-  - Examine disk artefacts and build a timeline.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v4.6).'
-  prerequisites:
-  - digital-forensics
-  estimated_minutes: 90
-  tags:
-  - forensics
-  - disk
-  - hard
-  - debian
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - digital-forensics
-- id: network-forensics-debian-monitor-import-tool-4-7
-  name: 'Network Forensics Lab: unsafe import tool v4.7 — Debian monitoring'
-  category: forensics
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-monitoring
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - rsyslog
-  - auditd
-  - import-tool
-  services:
-  - rsyslog
-  provisioning:
-    golden_image: debian-13-monitoring
-    role: network-forensics
-    component: import-tool
+    component: legacy-cgi
     version: '4.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v4.7).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 90
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: network-forensics-debian-monitor-webhook-receiver-4-8
+  name: 'Network Forensics Lab: unvalidated webhook receiver v4.8 — Debian monitoring'
+  category: forensics
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - webhook-receiver
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: network-forensics
+    component: webhook-receiver
+    version: '4.8'
     level: intermediate
   objectives:
   - Analyse captured traffic as evidence.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v4.7).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.8).'
   prerequisites:
   - digital-forensics
   estimated_minutes: 60
@@ -3272,15 +2756,15 @@
   - pcap
   - intermediate
   - debian
-  - import-tool
+  - webhook-receiver
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - digital-forensics
-- id: malware-triage-ssh-linux-message-queue-4-2
-  name: 'Malware Triage Lab: exposed message queue v4.2 — Debian + OpenSSH'
+- id: malware-triage-ssh-linux-reverse-proxy-4-3
+  name: 'Malware Triage Lab: misconfigured reverse proxy v4.3 — Debian + OpenSSH'
   category: forensics
   difficulty: advanced
   os_family: debian
@@ -3293,20 +2777,20 @@
   packages:
   - openssh-server
   - sudo
-  - message-queue
+  - reverse-proxy
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: malware-triage
-    component: message-queue
-    version: '4.2'
+    component: reverse-proxy
+    version: '4.3'
     level: advanced
   objectives:
   - Safely triage a sample in a contained environment.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v4.2).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.3).'
   prerequisites:
   - malware-analysis-fundamentals
   estimated_minutes: 120
@@ -3315,10 +2799,182 @@
   - malware
   - advanced
   - debian
-  - message-queue
+  - reverse-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - malware-analysis-fundamentals
+- id: disk-forensics-ssh-linux-import-tool-5-7
+  name: 'Disk Forensics Lab: unsafe import tool v5.7 — Debian + OpenSSH'
+  category: forensics
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - import-tool
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: disk-forensics
+    component: import-tool
+    version: '5.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v5.7).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 90
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: network-forensics-debian-monitor-backup-agent-5-8
+  name: 'Network Forensics Lab: over-privileged backup agent v5.8 — Debian monitoring'
+  category: forensics
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-monitoring
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - rsyslog
+  - auditd
+  - backup-agent
+  services:
+  - rsyslog
+  provisioning:
+    golden_image: debian-13-monitoring
+    role: network-forensics
+    component: backup-agent
+    version: '5.8'
+    level: intermediate
+  objectives:
+  - Analyse captured traffic as evidence.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v5.8).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 60
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics
+- id: malware-triage-ssh-linux-search-index-5-3
+  name: 'Malware Triage Lab: unauthenticated search index v5.3 — Debian + OpenSSH'
+  category: forensics
+  difficulty: advanced
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - search-index
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: malware-triage
+    component: search-index
+    version: '5.3'
+    level: advanced
+  objectives:
+  - Safely triage a sample in a contained environment.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v5.3).'
+  prerequisites:
+  - malware-analysis-fundamentals
+  estimated_minutes: 120
+  tags:
+  - forensics
+  - malware
+  - advanced
+  - debian
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - malware-analysis-fundamentals
+- id: disk-forensics-ssh-linux-admin-panel-5-7
+  name: 'Disk Forensics Lab: weak admin panel v5.7 — Debian + OpenSSH'
+  category: forensics
+  difficulty: hard
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 3072
+  disk_gb: 16
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - admin-panel
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: disk-forensics
+    component: admin-panel
+    version: '5.7'
+    level: hard
+  objectives:
+  - Examine disk artefacts and build a timeline.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v5.7).'
+  prerequisites:
+  - digital-forensics
+  estimated_minutes: 90
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - digital-forensics

@@ -490,8 +490,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-client-auth-proxy-1-7
-  name: 'Windows Enumeration Lab: flawed auth proxy v1.7 — Windows Client'
+- id: windows-enum-windows-client-metrics-endpoint-1-0
+  name: 'Windows Enumeration Lab: leaky metrics endpoint v1.0 — Windows Client'
   category: windows
   difficulty: easy
   os_family: windows
@@ -502,146 +502,21 @@
   disk_gb: 10
   network_mode: isolated
   packages:
-  - auth-proxy
+  - metrics-endpoint
   services:
   - w32time
   provisioning:
     golden_image: windows-client-base
     role: windows-enum
-    component: auth-proxy
-    version: '1.7'
+    component: metrics-endpoint
+    version: '1.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v1.7).'
-  prerequisites:
-  - windows-administration
-  estimated_minutes: 40
-  tags:
-  - windows
-  - enum
-  - easy
-  - windows
-  - auth-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-administration
-- id: windows-privesc-windows-client-job-runner-1-8
-  name: 'Windows Privilege Concepts Lab: injectable job runner v1.8 — Windows Client'
-  category: windows
-  difficulty: advanced
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-client-base
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - job-runner
-  services:
-  - w32time
-  provisioning:
-    golden_image: windows-client-base
-    role: windows-privesc
-    component: job-runner
-    version: '1.8'
-    level: advanced
-  objectives:
-  - Identify and remediate Windows privilege weaknesses.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v1.8).'
-  prerequisites:
-  - windows-privilege-escalation-concepts
-  estimated_minutes: 120
-  tags:
-  - windows
-  - privesc
-  - advanced
-  - windows
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-metrics-endpoint-1-0
-  name: 'Windows Hardening Lab: leaky metrics endpoint v1.0 — Windows Server'
-  category: windows
-  difficulty: intermediate
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - metrics-endpoint
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-harden
-    component: metrics-endpoint
-    version: '1.0'
-    level: intermediate
-  objectives:
-  - Harden a Windows server configuration.
-  - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the leaky metrics endpoint (v1.0).'
   prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 60
-  tags:
-  - windows
-  - hardening
-  - intermediate
-  - windows
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: windows-enum-windows-srv-webhook-receiver-1-5
-  name: 'Windows Enumeration Lab: unvalidated webhook receiver v1.5 — Windows Server'
-  category: windows
-  difficulty: easy
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - webhook-receiver
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-enum
-    component: webhook-receiver
-    version: '1.5'
-    level: easy
-  objectives:
-  - Enumerate Windows configuration and services.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.5).'
-  prerequisites:
   - windows-administration
   estimated_minutes: 40
   tags:
@@ -649,40 +524,39 @@
   - enum
   - easy
   - windows
-  - webhook-receiver
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-srv-report-exporter-1-6
-  name: 'Windows Privilege Concepts Lab: template-injectable report exporter v1.6 — Windows Server'
+- id: windows-privesc-windows-client-legacy-cgi-1-1
+  name: 'Windows Privilege Concepts Lab: legacy CGI handler v1.1 — Windows Client'
   category: windows
   difficulty: advanced
   os_family: windows
   arch: x86_64
-  base_image_key: windows-server-base
+  base_image_key: windows-client-base
   vcpu: 4
   memory_mb: 4096
   disk_gb: 20
   network_mode: isolated
   packages:
-  - report-exporter
+  - legacy-cgi
   services:
   - w32time
-  - lanmanserver
   provisioning:
-    golden_image: windows-server-base
+    golden_image: windows-client-base
     role: windows-privesc
-    component: report-exporter
-    version: '1.6'
+    component: legacy-cgi
+    version: '1.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v1.6).'
+  - 'Focus: identify and remediate the legacy CGI handler (v1.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -691,15 +565,15 @@
   - privesc
   - advanced
   - windows
-  - report-exporter
+  - legacy-cgi
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-import-tool-1-7
-  name: 'Windows Hardening Lab: unsafe import tool v1.7 — Windows Server'
+- id: windows-harden-windows-srv-webhook-receiver-1-2
+  name: 'Windows Hardening Lab: unvalidated webhook receiver v1.2 — Windows Server'
   category: windows
   difficulty: intermediate
   os_family: windows
@@ -710,21 +584,21 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - import-tool
+  - webhook-receiver
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-harden
-    component: import-tool
-    version: '1.7'
+    component: webhook-receiver
+    version: '1.2'
     level: intermediate
   objectives:
   - Harden a Windows server configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v1.7).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.2).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
@@ -733,20 +607,20 @@
   - hardening
   - intermediate
   - windows
-  - import-tool
+  - webhook-receiver
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-client-reverse-proxy-1-3
-  name: 'Windows Enumeration Lab: misconfigured reverse proxy v1.3 — Windows Client'
+- id: windows-enum-windows-srv-reverse-proxy-1-0
+  name: 'Windows Enumeration Lab: misconfigured reverse proxy v1.0 — Windows Server'
   category: windows
   difficulty: easy
   os_family: windows
   arch: x86_64
-  base_image_key: windows-client-base
+  base_image_key: windows-server-base
   vcpu: 1
   memory_mb: 1024
   disk_gb: 10
@@ -755,17 +629,18 @@
   - reverse-proxy
   services:
   - w32time
+  - lanmanserver
   provisioning:
-    golden_image: windows-client-base
+    golden_image: windows-server-base
     role: windows-enum
     component: reverse-proxy
-    version: '1.3'
+    version: '1.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.3).'
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v1.0).'
   prerequisites:
   - windows-administration
   estimated_minutes: 40
@@ -781,13 +656,13 @@
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-client-cache-layer-1-4
-  name: 'Windows Privilege Concepts Lab: insecure cache layer v1.4 — Windows Client'
+- id: windows-privesc-windows-srv-cache-layer-1-1
+  name: 'Windows Privilege Concepts Lab: insecure cache layer v1.1 — Windows Server'
   category: windows
   difficulty: advanced
   os_family: windows
   arch: x86_64
-  base_image_key: windows-client-base
+  base_image_key: windows-server-base
   vcpu: 4
   memory_mb: 4096
   disk_gb: 20
@@ -796,17 +671,18 @@
   - cache-layer
   services:
   - w32time
+  - lanmanserver
   provisioning:
-    golden_image: windows-client-base
+    golden_image: windows-server-base
     role: windows-privesc
     component: cache-layer
-    version: '1.4'
+    version: '1.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v1.4).'
+  - 'Focus: identify and remediate the insecure cache layer (v1.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -822,8 +698,8 @@
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-message-queue-1-5
-  name: 'Windows Hardening Lab: exposed message queue v1.5 — Windows Server'
+- id: windows-harden-windows-srv-message-queue-1-2
+  name: 'Windows Hardening Lab: exposed message queue v1.2 — Windows Server'
   category: windows
   difficulty: intermediate
   os_family: windows
@@ -842,13 +718,13 @@
     golden_image: windows-server-base
     role: windows-harden
     component: message-queue
-    version: '1.5'
+    version: '1.2'
     level: intermediate
   objectives:
   - Harden a Windows server configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v1.5).'
+  - 'Focus: identify and remediate the exposed message queue (v1.2).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
@@ -864,158 +740,32 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-srv-admin-panel-1-1
-  name: 'Windows Enumeration Lab: weak admin panel v1.1 — Windows Server'
+- id: windows-enum-windows-client-file-service-1-0
+  name: 'Windows Enumeration Lab: unsafe file service v1.0 — Windows Client'
   category: windows
   difficulty: easy
   os_family: windows
   arch: x86_64
-  base_image_key: windows-server-base
+  base_image_key: windows-client-base
   vcpu: 1
   memory_mb: 1024
   disk_gb: 10
   network_mode: isolated
   packages:
-  - admin-panel
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-enum
-    component: admin-panel
-    version: '1.1'
-    level: easy
-  objectives:
-  - Enumerate Windows configuration and services.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v1.1).'
-  prerequisites:
-  - windows-administration
-  estimated_minutes: 40
-  tags:
-  - windows
-  - enum
-  - easy
-  - windows
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-administration
-- id: windows-privesc-windows-srv-api-gateway-1-2
-  name: 'Windows Privilege Concepts Lab: permissive API gateway v1.2 — Windows Server'
-  category: windows
-  difficulty: advanced
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - api-gateway
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-privesc
-    component: api-gateway
-    version: '1.2'
-    level: advanced
-  objectives:
-  - Identify and remediate Windows privilege weaknesses.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v1.2).'
-  prerequisites:
-  - windows-privilege-escalation-concepts
-  estimated_minutes: 120
-  tags:
-  - windows
-  - privesc
-  - advanced
-  - windows
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-file-service-1-3
-  name: 'Windows Hardening Lab: unsafe file service v1.3 — Windows Server'
-  category: windows
-  difficulty: intermediate
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
   - file-service
   services:
   - w32time
-  - lanmanserver
   provisioning:
-    golden_image: windows-server-base
-    role: windows-harden
+    golden_image: windows-client-base
+    role: windows-enum
     component: file-service
-    version: '1.3'
-    level: intermediate
-  objectives:
-  - Harden a Windows server configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v1.3).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 60
-  tags:
-  - windows
-  - hardening
-  - intermediate
-  - windows
-  - file-service
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: windows-enum-windows-client-job-runner-1-8
-  name: 'Windows Enumeration Lab: injectable job runner v1.8 — Windows Client'
-  category: windows
-  difficulty: easy
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-client-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - job-runner
-  services:
-  - w32time
-  provisioning:
-    golden_image: windows-client-base
-    role: windows-enum
-    component: job-runner
-    version: '1.8'
+    version: '1.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v1.8).'
+  - 'Focus: identify and remediate the unsafe file service (v1.0).'
   prerequisites:
   - windows-administration
   estimated_minutes: 40
@@ -1024,15 +774,15 @@
   - enum
   - easy
   - windows
-  - job-runner
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-client-metrics-endpoint-1-0
-  name: 'Windows Privilege Concepts Lab: leaky metrics endpoint v1.0 — Windows Client'
+- id: windows-privesc-windows-client-auth-proxy-1-1
+  name: 'Windows Privilege Concepts Lab: flawed auth proxy v1.1 — Windows Client'
   category: windows
   difficulty: advanced
   os_family: windows
@@ -1043,20 +793,20 @@
   disk_gb: 20
   network_mode: isolated
   packages:
-  - metrics-endpoint
+  - auth-proxy
   services:
   - w32time
   provisioning:
     golden_image: windows-client-base
     role: windows-privesc
-    component: metrics-endpoint
-    version: '1.0'
+    component: auth-proxy
+    version: '1.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v1.0).'
+  - 'Focus: identify and remediate the flawed auth proxy (v1.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -1065,15 +815,15 @@
   - privesc
   - advanced
   - windows
-  - metrics-endpoint
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-legacy-cgi-1-1
-  name: 'Windows Hardening Lab: legacy CGI handler v1.1 — Windows Server'
+- id: windows-harden-windows-srv-job-runner-1-2
+  name: 'Windows Hardening Lab: injectable job runner v1.2 — Windows Server'
   category: windows
   difficulty: intermediate
   os_family: windows
@@ -1084,21 +834,21 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - legacy-cgi
+  - job-runner
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-harden
-    component: legacy-cgi
-    version: '1.1'
+    component: job-runner
+    version: '1.2'
     level: intermediate
   objectives:
   - Harden a Windows server configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v1.1).'
+  - 'Focus: identify and remediate the injectable job runner (v1.2).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
@@ -1107,15 +857,15 @@
   - hardening
   - intermediate
   - windows
-  - legacy-cgi
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-srv-report-exporter-1-6
-  name: 'Windows Enumeration Lab: template-injectable report exporter v1.6 — Windows Server'
+- id: windows-enum-windows-srv-report-exporter-1-0
+  name: 'Windows Enumeration Lab: template-injectable report exporter v1.0 — Windows Server'
   category: windows
   difficulty: easy
   os_family: windows
@@ -1134,13 +884,13 @@
     golden_image: windows-server-base
     role: windows-enum
     component: report-exporter
-    version: '1.6'
+    version: '1.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v1.6).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v1.0).'
   prerequisites:
   - windows-administration
   estimated_minutes: 40
@@ -1156,8 +906,8 @@
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-srv-import-tool-1-7
-  name: 'Windows Privilege Concepts Lab: unsafe import tool v1.7 — Windows Server'
+- id: windows-privesc-windows-srv-import-tool-1-1
+  name: 'Windows Privilege Concepts Lab: unsafe import tool v1.1 — Windows Server'
   category: windows
   difficulty: advanced
   os_family: windows
@@ -1176,13 +926,13 @@
     golden_image: windows-server-base
     role: windows-privesc
     component: import-tool
-    version: '1.7'
+    version: '1.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v1.7).'
+  - 'Focus: identify and remediate the unsafe import tool (v1.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -1198,8 +948,8 @@
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-backup-agent-1-8
-  name: 'Windows Hardening Lab: over-privileged backup agent v1.8 — Windows Server'
+- id: windows-harden-windows-srv-backup-agent-1-2
+  name: 'Windows Hardening Lab: over-privileged backup agent v1.2 — Windows Server'
   category: windows
   difficulty: intermediate
   os_family: windows
@@ -1218,13 +968,13 @@
     golden_image: windows-server-base
     role: windows-harden
     component: backup-agent
-    version: '1.8'
+    version: '1.2'
     level: intermediate
   objectives:
   - Harden a Windows server configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v1.8).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v1.2).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
@@ -1240,8 +990,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-client-cache-layer-2-4
-  name: 'Windows Enumeration Lab: insecure cache layer v2.4 — Windows Client'
+- id: windows-enum-windows-client-search-index-1-0
+  name: 'Windows Enumeration Lab: unauthenticated search index v1.0 — Windows Client'
   category: windows
   difficulty: easy
   os_family: windows
@@ -1252,20 +1002,20 @@
   disk_gb: 10
   network_mode: isolated
   packages:
-  - cache-layer
+  - search-index
   services:
   - w32time
   provisioning:
     golden_image: windows-client-base
     role: windows-enum
-    component: cache-layer
-    version: '2.4'
+    component: search-index
+    version: '1.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v2.4).'
+  - 'Focus: identify and remediate the unauthenticated search index (v1.0).'
   prerequisites:
   - windows-administration
   estimated_minutes: 40
@@ -1274,15 +1024,15 @@
   - enum
   - easy
   - windows
-  - cache-layer
+  - search-index
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-client-message-queue-2-5
-  name: 'Windows Privilege Concepts Lab: exposed message queue v2.5 — Windows Client'
+- id: windows-privesc-windows-client-admin-panel-1-1
+  name: 'Windows Privilege Concepts Lab: weak admin panel v1.1 — Windows Client'
   category: windows
   difficulty: advanced
   os_family: windows
@@ -1293,20 +1043,20 @@
   disk_gb: 20
   network_mode: isolated
   packages:
-  - message-queue
+  - admin-panel
   services:
   - w32time
   provisioning:
     golden_image: windows-client-base
     role: windows-privesc
-    component: message-queue
-    version: '2.5'
+    component: admin-panel
+    version: '1.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v2.5).'
+  - 'Focus: identify and remediate the weak admin panel (v1.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -1315,57 +1065,15 @@
   - privesc
   - advanced
   - windows
-  - message-queue
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-search-index-2-6
-  name: 'Windows Hardening Lab: unauthenticated search index v2.6 — Windows Server'
-  category: windows
-  difficulty: intermediate
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - search-index
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-harden
-    component: search-index
-    version: '2.6'
-    level: intermediate
-  objectives:
-  - Harden a Windows server configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v2.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 60
-  tags:
-  - windows
-  - hardening
-  - intermediate
-  - windows
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: windows-enum-windows-srv-api-gateway-2-2
-  name: 'Windows Enumeration Lab: permissive API gateway v2.2 — Windows Server'
+- id: windows-enum-windows-srv-metrics-endpoint-1-0
+  name: 'Windows Enumeration Lab: leaky metrics endpoint v1.0 — Windows Server'
   category: windows
   difficulty: easy
   os_family: windows
@@ -1376,106 +1084,564 @@
   disk_gb: 10
   network_mode: isolated
   packages:
-  - api-gateway
+  - metrics-endpoint
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-enum
-    component: api-gateway
-    version: '2.2'
+    component: metrics-endpoint
+    version: '1.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v1.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-srv-legacy-cgi-1-1
+  name: 'Windows Privilege Concepts Lab: legacy CGI handler v1.1 — Windows Server'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - legacy-cgi
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-privesc
+    component: legacy-cgi
+    version: '1.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v1.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-enum-windows-client-reverse-proxy-2-0
+  name: 'Windows Enumeration Lab: misconfigured reverse proxy v2.0 — Windows Client'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - reverse-proxy
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-enum
+    component: reverse-proxy
+    version: '2.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-client-cache-layer-2-1
+  name: 'Windows Privilege Concepts Lab: insecure cache layer v2.1 — Windows Client'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - cache-layer
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-privesc
+    component: cache-layer
+    version: '2.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v2.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-harden-windows-srv-message-queue-2-2
+  name: 'Windows Hardening Lab: exposed message queue v2.2 — Windows Server'
+  category: windows
+  difficulty: intermediate
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - message-queue
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-harden
+    component: message-queue
+    version: '2.2'
+    level: intermediate
+  objectives:
+  - Harden a Windows server configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v2.2).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 60
+  tags:
+  - windows
+  - hardening
+  - intermediate
+  - windows
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: windows-enum-windows-srv-file-service-2-0
+  name: 'Windows Enumeration Lab: unsafe file service v2.0 — Windows Server'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - file-service
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-enum
+    component: file-service
+    version: '2.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v2.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-srv-auth-proxy-2-1
+  name: 'Windows Privilege Concepts Lab: flawed auth proxy v2.1 — Windows Server'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - auth-proxy
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-privesc
+    component: auth-proxy
+    version: '2.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v2.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-harden-windows-srv-job-runner-2-2
+  name: 'Windows Hardening Lab: injectable job runner v2.2 — Windows Server'
+  category: windows
+  difficulty: intermediate
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - job-runner
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-harden
+    component: job-runner
+    version: '2.2'
+    level: intermediate
+  objectives:
+  - Harden a Windows server configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v2.2).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 60
+  tags:
+  - windows
+  - hardening
+  - intermediate
+  - windows
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: windows-enum-windows-client-report-exporter-2-0
+  name: 'Windows Enumeration Lab: template-injectable report exporter v2.0 — Windows Client'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - report-exporter
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-enum
+    component: report-exporter
+    version: '2.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v2.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-client-import-tool-2-1
+  name: 'Windows Privilege Concepts Lab: unsafe import tool v2.1 — Windows Client'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - import-tool
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-privesc
+    component: import-tool
+    version: '2.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v2.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-harden-windows-srv-backup-agent-2-2
+  name: 'Windows Hardening Lab: over-privileged backup agent v2.2 — Windows Server'
+  category: windows
+  difficulty: intermediate
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - backup-agent
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-harden
+    component: backup-agent
+    version: '2.2'
+    level: intermediate
+  objectives:
+  - Harden a Windows server configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v2.2).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 60
+  tags:
+  - windows
+  - hardening
+  - intermediate
+  - windows
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: windows-enum-windows-srv-search-index-2-0
+  name: 'Windows Enumeration Lab: unauthenticated search index v2.0 — Windows Server'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - search-index
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-enum
+    component: search-index
+    version: '2.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v2.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-srv-admin-panel-2-1
+  name: 'Windows Privilege Concepts Lab: weak admin panel v2.1 — Windows Server'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - admin-panel
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-privesc
+    component: admin-panel
+    version: '2.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v2.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-harden-windows-srv-api-gateway-2-2
+  name: 'Windows Hardening Lab: permissive API gateway v2.2 — Windows Server'
+  category: windows
+  difficulty: intermediate
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - api-gateway
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-harden
+    component: api-gateway
+    version: '2.2'
+    level: intermediate
+  objectives:
+  - Harden a Windows server configuration.
+  - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the permissive API gateway (v2.2).'
   prerequisites:
-  - windows-administration
-  estimated_minutes: 40
-  tags:
-  - windows
-  - enum
-  - easy
-  - windows
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-administration
-- id: windows-privesc-windows-srv-file-service-2-3
-  name: 'Windows Privilege Concepts Lab: unsafe file service v2.3 — Windows Server'
-  category: windows
-  difficulty: advanced
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - file-service
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-privesc
-    component: file-service
-    version: '2.3'
-    level: advanced
-  objectives:
-  - Identify and remediate Windows privilege weaknesses.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v2.3).'
-  prerequisites:
-  - windows-privilege-escalation-concepts
-  estimated_minutes: 120
-  tags:
-  - windows
-  - privesc
-  - advanced
-  - windows
-  - file-service
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-auth-proxy-2-4
-  name: 'Windows Hardening Lab: flawed auth proxy v2.4 — Windows Server'
-  category: windows
-  difficulty: intermediate
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - auth-proxy
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-harden
-    component: auth-proxy
-    version: '2.4'
-    level: intermediate
-  objectives:
-  - Harden a Windows server configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v2.4).'
-  prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
   tags:
@@ -1483,7 +1649,7 @@
   - hardening
   - intermediate
   - windows
-  - auth-proxy
+  - api-gateway
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -1614,8 +1780,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-srv-import-tool-2-7
-  name: 'Windows Enumeration Lab: unsafe import tool v2.7 — Windows Server'
+- id: windows-enum-windows-srv-reverse-proxy-2-0
+  name: 'Windows Enumeration Lab: misconfigured reverse proxy v2.0 — Windows Server'
   category: windows
   difficulty: easy
   os_family: windows
@@ -1626,147 +1792,22 @@
   disk_gb: 10
   network_mode: isolated
   packages:
-  - import-tool
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-enum
-    component: import-tool
-    version: '2.7'
-    level: easy
-  objectives:
-  - Enumerate Windows configuration and services.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v2.7).'
-  prerequisites:
-  - windows-administration
-  estimated_minutes: 40
-  tags:
-  - windows
-  - enum
-  - easy
-  - windows
-  - import-tool
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-administration
-- id: windows-privesc-windows-srv-backup-agent-2-8
-  name: 'Windows Privilege Concepts Lab: over-privileged backup agent v2.8 — Windows Server'
-  category: windows
-  difficulty: advanced
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - backup-agent
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-privesc
-    component: backup-agent
-    version: '2.8'
-    level: advanced
-  objectives:
-  - Identify and remediate Windows privilege weaknesses.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v2.8).'
-  prerequisites:
-  - windows-privilege-escalation-concepts
-  estimated_minutes: 120
-  tags:
-  - windows
-  - privesc
-  - advanced
-  - windows
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-reverse-proxy-2-0
-  name: 'Windows Hardening Lab: misconfigured reverse proxy v2.0 — Windows Server'
-  category: windows
-  difficulty: intermediate
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
   - reverse-proxy
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
-    role: windows-harden
+    role: windows-enum
     component: reverse-proxy
     version: '2.0'
-    level: intermediate
+    level: easy
   objectives:
-  - Harden a Windows server configuration.
-  - Combine techniques and verify your conclusions independently.
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the misconfigured reverse proxy (v2.0).'
   prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 60
-  tags:
-  - windows
-  - hardening
-  - intermediate
-  - windows
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: windows-enum-windows-client-message-queue-2-5
-  name: 'Windows Enumeration Lab: exposed message queue v2.5 — Windows Client'
-  category: windows
-  difficulty: easy
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-client-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - message-queue
-  services:
-  - w32time
-  provisioning:
-    golden_image: windows-client-base
-    role: windows-enum
-    component: message-queue
-    version: '2.5'
-    level: easy
-  objectives:
-  - Enumerate Windows configuration and services.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v2.5).'
-  prerequisites:
   - windows-administration
   estimated_minutes: 40
   tags:
@@ -1774,39 +1815,40 @@
   - enum
   - easy
   - windows
-  - message-queue
+  - reverse-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-client-search-index-2-6
-  name: 'Windows Privilege Concepts Lab: unauthenticated search index v2.6 — Windows Client'
+- id: windows-privesc-windows-srv-cache-layer-2-1
+  name: 'Windows Privilege Concepts Lab: insecure cache layer v2.1 — Windows Server'
   category: windows
   difficulty: advanced
   os_family: windows
   arch: x86_64
-  base_image_key: windows-client-base
+  base_image_key: windows-server-base
   vcpu: 4
   memory_mb: 4096
   disk_gb: 20
   network_mode: isolated
   packages:
-  - search-index
+  - cache-layer
   services:
   - w32time
+  - lanmanserver
   provisioning:
-    golden_image: windows-client-base
+    golden_image: windows-server-base
     role: windows-privesc
-    component: search-index
-    version: '2.6'
+    component: cache-layer
+    version: '2.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v2.6).'
+  - 'Focus: identify and remediate the insecure cache layer (v2.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -1815,62 +1857,20 @@
   - privesc
   - advanced
   - windows
-  - search-index
+  - cache-layer
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-admin-panel-2-7
-  name: 'Windows Hardening Lab: weak admin panel v2.7 — Windows Server'
-  category: windows
-  difficulty: intermediate
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - admin-panel
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-harden
-    component: admin-panel
-    version: '2.7'
-    level: intermediate
-  objectives:
-  - Harden a Windows server configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v2.7).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 60
-  tags:
-  - windows
-  - hardening
-  - intermediate
-  - windows
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: windows-enum-windows-srv-file-service-2-3
-  name: 'Windows Enumeration Lab: unsafe file service v2.3 — Windows Server'
+- id: windows-enum-windows-client-file-service-2-0
+  name: 'Windows Enumeration Lab: unsafe file service v2.0 — Windows Client'
   category: windows
   difficulty: easy
   os_family: windows
   arch: x86_64
-  base_image_key: windows-server-base
+  base_image_key: windows-client-base
   vcpu: 1
   memory_mb: 1024
   disk_gb: 10
@@ -1879,18 +1879,17 @@
   - file-service
   services:
   - w32time
-  - lanmanserver
   provisioning:
-    golden_image: windows-server-base
+    golden_image: windows-client-base
     role: windows-enum
     component: file-service
-    version: '2.3'
+    version: '2.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v2.3).'
+  - 'Focus: identify and remediate the unsafe file service (v2.0).'
   prerequisites:
   - windows-administration
   estimated_minutes: 40
@@ -1906,13 +1905,13 @@
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-srv-auth-proxy-2-4
-  name: 'Windows Privilege Concepts Lab: flawed auth proxy v2.4 — Windows Server'
+- id: windows-privesc-windows-client-auth-proxy-2-1
+  name: 'Windows Privilege Concepts Lab: flawed auth proxy v2.1 — Windows Client'
   category: windows
   difficulty: advanced
   os_family: windows
   arch: x86_64
-  base_image_key: windows-server-base
+  base_image_key: windows-client-base
   vcpu: 4
   memory_mb: 4096
   disk_gb: 20
@@ -1921,18 +1920,17 @@
   - auth-proxy
   services:
   - w32time
-  - lanmanserver
   provisioning:
-    golden_image: windows-server-base
+    golden_image: windows-client-base
     role: windows-privesc
     component: auth-proxy
-    version: '2.4'
+    version: '2.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v2.4).'
+  - 'Focus: identify and remediate the flawed auth proxy (v2.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -1948,140 +1946,16 @@
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-job-runner-2-5
-  name: 'Windows Hardening Lab: injectable job runner v2.5 — Windows Server'
-  category: windows
-  difficulty: intermediate
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - job-runner
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-harden
-    component: job-runner
-    version: '2.5'
-    level: intermediate
-  objectives:
-  - Harden a Windows server configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v2.5).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 60
-  tags:
-  - windows
-  - hardening
-  - intermediate
-  - windows
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: windows-enum-windows-client-legacy-cgi-2-1
-  name: 'Windows Enumeration Lab: legacy CGI handler v2.1 — Windows Client'
+- id: windows-enum-windows-srv-report-exporter-3-0
+  name: 'Windows Enumeration Lab: template-injectable report exporter v3.0 — Windows Server'
   category: windows
   difficulty: easy
   os_family: windows
   arch: x86_64
-  base_image_key: windows-client-base
+  base_image_key: windows-server-base
   vcpu: 1
   memory_mb: 1024
   disk_gb: 10
-  network_mode: isolated
-  packages:
-  - legacy-cgi
-  services:
-  - w32time
-  provisioning:
-    golden_image: windows-client-base
-    role: windows-enum
-    component: legacy-cgi
-    version: '2.1'
-    level: easy
-  objectives:
-  - Enumerate Windows configuration and services.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v2.1).'
-  prerequisites:
-  - windows-administration
-  estimated_minutes: 40
-  tags:
-  - windows
-  - enum
-  - easy
-  - windows
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-administration
-- id: windows-privesc-windows-client-webhook-receiver-2-2
-  name: 'Windows Privilege Concepts Lab: unvalidated webhook receiver v2.2 — Windows Client'
-  category: windows
-  difficulty: advanced
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-client-base
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - webhook-receiver
-  services:
-  - w32time
-  provisioning:
-    golden_image: windows-client-base
-    role: windows-privesc
-    component: webhook-receiver
-    version: '2.2'
-    level: advanced
-  objectives:
-  - Identify and remediate Windows privilege weaknesses.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.2).'
-  prerequisites:
-  - windows-privilege-escalation-concepts
-  estimated_minutes: 120
-  tags:
-  - windows
-  - privesc
-  - advanced
-  - windows
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-report-exporter-2-3
-  name: 'Windows Hardening Lab: template-injectable report exporter v2.3 — Windows Server'
-  category: windows
-  difficulty: intermediate
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
   network_mode: isolated
   packages:
   - report-exporter
@@ -2090,57 +1964,15 @@
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
-    role: windows-harden
+    role: windows-enum
     component: report-exporter
-    version: '2.3'
-    level: intermediate
-  objectives:
-  - Harden a Windows server configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v2.3).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 60
-  tags:
-  - windows
-  - hardening
-  - intermediate
-  - windows
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: windows-enum-windows-srv-backup-agent-3-8
-  name: 'Windows Enumeration Lab: over-privileged backup agent v3.8 — Windows Server'
-  category: windows
-  difficulty: easy
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - backup-agent
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-enum
-    component: backup-agent
-    version: '3.8'
+    version: '3.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v3.8).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v3.0).'
   prerequisites:
   - windows-administration
   estimated_minutes: 40
@@ -2149,15 +1981,15 @@
   - enum
   - easy
   - windows
-  - backup-agent
+  - report-exporter
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-srv-reverse-proxy-3-0
-  name: 'Windows Privilege Concepts Lab: misconfigured reverse proxy v3.0 — Windows Server'
+- id: windows-privesc-windows-srv-import-tool-3-1
+  name: 'Windows Privilege Concepts Lab: unsafe import tool v3.1 — Windows Server'
   category: windows
   difficulty: advanced
   os_family: windows
@@ -2168,21 +2000,21 @@
   disk_gb: 20
   network_mode: isolated
   packages:
-  - reverse-proxy
+  - import-tool
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-privesc
-    component: reverse-proxy
-    version: '3.0'
+    component: import-tool
+    version: '3.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v3.0).'
+  - 'Focus: identify and remediate the unsafe import tool (v3.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -2191,15 +2023,15 @@
   - privesc
   - advanced
   - windows
-  - reverse-proxy
+  - import-tool
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-cache-layer-3-1
-  name: 'Windows Hardening Lab: insecure cache layer v3.1 — Windows Server'
+- id: windows-harden-windows-srv-backup-agent-3-2
+  name: 'Windows Hardening Lab: over-privileged backup agent v3.2 — Windows Server'
   category: windows
   difficulty: intermediate
   os_family: windows
@@ -2210,21 +2042,21 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - cache-layer
+  - backup-agent
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-harden
-    component: cache-layer
-    version: '3.1'
+    component: backup-agent
+    version: '3.2'
     level: intermediate
   objectives:
   - Harden a Windows server configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v3.1).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v3.2).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
@@ -2233,15 +2065,15 @@
   - hardening
   - intermediate
   - windows
-  - cache-layer
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-client-search-index-3-6
-  name: 'Windows Enumeration Lab: unauthenticated search index v3.6 — Windows Client'
+- id: windows-enum-windows-client-search-index-3-0
+  name: 'Windows Enumeration Lab: unauthenticated search index v3.0 — Windows Client'
   category: windows
   difficulty: easy
   os_family: windows
@@ -2259,13 +2091,13 @@
     golden_image: windows-client-base
     role: windows-enum
     component: search-index
-    version: '3.6'
+    version: '3.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v3.6).'
+  - 'Focus: identify and remediate the unauthenticated search index (v3.0).'
   prerequisites:
   - windows-administration
   estimated_minutes: 40
@@ -2281,8 +2113,8 @@
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-client-admin-panel-3-7
-  name: 'Windows Privilege Concepts Lab: weak admin panel v3.7 — Windows Client'
+- id: windows-privesc-windows-client-admin-panel-3-1
+  name: 'Windows Privilege Concepts Lab: weak admin panel v3.1 — Windows Client'
   category: windows
   difficulty: advanced
   os_family: windows
@@ -2300,13 +2132,13 @@
     golden_image: windows-client-base
     role: windows-privesc
     component: admin-panel
-    version: '3.7'
+    version: '3.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v3.7).'
+  - 'Focus: identify and remediate the weak admin panel (v3.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -2322,8 +2154,8 @@
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-api-gateway-3-8
-  name: 'Windows Hardening Lab: permissive API gateway v3.8 — Windows Server'
+- id: windows-harden-windows-srv-api-gateway-3-2
+  name: 'Windows Hardening Lab: permissive API gateway v3.2 — Windows Server'
   category: windows
   difficulty: intermediate
   os_family: windows
@@ -2342,13 +2174,13 @@
     golden_image: windows-server-base
     role: windows-harden
     component: api-gateway
-    version: '3.8'
+    version: '3.2'
     level: intermediate
   objectives:
   - Harden a Windows server configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v3.8).'
+  - 'Focus: identify and remediate the permissive API gateway (v3.2).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
@@ -2364,8 +2196,8 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-srv-auth-proxy-3-4
-  name: 'Windows Enumeration Lab: flawed auth proxy v3.4 — Windows Server'
+- id: windows-enum-windows-srv-metrics-endpoint-3-0
+  name: 'Windows Enumeration Lab: leaky metrics endpoint v3.0 — Windows Server'
   category: windows
   difficulty: easy
   os_family: windows
@@ -2376,21 +2208,21 @@
   disk_gb: 10
   network_mode: isolated
   packages:
-  - auth-proxy
+  - metrics-endpoint
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-enum
-    component: auth-proxy
-    version: '3.4'
+    component: metrics-endpoint
+    version: '3.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v3.4).'
+  - 'Focus: identify and remediate the leaky metrics endpoint (v3.0).'
   prerequisites:
   - windows-administration
   estimated_minutes: 40
@@ -2399,15 +2231,15 @@
   - enum
   - easy
   - windows
-  - auth-proxy
+  - metrics-endpoint
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-srv-job-runner-3-5
-  name: 'Windows Privilege Concepts Lab: injectable job runner v3.5 — Windows Server'
+- id: windows-privesc-windows-srv-legacy-cgi-3-1
+  name: 'Windows Privilege Concepts Lab: legacy CGI handler v3.1 — Windows Server'
   category: windows
   difficulty: advanced
   os_family: windows
@@ -2418,21 +2250,21 @@
   disk_gb: 20
   network_mode: isolated
   packages:
-  - job-runner
+  - legacy-cgi
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-privesc
-    component: job-runner
-    version: '3.5'
+    component: legacy-cgi
+    version: '3.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v3.5).'
+  - 'Focus: identify and remediate the legacy CGI handler (v3.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -2441,15 +2273,15 @@
   - privesc
   - advanced
   - windows
-  - job-runner
+  - legacy-cgi
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-metrics-endpoint-3-6
-  name: 'Windows Hardening Lab: leaky metrics endpoint v3.6 — Windows Server'
+- id: windows-harden-windows-srv-webhook-receiver-3-2
+  name: 'Windows Hardening Lab: unvalidated webhook receiver v3.2 — Windows Server'
   category: windows
   difficulty: intermediate
   os_family: windows
@@ -2460,146 +2292,22 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - metrics-endpoint
+  - webhook-receiver
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-harden
-    component: metrics-endpoint
-    version: '3.6'
+    component: webhook-receiver
+    version: '3.2'
     level: intermediate
   objectives:
   - Harden a Windows server configuration.
   - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v3.6).'
-  prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 60
-  tags:
-  - windows
-  - hardening
-  - intermediate
-  - windows
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: windows-enum-windows-client-webhook-receiver-3-2
-  name: 'Windows Enumeration Lab: unvalidated webhook receiver v3.2 — Windows Client'
-  category: windows
-  difficulty: easy
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-client-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - webhook-receiver
-  services:
-  - w32time
-  provisioning:
-    golden_image: windows-client-base
-    role: windows-enum
-    component: webhook-receiver
-    version: '3.2'
-    level: easy
-  objectives:
-  - Enumerate Windows configuration and services.
-  - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the unvalidated webhook receiver (v3.2).'
   prerequisites:
-  - windows-administration
-  estimated_minutes: 40
-  tags:
-  - windows
-  - enum
-  - easy
-  - windows
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-administration
-- id: windows-privesc-windows-client-report-exporter-3-3
-  name: 'Windows Privilege Concepts Lab: template-injectable report exporter v3.3 — Windows Client'
-  category: windows
-  difficulty: advanced
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-client-base
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - report-exporter
-  services:
-  - w32time
-  provisioning:
-    golden_image: windows-client-base
-    role: windows-privesc
-    component: report-exporter
-    version: '3.3'
-    level: advanced
-  objectives:
-  - Identify and remediate Windows privilege weaknesses.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v3.3).'
-  prerequisites:
-  - windows-privilege-escalation-concepts
-  estimated_minutes: 120
-  tags:
-  - windows
-  - privesc
-  - advanced
-  - windows
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-import-tool-3-4
-  name: 'Windows Hardening Lab: unsafe import tool v3.4 — Windows Server'
-  category: windows
-  difficulty: intermediate
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - import-tool
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-harden
-    component: import-tool
-    version: '3.4'
-    level: intermediate
-  objectives:
-  - Harden a Windows server configuration.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v3.4).'
-  prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
   tags:
@@ -2607,20 +2315,20 @@
   - hardening
   - intermediate
   - windows
-  - import-tool
+  - webhook-receiver
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-srv-reverse-proxy-3-0
-  name: 'Windows Enumeration Lab: misconfigured reverse proxy v3.0 — Windows Server'
+- id: windows-enum-windows-client-reverse-proxy-3-0
+  name: 'Windows Enumeration Lab: misconfigured reverse proxy v3.0 — Windows Client'
   category: windows
   difficulty: easy
   os_family: windows
   arch: x86_64
-  base_image_key: windows-server-base
+  base_image_key: windows-client-base
   vcpu: 1
   memory_mb: 1024
   disk_gb: 10
@@ -2629,9 +2337,8 @@
   - reverse-proxy
   services:
   - w32time
-  - lanmanserver
   provisioning:
-    golden_image: windows-server-base
+    golden_image: windows-client-base
     role: windows-enum
     component: reverse-proxy
     version: '3.0'
@@ -2656,13 +2363,13 @@
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-srv-cache-layer-3-1
-  name: 'Windows Privilege Concepts Lab: insecure cache layer v3.1 — Windows Server'
+- id: windows-privesc-windows-client-cache-layer-3-1
+  name: 'Windows Privilege Concepts Lab: insecure cache layer v3.1 — Windows Client'
   category: windows
   difficulty: advanced
   os_family: windows
   arch: x86_64
-  base_image_key: windows-server-base
+  base_image_key: windows-client-base
   vcpu: 4
   memory_mb: 4096
   disk_gb: 20
@@ -2671,9 +2378,8 @@
   - cache-layer
   services:
   - w32time
-  - lanmanserver
   provisioning:
-    golden_image: windows-server-base
+    golden_image: windows-client-base
     role: windows-privesc
     component: cache-layer
     version: '3.1'
@@ -2740,98 +2446,16 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-client-admin-panel-3-7
-  name: 'Windows Enumeration Lab: weak admin panel v3.7 — Windows Client'
+- id: windows-enum-windows-srv-file-service-3-0
+  name: 'Windows Enumeration Lab: unsafe file service v3.0 — Windows Server'
   category: windows
   difficulty: easy
   os_family: windows
   arch: x86_64
-  base_image_key: windows-client-base
+  base_image_key: windows-server-base
   vcpu: 1
   memory_mb: 1024
   disk_gb: 10
-  network_mode: isolated
-  packages:
-  - admin-panel
-  services:
-  - w32time
-  provisioning:
-    golden_image: windows-client-base
-    role: windows-enum
-    component: admin-panel
-    version: '3.7'
-    level: easy
-  objectives:
-  - Enumerate Windows configuration and services.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v3.7).'
-  prerequisites:
-  - windows-administration
-  estimated_minutes: 40
-  tags:
-  - windows
-  - enum
-  - easy
-  - windows
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-administration
-- id: windows-privesc-windows-client-api-gateway-3-8
-  name: 'Windows Privilege Concepts Lab: permissive API gateway v3.8 — Windows Client'
-  category: windows
-  difficulty: advanced
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-client-base
-  vcpu: 4
-  memory_mb: 4096
-  disk_gb: 20
-  network_mode: isolated
-  packages:
-  - api-gateway
-  services:
-  - w32time
-  provisioning:
-    golden_image: windows-client-base
-    role: windows-privesc
-    component: api-gateway
-    version: '3.8'
-    level: advanced
-  objectives:
-  - Identify and remediate Windows privilege weaknesses.
-  - Work with minimal guidance; justify decisions and document findings.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v3.8).'
-  prerequisites:
-  - windows-privilege-escalation-concepts
-  estimated_minutes: 120
-  tags:
-  - windows
-  - privesc
-  - advanced
-  - windows
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-file-service-3-0
-  name: 'Windows Hardening Lab: unsafe file service v3.0 — Windows Server'
-  category: windows
-  difficulty: intermediate
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
   network_mode: isolated
   packages:
   - file-service
@@ -2840,58 +2464,16 @@
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
-    role: windows-harden
+    role: windows-enum
     component: file-service
     version: '3.0'
-    level: intermediate
+    level: easy
   objectives:
-  - Harden a Windows server configuration.
-  - Combine techniques and verify your conclusions independently.
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the unsafe file service (v3.0).'
   prerequisites:
-  - infrastructure-hardening
-  estimated_minutes: 60
-  tags:
-  - windows
-  - hardening
-  - intermediate
-  - windows
-  - file-service
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - infrastructure-hardening
-- id: windows-enum-windows-srv-job-runner-3-5
-  name: 'Windows Enumeration Lab: injectable job runner v3.5 — Windows Server'
-  category: windows
-  difficulty: easy
-  os_family: windows
-  arch: x86_64
-  base_image_key: windows-server-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - job-runner
-  services:
-  - w32time
-  - lanmanserver
-  provisioning:
-    golden_image: windows-server-base
-    role: windows-enum
-    component: job-runner
-    version: '3.5'
-    level: easy
-  objectives:
-  - Enumerate Windows configuration and services.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v3.5).'
-  prerequisites:
   - windows-administration
   estimated_minutes: 40
   tags:
@@ -2899,15 +2481,15 @@
   - enum
   - easy
   - windows
-  - job-runner
+  - file-service
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-srv-metrics-endpoint-3-6
-  name: 'Windows Privilege Concepts Lab: leaky metrics endpoint v3.6 — Windows Server'
+- id: windows-privesc-windows-srv-auth-proxy-3-1
+  name: 'Windows Privilege Concepts Lab: flawed auth proxy v3.1 — Windows Server'
   category: windows
   difficulty: advanced
   os_family: windows
@@ -2918,21 +2500,21 @@
   disk_gb: 20
   network_mode: isolated
   packages:
-  - metrics-endpoint
+  - auth-proxy
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-privesc
-    component: metrics-endpoint
-    version: '3.6'
+    component: auth-proxy
+    version: '3.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v3.6).'
+  - 'Focus: identify and remediate the flawed auth proxy (v3.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -2941,15 +2523,15 @@
   - privesc
   - advanced
   - windows
-  - metrics-endpoint
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-legacy-cgi-3-7
-  name: 'Windows Hardening Lab: legacy CGI handler v3.7 — Windows Server'
+- id: windows-harden-windows-srv-job-runner-3-2
+  name: 'Windows Hardening Lab: injectable job runner v3.2 — Windows Server'
   category: windows
   difficulty: intermediate
   os_family: windows
@@ -2960,21 +2542,21 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - legacy-cgi
+  - job-runner
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-harden
-    component: legacy-cgi
-    version: '3.7'
+    component: job-runner
+    version: '3.2'
     level: intermediate
   objectives:
   - Harden a Windows server configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v3.7).'
+  - 'Focus: identify and remediate the injectable job runner (v3.2).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
@@ -2983,15 +2565,15 @@
   - hardening
   - intermediate
   - windows
-  - legacy-cgi
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-client-report-exporter-4-3
-  name: 'Windows Enumeration Lab: template-injectable report exporter v4.3 — Windows Client'
+- id: windows-enum-windows-client-report-exporter-3-0
+  name: 'Windows Enumeration Lab: template-injectable report exporter v3.0 — Windows Client'
   category: windows
   difficulty: easy
   os_family: windows
@@ -3009,13 +2591,13 @@
     golden_image: windows-client-base
     role: windows-enum
     component: report-exporter
-    version: '4.3'
+    version: '3.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v4.3).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v3.0).'
   prerequisites:
   - windows-administration
   estimated_minutes: 40
@@ -3031,8 +2613,8 @@
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-client-import-tool-4-4
-  name: 'Windows Privilege Concepts Lab: unsafe import tool v4.4 — Windows Client'
+- id: windows-privesc-windows-client-import-tool-3-1
+  name: 'Windows Privilege Concepts Lab: unsafe import tool v3.1 — Windows Client'
   category: windows
   difficulty: advanced
   os_family: windows
@@ -3050,13 +2632,13 @@
     golden_image: windows-client-base
     role: windows-privesc
     component: import-tool
-    version: '4.4'
+    version: '3.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v4.4).'
+  - 'Focus: identify and remediate the unsafe import tool (v3.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -3072,8 +2654,550 @@
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-backup-agent-4-5
-  name: 'Windows Hardening Lab: over-privileged backup agent v4.5 — Windows Server'
+- id: windows-enum-windows-srv-search-index-3-0
+  name: 'Windows Enumeration Lab: unauthenticated search index v3.0 — Windows Server'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - search-index
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-enum
+    component: search-index
+    version: '3.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v3.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-srv-admin-panel-3-1
+  name: 'Windows Privilege Concepts Lab: weak admin panel v3.1 — Windows Server'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - admin-panel
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-privesc
+    component: admin-panel
+    version: '3.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v3.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-enum-windows-client-metrics-endpoint-4-0
+  name: 'Windows Enumeration Lab: leaky metrics endpoint v4.0 — Windows Client'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - metrics-endpoint
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-enum
+    component: metrics-endpoint
+    version: '4.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-client-legacy-cgi-4-1
+  name: 'Windows Privilege Concepts Lab: legacy CGI handler v4.1 — Windows Client'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - legacy-cgi
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-privesc
+    component: legacy-cgi
+    version: '4.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v4.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-harden-windows-srv-webhook-receiver-4-2
+  name: 'Windows Hardening Lab: unvalidated webhook receiver v4.2 — Windows Server'
+  category: windows
+  difficulty: intermediate
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - webhook-receiver
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-harden
+    component: webhook-receiver
+    version: '4.2'
+    level: intermediate
+  objectives:
+  - Harden a Windows server configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.2).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 60
+  tags:
+  - windows
+  - hardening
+  - intermediate
+  - windows
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: windows-enum-windows-srv-reverse-proxy-4-0
+  name: 'Windows Enumeration Lab: misconfigured reverse proxy v4.0 — Windows Server'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - reverse-proxy
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-enum
+    component: reverse-proxy
+    version: '4.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-srv-cache-layer-4-1
+  name: 'Windows Privilege Concepts Lab: insecure cache layer v4.1 — Windows Server'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - cache-layer
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-privesc
+    component: cache-layer
+    version: '4.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v4.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-harden-windows-srv-message-queue-4-2
+  name: 'Windows Hardening Lab: exposed message queue v4.2 — Windows Server'
+  category: windows
+  difficulty: intermediate
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - message-queue
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-harden
+    component: message-queue
+    version: '4.2'
+    level: intermediate
+  objectives:
+  - Harden a Windows server configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v4.2).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 60
+  tags:
+  - windows
+  - hardening
+  - intermediate
+  - windows
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: windows-enum-windows-client-file-service-4-0
+  name: 'Windows Enumeration Lab: unsafe file service v4.0 — Windows Client'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - file-service
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-enum
+    component: file-service
+    version: '4.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v4.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-client-auth-proxy-4-1
+  name: 'Windows Privilege Concepts Lab: flawed auth proxy v4.1 — Windows Client'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - auth-proxy
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-privesc
+    component: auth-proxy
+    version: '4.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v4.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-harden-windows-srv-job-runner-4-2
+  name: 'Windows Hardening Lab: injectable job runner v4.2 — Windows Server'
+  category: windows
+  difficulty: intermediate
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - job-runner
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-harden
+    component: job-runner
+    version: '4.2'
+    level: intermediate
+  objectives:
+  - Harden a Windows server configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v4.2).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 60
+  tags:
+  - windows
+  - hardening
+  - intermediate
+  - windows
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: windows-enum-windows-srv-report-exporter-4-0
+  name: 'Windows Enumeration Lab: template-injectable report exporter v4.0 — Windows Server'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - report-exporter
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-enum
+    component: report-exporter
+    version: '4.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the template-injectable report exporter (v4.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - report-exporter
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-srv-import-tool-4-1
+  name: 'Windows Privilege Concepts Lab: unsafe import tool v4.1 — Windows Server'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - import-tool
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-privesc
+    component: import-tool
+    version: '4.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v4.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-harden-windows-srv-backup-agent-4-2
+  name: 'Windows Hardening Lab: over-privileged backup agent v4.2 — Windows Server'
   category: windows
   difficulty: intermediate
   os_family: windows
@@ -3092,13 +3216,13 @@
     golden_image: windows-server-base
     role: windows-harden
     component: backup-agent
-    version: '4.5'
+    version: '4.2'
     level: intermediate
   objectives:
   - Harden a Windows server configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v4.5).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v4.2).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
@@ -3114,8 +3238,132 @@
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-srv-cache-layer-4-1
-  name: 'Windows Enumeration Lab: insecure cache layer v4.1 — Windows Server'
+- id: windows-enum-windows-client-search-index-4-0
+  name: 'Windows Enumeration Lab: unauthenticated search index v4.0 — Windows Client'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - search-index
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-enum
+    component: search-index
+    version: '4.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unauthenticated search index (v4.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - search-index
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-client-admin-panel-4-1
+  name: 'Windows Privilege Concepts Lab: weak admin panel v4.1 — Windows Client'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - admin-panel
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-privesc
+    component: admin-panel
+    version: '4.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v4.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-harden-windows-srv-api-gateway-4-2
+  name: 'Windows Hardening Lab: permissive API gateway v4.2 — Windows Server'
+  category: windows
+  difficulty: intermediate
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - api-gateway
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-harden
+    component: api-gateway
+    version: '4.2'
+    level: intermediate
+  objectives:
+  - Harden a Windows server configuration.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v4.2).'
+  prerequisites:
+  - infrastructure-hardening
+  estimated_minutes: 60
+  tags:
+  - windows
+  - hardening
+  - intermediate
+  - windows
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - infrastructure-hardening
+- id: windows-enum-windows-srv-metrics-endpoint-4-0
+  name: 'Windows Enumeration Lab: leaky metrics endpoint v4.0 — Windows Server'
   category: windows
   difficulty: easy
   os_family: windows
@@ -3126,28 +3374,152 @@
   disk_gb: 10
   network_mode: isolated
   packages:
-  - cache-layer
+  - metrics-endpoint
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-enum
-    component: cache-layer
-    version: '4.1'
+    component: metrics-endpoint
+    version: '4.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the leaky metrics endpoint (v4.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - metrics-endpoint
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-srv-legacy-cgi-4-1
+  name: 'Windows Privilege Concepts Lab: legacy CGI handler v4.1 — Windows Server'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - legacy-cgi
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-privesc
+    component: legacy-cgi
+    version: '4.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v4.1).'
+  prerequisites:
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
+  tags:
+  - windows
+  - privesc
+  - advanced
+  - windows
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-enum-windows-client-reverse-proxy-4-0
+  name: 'Windows Enumeration Lab: misconfigured reverse proxy v4.0 — Windows Client'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - reverse-proxy
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-enum
+    component: reverse-proxy
+    version: '4.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.0).'
+  prerequisites:
+  - windows-administration
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - reverse-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-client-cache-layer-4-1
+  name: 'Windows Privilege Concepts Lab: insecure cache layer v4.1 — Windows Client'
+  category: windows
+  difficulty: advanced
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-client-base
+  vcpu: 4
+  memory_mb: 4096
+  disk_gb: 20
+  network_mode: isolated
+  packages:
+  - cache-layer
+  services:
+  - w32time
+  provisioning:
+    golden_image: windows-client-base
+    role: windows-privesc
+    component: cache-layer
+    version: '4.1'
+    level: advanced
+  objectives:
+  - Identify and remediate Windows privilege weaknesses.
+  - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
   - 'Focus: identify and remediate the insecure cache layer (v4.1).'
   prerequisites:
-  - windows-administration
-  estimated_minutes: 40
+  - windows-privilege-escalation-concepts
+  estimated_minutes: 120
   tags:
   - windows
-  - enum
-  - easy
+  - privesc
+  - advanced
   - windows
   - cache-layer
   reset_supported: true
@@ -3155,9 +3527,51 @@
   disposable: true
   lab_id: null
   course_ids:
+  - windows-privilege-escalation-concepts
+- id: windows-enum-windows-srv-file-service-5-0
+  name: 'Windows Enumeration Lab: unsafe file service v5.0 — Windows Server'
+  category: windows
+  difficulty: easy
+  os_family: windows
+  arch: x86_64
+  base_image_key: windows-server-base
+  vcpu: 1
+  memory_mb: 1024
+  disk_gb: 10
+  network_mode: isolated
+  packages:
+  - file-service
+  services:
+  - w32time
+  - lanmanserver
+  provisioning:
+    golden_image: windows-server-base
+    role: windows-enum
+    component: file-service
+    version: '5.0'
+    level: easy
+  objectives:
+  - Enumerate Windows configuration and services.
+  - Follow the guided steps and confirm each result.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe file service (v5.0).'
+  prerequisites:
   - windows-administration
-- id: windows-privesc-windows-srv-message-queue-4-2
-  name: 'Windows Privilege Concepts Lab: exposed message queue v4.2 — Windows Server'
+  estimated_minutes: 40
+  tags:
+  - windows
+  - enum
+  - easy
+  - windows
+  - file-service
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - windows-administration
+- id: windows-privesc-windows-srv-auth-proxy-5-1
+  name: 'Windows Privilege Concepts Lab: flawed auth proxy v5.1 — Windows Server'
   category: windows
   difficulty: advanced
   os_family: windows
@@ -3168,21 +3582,21 @@
   disk_gb: 20
   network_mode: isolated
   packages:
-  - message-queue
+  - auth-proxy
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-privesc
-    component: message-queue
-    version: '4.2'
+    component: auth-proxy
+    version: '5.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v4.2).'
+  - 'Focus: identify and remediate the flawed auth proxy (v5.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -3191,15 +3605,15 @@
   - privesc
   - advanced
   - windows
-  - message-queue
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-search-index-4-3
-  name: 'Windows Hardening Lab: unauthenticated search index v4.3 — Windows Server'
+- id: windows-harden-windows-srv-job-runner-5-2
+  name: 'Windows Hardening Lab: injectable job runner v5.2 — Windows Server'
   category: windows
   difficulty: intermediate
   os_family: windows
@@ -3210,21 +3624,21 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - search-index
+  - job-runner
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-harden
-    component: search-index
-    version: '4.3'
+    component: job-runner
+    version: '5.2'
     level: intermediate
   objectives:
   - Harden a Windows server configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v4.3).'
+  - 'Focus: identify and remediate the injectable job runner (v5.2).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
@@ -3233,15 +3647,15 @@
   - hardening
   - intermediate
   - windows
-  - search-index
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - infrastructure-hardening
-- id: windows-enum-windows-client-api-gateway-4-8
-  name: 'Windows Enumeration Lab: permissive API gateway v4.8 — Windows Client'
+- id: windows-enum-windows-client-report-exporter-5-0
+  name: 'Windows Enumeration Lab: template-injectable report exporter v5.0 — Windows Client'
   category: windows
   difficulty: easy
   os_family: windows
@@ -3252,20 +3666,20 @@
   disk_gb: 10
   network_mode: isolated
   packages:
-  - api-gateway
+  - report-exporter
   services:
   - w32time
   provisioning:
     golden_image: windows-client-base
     role: windows-enum
-    component: api-gateway
-    version: '4.8'
+    component: report-exporter
+    version: '5.0'
     level: easy
   objectives:
   - Enumerate Windows configuration and services.
   - Follow the guided steps and confirm each result.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v4.8).'
+  - 'Focus: identify and remediate the template-injectable report exporter (v5.0).'
   prerequisites:
   - windows-administration
   estimated_minutes: 40
@@ -3274,15 +3688,15 @@
   - enum
   - easy
   - windows
-  - api-gateway
+  - report-exporter
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-administration
-- id: windows-privesc-windows-client-file-service-4-0
-  name: 'Windows Privilege Concepts Lab: unsafe file service v4.0 — Windows Client'
+- id: windows-privesc-windows-client-import-tool-5-1
+  name: 'Windows Privilege Concepts Lab: unsafe import tool v5.1 — Windows Client'
   category: windows
   difficulty: advanced
   os_family: windows
@@ -3293,20 +3707,20 @@
   disk_gb: 20
   network_mode: isolated
   packages:
-  - file-service
+  - import-tool
   services:
   - w32time
   provisioning:
     golden_image: windows-client-base
     role: windows-privesc
-    component: file-service
-    version: '4.0'
+    component: import-tool
+    version: '5.1'
     level: advanced
   objectives:
   - Identify and remediate Windows privilege weaknesses.
   - Work with minimal guidance; justify decisions and document findings.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v4.0).'
+  - 'Focus: identify and remediate the unsafe import tool (v5.1).'
   prerequisites:
   - windows-privilege-escalation-concepts
   estimated_minutes: 120
@@ -3315,15 +3729,15 @@
   - privesc
   - advanced
   - windows
-  - file-service
+  - import-tool
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - windows-privilege-escalation-concepts
-- id: windows-harden-windows-srv-auth-proxy-4-1
-  name: 'Windows Hardening Lab: flawed auth proxy v4.1 — Windows Server'
+- id: windows-harden-windows-srv-backup-agent-5-2
+  name: 'Windows Hardening Lab: over-privileged backup agent v5.2 — Windows Server'
   category: windows
   difficulty: intermediate
   os_family: windows
@@ -3334,21 +3748,21 @@
   disk_gb: 12
   network_mode: isolated
   packages:
-  - auth-proxy
+  - backup-agent
   services:
   - w32time
   - lanmanserver
   provisioning:
     golden_image: windows-server-base
     role: windows-harden
-    component: auth-proxy
-    version: '4.1'
+    component: backup-agent
+    version: '5.2'
     level: intermediate
   objectives:
   - Harden a Windows server configuration.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v4.1).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v5.2).'
   prerequisites:
   - infrastructure-hardening
   estimated_minutes: 60
@@ -3357,7 +3771,7 @@
   - hardening
   - intermediate
   - windows
-  - auth-proxy
+  - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true

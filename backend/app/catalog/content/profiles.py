@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-MIN_PROFILES = 1000
+MIN_PROFILES = 1160
 
 LEVEL_ORDER = ["beginner", "easy", "intermediate", "hard", "advanced", "expert"]
 LEVEL_SHORT = {"beginner": "b", "easy": "e", "intermediate": "i",
@@ -90,6 +90,8 @@ STACKS: dict[str, Stack] = {s.slug: s for s in [
           ["metasploit-framework", "nmap", "wireshark"], ["ssh"]),
     Stack("debian-monitor", "Debian monitoring", "debian", "debian-13-monitoring",
           ["rsyslog", "auditd"], ["rsyslog"]),
+    Stack("osint-station", "OSINT workstation", "debian", "debian-13-desktop",
+          ["exiftool", "python3", "firefox-esr"], ["lightdm"]),
 ]}
 
 WEB_STACKS = ["nginx-php", "apache-python", "node-express", "tomcat-java"]
@@ -223,6 +225,16 @@ THEMES: list[Theme] = [
     Theme("secure-coding", "Secure Coding Target", "development", "secure-coding",
           "secure-coding", "Review application code and fix insecure patterns.",
           ["intermediate", "hard"], ["node-express", "apache-python"], ["dev", "appsec"]),
+    # --- OSINT (authorised, public-source investigation sandboxes) ---
+    Theme("osint-recon", "OSINT Workstation", "osint", "osint-techniques",
+          "osint-techniques",
+          "Collect and verify information from public sources in a safe sandbox.",
+          ["easy", "intermediate", "hard", "advanced"], ["osint-station", "kali-attack"],
+          ["osint", "recon"]),
+    Theme("osint-investigation", "OSINT Investigation Scenario", "osint",
+          "osint-corroboration", "osint-techniques",
+          "Analyse a simulated public footprint and corroborate findings.",
+          ["intermediate", "hard", "advanced"], ["osint-station"], ["osint"]),
 ]
 
 

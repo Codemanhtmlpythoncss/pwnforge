@@ -388,51 +388,51 @@
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-alpine-min-api-gateway-1-2
-  name: 'Network Appliance Lab: permissive API gateway v1.2 — Alpine minimal'
+- id: net-appliance-alpine-min-auth-proxy-1-4
+  name: 'Network Appliance Lab: flawed auth proxy v1.4 — Alpine minimal'
   category: network-appliance
-  difficulty: hard
+  difficulty: intermediate
   os_family: alpine
   arch: x86_64
   base_image_key: alpine-base
   vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  memory_mb: 2048
+  disk_gb: 12
   network_mode: isolated
   packages:
   - openrc
   - openssh
-  - api-gateway
+  - auth-proxy
   services:
   - sshd
   provisioning:
     golden_image: alpine-base
     role: net-appliance
-    component: api-gateway
-    version: '1.2'
-    level: hard
+    component: auth-proxy
+    version: '1.4'
+    level: intermediate
   objectives:
   - Configure and audit packet-filtering rules.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v1.2).'
+  - 'Focus: identify and remediate the flawed auth proxy (v1.4).'
   prerequisites:
   - firewall-configuration
-  estimated_minutes: 90
+  estimated_minutes: 60
   tags:
   - network
   - firewall
-  - hard
+  - intermediate
   - alpine
-  - api-gateway
+  - auth-proxy
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - firewall-configuration
-- id: net-segment-ssh-linux-file-service-1-3
-  name: 'Network Segmentation Lab: unsafe file service v1.3 — Debian + OpenSSH'
+- id: net-segment-ssh-linux-job-runner-1-5
+  name: 'Network Segmentation Lab: injectable job runner v1.5 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -445,20 +445,20 @@
   packages:
   - openssh-server
   - sudo
-  - file-service
+  - job-runner
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: net-segment
-    component: file-service
-    version: '1.3'
+    component: job-runner
+    version: '1.5'
     level: intermediate
   objectives:
   - Design and verify isolated network zones.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v1.3).'
+  - 'Focus: identify and remediate the injectable job runner (v1.5).'
   prerequisites:
   - network-segmentation
   estimated_minutes: 60
@@ -467,58 +467,15 @@
   - segmentation
   - intermediate
   - debian
-  - file-service
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-ssh-linux-metrics-endpoint-1-0
-  name: 'Network Appliance Lab: leaky metrics endpoint v1.0 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: easy
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - metrics-endpoint
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-appliance
-    component: metrics-endpoint
-    version: '1.0'
-    level: easy
-  objectives:
-  - Configure and audit packet-filtering rules.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v1.0).'
-  prerequisites:
-  - firewall-configuration
-  estimated_minutes: 40
-  tags:
-  - network
-  - firewall
-  - easy
-  - debian
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-legacy-cgi-1-1
-  name: 'Network Segmentation Lab: legacy CGI handler v1.1 — Debian + OpenSSH'
+- id: net-appliance-ssh-linux-import-tool-1-4
+  name: 'Network Appliance Lab: unsafe import tool v1.4 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -531,63 +488,20 @@
   packages:
   - openssh-server
   - sudo
-  - legacy-cgi
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-segment
-    component: legacy-cgi
-    version: '1.1'
-    level: intermediate
-  objectives:
-  - Design and verify isolated network zones.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v1.1).'
-  prerequisites:
-  - network-segmentation
-  estimated_minutes: 60
-  tags:
-  - network
-  - segmentation
-  - intermediate
-  - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - network-segmentation
-- id: net-appliance-alpine-min-import-tool-1-7
-  name: 'Network Appliance Lab: unsafe import tool v1.7 — Alpine minimal'
-  category: network-appliance
-  difficulty: intermediate
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openrc
-  - openssh
   - import-tool
   services:
-  - sshd
+  - ssh
   provisioning:
-    golden_image: alpine-base
+    golden_image: debian-13-server
     role: net-appliance
     component: import-tool
-    version: '1.7'
+    version: '1.4'
     level: intermediate
   objectives:
   - Configure and audit packet-filtering rules.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v1.7).'
+  - 'Focus: identify and remediate the unsafe import tool (v1.4).'
   prerequisites:
   - firewall-configuration
   estimated_minutes: 60
@@ -595,7 +509,7 @@
   - network
   - firewall
   - intermediate
-  - alpine
+  - debian
   - import-tool
   reset_supported: true
   snapshots_supported: true
@@ -603,8 +517,8 @@
   lab_id: null
   course_ids:
   - firewall-configuration
-- id: net-segment-ssh-linux-backup-agent-1-8
-  name: 'Network Segmentation Lab: over-privileged backup agent v1.8 — Debian + OpenSSH'
+- id: net-segment-ssh-linux-backup-agent-1-5
+  name: 'Network Segmentation Lab: over-privileged backup agent v1.5 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -624,13 +538,13 @@
     golden_image: debian-13-server
     role: net-segment
     component: backup-agent
-    version: '1.8'
+    version: '1.5'
     level: intermediate
   objectives:
   - Design and verify isolated network zones.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v1.8).'
+  - 'Focus: identify and remediate the over-privileged backup agent (v1.5).'
   prerequisites:
   - network-segmentation
   estimated_minutes: 60
@@ -646,137 +560,51 @@
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-ssh-linux-message-queue-1-5
-  name: 'Network Appliance Lab: exposed message queue v1.5 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - message-queue
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-appliance
-    component: message-queue
-    version: '1.5'
-    level: hard
-  objectives:
-  - Configure and audit packet-filtering rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v1.5).'
-  prerequisites:
-  - firewall-configuration
-  estimated_minutes: 90
-  tags:
-  - network
-  - firewall
-  - hard
-  - debian
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-search-index-1-6
-  name: 'Network Segmentation Lab: unauthenticated search index v1.6 — Debian + OpenSSH'
+- id: net-appliance-alpine-min-admin-panel-1-4
+  name: 'Network Appliance Lab: weak admin panel v1.4 — Alpine minimal'
   category: network-appliance
   difficulty: intermediate
-  os_family: debian
+  os_family: alpine
   arch: x86_64
-  base_image_key: debian-13-server
+  base_image_key: alpine-base
   vcpu: 2
   memory_mb: 2048
   disk_gb: 12
   network_mode: isolated
   packages:
-  - openssh-server
-  - sudo
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-segment
-    component: search-index
-    version: '1.6'
-    level: intermediate
-  objectives:
-  - Design and verify isolated network zones.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v1.6).'
-  prerequisites:
-  - network-segmentation
-  estimated_minutes: 60
-  tags:
-  - network
-  - segmentation
-  - intermediate
-  - debian
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - network-segmentation
-- id: net-appliance-alpine-min-file-service-1-3
-  name: 'Network Appliance Lab: unsafe file service v1.3 — Alpine minimal'
-  category: network-appliance
-  difficulty: easy
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
   - openrc
   - openssh
-  - file-service
+  - admin-panel
   services:
   - sshd
   provisioning:
     golden_image: alpine-base
     role: net-appliance
-    component: file-service
-    version: '1.3'
-    level: easy
+    component: admin-panel
+    version: '1.4'
+    level: intermediate
   objectives:
   - Configure and audit packet-filtering rules.
-  - Follow the guided steps and confirm each result.
+  - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v1.3).'
+  - 'Focus: identify and remediate the weak admin panel (v1.4).'
   prerequisites:
   - firewall-configuration
-  estimated_minutes: 40
+  estimated_minutes: 60
   tags:
   - network
   - firewall
-  - easy
+  - intermediate
   - alpine
-  - file-service
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - firewall-configuration
-- id: net-segment-ssh-linux-auth-proxy-1-4
-  name: 'Network Segmentation Lab: flawed auth proxy v1.4 — Debian + OpenSSH'
+- id: net-segment-ssh-linux-api-gateway-1-5
+  name: 'Network Segmentation Lab: permissive API gateway v1.5 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -789,20 +617,20 @@
   packages:
   - openssh-server
   - sudo
-  - auth-proxy
+  - api-gateway
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: net-segment
-    component: auth-proxy
-    version: '1.4'
+    component: api-gateway
+    version: '1.5'
     level: intermediate
   objectives:
   - Design and verify isolated network zones.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v1.4).'
+  - 'Focus: identify and remediate the permissive API gateway (v1.5).'
   prerequisites:
   - network-segmentation
   estimated_minutes: 60
@@ -811,15 +639,15 @@
   - segmentation
   - intermediate
   - debian
-  - auth-proxy
+  - api-gateway
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-ssh-linux-legacy-cgi-1-1
-  name: 'Network Appliance Lab: legacy CGI handler v1.1 — Debian + OpenSSH'
+- id: net-appliance-ssh-linux-legacy-cgi-1-4
+  name: 'Network Appliance Lab: legacy CGI handler v1.4 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -839,13 +667,13 @@
     golden_image: debian-13-server
     role: net-appliance
     component: legacy-cgi
-    version: '1.1'
+    version: '1.4'
     level: intermediate
   objectives:
   - Configure and audit packet-filtering rules.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v1.1).'
+  - 'Focus: identify and remediate the legacy CGI handler (v1.4).'
   prerequisites:
   - firewall-configuration
   estimated_minutes: 60
@@ -861,8 +689,8 @@
   lab_id: null
   course_ids:
   - firewall-configuration
-- id: net-segment-ssh-linux-webhook-receiver-1-2
-  name: 'Network Segmentation Lab: unvalidated webhook receiver v1.2 — Debian + OpenSSH'
+- id: net-segment-ssh-linux-webhook-receiver-1-5
+  name: 'Network Segmentation Lab: unvalidated webhook receiver v1.5 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -882,13 +710,13 @@
     golden_image: debian-13-server
     role: net-segment
     component: webhook-receiver
-    version: '1.2'
+    version: '1.5'
     level: intermediate
   objectives:
   - Design and verify isolated network zones.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.2).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v1.5).'
   prerequisites:
   - network-segmentation
   estimated_minutes: 60
@@ -904,51 +732,180 @@
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-alpine-min-backup-agent-2-8
-  name: 'Network Appliance Lab: over-privileged backup agent v2.8 — Alpine minimal'
+- id: net-appliance-alpine-min-cache-layer-1-4
+  name: 'Network Appliance Lab: insecure cache layer v1.4 — Alpine minimal'
   category: network-appliance
-  difficulty: hard
+  difficulty: intermediate
   os_family: alpine
   arch: x86_64
   base_image_key: alpine-base
   vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
+  memory_mb: 2048
+  disk_gb: 12
   network_mode: isolated
   packages:
   - openrc
   - openssh
-  - backup-agent
+  - cache-layer
   services:
   - sshd
   provisioning:
     golden_image: alpine-base
     role: net-appliance
-    component: backup-agent
-    version: '2.8'
-    level: hard
+    component: cache-layer
+    version: '1.4'
+    level: intermediate
   objectives:
   - Configure and audit packet-filtering rules.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v2.8).'
+  - 'Focus: identify and remediate the insecure cache layer (v1.4).'
   prerequisites:
   - firewall-configuration
-  estimated_minutes: 90
+  estimated_minutes: 60
   tags:
   - network
   - firewall
-  - hard
+  - intermediate
   - alpine
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-appliance-ssh-linux-auth-proxy-1-4
+  name: 'Network Appliance Lab: flawed auth proxy v1.4 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - auth-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-appliance
+    component: auth-proxy
+    version: '1.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v1.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-appliance-alpine-min-import-tool-2-4
+  name: 'Network Appliance Lab: unsafe import tool v2.4 — Alpine minimal'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - import-tool
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: net-appliance
+    component: import-tool
+    version: '2.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v2.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - alpine
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-segment-ssh-linux-backup-agent-2-5
+  name: 'Network Segmentation Lab: over-privileged backup agent v2.5 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-segment
+    component: backup-agent
+    version: '2.5'
+    level: intermediate
+  objectives:
+  - Design and verify isolated network zones.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v2.5).'
+  prerequisites:
+  - network-segmentation
+  estimated_minutes: 60
+  tags:
+  - network
+  - segmentation
+  - intermediate
+  - debian
   - backup-agent
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-reverse-proxy-2-0
-  name: 'Network Segmentation Lab: misconfigured reverse proxy v2.0 — Debian + OpenSSH'
+  - network-segmentation
+- id: net-appliance-ssh-linux-admin-panel-2-4
+  name: 'Network Appliance Lab: weak admin panel v2.4 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -961,80 +918,37 @@
   packages:
   - openssh-server
   - sudo
-  - reverse-proxy
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-segment
-    component: reverse-proxy
-    version: '2.0'
-    level: intermediate
-  objectives:
-  - Design and verify isolated network zones.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.0).'
-  prerequisites:
-  - network-segmentation
-  estimated_minutes: 60
-  tags:
-  - network
-  - segmentation
-  - intermediate
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - network-segmentation
-- id: net-appliance-ssh-linux-search-index-2-6
-  name: 'Network Appliance Lab: unauthenticated search index v2.6 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: easy
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - search-index
+  - admin-panel
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: net-appliance
-    component: search-index
-    version: '2.6'
-    level: easy
+    component: admin-panel
+    version: '2.4'
+    level: intermediate
   objectives:
   - Configure and audit packet-filtering rules.
-  - Follow the guided steps and confirm each result.
+  - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v2.6).'
+  - 'Focus: identify and remediate the weak admin panel (v2.4).'
   prerequisites:
   - firewall-configuration
-  estimated_minutes: 40
+  estimated_minutes: 60
   tags:
   - network
   - firewall
-  - easy
+  - intermediate
   - debian
-  - search-index
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - firewall-configuration
-- id: net-segment-ssh-linux-admin-panel-2-7
-  name: 'Network Segmentation Lab: weak admin panel v2.7 — Debian + OpenSSH'
+- id: net-segment-ssh-linux-api-gateway-2-5
+  name: 'Network Segmentation Lab: permissive API gateway v2.5 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -1047,20 +961,20 @@
   packages:
   - openssh-server
   - sudo
-  - admin-panel
+  - api-gateway
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: net-segment
-    component: admin-panel
-    version: '2.7'
+    component: api-gateway
+    version: '2.5'
     level: intermediate
   objectives:
   - Design and verify isolated network zones.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v2.7).'
+  - 'Focus: identify and remediate the permissive API gateway (v2.5).'
   prerequisites:
   - network-segmentation
   estimated_minutes: 60
@@ -1069,7 +983,179 @@
   - segmentation
   - intermediate
   - debian
-  - admin-panel
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - network-segmentation
+- id: net-appliance-alpine-min-legacy-cgi-2-4
+  name: 'Network Appliance Lab: legacy CGI handler v2.4 — Alpine minimal'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - legacy-cgi
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: net-appliance
+    component: legacy-cgi
+    version: '2.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v2.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - alpine
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-segment-ssh-linux-webhook-receiver-2-5
+  name: 'Network Segmentation Lab: unvalidated webhook receiver v2.5 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-segment
+    component: webhook-receiver
+    version: '2.5'
+    level: intermediate
+  objectives:
+  - Design and verify isolated network zones.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.5).'
+  prerequisites:
+  - network-segmentation
+  estimated_minutes: 60
+  tags:
+  - network
+  - segmentation
+  - intermediate
+  - debian
+  - webhook-receiver
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - network-segmentation
+- id: net-appliance-ssh-linux-cache-layer-2-4
+  name: 'Network Appliance Lab: insecure cache layer v2.4 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - cache-layer
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-appliance
+    component: cache-layer
+    version: '2.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v2.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-segment-ssh-linux-message-queue-2-5
+  name: 'Network Segmentation Lab: exposed message queue v2.5 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - message-queue
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-segment
+    component: message-queue
+    version: '2.5'
+    level: intermediate
+  objectives:
+  - Design and verify isolated network zones.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v2.5).'
+  prerequisites:
+  - network-segmentation
+  estimated_minutes: 60
+  tags:
+  - network
+  - segmentation
+  - intermediate
+  - debian
+  - message-queue
   reset_supported: true
   snapshots_supported: true
   disposable: true
@@ -1162,395 +1248,8 @@
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-ssh-linux-webhook-receiver-2-2
-  name: 'Network Appliance Lab: unvalidated webhook receiver v2.2 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - webhook-receiver
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-appliance
-    component: webhook-receiver
-    version: '2.2'
-    level: hard
-  objectives:
-  - Configure and audit packet-filtering rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v2.2).'
-  prerequisites:
-  - firewall-configuration
-  estimated_minutes: 90
-  tags:
-  - network
-  - firewall
-  - hard
-  - debian
-  - webhook-receiver
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-report-exporter-2-3
-  name: 'Network Segmentation Lab: template-injectable report exporter v2.3 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - report-exporter
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-segment
-    component: report-exporter
-    version: '2.3'
-    level: intermediate
-  objectives:
-  - Design and verify isolated network zones.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v2.3).'
-  prerequisites:
-  - network-segmentation
-  estimated_minutes: 60
-  tags:
-  - network
-  - segmentation
-  - intermediate
-  - debian
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - network-segmentation
-- id: net-appliance-alpine-min-reverse-proxy-2-0
-  name: 'Network Appliance Lab: misconfigured reverse proxy v2.0 — Alpine minimal'
-  category: network-appliance
-  difficulty: easy
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openrc
-  - openssh
-  - reverse-proxy
-  services:
-  - sshd
-  provisioning:
-    golden_image: alpine-base
-    role: net-appliance
-    component: reverse-proxy
-    version: '2.0'
-    level: easy
-  objectives:
-  - Configure and audit packet-filtering rules.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v2.0).'
-  prerequisites:
-  - firewall-configuration
-  estimated_minutes: 40
-  tags:
-  - network
-  - firewall
-  - easy
-  - alpine
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-cache-layer-2-1
-  name: 'Network Segmentation Lab: insecure cache layer v2.1 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - cache-layer
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-segment
-    component: cache-layer
-    version: '2.1'
-    level: intermediate
-  objectives:
-  - Design and verify isolated network zones.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v2.1).'
-  prerequisites:
-  - network-segmentation
-  estimated_minutes: 60
-  tags:
-  - network
-  - segmentation
-  - intermediate
-  - debian
-  - cache-layer
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - network-segmentation
-- id: net-appliance-ssh-linux-admin-panel-2-7
-  name: 'Network Appliance Lab: weak admin panel v2.7 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - admin-panel
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-appliance
-    component: admin-panel
-    version: '2.7'
-    level: intermediate
-  objectives:
-  - Configure and audit packet-filtering rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v2.7).'
-  prerequisites:
-  - firewall-configuration
-  estimated_minutes: 60
-  tags:
-  - network
-  - firewall
-  - intermediate
-  - debian
-  - admin-panel
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-api-gateway-2-8
-  name: 'Network Segmentation Lab: permissive API gateway v2.8 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - api-gateway
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-segment
-    component: api-gateway
-    version: '2.8'
-    level: intermediate
-  objectives:
-  - Design and verify isolated network zones.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v2.8).'
-  prerequisites:
-  - network-segmentation
-  estimated_minutes: 60
-  tags:
-  - network
-  - segmentation
-  - intermediate
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - network-segmentation
-- id: net-appliance-alpine-min-job-runner-2-5
-  name: 'Network Appliance Lab: injectable job runner v2.5 — Alpine minimal'
-  category: network-appliance
-  difficulty: hard
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openrc
-  - openssh
-  - job-runner
-  services:
-  - sshd
-  provisioning:
-    golden_image: alpine-base
-    role: net-appliance
-    component: job-runner
-    version: '2.5'
-    level: hard
-  objectives:
-  - Configure and audit packet-filtering rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the injectable job runner (v2.5).'
-  prerequisites:
-  - firewall-configuration
-  estimated_minutes: 90
-  tags:
-  - network
-  - firewall
-  - hard
-  - alpine
-  - job-runner
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-metrics-endpoint-2-6
-  name: 'Network Segmentation Lab: leaky metrics endpoint v2.6 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - metrics-endpoint
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-segment
-    component: metrics-endpoint
-    version: '2.6'
-    level: intermediate
-  objectives:
-  - Design and verify isolated network zones.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v2.6).'
-  prerequisites:
-  - network-segmentation
-  estimated_minutes: 60
-  tags:
-  - network
-  - segmentation
-  - intermediate
-  - debian
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - network-segmentation
-- id: net-appliance-ssh-linux-report-exporter-3-3
-  name: 'Network Appliance Lab: template-injectable report exporter v3.3 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: easy
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - report-exporter
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-appliance
-    component: report-exporter
-    version: '3.3'
-    level: easy
-  objectives:
-  - Configure and audit packet-filtering rules.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the template-injectable report exporter (v3.3).'
-  prerequisites:
-  - firewall-configuration
-  estimated_minutes: 40
-  tags:
-  - network
-  - firewall
-  - easy
-  - debian
-  - report-exporter
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-import-tool-3-4
-  name: 'Network Segmentation Lab: unsafe import tool v3.4 — Debian + OpenSSH'
+- id: net-appliance-ssh-linux-import-tool-2-4
+  name: 'Network Appliance Lab: unsafe import tool v2.4 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -1568,15 +1267,144 @@
   - ssh
   provisioning:
     golden_image: debian-13-server
-    role: net-segment
+    role: net-appliance
     component: import-tool
+    version: '2.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v2.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-appliance-alpine-min-admin-panel-2-4
+  name: 'Network Appliance Lab: weak admin panel v2.4 — Alpine minimal'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - admin-panel
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: net-appliance
+    component: admin-panel
+    version: '2.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v2.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - alpine
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-appliance-ssh-linux-legacy-cgi-3-4
+  name: 'Network Appliance Lab: legacy CGI handler v3.4 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-appliance
+    component: legacy-cgi
     version: '3.4'
     level: intermediate
   objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v3.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-segment-ssh-linux-webhook-receiver-3-5
+  name: 'Network Segmentation Lab: unvalidated webhook receiver v3.5 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - webhook-receiver
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-segment
+    component: webhook-receiver
+    version: '3.5'
+    level: intermediate
+  objectives:
   - Design and verify isolated network zones.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe import tool (v3.4).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v3.5).'
   prerequisites:
   - network-segmentation
   estimated_minutes: 60
@@ -1585,15 +1413,15 @@
   - segmentation
   - intermediate
   - debian
-  - import-tool
+  - webhook-receiver
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-alpine-min-cache-layer-3-1
-  name: 'Network Appliance Lab: insecure cache layer v3.1 — Alpine minimal'
+- id: net-appliance-alpine-min-cache-layer-3-4
+  name: 'Network Appliance Lab: insecure cache layer v3.4 — Alpine minimal'
   category: network-appliance
   difficulty: intermediate
   os_family: alpine
@@ -1613,13 +1441,13 @@
     golden_image: alpine-base
     role: net-appliance
     component: cache-layer
-    version: '3.1'
+    version: '3.4'
     level: intermediate
   objectives:
   - Configure and audit packet-filtering rules.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the insecure cache layer (v3.1).'
+  - 'Focus: identify and remediate the insecure cache layer (v3.4).'
   prerequisites:
   - firewall-configuration
   estimated_minutes: 60
@@ -1635,8 +1463,8 @@
   lab_id: null
   course_ids:
   - firewall-configuration
-- id: net-segment-ssh-linux-message-queue-3-2
-  name: 'Network Segmentation Lab: exposed message queue v3.2 — Debian + OpenSSH'
+- id: net-segment-ssh-linux-message-queue-3-5
+  name: 'Network Segmentation Lab: exposed message queue v3.5 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -1656,13 +1484,13 @@
     golden_image: debian-13-server
     role: net-segment
     component: message-queue
-    version: '3.2'
+    version: '3.5'
     level: intermediate
   objectives:
   - Design and verify isolated network zones.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v3.2).'
+  - 'Focus: identify and remediate the exposed message queue (v3.5).'
   prerequisites:
   - network-segmentation
   estimated_minutes: 60
@@ -1678,51 +1506,8 @@
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-ssh-linux-api-gateway-3-8
-  name: 'Network Appliance Lab: permissive API gateway v3.8 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - api-gateway
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-appliance
-    component: api-gateway
-    version: '3.8'
-    level: hard
-  objectives:
-  - Configure and audit packet-filtering rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the permissive API gateway (v3.8).'
-  prerequisites:
-  - firewall-configuration
-  estimated_minutes: 90
-  tags:
-  - network
-  - firewall
-  - hard
-  - debian
-  - api-gateway
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-file-service-3-0
-  name: 'Network Segmentation Lab: unsafe file service v3.0 — Debian + OpenSSH'
+- id: net-appliance-ssh-linux-auth-proxy-3-4
+  name: 'Network Appliance Lab: flawed auth proxy v3.4 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -1735,20 +1520,63 @@
   packages:
   - openssh-server
   - sudo
-  - file-service
+  - auth-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-appliance
+    component: auth-proxy
+    version: '3.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v3.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-segment-ssh-linux-job-runner-3-5
+  name: 'Network Segmentation Lab: injectable job runner v3.5 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - job-runner
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: net-segment
-    component: file-service
-    version: '3.0'
+    component: job-runner
+    version: '3.5'
     level: intermediate
   objectives:
   - Design and verify isolated network zones.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v3.0).'
+  - 'Focus: identify and remediate the injectable job runner (v3.5).'
   prerequisites:
   - network-segmentation
   estimated_minutes: 60
@@ -1757,118 +1585,32 @@
   - segmentation
   - intermediate
   - debian
-  - file-service
+  - job-runner
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-alpine-min-metrics-endpoint-3-6
-  name: 'Network Appliance Lab: leaky metrics endpoint v3.6 — Alpine minimal'
+- id: net-appliance-alpine-min-import-tool-3-4
+  name: 'Network Appliance Lab: unsafe import tool v3.4 — Alpine minimal'
   category: network-appliance
-  difficulty: easy
+  difficulty: intermediate
   os_family: alpine
   arch: x86_64
   base_image_key: alpine-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
   network_mode: isolated
   packages:
   - openrc
   - openssh
-  - metrics-endpoint
+  - import-tool
   services:
   - sshd
   provisioning:
     golden_image: alpine-base
-    role: net-appliance
-    component: metrics-endpoint
-    version: '3.6'
-    level: easy
-  objectives:
-  - Configure and audit packet-filtering rules.
-  - Follow the guided steps and confirm each result.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the leaky metrics endpoint (v3.6).'
-  prerequisites:
-  - firewall-configuration
-  estimated_minutes: 40
-  tags:
-  - network
-  - firewall
-  - easy
-  - alpine
-  - metrics-endpoint
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-legacy-cgi-3-7
-  name: 'Network Segmentation Lab: legacy CGI handler v3.7 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - legacy-cgi
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-segment
-    component: legacy-cgi
-    version: '3.7'
-    level: intermediate
-  objectives:
-  - Design and verify isolated network zones.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v3.7).'
-  prerequisites:
-  - network-segmentation
-  estimated_minutes: 60
-  tags:
-  - network
-  - segmentation
-  - intermediate
-  - debian
-  - legacy-cgi
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - network-segmentation
-- id: net-appliance-ssh-linux-import-tool-3-4
-  name: 'Network Appliance Lab: unsafe import tool v3.4 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: intermediate
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 2048
-  disk_gb: 12
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - import-tool
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
     role: net-appliance
     component: import-tool
     version: '3.4'
@@ -1885,7 +1627,7 @@
   - network
   - firewall
   - intermediate
-  - debian
+  - alpine
   - import-tool
   reset_supported: true
   snapshots_supported: true
@@ -1936,51 +1678,8 @@
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-alpine-min-message-queue-3-2
-  name: 'Network Appliance Lab: exposed message queue v3.2 — Alpine minimal'
-  category: network-appliance
-  difficulty: hard
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openrc
-  - openssh
-  - message-queue
-  services:
-  - sshd
-  provisioning:
-    golden_image: alpine-base
-    role: net-appliance
-    component: message-queue
-    version: '3.2'
-    level: hard
-  objectives:
-  - Configure and audit packet-filtering rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the exposed message queue (v3.2).'
-  prerequisites:
-  - firewall-configuration
-  estimated_minutes: 90
-  tags:
-  - network
-  - firewall
-  - hard
-  - alpine
-  - message-queue
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-search-index-3-3
-  name: 'Network Segmentation Lab: unauthenticated search index v3.3 — Debian + OpenSSH'
+- id: net-appliance-ssh-linux-admin-panel-3-4
+  name: 'Network Appliance Lab: weak admin panel v3.4 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -1993,80 +1692,37 @@
   packages:
   - openssh-server
   - sudo
-  - search-index
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-segment
-    component: search-index
-    version: '3.3'
-    level: intermediate
-  objectives:
-  - Design and verify isolated network zones.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v3.3).'
-  prerequisites:
-  - network-segmentation
-  estimated_minutes: 60
-  tags:
-  - network
-  - segmentation
-  - intermediate
-  - debian
-  - search-index
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - network-segmentation
-- id: net-appliance-ssh-linux-file-service-3-0
-  name: 'Network Appliance Lab: unsafe file service v3.0 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: easy
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - file-service
+  - admin-panel
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: net-appliance
-    component: file-service
-    version: '3.0'
-    level: easy
+    component: admin-panel
+    version: '3.4'
+    level: intermediate
   objectives:
   - Configure and audit packet-filtering rules.
-  - Follow the guided steps and confirm each result.
+  - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unsafe file service (v3.0).'
+  - 'Focus: identify and remediate the weak admin panel (v3.4).'
   prerequisites:
   - firewall-configuration
-  estimated_minutes: 40
+  estimated_minutes: 60
   tags:
   - network
   - firewall
-  - easy
+  - intermediate
   - debian
-  - file-service
+  - admin-panel
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - firewall-configuration
-- id: net-segment-ssh-linux-auth-proxy-3-1
-  name: 'Network Segmentation Lab: flawed auth proxy v3.1 — Debian + OpenSSH'
+- id: net-segment-ssh-linux-api-gateway-3-5
+  name: 'Network Segmentation Lab: permissive API gateway v3.5 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -2079,20 +1735,20 @@
   packages:
   - openssh-server
   - sudo
-  - auth-proxy
+  - api-gateway
   services:
   - ssh
   provisioning:
     golden_image: debian-13-server
     role: net-segment
-    component: auth-proxy
-    version: '3.1'
+    component: api-gateway
+    version: '3.5'
     level: intermediate
   objectives:
   - Design and verify isolated network zones.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the flawed auth proxy (v3.1).'
+  - 'Focus: identify and remediate the permissive API gateway (v3.5).'
   prerequisites:
   - network-segmentation
   estimated_minutes: 60
@@ -2101,15 +1757,15 @@
   - segmentation
   - intermediate
   - debian
-  - auth-proxy
+  - api-gateway
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-alpine-min-legacy-cgi-4-7
-  name: 'Network Appliance Lab: legacy CGI handler v4.7 — Alpine minimal'
+- id: net-appliance-alpine-min-legacy-cgi-3-4
+  name: 'Network Appliance Lab: legacy CGI handler v3.4 — Alpine minimal'
   category: network-appliance
   difficulty: intermediate
   os_family: alpine
@@ -2129,13 +1785,13 @@
     golden_image: alpine-base
     role: net-appliance
     component: legacy-cgi
-    version: '4.7'
+    version: '3.4'
     level: intermediate
   objectives:
   - Configure and audit packet-filtering rules.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the legacy CGI handler (v4.7).'
+  - 'Focus: identify and remediate the legacy CGI handler (v3.4).'
   prerequisites:
   - firewall-configuration
   estimated_minutes: 60
@@ -2151,8 +1807,352 @@
   lab_id: null
   course_ids:
   - firewall-configuration
-- id: net-segment-ssh-linux-webhook-receiver-4-8
-  name: 'Network Segmentation Lab: unvalidated webhook receiver v4.8 — Debian + OpenSSH'
+- id: net-appliance-ssh-linux-cache-layer-3-4
+  name: 'Network Appliance Lab: insecure cache layer v3.4 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - cache-layer
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-appliance
+    component: cache-layer
+    version: '3.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the insecure cache layer (v3.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - debian
+  - cache-layer
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-appliance-alpine-min-auth-proxy-4-4
+  name: 'Network Appliance Lab: flawed auth proxy v4.4 — Alpine minimal'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - auth-proxy
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: net-appliance
+    component: auth-proxy
+    version: '4.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v4.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - alpine
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-segment-ssh-linux-job-runner-4-5
+  name: 'Network Segmentation Lab: injectable job runner v4.5 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - job-runner
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-segment
+    component: job-runner
+    version: '4.5'
+    level: intermediate
+  objectives:
+  - Design and verify isolated network zones.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the injectable job runner (v4.5).'
+  prerequisites:
+  - network-segmentation
+  estimated_minutes: 60
+  tags:
+  - network
+  - segmentation
+  - intermediate
+  - debian
+  - job-runner
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - network-segmentation
+- id: net-appliance-ssh-linux-import-tool-4-4
+  name: 'Network Appliance Lab: unsafe import tool v4.4 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - import-tool
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-appliance
+    component: import-tool
+    version: '4.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v4.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - debian
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-segment-ssh-linux-backup-agent-4-5
+  name: 'Network Segmentation Lab: over-privileged backup agent v4.5 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - backup-agent
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-segment
+    component: backup-agent
+    version: '4.5'
+    level: intermediate
+  objectives:
+  - Design and verify isolated network zones.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the over-privileged backup agent (v4.5).'
+  prerequisites:
+  - network-segmentation
+  estimated_minutes: 60
+  tags:
+  - network
+  - segmentation
+  - intermediate
+  - debian
+  - backup-agent
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - network-segmentation
+- id: net-appliance-alpine-min-admin-panel-4-4
+  name: 'Network Appliance Lab: weak admin panel v4.4 — Alpine minimal'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - admin-panel
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: net-appliance
+    component: admin-panel
+    version: '4.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v4.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - alpine
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-segment-ssh-linux-api-gateway-4-5
+  name: 'Network Segmentation Lab: permissive API gateway v4.5 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - api-gateway
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-segment
+    component: api-gateway
+    version: '4.5'
+    level: intermediate
+  objectives:
+  - Design and verify isolated network zones.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the permissive API gateway (v4.5).'
+  prerequisites:
+  - network-segmentation
+  estimated_minutes: 60
+  tags:
+  - network
+  - segmentation
+  - intermediate
+  - debian
+  - api-gateway
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - network-segmentation
+- id: net-appliance-ssh-linux-legacy-cgi-4-4
+  name: 'Network Appliance Lab: legacy CGI handler v4.4 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - legacy-cgi
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-appliance
+    component: legacy-cgi
+    version: '4.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the legacy CGI handler (v4.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - debian
+  - legacy-cgi
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-segment-ssh-linux-webhook-receiver-4-5
+  name: 'Network Segmentation Lab: unvalidated webhook receiver v4.5 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -2172,13 +2172,13 @@
     golden_image: debian-13-server
     role: net-segment
     component: webhook-receiver
-    version: '4.8'
+    version: '4.5'
     level: intermediate
   objectives:
   - Design and verify isolated network zones.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.8).'
+  - 'Focus: identify and remediate the unvalidated webhook receiver (v4.5).'
   prerequisites:
   - network-segmentation
   estimated_minutes: 60
@@ -2194,137 +2194,180 @@
   lab_id: null
   course_ids:
   - network-segmentation
-- id: net-appliance-ssh-linux-backup-agent-4-5
-  name: 'Network Appliance Lab: over-privileged backup agent v4.5 — Debian + OpenSSH'
-  category: network-appliance
-  difficulty: hard
-  os_family: debian
-  arch: x86_64
-  base_image_key: debian-13-server
-  vcpu: 2
-  memory_mb: 3072
-  disk_gb: 16
-  network_mode: isolated
-  packages:
-  - openssh-server
-  - sudo
-  - backup-agent
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-appliance
-    component: backup-agent
-    version: '4.5'
-    level: hard
-  objectives:
-  - Configure and audit packet-filtering rules.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the over-privileged backup agent (v4.5).'
-  prerequisites:
-  - firewall-configuration
-  estimated_minutes: 90
-  tags:
-  - network
-  - firewall
-  - hard
-  - debian
-  - backup-agent
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - firewall-configuration
-- id: net-segment-ssh-linux-reverse-proxy-4-6
-  name: 'Network Segmentation Lab: misconfigured reverse proxy v4.6 — Debian + OpenSSH'
+- id: net-appliance-alpine-min-cache-layer-4-4
+  name: 'Network Appliance Lab: insecure cache layer v4.4 — Alpine minimal'
   category: network-appliance
   difficulty: intermediate
-  os_family: debian
+  os_family: alpine
   arch: x86_64
-  base_image_key: debian-13-server
+  base_image_key: alpine-base
   vcpu: 2
   memory_mb: 2048
   disk_gb: 12
   network_mode: isolated
   packages:
-  - openssh-server
-  - sudo
-  - reverse-proxy
-  services:
-  - ssh
-  provisioning:
-    golden_image: debian-13-server
-    role: net-segment
-    component: reverse-proxy
-    version: '4.6'
-    level: intermediate
-  objectives:
-  - Design and verify isolated network zones.
-  - Combine techniques and verify your conclusions independently.
-  - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the misconfigured reverse proxy (v4.6).'
-  prerequisites:
-  - network-segmentation
-  estimated_minutes: 60
-  tags:
-  - network
-  - segmentation
-  - intermediate
-  - debian
-  - reverse-proxy
-  reset_supported: true
-  snapshots_supported: true
-  disposable: true
-  lab_id: null
-  course_ids:
-  - network-segmentation
-- id: net-appliance-alpine-min-search-index-4-3
-  name: 'Network Appliance Lab: unauthenticated search index v4.3 — Alpine minimal'
-  category: network-appliance
-  difficulty: easy
-  os_family: alpine
-  arch: x86_64
-  base_image_key: alpine-base
-  vcpu: 1
-  memory_mb: 1024
-  disk_gb: 10
-  network_mode: isolated
-  packages:
   - openrc
   - openssh
-  - search-index
+  - cache-layer
   services:
   - sshd
   provisioning:
     golden_image: alpine-base
     role: net-appliance
-    component: search-index
-    version: '4.3'
-    level: easy
+    component: cache-layer
+    version: '4.4'
+    level: intermediate
   objectives:
   - Configure and audit packet-filtering rules.
-  - Follow the guided steps and confirm each result.
+  - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the unauthenticated search index (v4.3).'
+  - 'Focus: identify and remediate the insecure cache layer (v4.4).'
   prerequisites:
   - firewall-configuration
-  estimated_minutes: 40
+  estimated_minutes: 60
   tags:
   - network
   - firewall
-  - easy
+  - intermediate
   - alpine
-  - search-index
+  - cache-layer
   reset_supported: true
   snapshots_supported: true
   disposable: true
   lab_id: null
   course_ids:
   - firewall-configuration
-- id: net-segment-ssh-linux-admin-panel-4-4
-  name: 'Network Segmentation Lab: weak admin panel v4.4 — Debian + OpenSSH'
+- id: net-segment-ssh-linux-message-queue-4-5
+  name: 'Network Segmentation Lab: exposed message queue v4.5 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - message-queue
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-segment
+    component: message-queue
+    version: '4.5'
+    level: intermediate
+  objectives:
+  - Design and verify isolated network zones.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the exposed message queue (v4.5).'
+  prerequisites:
+  - network-segmentation
+  estimated_minutes: 60
+  tags:
+  - network
+  - segmentation
+  - intermediate
+  - debian
+  - message-queue
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - network-segmentation
+- id: net-appliance-ssh-linux-auth-proxy-4-4
+  name: 'Network Appliance Lab: flawed auth proxy v4.4 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - auth-proxy
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-appliance
+    component: auth-proxy
+    version: '4.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the flawed auth proxy (v4.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - debian
+  - auth-proxy
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-appliance-alpine-min-import-tool-4-4
+  name: 'Network Appliance Lab: unsafe import tool v4.4 — Alpine minimal'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: alpine
+  arch: x86_64
+  base_image_key: alpine-base
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openrc
+  - openssh
+  - import-tool
+  services:
+  - sshd
+  provisioning:
+    golden_image: alpine-base
+    role: net-appliance
+    component: import-tool
+    version: '4.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the unsafe import tool (v4.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - alpine
+  - import-tool
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-appliance-ssh-linux-admin-panel-5-4
+  name: 'Network Appliance Lab: weak admin panel v5.4 — Debian + OpenSSH'
   category: network-appliance
   difficulty: intermediate
   os_family: debian
@@ -2342,15 +2385,58 @@
   - ssh
   provisioning:
     golden_image: debian-13-server
-    role: net-segment
+    role: net-appliance
     component: admin-panel
-    version: '4.4'
+    version: '5.4'
+    level: intermediate
+  objectives:
+  - Configure and audit packet-filtering rules.
+  - Combine techniques and verify your conclusions independently.
+  - Apply the remediation and verify the issue is resolved.
+  - 'Focus: identify and remediate the weak admin panel (v5.4).'
+  prerequisites:
+  - firewall-configuration
+  estimated_minutes: 60
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - debian
+  - admin-panel
+  reset_supported: true
+  snapshots_supported: true
+  disposable: true
+  lab_id: null
+  course_ids:
+  - firewall-configuration
+- id: net-segment-ssh-linux-api-gateway-5-5
+  name: 'Network Segmentation Lab: permissive API gateway v5.5 — Debian + OpenSSH'
+  category: network-appliance
+  difficulty: intermediate
+  os_family: debian
+  arch: x86_64
+  base_image_key: debian-13-server
+  vcpu: 2
+  memory_mb: 2048
+  disk_gb: 12
+  network_mode: isolated
+  packages:
+  - openssh-server
+  - sudo
+  - api-gateway
+  services:
+  - ssh
+  provisioning:
+    golden_image: debian-13-server
+    role: net-segment
+    component: api-gateway
+    version: '5.5'
     level: intermediate
   objectives:
   - Design and verify isolated network zones.
   - Combine techniques and verify your conclusions independently.
   - Apply the remediation and verify the issue is resolved.
-  - 'Focus: identify and remediate the weak admin panel (v4.4).'
+  - 'Focus: identify and remediate the permissive API gateway (v5.5).'
   prerequisites:
   - network-segmentation
   estimated_minutes: 60
@@ -2359,7 +2445,7 @@
   - segmentation
   - intermediate
   - debian
-  - admin-panel
+  - api-gateway
   reset_supported: true
   snapshots_supported: true
   disposable: true
