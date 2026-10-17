@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.2.0 — 2026-10-17
+
+Big content expansion.
+
+- **Tool-mastery curriculum**: 25 hands-on courses teaching the essential
+  security tools (Nmap, Nikto/Nuclei, Wireshark/tcpdump, Burp, ZAP, gobuster/ffuf,
+  sqlmap, Metasploit, netcat/socat, proxychains, curl/HTTPie, Hydra, John,
+  Hashcat, SMB/LDAP enum, Impacket, NetExec, BloodHound, Responder, Ghidra,
+  radare2, gdb, Volatility, Autopsy/TSK, CyberChef) — all framed for authorised
+  use in your own labs.
+- **OSINT**: added an OSINT Tooling course plus an "OSINT & Reconnaissance" path.
+- **Learning paths**: added "The Hacker's Toolkit" and "OSINT & Reconnaissance" (10 total).
+- **Machines**: catalogue raised to 1,440 profiles (tool-practice/web ranges, CTF boxes).
+- Catalogue now: 89 courses, 1,440 profiles, 11 labs, 96 competencies. 51 tests passing.
+
 ## 1.0.0 — 2026-10-17
 
 Initial release of Pwnforge.
