@@ -37,8 +37,8 @@ DEFAULTS: list[SettingDef] = [
                "Session lifetime in hours before re-login is required."),
     SettingDef("auth.registration_open", False, "bool", "auth",
                "Allow self-service learner registration."),
-    SettingDef("auth.min_password_length", 10, "int", "auth",
-               "Minimum password length enforced on create/change."),
+    SettingDef("auth.min_password_length", 1, "int", "auth",
+               "Minimum password length enforced on create/change (1: any password that isn't empty)."),
     # --- resource limits (consumed by the VM capacity planner) ---
     SettingDef("vm.storage_dir", "", "string", "resources",
                "Override directory for VM overlays/images (blank = data dir default)."),

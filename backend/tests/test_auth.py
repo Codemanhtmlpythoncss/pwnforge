@@ -35,10 +35,12 @@ def test_password_hash_not_leaked(admin):
     assert "password" not in me and "password_hash" not in me
 
 
-def test_password_min_length_enforced(admin):
-    # 9 chars passes the schema (>=8) but fails the service policy (>=10) -> 400.
-    r = admin.post("/api/users", json={"username": "shorty", "password": "ninechar9", "role": "learner"})
+def test_no_password_minimum_unless_an_admin_sets_one(admin):
+    # By default any password that isn't empty is accepted.
+    assert admin.post("/api/users", json={"username": "shorty", "password": "x", "role": "learner"}).status_code == 200
+    assert admin.post("/api/users", json={"username": "empty1", "password": "", "role": "learner"}).status_code == 422
+    # An administrator can still ask for a minimum.
+    admin.put("/api/settings/auth.min_password_length", json={"value": 10})
+    r = admin.post("/api/users", json={"username": "shorty2", "password": "ninechar9", "role": "learner"})
     assert r.status_code == 400
-    # Far-too-short is rejected by request validation (422).
-    r2 = admin.post("/api/users", json={"username": "shorty2", "password": "x", "role": "learner"})
-    assert r2.status_code == 422
+    admin.put("/api/settings/auth.min_password_length", json={"value": 1})
