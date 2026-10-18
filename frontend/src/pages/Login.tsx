@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../auth";
+import { Logo, LogoMark } from "../logo";
 
 export default function Login() {
   const { initialised, login, bootstrap } = useAuth();
@@ -24,11 +25,15 @@ export default function Login() {
       {/* Brand / terminal panel */}
       <div className="hidden lg:flex flex-col justify-center px-16 relative overflow-hidden"
         style={{ background: "linear-gradient(160deg, var(--bg2), var(--bg))" }}>
+        <div className="absolute inset-0 bg-grid pointer-events-none" />
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none"
           style={{ background: "radial-gradient(600px 400px at 70% 20%, var(--brand), transparent)" }} />
         <div className="relative">
-          <div className="text-5xl font-extrabold tracking-tight">
-            Pwn<span className="text-brand glow-text">forge</span>
+          <div className="flex items-center gap-4">
+            <LogoMark size={62} />
+            <div className="text-5xl font-extrabold tracking-tight">
+              Pwn<span className="text-brand glow-text">forge</span>
+            </div>
           </div>
           <p className="text-muted mt-3 max-w-md">
             Self-hosted cybersecurity training & virtual lab platform. Learn by
@@ -47,7 +52,7 @@ export default function Login() {
       {/* Form */}
       <div className="grid place-items-center p-6">
         <form onSubmit={submit} className="card p-8 w-full max-w-sm fade-in">
-          <div className="text-2xl font-extrabold mb-1 lg:hidden">Pwn<span className="text-brand">forge</span></div>
+          <Logo size={26} className="mb-4 lg:hidden" />
           <div className="text-xl font-bold mb-1">{bootstrapping ? "Create administrator" : "Sign in"}</div>
           <div className="text-muted text-sm mb-6">
             {bootstrapping ? "First-run setup — this binds to localhost by default." : "Welcome back, operator."}

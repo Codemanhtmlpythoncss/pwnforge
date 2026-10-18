@@ -4,6 +4,7 @@ import { api } from "./api";
 import { useAuth } from "./auth";
 import { RankBadge, Spinner } from "./ui";
 import { Icon } from "./icons";
+import { Logo } from "./logo";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
@@ -105,11 +106,8 @@ function Sidebar({ isAdmin, user }: { isAdmin: boolean; user: any }) {
   );
   return (
     <aside className="w-[232px] shrink-0 border-r border-line bg-[var(--bg2)] flex flex-col">
-      <div className="px-5 h-14 flex items-center gap-2 border-b border-line">
-        <span className="text-brand text-lg">▰</span>
-        <span className="text-[19px] font-extrabold tracking-tight">
-          Pwn<span className="text-brand glow-text">forge</span>
-        </span>
+      <div className="px-4 h-14 flex items-center border-b border-line">
+        <Logo size={30} />
       </div>
       <nav className="flex-1 overflow-y-auto px-2 py-3 space-y-5">
         {GROUPS.map(g => (

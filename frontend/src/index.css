@@ -167,6 +167,12 @@ code, kbd, .mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo
 
 /* --- Misc -------------------------------------------------------------- */
 .glow-text { text-shadow: 0 0 18px rgba(159,239,0,.55); }
+.bg-grid {
+  background-image: radial-gradient(rgba(159,239,0,.08) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(70% 70% at 60% 30%, #000, transparent);
+  mask-image: radial-gradient(70% 70% at 60% 30%, #000, transparent);
+}
 .ring { transform: rotate(-90deg); }
 .ring circle { fill: none; stroke-linecap: round; }
 .hairline { border-top: 1px solid var(--line); }

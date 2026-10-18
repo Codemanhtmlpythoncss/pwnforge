@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
 import { Diff, Spinner, Empty } from "../ui";
+import { MachineAvatar } from "../logo";
 
 const DIFFS = ["", "easy", "intermediate", "hard", "advanced", "expert"];
 const PAGE = 24;
@@ -61,19 +62,29 @@ export default function Machines() {
         <>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {data.items.map((p: any) => (
-              <div key={p.id} className="card p-4 flex flex-col">
-                <div className="flex items-center justify-between mb-1">
-                  <Diff d={p.difficulty} />
-                  <span className={`tag ${p.readiness === "ready" ? "text-ok" : ""}`}>{p.readiness}</span>
+              <div key={p.id} className="card card-hover card-lift p-4 flex flex-col">
+                <div className="flex items-start gap-3">
+                  <MachineAvatar os={p.os_family} difficulty={p.difficulty} />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <Diff d={p.difficulty} />
+                      <span className={`tag ${p.readiness === "ready" ? "tag-green" : ""}`}>
+                        {p.readiness === "ready" ? "● ready" : p.readiness}
+                      </span>
+                    </div>
+                    <div className="font-semibold text-sm leading-snug mt-1.5">{p.name}</div>
+                    <div className="text-muted text-[11px] mt-0.5 mono truncate">{p.id}</div>
+                  </div>
                 </div>
-                <div className="font-medium text-sm leading-snug">{p.name}</div>
-                <div className="text-muted text-xs mt-1 font-mono">{p.id}</div>
-                <div className="text-muted text-xs mt-2">
-                  {p.os_family} · {p.vcpu} vCPU · {p.memory_mb}MB · {p.disk_gb}GB
+                <div className="text-muted text-xs mt-3 flex flex-wrap gap-x-3 gap-y-1">
+                  <span>{p.os_family}</span><span>{p.vcpu} vCPU</span>
+                  <span>{p.memory_mb} MB</span><span>{p.disk_gb} GB</span>
                 </div>
                 <div className="flex gap-2 mt-3">
-                  <button className="btn btn-primary flex-1 justify-center text-sm"
-                    disabled={p.readiness !== "ready"} onClick={() => launch(p.id)}>Launch</button>
+                  <button className="btn btn-primary flex-1 text-sm"
+                    disabled={p.readiness !== "ready"} onClick={() => launch(p.id)}>
+                    ▸ Launch
+                  </button>
                 </div>
               </div>
             ))}
