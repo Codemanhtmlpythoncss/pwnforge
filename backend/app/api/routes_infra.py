@@ -9,7 +9,7 @@ from backend.app.api import schemas
 from backend.app.api.deps import current_user, get_db, require_admin
 from backend.app.core import host_monitor
 from backend.app.database.models import (
-    Job, Lab, LabInstance, User, VMInstance, VMStatus,
+    Job, Lab, LabInstance, User, UserRole, VMInstance, VMStatus,
 )
 from backend.app.images import service as images
 from backend.app.jobs import runner
@@ -88,6 +88,8 @@ def list_vms(user: User = Depends(current_user), db: Session = Depends(get_db)) 
 @router.post("/vms")
 def start_vm(body: schemas.StartVMRequest, user: User = Depends(current_user),
              db: Session = Depends(get_db)) -> dict:
+    if user.role == UserRole.viewer:
+        raise HTTPException(403, "Viewers can't start machines.")
     try:
         inst = vms.create_instance(db, profile_id=body.profile_id, owner_id=user.id,
                                    name=body.name, persistent=body.persistent)
@@ -180,6 +182,8 @@ def lab_detail(lab_id: str, db: Session = Depends(get_db)) -> dict:
 @router.post("/lab-instances")
 def start_lab(body: schemas.StartLabRequest, user: User = Depends(current_user),
               db: Session = Depends(get_db)) -> dict:
+    if user.role == UserRole.viewer:
+        raise HTTPException(403, "Viewers can't start labs.")
     try:
         li = labs.create_lab_instance(db, lab_id=body.lab_id, owner_id=user.id)
     except labs.LabServiceError as e:
@@ -292,7 +296,7 @@ def storage_cleanup(dry_run: bool = True, user: User = Depends(require_admin),
 @router.get("/jobs/{job_id}")
 def get_job(job_id: str, user: User = Depends(current_user), db: Session = Depends(get_db)) -> dict:
     job = db.get(Job, job_id)
-    if job is None:
+    if job is None or (job.owner_id != user.id and user.role != UserRole.administrator):
         raise HTTPException(404, "Unknown job")
     return {"id": job.id, "kind": job.kind, "status": job.status.value,
             "progress": job.progress, "stage": job.stage, "steps": job.steps,
@@ -301,6 +305,9 @@ def get_job(job_id: str, user: User = Depends(current_user), db: Session = Depen
 
 @router.get("/jobs")
 def list_jobs(limit: int = 25, user: User = Depends(current_user), db: Session = Depends(get_db)) -> dict:
-    rows = db.execute(select(Job).order_by(Job.created_at.desc()).limit(limit)).scalars()
+    q = select(Job).order_by(Job.created_at.desc()).limit(max(1, min(limit, 200)))
+    if user.role != UserRole.administrator:
+        q = q.where(Job.owner_id == user.id)
+    rows = db.execute(q).scalars()
     return {"items": [{"id": j.id, "kind": j.kind, "status": j.status.value,
                        "progress": j.progress, "stage": j.stage} for j in rows]}

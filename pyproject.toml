@@ -24,6 +24,8 @@ dependencies = [
   "click==8.1.8",
   "rich==13.9.4",
   "jsonschema==4.23.0",
+  "httpx==0.28.1",
+  "cryptography==44.0.0",
 ]
 
 [project.scripts]
