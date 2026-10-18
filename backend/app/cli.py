@@ -242,14 +242,142 @@ def images_prune(dry_run: bool = True) -> None:
         console.print_json(json.dumps(storage.cleanup(s, dry_run=dry_run)))
 
 
+# ---- training environments (for host tools such as a homelab dashboard) ----
+env_app = typer.Typer(help="Training environments: list, start, stop, delete, clean up")
+app.add_typer(env_app, name="env")
+
+
+def _vm_row(s, inst) -> dict:
+    """One VM as plain data: no credentials, no flags, no learner e-mail."""
+    import os as _os
+    from backend.app.database.models import User, VirtualNetwork
+    owner = s.get(User, inst.owner_id)
+    net = s.get(VirtualNetwork, inst.network_id) if inst.network_id else None
+    disk = 0
+    if inst.overlay_path:
+        try:
+            st = _os.stat(inst.overlay_path)
+            disk = getattr(st, "st_blocks", 0) * 512 or st.st_size
+        except OSError:
+            disk = 0
+    when = lambda d: d.isoformat() if d else None  # noqa: E731
+    return {"kind": "vm", "id": inst.id, "name": inst.name, "status": inst.status.value, "driver": inst.driver,
+            "domain": inst.driver_ref, "vcpu": inst.vcpu, "memory_mb": inst.memory_mb, "ip_address": inst.ip_address,
+            "network": {"mode": net.mode.value, "external_access": bool(net.external_access), "cidr": net.cidr} if net else None,
+            "lab_instance_id": inst.lab_instance_id, "persistent": inst.persistent, "disposable": inst.disposable,
+            "owner": owner.username if owner else None, "disk_bytes": disk, "started_at": when(inst.started_at),
+            "stopped_at": when(inst.stopped_at), "last_heartbeat": when(inst.last_heartbeat), "last_error": inst.last_error}
+
+
+def _env_out(data, as_json: bool) -> None:
+    if as_json:
+        sys.stdout.write(json.dumps(data) + "\n")
+    else:
+        console.print_json(json.dumps(data))
+
+
+@env_app.command("list")
+def env_list(as_json: bool = typer.Option(False, "--json", help="Plain JSON on stdout")) -> None:
+    """Every VM and lab that hasn't been deleted, with its resources and network."""
+    from sqlalchemy import select
+    from backend.app.database.base import session_scope
+    from backend.app.database.models import Lab, LabInstance, VMInstance, VMStatus
+    with session_scope() as s:
+        vms_ = [_vm_row(s, i) for i in s.execute(select(VMInstance).where(VMInstance.status != VMStatus.deleted)).scalars()]
+        labs = []
+        for li in s.execute(select(LabInstance).where(LabInstance.status != VMStatus.deleted)).scalars():
+            lab = s.get(Lab, li.lab_id)
+            labs.append({"kind": "lab", "id": li.id, "lab_id": li.lab_id, "title": getattr(lab, "title", None) or li.lab_id,
+                         "status": li.status.value, "last_error": li.last_error,
+                         "started_at": li.started_at.isoformat() if li.started_at else None,
+                         "machines": [v["id"] for v in vms_ if v["lab_instance_id"] == li.id]})
+    _env_out({"vms": vms_, "labs": labs}, as_json)
+
+
+def _find(s, kind: str, ident: str):
+    from backend.app.database.models import LabInstance, VMInstance
+    obj = s.get(VMInstance if kind == "vm" else LabInstance, ident)
+    if obj is None:
+        console.print(f"[red]No such {kind}: {ident}[/red]")
+        raise typer.Exit(2)
+    return obj
+
+
+def _check_kind(kind: str) -> None:
+    if kind not in ("vm", "lab"):
+        console.print("[red]KIND is vm or lab[/red]")
+        raise typer.Exit(2)
+
+
+@env_app.command("stop")
+def env_stop(kind: str, ident: str, force: bool = False) -> None:
+    """Stop a VM or a whole lab (its disks are kept)."""
+    from backend.app.database.base import session_scope
+    from backend.app.labs import service as labs
+    from backend.app.vms import service as vms
+    _check_kind(kind)
+    with session_scope() as s:
+        obj = _find(s, kind, ident)
+        if kind == "vm":
+            vms.stop_instance(s, obj, force=force)
+        else:
+            labs.stop_lab(s, obj)
+        _env_out({"ok": True, "status": obj.status.value}, True)
+
+
+@env_app.command("start")
+def env_start(kind: str, ident: str) -> None:
+    """Start a stopped VM or lab again (waits until it runs)."""
+    from backend.app.database.base import session_scope
+    from backend.app.labs import service as labs
+    from backend.app.vms import service as vms
+    _check_kind(kind)
+    with session_scope() as s:
+        obj = _find(s, kind, ident)
+        try:
+            if kind == "vm":
+                vms.start_instance(s, obj)
+            else:
+                labs.start_lab(s, obj)
+        except Exception as e:  # noqa: BLE001 -- the service records last_error; say it too
+            _env_out({"ok": False, "error": str(e)}, True)
+            raise typer.Exit(1)
+        _env_out({"ok": True, "status": obj.status.value}, True)
+
+
+@env_app.command("delete")
+def env_delete(kind: str, ident: str) -> None:
+    """Delete a VM or lab: its domain, overlay disk and (for a lab) its networks. Base images are kept."""
+    from backend.app.database.base import session_scope
+    from backend.app.labs import service as labs
+    from backend.app.vms import service as vms
+    _check_kind(kind)
+    with session_scope() as s:
+        obj = _find(s, kind, ident)
+        if kind == "vm":
+            vms.delete_instance(s, obj)
+        else:
+            labs.delete_lab_instance(s, obj)
+    _env_out({"ok": True}, True)
+
+
+@env_app.command("cleanup")
+def env_cleanup(apply: bool = typer.Option(False, "--apply", help="Delete them (default: only list them)")) -> None:
+    """Overlay disks no VM uses any more (a dry run unless --apply)."""
+    from backend.app.database.base import session_scope
+    from backend.app.storage import service as storage_svc
+    with session_scope() as s:
+        _env_out(storage_svc.cleanup(s, dry_run=not apply), True)
+
+
 # ---- storage / backup ----
 @app.command()
-def storage() -> None:
+def storage(as_json: bool = typer.Option(False, "--json", help="Plain JSON on stdout")) -> None:
     """Storage report (physical vs virtual)."""
     from backend.app.database.base import session_scope
     from backend.app.storage import service as storage_svc
     with session_scope() as s:
-        console.print_json(json.dumps(storage_svc.report(s)))
+        _env_out(storage_svc.report(s), as_json)
 
 
 @app.command()
