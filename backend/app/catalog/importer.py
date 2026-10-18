@@ -42,7 +42,6 @@ def import_all(session: Session, *, include_profiles: bool = True) -> dict:
 
 
 def _import_competencies(session: Session) -> int:
-    existing = {c.key for c in session.execute(select(Competency.key)).scalars()}
     n = 0
     for domain, key, name, desc in COMPETENCIES:
         row = session.get(Competency, key)
