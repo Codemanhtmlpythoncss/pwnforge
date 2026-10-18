@@ -15,10 +15,11 @@ typer==0.15.1
 click==8.1.8
 rich==13.9.4
 jsonschema==4.23.0
+httpx==0.28.1            # the AI assistant's client
+cryptography==44.0.0     # the OpenVPN certificate authority
 # On a Debian/KVM host, also install the distro package: python3-libvirt
 # (apt install libvirt-daemon-system qemu-system-x86 qemu-utils python3-libvirt)
 
 # Dev/test:
-httpx==0.28.1
 pytest==8.3.4
 pytest-asyncio==0.25.0

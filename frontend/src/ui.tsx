@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { KeyboardEvent, ReactNode, useState } from "react";
 import { diffClass } from "./api";
 
 export function Panel({ children, className = "", hover = false }:
@@ -140,4 +140,53 @@ export function Markdown({ text }: { text: string }) {
   if (inCode) html.push("</code></pre>");
   flushList();
   return <div className="prose-body" dangerouslySetInnerHTML={{ __html: html.join("") }} />;
+}
+
+/* ---- docs building blocks: copyable code, tabs, callouts ---- */
+export function CodeBlock({ code, label, lang }: { code: string; label?: string; lang?: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 1500); } catch {}
+  };
+  return (
+    <div className="code-block">
+      <div className="code-head">
+        <span>{label || lang || "shell"}</span>
+        <button type="button" className="btn btn-ghost py-0.5 px-2 text-xs" onClick={copy} aria-label={`Copy ${label || "code"}`}>
+          {copied ? "Copied" : "Copy"}
+        </button>
+      </div>
+      <pre tabIndex={0}><code>{code}</code></pre>
+    </div>
+  );
+}
+
+export function Tabs({ tabs, active, onChange, label }:
+  { tabs: [string, string][]; active: string; onChange: (id: string) => void; label: string }) {
+  const keyNav = (e: KeyboardEvent, i: number) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const next = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length][0];
+    onChange(next);
+    (document.getElementById("tab-" + next) as HTMLElement | null)?.focus();
+  };
+  return (
+    <div role="tablist" aria-label={label} className="flex flex-wrap gap-1 border-b border-line mb-4">
+      {tabs.map(([id, text], i) => (
+        <button key={id} id={"tab-" + id} role="tab" aria-selected={active === id} tabIndex={active === id ? 0 : -1}
+          onKeyDown={e => keyNav(e, i)} onClick={() => onChange(id)}
+          className={`px-3 py-2 text-sm -mb-px border-b-2 ${active === id ? "border-[var(--brand)] text-ink font-semibold" : "border-transparent text-muted hover:text-ink"}`}>
+          {text}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export function Callout({ kind = "info", title, children }: { kind?: "info" | "warn" | "danger"; title?: string; children: ReactNode }) {
+  return (
+    <div role={kind === "info" ? "note" : "alert"} className={`callout callout-${kind}`}>
+      {title && <div className="font-semibold mb-1">{title}</div>}
+      <div className="text-sm">{children}</div>
+    </div>
+  );
 }

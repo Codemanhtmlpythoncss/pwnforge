@@ -75,3 +75,39 @@ def poll_job(client, job_id, n=200):
             return j
         time.sleep(0.05)
     return client.get(f"/api/jobs/{job_id}").json()
+
+
+@pytest.fixture(autouse=True)
+def _fresh_rate_limits():
+    """Each test starts with empty rate-limit windows (many sign-ins happen from one test client)."""
+    from backend.app.security import ratelimit
+    ratelimit.reset()
+    yield
+
+
+def make_user(admin, role="learner"):
+    """A new user of `role` and a client signed in as them: (client, user dict)."""
+    import uuid
+    from fastapi.testclient import TestClient
+    from backend.app.main import create_app
+    uname = f"{role[:5]}-{uuid.uuid4().hex[:8]}"
+    r = admin.post("/api/users", json={"username": uname, "password": "userpass12345", "role": role})
+    assert r.status_code == 200, r.text
+    c = TestClient(create_app())
+    assert c.post("/api/auth/login", json={"username": uname, "password": "userpass12345"}).status_code == 200
+    return c, c.get("/api/auth/me").json()["user"]
+
+
+def token_for(client, scopes, name="test"):
+    r = client.post("/api/tokens", json={"name": name, "scopes": scopes, "expires_days": 30})
+    assert r.status_code == 201, r.text
+    return r.json()
+
+
+def bearer(token):
+    """A cookie-less client that sends only this token."""
+    from fastapi.testclient import TestClient
+    from backend.app.main import create_app
+    c = TestClient(create_app())
+    c.headers["Authorization"] = "Bearer " + token
+    return c
