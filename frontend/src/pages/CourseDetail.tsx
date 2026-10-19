@@ -176,10 +176,39 @@ function Exercise({ e }: { e: any }) {
 
 function Assessment({ a, onDone }: { a: any; onDone: () => void }) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [hints, setHints] = useState<Record<string, string[]>>({});
+  const [hintErrors, setHintErrors] = useState<Record<string, string>>({});
+  const [loadingHint, setLoadingHint] = useState<string | null>(null);
   const [res, setRes] = useState<any>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const revealHint = async (q: any) => {
+    const shown = hints[q.id] || [];
+    if (!q.has_hints || shown.length >= q.hint_count || loadingHint) return;
+    setLoadingHint(q.id);
+    setHintErrors(current => ({ ...current, [q.id]: "" }));
+    try {
+      const result = await api.get(
+        `/api/assessments/${a.id}/questions/${q.id}/hint?index=${shown.length}`
+      );
+      setHints(current => ({ ...current, [q.id]: [...(current[q.id] || []), result.text] }));
+    } catch (error) {
+      setHintErrors(current => ({
+        ...current,
+        [q.id]: error instanceof Error ? error.message : "Could not load hint.",
+      }));
+    } finally {
+      setLoadingHint(null);
+    }
+  };
   const submit = async () => {
-    const r = await api.post(`/api/assessments/${a.id}/submit`, { answers });
-    setRes(r); onDone();
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      const r = await api.post(`/api/assessments/${a.id}/submit`, { answers });
+      setRes(r); onDone();
+    } finally {
+      setSubmitting(false);
+    }
   };
   return (
     <Panel>
@@ -189,7 +218,7 @@ function Assessment({ a, onDone }: { a: any; onDone: () => void }) {
       </div>
       <div className="space-y-4">
         {a.questions.map((q: any, i: number) => (
-          <div key={q.id}>
+          <div key={q.id} className="space-y-2">
             <div className="text-sm font-medium mb-1">{i + 1}. {q.prompt}</div>
             {q.kind === "mcq" ? (
               <div className="space-y-1">
@@ -204,10 +233,22 @@ function Assessment({ a, onDone }: { a: any; onDone: () => void }) {
               <input className="input" placeholder="Answer" value={answers[q.id] || ""}
                 onChange={e => setAnswers(current => ({ ...current, [q.id]: e.target.value }))} />
             )}
+            {q.has_hints && (
+              <button className="btn btn-ghost" onClick={() => revealHint(q)}
+                disabled={loadingHint !== null || (hints[q.id] || []).length >= q.hint_count}>
+                💡 Hint ({(hints[q.id] || []).length}/{q.hint_count}) <span className="text-muted">optional</span>
+              </button>
+            )}
+            {(hints[q.id] || []).map((hint, hintIndex) => (
+              <div key={hintIndex} className="text-sm text-warn bg-panel2 rounded p-2">💡 {hint}</div>
+            ))}
+            {hintErrors[q.id] && <div className="text-sm text-bad">{hintErrors[q.id]}</div>}
           </div>
         ))}
       </div>
-      <button className="btn btn-primary mt-4" onClick={submit}>Submit assessment</button>
+      <button className="btn btn-primary mt-4" onClick={submit} disabled={submitting}>
+        {submitting ? "Submitting…" : "Submit assessment"}
+      </button>
       {res && (
         <div className={`mt-3 text-sm font-semibold ${res.passed ? "text-ok" : "text-bad"}`}>
           Score {res.score}% — {res.passed ? "passed ✓" : "not passed"}

@@ -108,6 +108,18 @@ def submit_assessment(assessment_id: str, body: schemas.SubmitAssessmentRequest,
         raise HTTPException(404, str(e))
 
 
+@router.get("/assessments/{assessment_id}/questions/{question_id}/hint")
+def get_assessment_hint(assessment_id: str, question_id: str, index: int = 0,
+                        user: User = Depends(current_user),
+                        db: Session = Depends(get_db)) -> dict:
+    if not bool(cfg.get_setting(db, "ui.hints_enabled", True)):
+        raise HTTPException(403, "Hints are disabled")
+    try:
+        return courses.reveal_assessment_hint(db, assessment_id, question_id, index)
+    except courses.CourseError as e:
+        raise HTTPException(404, str(e))
+
+
 @router.get("/recommendations")
 def recommend(limit: int = 5, user: User = Depends(current_user),
               db: Session = Depends(get_db)) -> dict:

@@ -4,13 +4,15 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 from sqlalchemy import func, or_, select
+from sqlalchemy.dialects.postgresql import insert as postgresql_insert
+from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from sqlalchemy.orm import Session, selectinload
 
 from backend.app.competencies import service as competencies
 from backend.app.courses import achievements
 from backend.app.database.models import (
-    Assessment, AssessmentQuestion, Course, CourseProgress, Difficulty, Exercise,
-    Lesson, LessonProgress, ProgressStatus, User,
+    Assessment, AssessmentProgress, AssessmentQuestion, Course, CourseProgress,
+    Difficulty, Exercise, Lesson, LessonProgress, ProgressStatus, User,
 )
 from backend.app.security import audit, crypto
 
@@ -130,7 +132,8 @@ def _assessment_view(a: Assessment) -> dict:
         "passing_score": a.passing_score, "difficulty": a.difficulty.value,
         "questions": [
             {"id": q.id, "order": q.order, "kind": q.kind, "prompt": q.prompt,
-             "choices": q.choices, "points": q.points}
+             "choices": q.choices, "points": q.points,
+             "has_hints": bool(q.hints), "hint_count": len(q.hints or [])}
             for q in a.questions
         ],
     }
@@ -242,6 +245,20 @@ def reveal_hint(session: Session, user: User, *, lesson_id: str | None = None,
             "text": hint.get("text") if isinstance(hint, dict) else hint}
 
 
+def reveal_assessment_hint(session: Session, assessment_id: str,
+                           question_id: str, index: int = 0) -> dict:
+    """Reveal one optional question hint without exposing answer metadata."""
+    question = session.get(AssessmentQuestion, question_id)
+    if question is None or question.assessment_id != assessment_id:
+        raise CourseError("Unknown assessment question")
+    hints = question.hints or []
+    if index < 0 or index >= len(hints):
+        raise CourseError("No such hint")
+    hint = hints[index]
+    return {"question_id": question_id, "index": index, "total": len(hints),
+            "text": hint.get("text") if isinstance(hint, dict) else hint}
+
+
 def reveal_walkthrough(session: Session, user: User, lesson_id: str) -> dict:
     """Return the optional full walkthrough and record that it was opened."""
     l = session.get(Lesson, lesson_id)
@@ -320,8 +337,12 @@ def submit_assessment(session: Session, user: User, assessment_id: str,
     cp = start_course(session, user, assessment.course_id)
     norm = score_pct / 100
     cp.best_assessment_score = max(cp.best_assessment_score or 0, norm)
-    if passed:
+    progress = _get_or_create_assessment_progress(session, user.id, assessment_id)
+    progress.best_score = max(progress.best_score or 0, norm)
+    progress.passed = bool(progress.passed) or passed
+    if passed and not progress.xp_awarded:
         user.xp += 30
+        progress.xp_awarded = True
     session.flush()
     recompute_course_percent(session, user, assessment.course_id)
     achievements.evaluate(session, user)
@@ -333,6 +354,48 @@ def submit_assessment(session: Session, user: User, assessment_id: str,
         "passed": passed, "passing_score": assessment.passing_score,
         "earned": earned, "total": total_points, "results": results,
     }
+
+
+def _get_or_create_assessment_progress(session: Session, user_id: int,
+                                       assessment_id: str) -> AssessmentProgress:
+    """Create-or-lock the reward record so duplicate submissions cannot farm XP."""
+    bind = session.get_bind()
+    values = {
+        "user_id": user_id,
+        "assessment_id": assessment_id,
+        "best_score": 0.0,
+        "passed": False,
+        "xp_awarded": False,
+    }
+    if bind.dialect.name == "sqlite":
+        stmt = sqlite_insert(AssessmentProgress).values(**values).on_conflict_do_nothing(
+            index_elements=["user_id", "assessment_id"]
+        )
+        session.execute(stmt)
+    elif bind.dialect.name == "postgresql":
+        stmt = postgresql_insert(AssessmentProgress).values(**values).on_conflict_do_nothing(
+            index_elements=["user_id", "assessment_id"]
+        )
+        session.execute(stmt)
+    else:
+        progress = session.execute(
+            select(AssessmentProgress).where(
+                AssessmentProgress.user_id == user_id,
+                AssessmentProgress.assessment_id == assessment_id,
+            ).with_for_update()
+        ).scalar_one_or_none()
+        if progress is None:
+            progress = AssessmentProgress(**values)
+            session.add(progress)
+            session.flush()
+        return progress
+
+    return session.execute(
+        select(AssessmentProgress).where(
+            AssessmentProgress.user_id == user_id,
+            AssessmentProgress.assessment_id == assessment_id,
+        ).with_for_update()
+    ).scalar_one()
 
 
 def _check_answer(q: AssessmentQuestion, given: str) -> bool:

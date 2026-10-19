@@ -282,6 +282,22 @@ class AssessmentQuestion(Base):
     assessment: Mapped["Assessment"] = relationship(back_populates="questions")
 
 
+class AssessmentProgress(Base):
+    """Per-learner assessment record used to make completion XP one-time."""
+    __tablename__ = "assessment_progress"
+    __table_args__ = (UniqueConstraint("user_id", "assessment_id",
+                                       name="uq_assessment_progress_user_assessment"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    assessment_id: Mapped[str] = mapped_column(
+        ForeignKey("assessments.id", ondelete="CASCADE"), index=True
+    )
+    best_score: Mapped[float] = mapped_column(Float, default=0.0)
+    passed: Mapped[bool] = mapped_column(Boolean, default=False)
+    xp_awarded: Mapped[bool] = mapped_column(Boolean, default=False)
+
+
 class LearningPath(TimestampMixin, Base):
     __tablename__ = "learning_paths"
 

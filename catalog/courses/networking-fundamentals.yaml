@@ -81,7 +81,8 @@ assessment:
     competency: networking-fundamentals
     explanation: SSH uses TCP 22.
     points: 10
-    hints: []
+    hints:
+    - Find the well-known TCP port assigned to secure remote shell access.
   - kind: mcq
     prompt: Which is connectionless?
     choices:
@@ -93,14 +94,16 @@ assessment:
     competency: networking-fundamentals
     explanation: UDP is connectionless.
     points: 10
-    hints: []
+    hints:
+    - Which transport protocol sends datagrams without first establishing a connection or performing a handshake?
   - kind: short_answer
     prompt: Usable hosts in a /28?
     answer: '14'
     competency: networking-fundamentals
     explanation: 2^4 - 2 = 14.
     points: 10
-    hints: []
+    hints:
+    - A /28 leaves four host bits. Count all addresses, then remove the network and broadcast addresses.
   difficulty: beginner
   passing_score: 70
   description: ''
