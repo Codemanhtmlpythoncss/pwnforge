@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Callout, CodeBlock, Panel, Section, Tabs } from "../ui";
 import { Icon } from "../icons";
+import { loadHostInfo, maskFromCidr, type HostInfo } from "../components/Connect";
 
 /**
  * Player guide. Explains the HackTheBox-style lab model and, in particular, how to
  * reach a lab target from your own machine over either Tailscale or the local network.
- * Intentionally uses placeholders (<target-ip>, <host-lan-ip>) rather than any real
- * host address; 10.200.0.0/16 is PwnForge's default lab network range.
+ * The host's LAN IP and lab network are filled in from the server when available, falling
+ * back to <host-lan-ip> / 10.200.0.0/16 (PwnForge's default lab network range).
  */
 export default function Guide() {
   const [net, setNet] = useState("tailscale");
+  const [host, setHost] = useState<HostInfo | null>(null);
+  useEffect(() => { loadHostInfo().then(setHost); }, []);
+  const cidr = host?.lab_network_cidr || "10.200.0.0/16";
+  const gw = host?.host_lan_ip || "<host-lan-ip>";
+  const mask = maskFromCidr(cidr);
   return (
     <div className="space-y-8 max-w-3xl">
       <div>
@@ -34,7 +40,7 @@ export default function Guide() {
 
       <Section title="1 · Reach the target from your machine">
         <p className="text-sm text-muted mb-3">
-          Lab targets sit on an isolated network behind the PwnForge host (default <code>10.200.0.0/16</code>), so your own
+          Lab targets sit on an isolated network behind the PwnForge host (<code>{cidr}</code>), so your own
           computer needs a route to them. Set this up <strong className="text-ink">once per device</strong>. Pick the method that matches your setup:
         </p>
         <Tabs label="Connection method" active={net} onChange={setNet}
@@ -58,15 +64,15 @@ export default function Guide() {
 
         {net === "lan" && (
           <div className="space-y-3">
-            <p className="text-sm text-muted">No Tailscale needed — for devices on the same local network as the host. Ask the host's admin for its LAN IP.</p>
+            <p className="text-sm text-muted">No Tailscale needed — for devices on the same local network as the host.{host?.host_lan_ip ? "" : " Ask the host's admin for its LAN IP."}</p>
             <ol className="list-decimal ml-5 space-y-2 text-sm text-muted">
               <li>Make sure lab access is on (the host helper opens the LAN path too):
                 <CodeBlock label="on the host" code={"pwnforge-host.sh tailnet-access on"} />
               </li>
               <li>Add a static route to the lab network via the host's LAN IP:
-                <CodeBlock label="macOS / Linux" code={"sudo ip route add 10.200.0.0/16 via <host-lan-ip>"} />
-                <CodeBlock label="macOS (alternative)" code={"sudo route -n add -net 10.200.0.0/16 <host-lan-ip>"} />
-                <CodeBlock label="Windows (admin)" code={"route add 10.200.0.0 mask 255.255.0.0 <host-lan-ip>"} />
+                <CodeBlock label="macOS / Linux" code={`sudo ip route add ${cidr} via ${gw}`} />
+                <CodeBlock label="macOS (alternative)" code={`sudo route -n add -net ${cidr} ${gw}`} />
+                <CodeBlock label="Windows (admin)" code={`route add ${cidr.split("/")[0]} mask ${mask} ${gw}`} />
               </li>
             </ol>
           </div>

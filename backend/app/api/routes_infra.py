@@ -1,6 +1,10 @@
 """Infrastructure endpoints: profiles, VMs, labs, images, networks, storage, host."""
 from __future__ import annotations
 
+import shutil
+import socket
+import subprocess
+
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -8,6 +12,7 @@ from sqlalchemy.orm import Session
 from backend.app.api import schemas
 from backend.app.api.deps import current_user, get_db, require_admin
 from backend.app.core import host_monitor
+from backend.app.core.settings_service import get_setting
 from backend.app.database.models import (
     Job, Lab, LabInstance, User, UserRole, VMInstance, VMStatus,
 )
@@ -31,8 +36,30 @@ def host_stats(user: User = Depends(current_user)) -> dict:
     return host_monitor.host_stats()
 
 
+def _host_lan_ip() -> str | None:
+    """Best-effort primary IPv4 of this host on its local network (the default-route source).
+
+    Lets the UI fill in the gateway for `ip route add <lab-net> via <host-ip>` instead of a placeholder.
+    """
+    ip_bin = shutil.which("ip")
+    if ip_bin:
+        try:
+            parts = subprocess.run([ip_bin, "-4", "route", "get", "1.1.1.1"],
+                                   capture_output=True, text=True, timeout=2).stdout.split()
+            if "src" in parts:
+                return parts[parts.index("src") + 1]
+        except Exception:  # noqa: BLE001 - best effort; fall back below
+            pass
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.connect(("1.1.1.1", 80))  # no packets sent; just selects the egress interface
+            return s.getsockname()[0]
+    except Exception:  # noqa: BLE001 - no address to offer
+        return None
+
+
 @router.get("/host/capabilities")
-def host_caps(user: User = Depends(current_user)) -> dict:
+def host_caps(user: User = Depends(current_user), db: Session = Depends(get_db)) -> dict:
     c = active_capabilities()
     return {
         "driver": c.driver, "platform": c.platform, "arch": c.arch,
@@ -40,6 +67,8 @@ def host_caps(user: User = Depends(current_user)) -> dict:
         "real_virtualization": c.real_virtualization,
         "hardware_acceleration": c.hardware_acceleration,
         "features": c.features, "notes": c.notes,
+        "host_lan_ip": _host_lan_ip(),
+        "lab_network_cidr": get_setting(db, "network.base_cidr", "10.200.0.0/16"),
     }
 
 
@@ -216,29 +245,39 @@ def start_lab(body: schemas.StartLabRequest, user: User = Depends(current_user),
     return {"lab_instance_id": li.id, "job_id": job_id}
 
 
+def _lab_instance_out(db: Session, user: User, li: LabInstance) -> dict:
+    vmrows = list(db.execute(select(VMInstance).where(VMInstance.lab_instance_id == li.id)).scalars())
+    for v in vmrows:
+        _refresh_ip(db, v)
+    lab = db.get(Lab, li.lab_id)
+    by_role = {m["role"]: m for m in (lab.machines if lab else [])}
+    solved = _lab_solved(db, user, li.lab_id)
+    return {"id": li.id, "lab_id": li.lab_id, "status": li.status.value,
+            "last_error": li.last_error,
+            "title": lab.title if lab else li.lab_id,
+            "description": lab.description if lab else "",
+            "objectives": lab.objectives if lab else [],
+            "hints": lab.hints if lab else [],
+            "solved": solved,
+            # The walkthrough is only revealed once the flag is in (or to an admin).
+            "guide": (lab.guide if lab and (solved or user.role.value == "administrator") else None),
+            "machines": [_vm_out(v, by_role.get(_role_of(v.name))) for v in vmrows],
+            "topology": networks.topology(db, li.id)}
+
+
 @router.get("/lab-instances")
 def list_lab_instances(user: User = Depends(current_user), db: Session = Depends(get_db)) -> dict:
     rows = db.execute(select(LabInstance).where(LabInstance.owner_id == user.id)).scalars()
-    out = []
-    for li in rows:
-        vmrows = list(db.execute(select(VMInstance).where(VMInstance.lab_instance_id == li.id)).scalars())
-        for v in vmrows:
-            _refresh_ip(db, v)
-        lab = db.get(Lab, li.lab_id)
-        by_role = {m["role"]: m for m in (lab.machines if lab else [])}
-        solved = _lab_solved(db, user, li.lab_id)
-        out.append({"id": li.id, "lab_id": li.lab_id, "status": li.status.value,
-                    "last_error": li.last_error,
-                    "title": lab.title if lab else li.lab_id,
-                    "description": lab.description if lab else "",
-                    "objectives": lab.objectives if lab else [],
-                    "hints": lab.hints if lab else [],
-                    "solved": solved,
-                    # The walkthrough is only revealed once the flag is in (or to an admin).
-                    "guide": (lab.guide if lab and (solved or user.role.value == "administrator") else None),
-                    "machines": [_vm_out(v, by_role.get(_role_of(v.name))) for v in vmrows],
-                    "topology": networks.topology(db, li.id)})
-    return {"items": out}
+    return {"items": [_lab_instance_out(db, user, li) for li in rows]}
+
+
+@router.get("/lab-instances/{li_id}")
+def get_lab_instance(li_id: str, user: User = Depends(current_user), db: Session = Depends(get_db)) -> dict:
+    """One instance, for the workspace's frequent polling — avoids rebuilding every other lab each time."""
+    li = db.get(LabInstance, li_id)
+    if li is None or (li.owner_id != user.id and user.role.value != "administrator"):
+        raise HTTPException(404, "Unknown lab instance")
+    return _lab_instance_out(db, user, li)
 
 
 def _lab_solved(db: Session, user: User, lab_id: str) -> bool:
