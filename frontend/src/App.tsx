@@ -6,6 +6,7 @@ import { RankBadge, Spinner } from "./ui";
 import { Icon } from "./icons";
 import { Logo } from "./logo";
 import Login from "./pages/Login";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import AchievementToaster from "./AchievementToaster";
 // Route pages are code-split: each loads on demand, keeping the initial bundle small
 // (LabWorkspace in particular pulls in the xterm terminal, which most sessions never open).
@@ -61,6 +62,7 @@ function toggleTheme() {
 
 export default function App() {
   const { user, loading } = useAuth();
+  const loc = useLocation();
   useEffect(() => {
     try {
       const t = localStorage.getItem("pwnforge-theme");
@@ -79,6 +81,7 @@ export default function App() {
         <TopBar />
         <main className="flex-1 overflow-y-auto">
           <div className="max-w-6xl mx-auto px-6 py-6 fade-in">
+            <ErrorBoundary key={loc.pathname}>
             <Suspense fallback={<div className="grid place-items-center py-20"><Spinner /></div>}>
               <Routes>
               <Route path="/" element={<Dashboard />} />
@@ -99,6 +102,7 @@ export default function App() {
               <Route path="*" element={<Navigate to="/" />} />
               </Routes>
             </Suspense>
+            </ErrorBoundary>
           </div>
         </main>
       </div>
