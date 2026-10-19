@@ -45,7 +45,7 @@ def bootstrap(body: schemas.BootstrapRequest, request: Request, response: Respon
     """Create the first administrator. Only works when no users exist."""
     if auth_service.count_users(db) > 0:
         raise HTTPException(status.HTTP_409_CONFLICT, "Already initialised")
-    minlen = int(cfg.get_setting(db, "auth.min_password_length", 10))
+    minlen = int(cfg.get_setting(db, "auth.min_password_length", 1))
     try:
         user = auth_service.create_user(
             db, username=body.username, password=body.password,
@@ -80,7 +80,7 @@ def register(body: schemas.RegisterRequest, request: Request, response: Response
              db: Session = Depends(get_db)) -> dict:
     if not bool(cfg.get_setting(db, "auth.registration_open")):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Registration is closed")
-    minlen = int(cfg.get_setting(db, "auth.min_password_length", 10))
+    minlen = int(cfg.get_setting(db, "auth.min_password_length", 1))
     try:
         user = auth_service.create_user(
             db, username=body.username, password=body.password, email=body.email,
@@ -114,7 +114,7 @@ def change_password(body: schemas.ChangePasswordRequest, request: Request,
                     user: User = Depends(current_user), db: Session = Depends(get_db)) -> dict:
     if not crypto.verify_password(body.current_password, user.password_hash):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "Current password incorrect")
-    minlen = int(cfg.get_setting(db, "auth.min_password_length", 10))
+    minlen = int(cfg.get_setting(db, "auth.min_password_length", 1))
     try:
         auth_service.change_password(db, user, body.new_password, minlen)
     except auth_service.AuthError as e:

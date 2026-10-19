@@ -41,14 +41,14 @@ def create_user(
     email: str | None = None,
     display_name: str | None = None,
     must_change_password: bool = False,
-    min_password_length: int = 10,
+    min_password_length: int = 1,
 ) -> User:
     username = username.strip()
     if not username or len(username) < 3:
         raise AuthError("Username must be at least 3 characters.")
     if get_user_by_username(session, username):
         raise AuthError("Username already exists.")
-    if len(password) < min_password_length:
+    if len(password) < max(1, min_password_length):
         raise AuthError(f"Password must be at least {min_password_length} characters.")
     user = User(
         username=username,
@@ -79,8 +79,8 @@ def authenticate(session: Session, username: str, password: str) -> User:
     return user
 
 
-def change_password(session: Session, user: User, new_password: str, min_length: int = 10) -> None:
-    if len(new_password) < min_length:
+def change_password(session: Session, user: User, new_password: str, min_length: int = 1) -> None:
+    if len(new_password) < max(1, min_length):
         raise AuthError(f"Password must be at least {min_length} characters.")
     user.password_hash = crypto.hash_password(new_password)
     user.must_change_password = False

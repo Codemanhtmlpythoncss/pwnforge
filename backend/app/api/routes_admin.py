@@ -130,7 +130,7 @@ def create_user(body: schemas.CreateUserRequest, user: User = Depends(require_ad
             db, username=body.username, password=body.password,
             role=UserRole(body.role), email=body.email, display_name=body.display_name,
             must_change_password=True,
-            min_password_length=int(cfg.get_setting(db, "auth.min_password_length", 10)))
+            min_password_length=int(cfg.get_setting(db, "auth.min_password_length", 1)))
     except (auth_service.AuthError, ValueError) as e:
         raise HTTPException(400, str(e))
     audit.record(db, action="user.create", actor_id=user.id, target_id=str(new.id))

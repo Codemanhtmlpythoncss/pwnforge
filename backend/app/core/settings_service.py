@@ -40,8 +40,8 @@ DEFAULTS: list[SettingDef] = [
     SettingDef("admin.update_command", "", "string", "maintenance",
                "Command the in-app Update button runs to update PwnForge (pull, reinstall, migrate, "
                "rebuild, restart). Empty means updates are host-managed and the button is disabled."),
-    SettingDef("auth.min_password_length", 10, "int", "auth",
-               "Minimum password length enforced on create/change."),
+    SettingDef("auth.min_password_length", 1, "int", "auth",
+               "Minimum password length enforced on create/change (1: any password that isn't empty)."),
     # --- resource limits (consumed by the VM capacity planner) ---
     SettingDef("vm.storage_dir", "", "string", "resources",
                "Override directory for VM overlays/images (blank = data dir default)."),

@@ -11,25 +11,25 @@ class LoginRequest(BaseModel):
 
 class BootstrapRequest(BaseModel):
     username: str = Field(min_length=3, max_length=64)
-    password: str = Field(min_length=8)
+    password: str = Field(min_length=1)
     display_name: str | None = None
 
 
 class ChangePasswordRequest(BaseModel):
     current_password: str
-    new_password: str = Field(min_length=8)
+    new_password: str = Field(min_length=1)
 
 
 class RegisterRequest(BaseModel):
     username: str = Field(min_length=3, max_length=64)
-    password: str = Field(min_length=8)
+    password: str = Field(min_length=1)
     email: str | None = None
     display_name: str | None = None
 
 
 class CreateUserRequest(BaseModel):
     username: str
-    password: str = Field(min_length=8)
+    password: str = Field(min_length=1)
     role: str = "learner"
     email: str | None = None
     display_name: str | None = None
