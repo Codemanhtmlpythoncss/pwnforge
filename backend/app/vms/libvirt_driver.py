@@ -88,6 +88,9 @@ def domain_xml(spec: VMSpec, *, hardware_acceleration: bool = True) -> str:
         mac = f"<mac address='{sx.escape(spec.mac)}'/>" if spec.mac else ""
         net = (f"<interface type='network'>{mac}"
                f"<source network='{sx.escape(spec.network_ref)}'/>"
+               # No PCI option ROM: lab guests never PXE-boot, and the virtio NIC ROM (efi-virtio.rom) is
+               # absent on some hosts (e.g. Debian arm64 without ipxe-qemu), which makes QEMU refuse to start.
+               f"<rom enabled='no'/>"
                f"<model type='virtio'/></interface>")
     gfx = ""
     if not spec.headless:
