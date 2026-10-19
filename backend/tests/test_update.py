@@ -22,11 +22,14 @@ def test_update_is_enabled_by_default_and_can_be_disabled(admin):
 
 def test_update_runs_the_configured_command(admin, tmp_path):
     marker = tmp_path / "updated"
-    admin.put("/api/settings/admin.update_command", json={"value": f"echo done > {marker}"})
+    admin.put("/api/settings/admin.update_command",
+              json={"value": f"echo updater-started; echo done > {marker}"})
     assert admin.get("/api/admin/version").json()["update_enabled"] is True
     r = admin.post("/api/admin/update")
     assert r.status_code == 200
-    assert poll_job(admin, r.json()["job_id"])["status"] == "succeeded"
+    job = poll_job(admin, r.json()["job_id"])
+    assert job["status"] == "succeeded"
+    assert job["result"]["output"].strip() == "updater-started"
     assert marker.read_text().strip() == "done"
     admin.put("/api/settings/admin.update_command", json={"value": ""})
 

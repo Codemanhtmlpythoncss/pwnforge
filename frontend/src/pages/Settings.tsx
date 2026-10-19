@@ -7,22 +7,49 @@ function Updates() {
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
   const [out, setOut] = useState("");
+  const [command, setCommand] = useState("");
+  const [outcome, setOutcome] = useState<"" | "success" | "failed" | "restarted" | "timeout">("");
   const load = () => api.get("/api/admin/version").then(setV).catch(() => {});
   useEffect(() => { load(); }, []);
 
   const update = async () => {
-    setMsg(""); setOut(""); setBusy(true);
+    setMsg(""); setOut(""); setCommand(""); setOutcome(""); setBusy(true);
     try {
       const { job_id } = await api.post("/api/admin/update");
       setMsg("Updating… (the service restarts when it's done)");
+      let finished = false;
       for (let i = 0; i < 400; i++) {
         await new Promise(r => setTimeout(r, 2000));
         let j;
-        try { j = await api.get(`/api/jobs/${job_id}`); } catch { setMsg("Update finished (the server restarted). Reload the page."); break; }
-        if (j.status === "succeeded") { setOut(j.result?.output || ""); setMsg("Update finished. Reload the page to load it."); break; }
-        if (j.status === "failed") { setOut(j.error || ""); setMsg("Update failed."); break; }
+        try { j = await api.get(`/api/jobs/${job_id}`); }
+        catch {
+          setOutcome("restarted");
+          setMsg("The connection closed while checking the update. Reload and check the version above to confirm the server restarted.");
+          finished = true;
+          break;
+        }
+        if (j.status === "succeeded") {
+          setOut(typeof j.result?.output === "string" ? j.result.output.trim() : "");
+          setCommand(typeof j.result?.command === "string" ? j.result.command : "");
+          setOutcome("success");
+          setMsg("Update command completed. Reload the page to load the updated app.");
+          finished = true;
+          break;
+        }
+        if (j.status === "failed") {
+          setOut(j.error || "");
+          setOutcome("failed");
+          setMsg("Update failed.");
+          finished = true;
+          break;
+        }
+        setMsg(`Updating PwnForge${j.stage ? ` — ${j.stage}` : ""}…`);
       }
-    } catch (e: any) { setMsg(e.message); }
+      if (!finished) {
+        setOutcome("timeout");
+        setMsg("The update is still running. Check its status in Jobs, then reload when it finishes.");
+      }
+    } catch (e: any) { setOutcome("failed"); setMsg(e.message); }
     finally { setBusy(false); load(); }
   };
 
@@ -44,10 +71,10 @@ function Updates() {
           {busy ? "Updating…" : "Update PwnForge"}
         </button>
       </div>
-      {msg && <div className="text-sm text-brand mt-2">{msg}</div>}
-      {out
-        ? <pre className="mt-2 text-xs font-mono bg-panel2 rounded-lg p-3 overflow-auto max-h-56 whitespace-pre-wrap">{out}</pre>
-        : (msg && !busy) ? <div className="text-muted text-xs mt-1">The updater produced no output — check that admin.update_command actually updates (the default is <span className="font-mono">bash scripts/update.sh</span>).</div> : null}
+      {msg && <div className={`text-sm mt-2 ${outcome === "failed" ? "text-bad" : outcome === "success" ? "text-ok" : "text-brand"}`} role={outcome === "failed" ? "alert" : "status"} aria-live="polite">{msg}</div>}
+      {outcome === "success" && command && <div className="text-muted text-xs mt-1">Command: <span className="font-mono">{command}</span></div>}
+      {outcome === "success" && !out && <div className="text-muted text-xs mt-1">The command exited successfully but produced no console output.</div>}
+      {out && <pre className="mt-2 text-xs font-mono bg-panel2 rounded-lg p-3 overflow-auto max-h-56 whitespace-pre-wrap">{out}</pre>}
     </Panel>
   );
 }
