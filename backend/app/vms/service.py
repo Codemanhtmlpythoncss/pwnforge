@@ -41,6 +41,8 @@ def create_instance(session: Session, *, profile_id: str, owner_id: int,
     if profile is None:
         raise VMServiceError(f"Unknown profile {profile_id}")
     driver = get_driver()
+    if driver.name == "unavailable":
+        raise VMServiceError(driver.capabilities().notes[0])
     inst = VMInstance(
         name=name or f"{profile_id}-{int(time.time())}",
         profile_id=profile_id, owner_id=owner_id, lab_instance_id=lab_instance_id,

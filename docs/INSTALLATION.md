@@ -1,21 +1,22 @@
 # Installation
 
-Pwnforge targets **Debian** for full virtualisation. It also runs on any host
-(macOS, other Linux, CI) using the simulation driver, which is ideal for
-development and for using the learning platform without real VMs.
+PwnForge's learning website can run on any host. Real lab guests require Linux,
+QEMU, and libvirt. KVM accelerates guests when available; without `/dev/kvm`,
+QEMU TCG still boots real guest operating systems but runs substantially slower.
+PwnForge does not create pretend VMs in production.
 
 ## Prerequisites
 
 - Python 3.11+ (3.12 recommended)
 - Node.js 18+ and npm (to build the website)
-- On a Debian/KVM host, for real VMs:
+- On a Debian/Linux host, for real VMs:
   ```bash
   sudo apt update
   sudo apt install qemu-system-x86 qemu-utils \
                    libvirt-daemon-system libvirt-clients python3-libvirt \
                    nodejs npm
   sudo adduser "$USER" libvirt
-  sudo adduser "$USER" kvm
+  sudo adduser "$USER" kvm  # only needed when /dev/kvm is available
   # log out/in so the group membership applies
   ```
 - On an **arm64** host (a Raspberry Pi 4/5 with 64-bit Raspberry Pi OS or Debian, an
@@ -23,8 +24,10 @@ development and for using the learning platform without real VMs.
 
 ## Real lab machines
 
-With KVM, libvirt and the `libvirt` Python binding available, "Start lab" boots
-real virtual machines (the `libvirt` driver is picked automatically):
+With QEMU, libvirt and the `libvirt` Python binding available, "Start lab" boots
+real virtual machines (the `libvirt` driver is picked automatically). With no
+KVM device, libvirt runs the guests through QEMU TCG software emulation instead:
+they remain real VMs, but boot and runtime are slower.
 
 - **Images.** Fetch the cloud images for your CPU once, for example on arm64:
   `pwnforge images fetch debian-13-base-arm64` (also `alpine-base-arm64` and
@@ -84,7 +87,7 @@ the data directory). Key ones:
 |----------|---------|---------|
 | `PWNFORGE_DATA_DIR` | `~/.pwnforge` | Where DB, images, overlays, backups live |
 | `PWNFORGE_DATABASE_URL` | `sqlite:///<data>/pwnforge.db` | DB URL (Postgres supported) |
-| `PWNFORGE_VM_DRIVER` | `auto` | `auto`/`libvirt`/`qemu`/`simulation` |
+| `PWNFORGE_VM_DRIVER` | `auto` | `auto`/`libvirt`/`qemu`; simulation is test-only |
 | `PWNFORGE_LIBVIRT_URI` | `qemu:///system` | libvirt connection |
 
 Everything else (port, LAN access, RAM/CPU limits, cleanup, theme, …) is a

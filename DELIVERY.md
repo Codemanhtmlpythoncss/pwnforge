@@ -1,8 +1,9 @@
 # Pwnforge — Delivery & Acceptance Report
 
-Generated for the build on **2026-10-17**, developed on **macOS 26.3, Apple M4
-(arm64), 16 GB RAM** (no KVM/libvirt — the simulation driver is active here;
-the deployment target is Debian/KVM).
+Originally generated for the 2026-10-17 build on **macOS 26.3, Apple M4
+(arm64), 16 GB RAM**. This host cannot boot Linux libvirt guests. The current
+production policy is real libvirt/QEMU guests only; the deterministic
+simulation backend is limited to the test suite.
 
 ## How things were verified
 
@@ -24,9 +25,9 @@ the deployment target is Debian/KVM).
   Required ≥ 1,000. ✅
 - **Difficulty levels implemented:** orientation, beginner, easy, intermediate,
   hard, advanced, expert, mastery (0–7). ✅
-- **Supported host platforms:** Debian/Linux with KVM (full, via libvirt);
-  Linux without libvirt (QEMU driver); any host incl. macOS/CI (simulation
-  driver, clearly labelled).
+- **Supported VM hosts:** Linux with QEMU, qemu-img and libvirt. KVM accelerates
+  guests where available; QEMU TCG runs real guests without KVM, more slowly.
+  Hosts without a real backend report unavailable and block lab launches.
 - **Local website address:** `http://localhost:8080` (port + LAN access
   configurable; localhost-only by default).
 - **Storage architecture:** ISOs → immutable golden images (Debian base +
@@ -56,8 +57,8 @@ the deployment target is Debian/KVM).
 - [x] **Optional hints, steps and walkthroughs** (requested) — per lesson/exercise.
 
 ### Virtualisation
-- [x] Real VM create/start/stop/reset/delete — verified with the simulation
-      driver end-to-end (runs the same orchestration code).
+- [x] VM create/start/stop/reset/delete orchestration — verified with the
+      test-only simulation driver; real guest boot remains unverified here.
 - [x] Actual VM status reconciliation (`/api/admin/reconcile`).
 - [x] Copy-on-write disks — libvirt/qemu drivers use `qemu-img` backing-file
       overlays; mechanics verified by unit of the storage layer.
@@ -90,15 +91,14 @@ the deployment target is Debian/KVM).
 
 ## Known limitations / unverified items
 
-1. **Real KVM boot is unverified on this dev machine.** macOS has no
-   libvirt/KVM and only ~13 GB free disk, so no real guest OS was booted here.
-   The `LibvirtDriver` (domain/network XML, CoW overlays, snapshots, VNC, DHCP
-   lease IP discovery) is implemented to the libvirt Python API and is the
-   production path on Debian; it must be validated on a KVM host. The honest
-   `simulation` driver is used here and is clearly labelled everywhere.
+1. **Real guest boot is unverified on this dev machine.** macOS has no Linux
+   libvirt host, so no real guest OS was booted here. The `LibvirtDriver`
+   supports KVM domains and QEMU TCG domains (when `/dev/kvm` is unavailable);
+   both still need validation on the deployment host. The simulation driver is
+   confined to tests and cannot be selected in production.
 2. **Guest provisioning (cloud-init/Ansible) and in-guest service readiness
-   checks** are modelled in profiles/labs but depend on real guests; on KVM,
-   wire the provisioning step into image build and lab readiness checks.
+   checks** are modelled in profiles/labs but depend on real guests; role-image
+   provisioning is implemented and must be verified on the deployment host.
 3. **QEMU driver** is implemented (process + QMP lifecycle); `qemu-img` overlay
    creation is runnable where `qemu-img` exists (present here), but booting a
    guest was not performed (no base image, macOS host).

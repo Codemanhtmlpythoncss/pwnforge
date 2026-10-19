@@ -60,7 +60,7 @@ Profiles are never shown as "ready" unless launchable:
 
 | Readiness | Meaning |
 |-----------|---------|
-| `ready` | Base image present (real driver) or simulation active |
+| `ready` | Base image present for the configured real VM driver |
 | `requires_base_image` | Image not downloaded/built |
 | `requires_install_media` | Needs an ISO (e.g. Windows) |
 | `requires_manual_config` | No base image key |

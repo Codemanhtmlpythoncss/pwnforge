@@ -16,6 +16,7 @@ from sqlalchemy.orm import Session
 
 from backend.app.auth import service as auth_service
 from backend.app.database.base import get_session_factory
+from backend.app.core.config import get_settings
 from backend.app.database.models import Job, JobStatus, User, VMInstance
 from backend.app.security import crypto
 
@@ -109,6 +110,13 @@ async def ws_terminal(ws: WebSocket, vm_id: str) -> None:
             await ws.close()
             return
         simulated = inst.driver == "simulation"
+        if simulated and get_settings().environment.lower() != "test":
+            await ws.send_text(
+                "\r\nThis saved lab record was created by the old simulation backend and has no guest OS. "
+                "Set up real machines, then start a new lab.\r\n"
+            )
+            await ws.close()
+            return
         banner = (f"\r\nPwnforge terminal — {inst.name} ({inst.ip_address or 'no ip'})\r\n")
         if simulated:
             banner += ("[simulated guest — no host shell is exposed; "

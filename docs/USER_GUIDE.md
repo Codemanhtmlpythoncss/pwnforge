@@ -57,9 +57,9 @@ many competencies you've mastered.
 ### Lab workspace
 
 - Pick a machine to open its **terminal** (xterm.js over an authorised
-  WebSocket). On a KVM host this is the guest's serial console; on a host
-  without a hypervisor it is a clearly-labelled **simulated** terminal (no host
-  shell is ever exposed).
+  WebSocket). This is the guest's real serial console. Hosts without a
+  configured real VM backend cannot start labs; software-emulated QEMU guests
+  still run real operating systems.
 - **Submit flag** validates server-side; a correct flag awards points and
   competency evidence.
 - **Reset** returns a disposable VM to its clean baseline — your learning

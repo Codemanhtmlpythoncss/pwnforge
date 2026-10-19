@@ -5,12 +5,11 @@ interface. A driver reports its real capabilities; the orchestration layer
 refuses operations a driver cannot honestly perform rather than faking them.
 
 Drivers shipped:
-  * libvirt  - production path for Debian/KVM hosts (``LibvirtDriver``).
+  * libvirt  - production path for Linux hosts (KVM-accelerated where available;
+               QEMU TCG software emulation otherwise).
   * qemu     - direct QEMU process management where libvirt is absent.
-  * simulation - deterministic, clearly-labelled fake for hosts with no
-                 hypervisor (e.g. macOS dev boxes, CI). It never claims to be
-                 a real hypervisor; instances created on it are flagged
-                 ``driver="simulation"`` and surfaced as simulated in the UI.
+  * simulation - deterministic fake used only in automated tests; production
+                 launches never silently substitute it for a real VM.
 """
 from __future__ import annotations
 

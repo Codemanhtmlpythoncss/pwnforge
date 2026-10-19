@@ -461,7 +461,7 @@ class VMInstance(TimestampMixin, Base):
     lab_instance_id: Mapped[str | None] = mapped_column(
         ForeignKey("lab_instances.id", ondelete="CASCADE"), index=True
     )
-    driver: Mapped[str] = mapped_column(String(20), default="simulation")
+    driver: Mapped[str] = mapped_column(String(20), default="unavailable")
     driver_ref: Mapped[str | None] = mapped_column(String(128))  # libvirt domain name etc.
     status: Mapped[VMStatus] = mapped_column(Enum(VMStatus), default=VMStatus.defined, index=True)
     base_image_key: Mapped[str | None] = mapped_column(String(80))

@@ -107,31 +107,33 @@ def stats(session: Session) -> dict:
 def recompute_readiness(session: Session) -> dict:
     """Recompute each profile's readiness from host capabilities + image state.
 
-    Never marks a profile 'ready' unless its base image is present (real driver)
-    or the active driver is a simulation (which needs no real image but is
-    flagged as simulated at launch).
+    Never marks a profile ready unless its base image is present for a real
+    driver. The test-only simulation driver remains useful for isolated tests.
     """
     caps = active_capabilities()
     images = {i.key: i for i in session.execute(select(BaseImage)).scalars()}
     host_arch = caps.arch
     counts: dict[str, int] = {}
     for p in session.execute(select(VMProfile)).scalars():
-        readiness = _assess(p, images, caps.real_virtualization, host_arch)
+        readiness = _assess(p, images, caps.driver, caps.real_virtualization, host_arch)
         p.readiness = readiness
         counts[readiness.value] = counts.get(readiness.value, 0) + 1
     session.flush()
     return counts
 
 
-def _assess(p: VMProfile, images: dict, real_virt: bool, host_arch: str) -> ProfileReadiness:
+def _assess(p: VMProfile, images: dict, driver: str, real_virt: bool,
+            host_arch: str) -> ProfileReadiness:
     if not p.base_image_key:
         return ProfileReadiness.requires_manual_config
     img = images.get(p.base_image_key)
     if img is None:
         return ProfileReadiness.invalid
-    if not real_virt:
-        # Simulation driver: launchable as a simulation regardless of image bytes.
+    if driver == "simulation":
+        # The deterministic driver is permitted only in the test environment.
         return ProfileReadiness.ready
+    if not real_virt:
+        return ProfileReadiness.unsupported_on_host
     # The image this host actually boots (a Linux role image runs on the distro's image for this CPU).
     from backend.app.vms.provision import host_image_from
 

@@ -54,6 +54,6 @@ def test_reconcile(admin):
 
 def test_host_capabilities_honest(admin):
     caps = admin.get("/api/host/capabilities").json()
-    # On this dev host the driver is simulation and must say so.
+    # The test fixture explicitly opts into the test-only simulation driver.
     assert caps["driver"] in ("simulation", "qemu", "libvirt")
     assert isinstance(caps["real_virtualization"], bool)

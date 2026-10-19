@@ -17,6 +17,7 @@ from backend.app.database.models import (
 from backend.app.networks import service as networks
 from backend.app.security import audit
 from backend.app.vms import service as vms
+from backend.app.vms.factory import get_driver
 
 
 class LabServiceError(Exception):
@@ -27,6 +28,9 @@ def create_lab_instance(session: Session, *, lab_id: str, owner_id: int) -> LabI
     lab = session.get(Lab, lab_id)
     if lab is None:
         raise LabServiceError(f"Unknown lab {lab_id}")
+    driver = get_driver()
+    if driver.name == "unavailable":
+        raise LabServiceError(driver.capabilities().notes[0])
     li = LabInstance(lab_id=lab_id, owner_id=owner_id, status=VMStatus.defined)
     session.add(li)
     session.flush()

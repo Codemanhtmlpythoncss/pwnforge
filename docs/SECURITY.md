@@ -44,17 +44,17 @@ so its own security is a first-class concern.
 ## Guest terminals
 
 The browser terminal is an **authorised bridge to the intended guest only**, and
-never a host shell. Ownership is re-checked on every WebSocket connection. On a
-host without a hypervisor the terminal is an explicitly-labelled simulation with
-a tiny fixed command set — it cannot reach the host. A separate host-admin
+never a host shell. Ownership is re-checked on every WebSocket connection. A
+production host without a configured hypervisor cannot start labs. The tiny
+simulation terminal exists only for automated tests. A separate host-admin
 terminal is intentionally **not** implemented.
 
 ## Honesty guarantees
 
 - A VM is reported `running` only after the hypervisor confirms it.
-- When the simulation driver is active, `real_virtualization` is `false`
-  everywhere and every instance is flagged `simulated`. Pwnforge never pretends a
-  VM booted when it did not.
+- Production reports an unavailable VM backend and blocks new VM starts when a
+  real hypervisor is not configured. QEMU TCG is labelled as software emulation
+  but still boots real guest operating systems.
 
 ## Reporting
 

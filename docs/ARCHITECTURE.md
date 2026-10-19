@@ -10,11 +10,11 @@ Pwnforge is a single deployable application with three layers:
    agnostic *service* modules; the HTTP routes and the CLI are thin shells over
    the same services, so they can never drift apart.
 3. **Virtualisation** — a driver abstraction that the orchestration services
-   call. The same code runs against libvirt/KVM, QEMU, or a simulation driver.
+   call. Production runs against libvirt/QEMU; the simulation driver is test-only.
 
 ```
 Browser ──HTTP/WS──> FastAPI routes ──> services ──> SQLAlchemy ──> SQLite/Postgres
-                                   └──> VM driver  ──> libvirt / qemu / simulation
+                                   └──> VM driver  ──> libvirt / QEMU
 Background jobs (ThreadPool) ──> services (staged VM/lab lifecycle)
 ```
 
@@ -57,9 +57,11 @@ Background jobs (ThreadPool) ──> services (staged VM/lab lifecycle)
 `DriverUnsupported` for capabilities they cannot honestly perform; the
 orchestration layer refuses the operation rather than faking it.
 
-`HostCapabilities.real_virtualization` is the honesty flag. The simulation
-driver returns `False`, and every instance it creates is marked
-`driver="simulation"` and surfaced as `simulated: true` in the API and UI.
+`HostCapabilities.real_virtualization` is the honesty flag. When no real backend
+is configured, the host is reported as unavailable and VM launches are blocked.
+QEMU TCG runs real guest operating systems without KVM acceleration; its
+capabilities report that it is software-emulated. The simulation driver is
+reserved for automated tests.
 
 ### Staged VM startup
 
