@@ -4,7 +4,10 @@ from __future__ import annotations
 from backend.tests.conftest import make_user, poll_job
 
 
-def test_version_is_visible_and_update_is_off_by_default(admin):
+def test_update_is_enabled_by_default_and_can_be_disabled(admin):
+    # Fresh installs ship the bundled updater, so the button is on.
+    assert admin.get("/api/admin/version").json()["update_enabled"] is True
+    # Clearing the command disables it.
     admin.put("/api/settings/admin.update_command", json={"value": ""})
     v = admin.get("/api/admin/version").json()
     assert v["version"] and v["update_enabled"] is False
