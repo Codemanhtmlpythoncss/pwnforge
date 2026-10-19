@@ -86,6 +86,53 @@ def login_password(vm_id: str) -> str:
     return "".join(_PW_ALPHABET[b % len(_PW_ALPHABET)] for b in digest[:14])
 
 
+def derive_flag(instance_id: str) -> str:
+    """A lab instance's flag: PWN{...}, derived from the server secret and the instance id. Unguessable and
+    unique per instance, never stored — the same value is planted in the target and re-derived to validate a
+    submission, so you have to actually read it off the box."""
+    key = get_settings().load_or_create_secret().encode()
+    digest = hmac.new(key, b"pwnforge-flag:" + instance_id.encode(), hashlib.sha256).hexdigest()
+    return "PWN{" + digest[:24] + "}"
+
+
+def _safe_login(user: str) -> str:
+    return re.sub(r"[^a-z0-9_-]", "", (user or "user").lower())[:32] or "user"
+
+
+def target_user_data(hostname: str, os_family: str, user: str, password: str, flag: str, sudo: bool = False) -> str:
+    """A black-box target: an account whose (weak) password the learner must DISCOVER — it is never shown — with
+    the flag planted in that account's home. No learner login is created; getting in is the whole challenge."""
+    safe = _safe_login(user)
+    shell = "/bin/ash" if os_family == "alpine" else "/bin/bash"
+    home = "/root" if safe == "root" else "/home/" + safe
+    lines = [
+        "#cloud-config",
+        f"hostname: {_yaml_str(hostname)}",
+        "manage_etc_hosts: true",
+        "users:",
+        f"  - name: {safe}",
+        f"    shell: {shell}",
+        "    lock_passwd: false",
+        f"    plain_text_passwd: {_yaml_str(password)}",
+    ]
+    if sudo:
+        lines += [f"    groups: [{'wheel' if os_family == 'alpine' else 'sudo'}]", "    sudo: \"ALL=(ALL) ALL\""]
+    plant = "mkdir -p %s && printf '%%s\\n' %s > %s/flag.txt && chown %s:%s %s/flag.txt && chmod 600 %s/flag.txt" % (
+        home, _sh_quote(flag), home, safe, safe, home, home)
+    lines += [
+        "ssh_pwauth: true",
+        "disable_root: true" if safe != "root" else "disable_root: false",
+        "runcmd:",
+        f"  - [sh, -c, {_yaml_str(plant)}]",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def _sh_quote(s: str) -> str:
+    return "'" + str(s).replace("'", "'\\''") + "'"
+
+
 def hostname_for(name: str) -> str:
     """A valid hostname from a machine name like ``1a2b3c4d-web``: the role part."""
     part = name.split("-", 1)[1] if "-" in name else name
@@ -98,9 +145,9 @@ def _yaml_str(s: str) -> str:
     return json.dumps(s)   # a JSON string is a valid YAML scalar
 
 
-def instance_user_data(hostname: str, password: str, os_family: str) -> str:
+def instance_user_data(hostname: str, password: str, os_family: str, flag: str | None = None) -> str:
     admin_group = "wheel" if os_family == "alpine" else "sudo"
-    return "\n".join([
+    lines = [
         "#cloud-config",
         f"hostname: {_yaml_str(hostname)}",
         "manage_etc_hosts: true",
@@ -114,8 +161,15 @@ def instance_user_data(hostname: str, password: str, os_family: str) -> str:
         f"    plain_text_passwd: {_yaml_str(password)}",
         "ssh_pwauth: true",
         "disable_root: true",
-        "",
-    ])
+    ]
+    if flag:
+        # The challenge flag, planted in the learner's home so there's something real to find and submit.
+        home = "/home/" + LOGIN_USER
+        plant = "mkdir -p %s && printf '%%s\\n' %s > %s/flag.txt && chown %s:%s %s/flag.txt && chmod 600 %s/flag.txt" % (
+            home, _sh_quote(flag), home, LOGIN_USER, LOGIN_USER, home, home)
+        lines += ["runcmd:", f"  - [sh, -c, {_yaml_str(plant)}]"]
+    lines.append("")
+    return "\n".join(lines)
 
 
 _BUILD_SCRIPT_APT = """#!/bin/sh

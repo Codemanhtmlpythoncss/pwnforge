@@ -9,8 +9,23 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from backend.app.competencies import service as competencies
-from backend.app.database.models import Flag, FlagSubmission, User
+from backend.app.database.models import Flag, FlagSubmission, LabInstance, User, VMStatus
 from backend.app.security import audit, crypto
+
+
+def _instance_flag_match(session: Session, user: User, lab_id: str, value: str) -> bool:
+    """Does ``value`` equal the per-instance flag planted in one of this user's instances of ``lab_id``?"""
+    from backend.app.vms import provision
+
+    submitted = crypto.hash_flag(value)
+    rows = session.execute(
+        select(LabInstance).where(LabInstance.lab_id == lab_id, LabInstance.owner_id == user.id)
+    ).scalars()
+    for li in rows:
+        if li.status in (VMStatus.running, VMStatus.starting, VMStatus.stopped):
+            if crypto.constant_time_equals(submitted, crypto.hash_flag(provision.derive_flag(li.id))):
+                return True
+    return False
 
 
 def submit_flag(session: Session, user: User, *, scope_type: str, scope_id: str,
@@ -24,6 +39,9 @@ def submit_flag(session: Session, user: User, *, scope_type: str, scope_id: str,
         if crypto.constant_time_equals(submitted, f.value_hash):
             matched = f
             break
+    # Labs plant a per-instance flag (unguessable, unique to the running lab). Accept that, crediting the lab's flag row.
+    if matched is None and scope_type == "lab" and flags and _instance_flag_match(session, user, scope_id, value):
+        matched = flags[0]
 
     already = False
     if matched:

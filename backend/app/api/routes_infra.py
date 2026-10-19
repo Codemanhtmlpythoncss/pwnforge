@@ -71,15 +71,19 @@ def profile_detail(profile_id: str, db: Session = Depends(get_db)) -> dict:
 
 
 # ---- VM instances ----
-def _vm_out(i: VMInstance) -> dict:
-    """A machine as its owner (or an administrator) sees it; only those callers reach this."""
+def _vm_out(i: VMInstance, machine: dict | None = None) -> dict:
+    """A machine as its owner (or an administrator) sees it; only those callers reach this.
+
+    ``machine`` is the lab's definition for this box, if any. A black-box target (``target`` set) shows no login
+    — getting in is the challenge — while a practice box shows the learner credentials."""
+    is_target = bool(machine and machine.get("target"))
     out = {"id": i.id, "name": i.name, "profile_id": i.profile_id,
            "status": i.status.value, "driver": i.driver,
            "ip_address": i.ip_address, "vcpu": i.vcpu, "memory_mb": i.memory_mb,
            "disposable": i.disposable, "persistent": i.persistent,
            "lab_instance_id": i.lab_instance_id, "last_error": i.last_error,
-           "simulated": i.driver == "simulation", "login": None}
-    if i.driver != "simulation" and i.overlay_path:
+           "simulated": i.driver == "simulation", "login": None, "target": is_target}
+    if not is_target and i.driver != "simulation" and i.overlay_path:
         out["login"] = {"username": provision.LOGIN_USER, "password": provision.login_password(i.id)}
     return out
 
@@ -220,11 +224,35 @@ def list_lab_instances(user: User = Depends(current_user), db: Session = Depends
         vmrows = list(db.execute(select(VMInstance).where(VMInstance.lab_instance_id == li.id)).scalars())
         for v in vmrows:
             _refresh_ip(db, v)
+        lab = db.get(Lab, li.lab_id)
+        by_role = {m["role"]: m for m in (lab.machines if lab else [])}
+        solved = _lab_solved(db, user, li.lab_id)
         out.append({"id": li.id, "lab_id": li.lab_id, "status": li.status.value,
                     "last_error": li.last_error,
-                    "machines": [_vm_out(v) for v in vmrows],
+                    "title": lab.title if lab else li.lab_id,
+                    "description": lab.description if lab else "",
+                    "objectives": lab.objectives if lab else [],
+                    "hints": lab.hints if lab else [],
+                    "solved": solved,
+                    # The walkthrough is only revealed once the flag is in (or to an admin).
+                    "guide": (lab.guide if lab and (solved or user.role.value == "administrator") else None),
+                    "machines": [_vm_out(v, by_role.get(_role_of(v.name))) for v in vmrows],
                     "topology": networks.topology(db, li.id)})
     return {"items": out}
+
+
+def _lab_solved(db: Session, user: User, lab_id: str) -> bool:
+    from backend.app.database.models import Flag, FlagSubmission
+    fid = db.execute(select(Flag.id).where(Flag.scope_type == "lab", Flag.scope_id == lab_id)).scalars().first()
+    if not fid:
+        return False
+    return db.execute(select(FlagSubmission).where(
+        FlagSubmission.user_id == user.id, FlagSubmission.flag_id == fid,
+        FlagSubmission.correct.is_(True))).first() is not None
+
+
+def _role_of(name: str) -> str:
+    return name.split("-", 1)[1] if "-" in name else name
 
 
 @router.post("/lab-instances/{li_id}/stop")

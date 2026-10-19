@@ -79,7 +79,8 @@ _START_STAGES = [
 ]
 
 
-def start_instance(session: Session, inst: VMInstance, progress=None) -> VMInstance:
+def start_instance(session: Session, inst: VMInstance, progress=None,
+                   flag: str | None = None, target: dict | None = None) -> VMInstance:
     driver = get_driver()
     caps = driver.capabilities()
     profile = session.get(VMProfile, inst.profile_id) if inst.profile_id else None
@@ -152,10 +153,18 @@ def start_instance(session: Session, inst: VMInstance, progress=None) -> VMInsta
             driver.create_overlay(str(role), overlay_path, profile.disk_gb)
             inst.overlay_path = overlay_path
             host = provision.hostname_for(inst.name)
+            if target:
+                # Black-box target: a login the learner must discover (not shown), flag planted in its home.
+                user_data = provision.target_user_data(
+                    host, profile.os_family, target.get("user", "user"),
+                    target.get("password", ""), flag or provision.derive_flag(inst.lab_instance_id or inst.id),
+                    sudo=bool(target.get("sudo")))
+            else:
+                user_data = provision.instance_user_data(
+                    host, provision.login_password(inst.id), profile.os_family, flag=flag)
             seed_path = str(provision.write_seed(
                 get_settings().overlays_dir / f"{inst.id}-seed.iso",
-                provision.instance_user_data(host, provision.login_password(inst.id), profile.os_family),
-                provision.meta_data(inst.id, host)))
+                user_data, provision.meta_data(inst.id, host)))
         else:
             # Simulation: no real image needed; be explicit about it.
             step(4, "simulation driver: no real base image required")

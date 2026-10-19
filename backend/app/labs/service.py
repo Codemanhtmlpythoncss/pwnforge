@@ -87,7 +87,10 @@ def start_lab(session: Session, li: LabInstance, progress=None) -> LabInstance:
             if net_name in net_refs:
                 inst.network_id = net_refs[net_name].driver_ref
             session.flush()
-            vms.start_instance(session, inst, progress=None)
+            # One flag per lab instance, planted on the machine the learner works on (the target, or the only box).
+            from backend.app.vms import provision
+            flag = provision.derive_flag(li.id) if m.get("flag", m.get("target") is not None or len(lab.machines) == 1) else None
+            vms.start_instance(session, inst, progress=None, flag=flag, target=m.get("target"))
 
         li.status = VMStatus.running
         li.started_at = datetime.now(timezone.utc)

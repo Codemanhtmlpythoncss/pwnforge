@@ -512,6 +512,8 @@ class Lab(TimestampMixin, Base):
     reset_behavior: Mapped[str] = mapped_column(String(32), default="disposable")
     objectives: Mapped[list] = mapped_column(JSON, default=list)
     tags: Mapped[list] = mapped_column(JSON, default=list)
+    hints: Mapped[list] = mapped_column(JSON, default=list)        # [{title, text}] tiered hints
+    guide: Mapped[str] = mapped_column(Text, default="")           # walkthrough, revealed after the flag is in
 
 
 class LabInstance(TimestampMixin, Base):
