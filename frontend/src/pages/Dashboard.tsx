@@ -7,12 +7,20 @@ import { Icon } from "../icons";
 export default function Dashboard() {
   const [d, setD] = useState<any>(null);
   const [recs, setRecs] = useState<any[]>([]);
+  const [host, setHost] = useState<any>(null);
   useEffect(() => {
     api.get("/api/dashboard").then(setD);
     api.get("/api/recommendations?limit=4").then(r => setRecs(r.items));
   }, []);
+  // Keep the "live" host rings actually live — refresh just the metrics, not the whole dashboard.
+  useEffect(() => {
+    const poll = () => { if (!document.hidden) api.get("/api/host/stats").then(setHost).catch(() => {}); };
+    const t = setInterval(poll, 5000);
+    document.addEventListener("visibilitychange", poll);
+    return () => { clearInterval(t); document.removeEventListener("visibilitychange", poll); };
+  }, []);
   if (!d) return <Spinner />;
-  const h = d.host;
+  const h = host || d.host;
   const rank = rankFor(d.xp);
 
   return (
