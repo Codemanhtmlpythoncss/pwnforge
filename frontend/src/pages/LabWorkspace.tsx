@@ -15,17 +15,19 @@ export default function LabWorkspace() {
   const [flagMsg, setFlagMsg] = useState("");
   const [hintsShown, setHintsShown] = useState(0);
   const [copied, setCopied] = useState("");
+  const [gone, setGone] = useState(false);
 
   const copy = (text: string, what: string) => {
     navigator.clipboard?.writeText(text).then(() => { setCopied(what); setTimeout(() => setCopied(""), 1200); }).catch(() => {});
   };
 
-  const load = () => api.get("/api/lab-instances").then(r => {
-    const found = r.items.find((x: any) => x.id === id);
+  // Poll just this instance, not every lab the user owns.
+  const load = () => api.get(`/api/lab-instances/${id}`).then((found: any) => {
     setLi(found); setLabId(found?.lab_id || "");
     if (found && !active && found.machines[0]) setActive(found.machines[0].id);
-  });
+  }).catch(() => setGone(true));
   useEffect(() => {
+    setGone(false);
     load();
     const t = setInterval(() => { if (!document.hidden) load(); }, 4000);
     const onVis = () => { if (!document.hidden) load(); };
@@ -40,6 +42,7 @@ export default function LabWorkspace() {
     if (r.correct) load();
   };
 
+  if (gone) return <Panel><div className="text-sm text-muted">This lab instance is no longer running. Start it again from <a className="text-brand" href="/labs">Labs</a>.</div></Panel>;
   if (!li) return <Spinner />;
   const activeM = li.machines.find((m: any) => m.id === active);
   const labCidr = activeM?.network_cidr || li.topology?.networks?.[0]?.cidr || undefined;
