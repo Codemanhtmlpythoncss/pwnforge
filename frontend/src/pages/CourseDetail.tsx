@@ -195,14 +195,14 @@ function Assessment({ a, onDone }: { a: any; onDone: () => void }) {
               <div className="space-y-1">
                 {q.choices.map((c: string) => (
                   <label key={c} className="flex items-center gap-2 text-sm">
-                    <input type="radio" name={q.id} value={c}
-                      onChange={() => setAnswers({ ...answers, [q.id]: c })} />{c}
+                    <input type="radio" name={q.id} value={c} checked={answers[q.id] === c}
+                      onChange={() => setAnswers(current => ({ ...current, [q.id]: c }))} />{c}
                   </label>
                 ))}
               </div>
             ) : (
-              <input className="input" placeholder="Answer"
-                onChange={e => setAnswers({ ...answers, [q.id]: e.target.value })} />
+              <input className="input" placeholder="Answer" value={answers[q.id] || ""}
+                onChange={e => setAnswers(current => ({ ...current, [q.id]: e.target.value }))} />
             )}
           </div>
         ))}
