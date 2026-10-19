@@ -14,6 +14,7 @@ import Paths from "./pages/Paths";
 import PathDetail from "./pages/PathDetail";
 import Skills from "./pages/Skills";
 import Labs from "./pages/Labs";
+import Running from "./pages/Running";
 import LabWorkspace from "./pages/LabWorkspace";
 import Achievements from "./pages/Achievements";
 import Admin from "./pages/Admin";
@@ -30,6 +31,7 @@ const GROUPS: { label: string; items: [string, string, string][] }[] = [
   { label: "Labs", items: [
     ["/machines", "Machines", "cpu"],
     ["/labs", "Labs", "box"],
+    ["/running", "Running", "server"],
   ]},
 ];
 const ADMIN_ITEMS: [string, string, string][] = [
@@ -40,7 +42,7 @@ const ADMIN_ITEMS: [string, string, string][] = [
 const TITLES: Record<string, string> = {
   "/": "Dashboard", "/courses": "Course Catalogue", "/paths": "Learning Paths",
   "/skills": "Skills", "/achievements": "Achievements", "/machines": "Machine Catalogue",
-  "/labs": "Labs", "/admin": "Administration", "/settings": "Settings",
+  "/labs": "Labs", "/running": "Running", "/admin": "Administration", "/settings": "Settings",
 };
 
 function toggleTheme() {
@@ -78,6 +80,7 @@ export default function App() {
               <Route path="/machines" element={<Machines />} />
               <Route path="/labs" element={<Labs />} />
               <Route path="/labs/instance/:id" element={<LabWorkspace />} />
+              <Route path="/running" element={<Running />} />
               <Route path="/skills" element={<Skills />} />
               <Route path="/achievements" element={<Achievements />} />
               {user.role === "administrator" && <Route path="/admin" element={<Admin />} />}
