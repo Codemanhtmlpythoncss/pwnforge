@@ -79,6 +79,50 @@ function Updates() {
   );
 }
 
+function ChangePassword() {
+  const [cur, setCur] = useState("");
+  const [next, setNext] = useState("");
+  const [show, setShow] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState("");
+  const [ok, setOk] = useState(false);
+  const save = async () => {
+    setBusy(true); setMsg(""); setOk(false);
+    try {
+      await api.post("/api/auth/change-password", { current_password: cur, new_password: next });
+      setOk(true); setMsg("Password changed."); setCur(""); setNext("");
+    } catch (e: any) { setMsg(e.message || "Couldn't change the password"); }
+    finally { setBusy(false); }
+  };
+  return (
+    <Panel>
+      <div className="font-semibold mb-1">Password</div>
+      <div className="text-muted text-sm mb-3">
+        Change your sign-in password. Passwords are stored hashed, so the current one can't be shown —
+        use the eye toggle to see what you type.
+      </div>
+      <div className="space-y-2 max-w-sm">
+        <div className="relative">
+          <input className="input pr-16" type={show ? "text" : "password"} placeholder="Current password"
+            autoComplete="current-password" value={cur} onChange={e => setCur(e.target.value)} />
+        </div>
+        <div className="relative">
+          <input className="input pr-16" type={show ? "text" : "password"} placeholder="New password"
+            autoComplete="new-password" value={next} onChange={e => setNext(e.target.value)} />
+          <button type="button" tabIndex={-1} onClick={() => setShow(s => !s)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-muted hover:text-ink">
+            {show ? "Hide" : "Show"}
+          </button>
+        </div>
+        <button className="btn btn-primary text-sm" disabled={busy || !cur || !next} onClick={save}>
+          {busy ? "Saving…" : "Change password"}
+        </button>
+        {msg && <div className={`text-sm ${ok ? "text-ok" : "text-bad"}`}>{msg}</div>}
+      </div>
+    </Panel>
+  );
+}
+
 function AccountReset() {
   const [confirming, setConfirming] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -139,6 +183,7 @@ export default function Settings() {
         <div className="text-muted text-sm mt-1">Every setting has a real backend effect. RAM and limits are live-configurable.</div></div>
       {saved && <div className="text-sm text-brand">{saved}</div>}
       <Updates />
+      <ChangePassword />
       <AccountReset />
       {Object.entries(groups).map(([cat, list]) => (
         <Panel key={cat}>
