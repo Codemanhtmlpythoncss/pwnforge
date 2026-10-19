@@ -26,7 +26,7 @@ with no mandatory cloud service.
 | Website | React + TypeScript + Vite SPA, dark/light theme, served by the backend |
 | API | FastAPI, ~60 documented endpoints + OpenAPI at `/api/docs` |
 | Database | SQLite + SQLAlchemy + Alembic migrations (PostgreSQL-ready) |
-| Virtualisation | libvirt/KVM (Debian) · QEMU · honest **simulation** driver |
+| Virtualisation | Real libvirt/QEMU guests; KVM acceleration when available, QEMU TCG otherwise |
 | Terminals | Browser xterm.js terminal over authorised WebSocket |
 | Tests | **51 automated tests, all passing** |
 
@@ -35,7 +35,7 @@ verified vs. unverified on which host.
 
 ---
 
-## Quick start (development, any host)
+## Quick start (learning platform, any host)
 
 ```bash
 cd pwnforge
@@ -94,12 +94,15 @@ See [docs/LEARNING_PATHS.md](docs/LEARNING_PATHS.md).
 
 A pluggable driver runs the identical orchestration code against:
 
-- **libvirt** — production path for Debian/KVM hosts (copy-on-write QCOW2
-  overlays on golden images, isolated libvirt networks, snapshots, VNC);
+- **libvirt** — production path for Debian/Linux hosts (copy-on-write QCOW2
+  overlays on golden images, isolated libvirt networks, snapshots, VNC). It
+  uses KVM acceleration when available and QEMU software emulation otherwise;
 - **qemu** — direct QEMU process management where libvirt is absent;
-- **simulation** — a deterministic, clearly-labelled stand-in for hosts without
-  a hypervisor (e.g. macOS, CI). It never claims to be a real hypervisor; its
-  VMs are flagged `simulated` everywhere in the UI and API.
+
+Production never substitutes a pretend guest for a real VM. If no supported
+Linux QEMU/libvirt backend is configured, PwnForge reports that VM hosting is
+unavailable and blocks lab launches. The simulation driver is used only by the
+automated test suite.
 
 Storage is layered — ISOs → immutable golden images → reusable components →
 copy-on-write overlays — with image-dependency tracking and safe,

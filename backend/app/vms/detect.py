@@ -33,26 +33,21 @@ def probe_host() -> dict:
     elif system == "darwin":
         info["has_hvf"] = True
         info["notes"].append(
-            "macOS host: libvirt/KVM unavailable. QEMU may use HVF but creating "
-            "lab VMs here is not supported; use the simulation driver for development."
+            "macOS host: the production libvirt VM backend requires Linux."
         )
     return info
 
 
 def select_driver_name(configured: str = "auto") -> str:
-    """Return the best available driver name honouring the configured preference."""
+    """Select a real VM backend; report unavailable instead of silently simulating."""
     host = probe_host()
     if configured and configured != "auto":
         return configured
-    if host["platform"] == "linux" and host["has_kvm"] and (
-        host["has_libvirt_py"] or host["has_virsh"]
-    ):
+    if (host["platform"] == "linux" and host["qemu_system"] and host["has_qemu_img"]
+            and (host["has_libvirt_py"] or host["has_virsh"])):
+        # Libvirt can run genuine QEMU guests with TCG when KVM is unavailable.
         return "libvirt"
-    # A QEMU driver is only honestly useful where it can accelerate; otherwise
-    # we prefer the clearly-labelled simulation driver over slow TCG emulation.
-    if host["platform"] == "linux" and host["qemu_system"] and host["has_qemu_img"]:
-        return "qemu"
-    return "simulation"
+    return "unavailable"
 
 
 def _module_present(name: str) -> bool:

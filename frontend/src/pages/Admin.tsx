@@ -39,7 +39,7 @@ function Overview() {
         <div className="text-sm space-y-1">
           <Row k="Driver" v={caps.driver} />
           <Row k="Platform / arch" v={`${caps.platform} / ${caps.arch}`} />
-          <Row k="Real virtualization" v={caps.real_virtualization ? "yes" : "no (simulated)"} />
+          <Row k="Real virtualization" v={caps.real_virtualization ? "yes" : caps.driver === "simulation" ? "test simulation" : "unavailable — configure QEMU/libvirt"} />
           <Row k="HW acceleration" v={caps.hardware_acceleration ? "yes" : "no"} />
           <Row k="CPUs / RAM" v={`${caps.cpu_count} / ${Math.round(caps.total_memory_mb/1024)}GB`} />
         </div>

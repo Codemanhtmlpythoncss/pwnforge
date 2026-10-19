@@ -25,6 +25,7 @@ from pathlib import Path
 
 from backend.app.core.config import get_settings
 from backend.app.database.models import VMStatus
+from backend.app.vms.detect import probe_host
 from backend.app.vms.driver import (
     ConsoleInfo,
     CapacityError,
@@ -65,15 +66,18 @@ def bridge_name(network: str) -> str:
     return "pfbr" + hashlib.sha1(network.encode()).hexdigest()[:10]
 
 
-def domain_xml(spec: VMSpec) -> str:
-    """The libvirt domain for one machine: KVM, the host's CPU, virtio disk and network, a serial console."""
+def domain_xml(spec: VMSpec, *, hardware_acceleration: bool = True) -> str:
+    """Build a real libvirt guest definition for KVM or QEMU's software emulator."""
     arch = arch_of(spec.arch)
     if arch == "aarch64":
         os_xml = ("<os firmware='efi'><type arch='aarch64' machine='virt'>hvm</type><boot dev='hd'/></os>")
-        features = "<features><acpi/><gic version='host'/></features>"
+        gic = "host" if hardware_acceleration else "3"
+        features = f"<features><acpi/><gic version='{gic}'/></features>"
     else:
         os_xml = "<os><type arch='x86_64' machine='q35'>hvm</type><boot dev='hd'/></os>"
         features = "<features><acpi/><apic/></features>"
+    domain_type = "kvm" if hardware_acceleration else "qemu"
+    cpu = "<cpu mode='host-passthrough' check='none'/>" if hardware_acceleration else ""
     seed = ""
     if spec.cloud_init_iso:
         seed = (f"<disk type='file' device='disk'><driver name='qemu' type='raw'/>"
@@ -91,13 +95,13 @@ def domain_xml(spec: VMSpec) -> str:
                "<video><model type='virtio'/></video>"
                "<input type='tablet' bus='usb'/><input type='keyboard' bus='usb'/>")
     return f"""
-<domain type='kvm'>
+<domain type='{domain_type}'>
   <name>{sx.escape(spec.name)}</name>
   <memory unit='MiB'>{int(spec.memory_mb)}</memory>
   <vcpu>{int(spec.vcpu)}</vcpu>
   {os_xml}
   {features}
-  <cpu mode='host-passthrough' check='none'/>
+  {cpu}
   <on_poweroff>destroy</on_poweroff>
   <devices>
     <disk type='file' device='disk'>
@@ -241,6 +245,7 @@ class LibvirtDriver(VMDriver):
         self._conn = libvirt.open(self._uri)
         if self._conn is None:  # pragma: no cover
             raise DriverError(f"Failed to open libvirt connection {self._uri}")
+        self._hardware_acceleration = probe_host()["has_kvm"]
 
     # -- capabilities -------------------------------------------------------
     def capabilities(self) -> HostCapabilities:  # pragma: no cover - needs host
@@ -252,12 +257,17 @@ class LibvirtDriver(VMDriver):
             cpu_count=info[2],
             total_memory_mb=int(info[1]),
             real_virtualization=True,
-            hardware_acceleration=True,
+            hardware_acceleration=self._hardware_acceleration,
             features={
                 "snapshots": True, "clone": True, "pause": True,
                 "console": True, "networks": True, "copy_on_write": True,
             },
-            notes=[f"libvirt {self._conn.getLibVersion()} via {self._uri}"],
+            notes=[
+                f"libvirt {self._conn.getLibVersion()} via {self._uri}",
+                *([] if self._hardware_acceleration else [
+                    "Real guests use QEMU TCG software emulation because KVM is unavailable; expect slower boot and runtime."
+                ]),
+            ],
         )
 
     # -- overlays -----------------------------------------------------------
@@ -310,7 +320,8 @@ class LibvirtDriver(VMDriver):
             old = None
         if old is not None:
             self.delete(spec.name)
-        dom = self._conn.defineXML(domain_xml(spec))
+        dom = self._conn.defineXML(domain_xml(
+            spec, hardware_acceleration=self._hardware_acceleration))
         return dom.name()
 
     def _dom(self, ref: str):  # pragma: no cover

@@ -56,7 +56,7 @@ class Settings(BaseSettings):
     database_url: str = ""
 
     # --- Virtualisation ----------------------------------------------------
-    # auto | libvirt | qemu | simulation
+    # auto | libvirt | qemu; simulation is test-only
     vm_driver: str = "auto"
     libvirt_uri: str = "qemu:///system"
 

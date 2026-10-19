@@ -158,7 +158,8 @@ function TopBar() {
     (loc.pathname.startsWith("/courses/") ? "Course" :
      loc.pathname.startsWith("/paths/") ? "Learning Path" :
      loc.pathname.startsWith("/labs/") ? "Lab Workspace" : "Pwnforge");
-  const sim = caps && !caps.real_virtualization;
+  const sim = caps?.driver === "simulation";
+  const unavailable = caps?.driver === "unavailable";
   return (
     <header className="h-14 shrink-0 border-b border-line bg-[var(--bg2)] flex items-center justify-between px-6">
       <div className="flex items-center gap-2 text-sm">
@@ -168,9 +169,9 @@ function TopBar() {
       <div className="flex items-center gap-4">
         {caps && (
           <span className="tag" title="Active virtualisation driver">
-            <span className={`w-2 h-2 rounded-full ${sim ? "bg-[var(--warn)]" : "bg-[var(--brand)]"}`}
-              style={{ boxShadow: `0 0 8px ${sim ? "var(--warn)" : "var(--brand)"}` }} />
-            {caps.driver}{sim ? " · simulated" : ""}
+            <span className={`w-2 h-2 rounded-full ${sim || unavailable ? "bg-[var(--warn)]" : "bg-[var(--brand)]"}`}
+              style={{ boxShadow: `0 0 8px ${sim || unavailable ? "var(--warn)" : "var(--brand)"}` }} />
+            {caps.driver}{sim ? " · simulated" : unavailable ? " · real VM setup needed" : ""}
           </span>
         )}
         {user && <RankBadge xp={user.xp} size={36} />}

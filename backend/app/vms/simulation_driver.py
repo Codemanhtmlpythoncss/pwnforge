@@ -6,7 +6,8 @@ file in the data dir so that reconciliation across process restarts behaves
 like a real backend. The orchestration layer flags every instance created on
 this driver as ``driver="simulation"`` and the UI shows a clear banner.
 
-Use it for development on unsupported hosts (e.g. macOS) and for tests.
+Use it only in isolated automated tests. Production and development launches
+require a real VM backend or fail with an actionable setup message.
 """
 from __future__ import annotations
 

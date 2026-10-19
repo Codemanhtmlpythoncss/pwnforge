@@ -17,10 +17,11 @@ Settings → `server.lan_access = true`, then browse to `http://<host-ip>:8080`.
 
 ## Virtualisation
 
-**Driver is `simulation` on a Linux host that has KVM** — check `/dev/kvm`
-exists and you're in the `kvm`/`libvirt` groups (`id`), and that
-`python3-libvirt`/`virsh` are installed. `pwnforge status` shows the detected
-host and selected driver.
+**VM hosting is unavailable** — install QEMU, qemu-img, libvirt and its Python
+binding, then run the dashboard's **Set up real machines** action (or follow
+the installation steps). If `/dev/kvm` is absent, QEMU TCG still boots real
+VMs but will be slower. PwnForge blocks lab launches until a real backend is
+ready; it does not silently simulate a guest.
 
 **VM start fails: "Base image … is absent"** — fetch it on the host:
 `pwnforge images fetch debian-13-base` (or build role images from it). Nothing is
@@ -43,9 +44,9 @@ that lab's resources are torn down. Check the job's steps
 
 ## Terminal
 
-**Simulated terminal / "no host shell is exposed"** — expected when the active
-driver is `simulation` (e.g. on macOS). Deploy on a KVM host for a live guest
-console.
+**No live guest console** — check that the VM is running with a real driver and
+that it has a serial console configured. The simulation backend is reserved for
+automated tests.
 
 **"Not authorised for this VM"** — you don't own that VM (and aren't an admin).
 
