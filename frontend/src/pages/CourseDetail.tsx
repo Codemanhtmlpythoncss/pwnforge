@@ -1,16 +1,37 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams, Link, useNavigate } from "react-router-dom";
 import { api } from "../api";
 import { Bar, Diff, Markdown, Panel, Spinner } from "../ui";
 
 export default function CourseDetail() {
   const { id } = useParams();
+  const [params] = useSearchParams();
+  const pathId = params.get("path");
+  const navigate = useNavigate();
   const [c, setC] = useState<any>(null);
+  const [nextStep, setNextStep] = useState<any>(null);
+  const [pathTitle, setPathTitle] = useState("");
   const load = () => api.get(`/api/courses/${id}`).then(setC);
   useEffect(() => { load(); }, [id]);
+
+  // When arrived from a learning path, work out the next course so we can offer "Continue".
+  useEffect(() => {
+    setNextStep(null); setPathTitle("");
+    if (!pathId) return;
+    api.get(`/api/paths/${pathId}`).then(p => {
+      setPathTitle(p.title || "");
+      const steps = p.steps || [];
+      const i = steps.findIndex((s: any) => s.course_id === id);
+      const next = i >= 0 ? steps.slice(i + 1).find((s: any) => s.course_id) : null;
+      setNextStep(next || null);
+    }).catch(() => {});
+  }, [pathId, id]);
+
   if (!c) return <Spinner />;
 
+  const completed = c.progress?.status === "completed";
   const start = async () => { await api.post(`/api/courses/${id}/start`); load(); };
+  const goNext = () => nextStep && navigate(`/courses/${nextStep.course_id}?path=${pathId}`);
 
   return (
     <div className="space-y-5">
@@ -22,9 +43,30 @@ export default function CourseDetail() {
           <p className="text-muted mt-1 max-w-2xl">{c.description}</p>
         </div>
         <button className="btn btn-primary" onClick={start}>
-          {c.progress?.status === "completed" ? "Revisit" : c.progress ? "Continue" : "Start course"}
+          {completed ? "Revisit" : c.progress ? "Continue" : "Start course"}
         </button>
       </div>
+
+      {pathId && (
+        <Panel className={completed ? "border-brand" : ""}>
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="text-sm">
+              <Link to={`/paths/${pathId}`} className="text-muted hover:text-brand">← {pathTitle || "Learning path"}</Link>
+              <div className="mt-0.5">
+                {completed
+                  ? (nextStep ? <span className="text-ok">Course complete ✓ — ready for the next one.</span>
+                              : <span className="text-ok">Course complete ✓ — that's the last course in this path!</span>)
+                  : <span className="text-muted">Part of the <b>{pathTitle}</b> path. Finish it to continue.</span>}
+              </div>
+            </div>
+            {completed && nextStep && (
+              <button className="btn btn-primary text-sm" onClick={goNext}>
+                Continue to {nextStep.title || "next course"} →
+              </button>
+            )}
+          </div>
+        </Panel>
+      )}
 
       {c.progress && (
         <Panel>
