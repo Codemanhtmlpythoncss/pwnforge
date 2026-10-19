@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { NavLink, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { api } from "./api";
 import { useAuth } from "./auth";
@@ -6,19 +6,21 @@ import { RankBadge, Spinner } from "./ui";
 import { Icon } from "./icons";
 import { Logo } from "./logo";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import Courses from "./pages/Courses";
-import CourseDetail from "./pages/CourseDetail";
-import Machines from "./pages/Machines";
-import Paths from "./pages/Paths";
-import PathDetail from "./pages/PathDetail";
-import Skills from "./pages/Skills";
-import Labs from "./pages/Labs";
-import Running from "./pages/Running";
-import LabWorkspace from "./pages/LabWorkspace";
-import Achievements from "./pages/Achievements";
-import Admin from "./pages/Admin";
-import Settings from "./pages/Settings";
+// Route pages are code-split: each loads on demand, keeping the initial bundle small
+// (LabWorkspace in particular pulls in the xterm terminal, which most sessions never open).
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Courses = lazy(() => import("./pages/Courses"));
+const CourseDetail = lazy(() => import("./pages/CourseDetail"));
+const Machines = lazy(() => import("./pages/Machines"));
+const Paths = lazy(() => import("./pages/Paths"));
+const PathDetail = lazy(() => import("./pages/PathDetail"));
+const Skills = lazy(() => import("./pages/Skills"));
+const Labs = lazy(() => import("./pages/Labs"));
+const Running = lazy(() => import("./pages/Running"));
+const LabWorkspace = lazy(() => import("./pages/LabWorkspace"));
+const Achievements = lazy(() => import("./pages/Achievements"));
+const Admin = lazy(() => import("./pages/Admin"));
+const Settings = lazy(() => import("./pages/Settings"));
 
 const GROUPS: { label: string; items: [string, string, string][] }[] = [
   { label: "Learn", items: [
@@ -71,7 +73,8 @@ export default function App() {
         <TopBar />
         <main className="flex-1 overflow-y-auto">
           <div className="max-w-6xl mx-auto px-6 py-6 fade-in">
-            <Routes>
+            <Suspense fallback={<div className="grid place-items-center py-20"><Spinner /></div>}>
+              <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/courses" element={<Courses />} />
               <Route path="/courses/:id" element={<CourseDetail />} />
@@ -86,7 +89,8 @@ export default function App() {
               {user.role === "administrator" && <Route path="/admin" element={<Admin />} />}
               {user.role === "administrator" && <Route path="/settings" element={<Settings />} />}
               <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
+              </Routes>
+            </Suspense>
           </div>
         </main>
       </div>
