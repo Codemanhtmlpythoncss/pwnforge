@@ -213,3 +213,6 @@ code, kbd, .mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo
   body, #root, main { background: #fff !important; }
   .cert-sheet { border-color: #0a0a0a !important; box-shadow: none !important; }
 }
+/* Achievement toast slide-in */
+@keyframes achToastIn { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
+.ach-toast-in { animation: achToastIn .22s ease-out; }

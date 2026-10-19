@@ -45,7 +45,7 @@ export default function PathDetail() {
               </div>
               {s.note && <div className="text-muted text-xs mt-0.5">{s.note}</div>}
             </div>
-            {s.course_id && <Link to={`/courses/${s.course_id}`} className="btn btn-ghost text-sm">Open</Link>}
+            {s.course_id && <Link to={`/courses/${s.course_id}?path=${id}`} className="btn btn-ghost text-sm">Open</Link>}
             {s.lab_id && <Link to="/labs" className="btn btn-ghost text-sm">Lab</Link>}
           </div>
         ))}

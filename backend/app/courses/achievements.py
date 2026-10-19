@@ -51,6 +51,48 @@ def _labs_completed(session: Session, user_id: int) -> int:
     ).scalar_one()
 
 
+def _solved_lab_ids(session: Session, user_id: int) -> set[str]:
+    """Lab ids this user has captured the flag for (a correct, lab-scoped submission)."""
+    from backend.app.database.models import Flag, FlagSubmission
+
+    rows = session.execute(
+        select(Flag.scope_id).select_from(FlagSubmission).join(Flag, Flag.id == FlagSubmission.flag_id).where(
+            FlagSubmission.user_id == user_id, FlagSubmission.correct.is_(True), Flag.scope_type == "lab")
+    ).scalars()
+    return set(rows)
+
+
+def _flags_captured(session: Session, user_id: int) -> int:
+    return len(_solved_lab_ids(session, user_id))
+
+
+def _black_box_solved(session: Session, user_id: int) -> int:
+    from backend.app.database.models import Lab
+
+    solved = _solved_lab_ids(session, user_id)
+    if not solved:
+        return 0
+    n = 0
+    for lab in session.execute(select(Lab).where(Lab.id.in_(solved))).scalars():
+        if "black-box" in (lab.tags or []):
+            n += 1
+    return n
+
+
+def _paths_completed(session: Session, user_id: int) -> int:
+    from backend.app.database.models import LearningPath
+
+    done_courses = {cp.course_id for cp in session.execute(
+        select(CourseProgress).where(CourseProgress.user_id == user_id,
+                                     CourseProgress.status == ProgressStatus.completed)).scalars()}
+    n = 0
+    for p in session.execute(select(LearningPath)).scalars():
+        required = [s.course_id for s in p.steps if s.required and s.course_id]
+        if required and all(c in done_courses for c in required):
+            n += 1
+    return n
+
+
 def evaluate(session: Session, user: User) -> list[str]:
     """Award any newly-earned achievements. Returns keys awarded this call."""
     awarded: list[str] = []
@@ -80,4 +122,10 @@ def _criteria_met(session: Session, user: User, crit: dict) -> bool:
         return user.xp >= int(crit.get("amount", 100))
     if ctype == "streak_days":
         return user.streak_days >= int(crit.get("days", 3))
+    if ctype == "flags_captured":
+        return _flags_captured(session, user.id) >= int(crit.get("count", 1))
+    if ctype == "black_box_solved":
+        return _black_box_solved(session, user.id) >= int(crit.get("count", 1))
+    if ctype == "paths_completed":
+        return _paths_completed(session, user.id) >= int(crit.get("count", 1))
     return False
