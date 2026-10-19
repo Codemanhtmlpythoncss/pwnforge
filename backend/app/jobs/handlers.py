@@ -40,3 +40,9 @@ def _image_fetch(session, job: Job, params: dict, progress) -> dict:
     img = images.fetch_image(session, params["key"],
                              progress=lambda p: progress.update(percent=p))
     return {"key": img.key, "status": img.status.value}
+
+
+@register("admin.update")
+def _admin_update(session, job: Job, params: dict, progress) -> dict:
+    from backend.app.core import updater
+    return updater.run_update(session, progress=progress)

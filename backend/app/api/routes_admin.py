@@ -187,6 +187,26 @@ def diagnostics(user: User = Depends(require_admin), db: Session = Depends(get_d
     }
 
 
+@router.get("/admin/version")
+def version(user: User = Depends(current_user), db: Session = Depends(get_db)) -> dict:
+    from backend.app.core import updater
+    return updater.version_info(db)
+
+
+@router.post("/admin/update")
+def update(user: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict:
+    from backend.app.core import updater
+    from backend.app.jobs import runner
+
+    if not updater.version_info(db)["update_enabled"]:
+        raise HTTPException(409, "No in-app updater is configured; updates are applied by the host "
+                                 "(set admin.update_command to enable this button).")
+    audit.record(db, action="admin.update", actor_id=user.id)
+    db.commit()
+    job_id = runner.enqueue("admin.update", params={}, owner_id=user.id, target_type="system")
+    return {"job_id": job_id}
+
+
 @router.post("/admin/reconcile")
 def reconcile(user: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict:
     return vms.reconcile(db)
