@@ -14,6 +14,15 @@ export default function PathDetail() {
         <h1 className="text-2xl font-bold">{p.title}</h1>
         <p className="text-muted mt-1 max-w-2xl">{p.description}</p>
       </div>
+      {p.certificate && (
+        <Panel className="border-brand">
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="text-sm"><span className="text-xl mr-2">🎓</span>
+              <span className="text-ok font-semibold">Path complete!</span> You've earned a certificate.</div>
+            <Link to="/certificates" className="btn btn-primary text-sm">View certificate</Link>
+          </div>
+        </Panel>
+      )}
       <Panel>
         <div className="flex justify-between text-sm mb-2">
           <span>{p.completed_steps}/{p.steps.length} steps complete</span><span>{p.percent}%</span>

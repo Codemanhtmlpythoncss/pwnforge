@@ -93,3 +93,30 @@ def test_recommendations(admin):
     r = admin.get("/api/recommendations").json()
     assert len(r["items"]) >= 1
     assert "reasons" in r["items"][0]
+
+
+def test_certificate_issued_on_path_completion(admin):
+    from backend.tests.conftest import make_user
+    from backend.app.database.base import session_scope
+    from backend.app.database.models import CourseProgress, Flag, FlagSubmission, LearningPath, ProgressStatus, User
+    learner, info = make_user(admin, "learner")   # a fresh user with no prior progress to collide with
+    with session_scope() as s:
+        path = next((p for p in s.query(LearningPath).all() if p.steps), None)
+        assert path is not None
+        pid = path.id
+        uid = s.query(User).filter(User.username == info["username"]).first().id
+        for st in path.steps:
+            if st.course_id:
+                s.add(CourseProgress(user_id=uid, course_id=st.course_id, status=ProgressStatus.completed, percent=100))
+            if st.lab_id:
+                fid = s.query(Flag.id).filter(Flag.scope_type == "lab", Flag.scope_id == st.lab_id).scalar()
+                if fid:
+                    s.add(FlagSubmission(user_id=uid, flag_id=fid, correct=True))
+    r = learner.get(f"/api/paths/{pid}").json()
+    assert r["percent"] == 100 and r["certificate"] and r["certificate"]["serial"].startswith("PF-")
+    serial = r["certificate"]["serial"]
+    assert learner.get(f"/api/paths/{pid}").json()["certificate"]["serial"] == serial   # idempotent
+    certs = learner.get("/api/certificates").json()["items"]
+    assert any(c["serial"] == serial and c["path_id"] == pid for c in certs)
+    assert learner.get(f"/api/certificates/{serial}").json()["path_title"]
+    assert learner.get("/api/certificates/PF-NOPE").status_code == 404

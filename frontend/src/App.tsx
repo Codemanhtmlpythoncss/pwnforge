@@ -19,6 +19,7 @@ const Labs = lazy(() => import("./pages/Labs"));
 const Running = lazy(() => import("./pages/Running"));
 const LabWorkspace = lazy(() => import("./pages/LabWorkspace"));
 const Achievements = lazy(() => import("./pages/Achievements"));
+const Certificates = lazy(() => import("./pages/Certificates"));
 const Admin = lazy(() => import("./pages/Admin"));
 const Settings = lazy(() => import("./pages/Settings"));
 
@@ -29,6 +30,7 @@ const GROUPS: { label: string; items: [string, string, string][] }[] = [
     ["/paths", "Learning Paths", "route"],
     ["/skills", "Skills", "chart"],
     ["/achievements", "Achievements", "trophy"],
+    ["/certificates", "Certificates", "shield"],
   ]},
   { label: "Labs", items: [
     ["/machines", "Machines", "cpu"],
@@ -43,7 +45,7 @@ const ADMIN_ITEMS: [string, string, string][] = [
 
 const TITLES: Record<string, string> = {
   "/": "Dashboard", "/courses": "Course Catalogue", "/paths": "Learning Paths",
-  "/skills": "Skills", "/achievements": "Achievements", "/machines": "Machine Catalogue",
+  "/skills": "Skills", "/achievements": "Achievements", "/certificates": "Certificates", "/machines": "Machine Catalogue",
   "/labs": "Labs", "/running": "Running", "/admin": "Administration", "/settings": "Settings",
 };
 
@@ -86,6 +88,7 @@ export default function App() {
               <Route path="/running" element={<Running />} />
               <Route path="/skills" element={<Skills />} />
               <Route path="/achievements" element={<Achievements />} />
+              <Route path="/certificates" element={<Certificates />} />
               {user.role === "administrator" && <Route path="/admin" element={<Admin />} />}
               {user.role === "administrator" && <Route path="/settings" element={<Settings />} />}
               <Route path="*" element={<Navigate to="/" />} />

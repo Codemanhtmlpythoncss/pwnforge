@@ -206,3 +206,10 @@ code, kbd, .mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo
 .doc th, .doc td { text-align: left; padding: .4rem .5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
 .table-wrap { overflow-x: auto; }
 .chat-msg { white-space: pre-wrap; word-break: break-word; line-height: 1.6; }
+
+/* Print a certificate cleanly (hide app chrome). */
+@media print {
+  aside, nav, header, .print\:hidden { display: none !important; }
+  body, #root, main { background: #fff !important; }
+  .cert-sheet { border-color: #0a0a0a !important; box-shadow: none !important; }
+}
