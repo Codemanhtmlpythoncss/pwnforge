@@ -65,14 +65,14 @@ route has been approved, install the small client command on your Mac:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/Codemanhtmlpythoncss/nodeyard/tailnet-lab-access/share/nodeyard/dashboard/web/pwnforge-install-macos.sh | sh
-pwnforge install 10.200.0.0/16 192.168.1.123
+pwnforge install 10.200.0.0/16 <server-lan-ip>
 ```
 
 For a Linux client with systemd and iproute2:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/Codemanhtmlpythoncss/nodeyard/tailnet-lab-access/share/nodeyard/dashboard/web/pwnforge-install-linux.sh | sh
-pwnforge install 10.200.0.0/16 192.168.1.123
+pwnforge install 10.200.0.0/16 <server-lan-ip>
 ```
 
 Use the lab network and server LAN address shown by the Nodeyard dashboard.
