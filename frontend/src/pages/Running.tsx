@@ -31,8 +31,11 @@ export default function Running() {
   };
   useEffect(() => {
     load();
-    timer.current = setInterval(load, 4000);
-    return () => clearInterval(timer.current);
+    // Poll only while the tab is visible; refresh at once when it comes back.
+    timer.current = setInterval(() => { if (!document.hidden) load(); }, 4000);
+    const onVis = () => { if (!document.hidden) load(); };
+    document.addEventListener("visibilitychange", onVis);
+    return () => { clearInterval(timer.current); document.removeEventListener("visibilitychange", onVis); };
   }, []);
 
   const act = async (key: string, fn: () => Promise<any>, note = "") => {

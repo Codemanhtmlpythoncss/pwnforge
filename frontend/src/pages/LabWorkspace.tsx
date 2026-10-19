@@ -18,7 +18,13 @@ export default function LabWorkspace() {
     setLi(found); setLabId(found?.lab_id || "");
     if (found && !active && found.machines[0]) setActive(found.machines[0].id);
   });
-  useEffect(() => { load(); const t = setInterval(load, 4000); return () => clearInterval(t); }, [id]);
+  useEffect(() => {
+    load();
+    const t = setInterval(() => { if (!document.hidden) load(); }, 4000);
+    const onVis = () => { if (!document.hidden) load(); };
+    document.addEventListener("visibilitychange", onVis);
+    return () => { clearInterval(t); document.removeEventListener("visibilitychange", onVis); };
+  }, [id]);
 
   const submitFlag = async () => {
     setFlagMsg("");
