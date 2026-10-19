@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api";
 import { Panel, Spinner, Empty } from "../ui";
+import { ConnectCommands } from "../components/Connect";
 
 type VM = {
   id: string; name: string; profile_id: string; status: string; driver: string;
@@ -58,25 +59,32 @@ export default function Running() {
   if (vms === null) return <Spinner />;
 
   const vmRow = (v: VM) => (
-    <div key={v.id} className="flex items-center gap-3 py-2.5 border-b border-line last:border-0">
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2">
-          <span className="font-medium text-sm truncate">{v.name.includes("-") ? v.name.split("-").slice(1).join("-") : v.name}</span>
-          <span className={chipClass(v.status)}>{v.status}</span>
-          {v.simulated && <span className="tag">simulated</span>}
+    <div key={v.id} className="py-2.5 border-b border-line last:border-0">
+      <div className="flex items-center gap-3">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <span className="font-medium text-sm truncate">{v.name.includes("-") ? v.name.split("-").slice(1).join("-") : v.name}</span>
+            <span className={chipClass(v.status)}>{v.status}</span>
+            {v.simulated && <span className="tag">simulated</span>}
+          </div>
+          <div className="text-muted text-[11px] mono mt-0.5">
+            {v.profile_id} · {v.vcpu} vCPU · {v.memory_mb} MB{v.ip_address ? ` · ${v.ip_address}` : ""}
+          </div>
+          {v.last_error && <div className="text-bad text-xs mt-0.5">{v.last_error}</div>}
         </div>
-        <div className="text-muted text-[11px] mono mt-0.5">
-          {v.profile_id} · {v.vcpu} vCPU · {v.memory_mb} MB{v.ip_address ? ` · ${v.ip_address}` : ""}
+        <div className="flex gap-2 shrink-0">
+          {RUNNING.has(v.status)
+            ? <button className="btn text-xs" disabled={busy[v.id]} onClick={() => act(v.id, () => api.post(`/api/vms/${v.id}/stop`))}>Stop</button>
+            : <button className="btn text-xs" disabled={busy[v.id]} onClick={() => act(v.id, () => api.post(`/api/vms/${v.id}/reset`), "Starting…")}>Start</button>}
+          {v.status === "running" && <button className="btn text-xs" disabled={busy[v.id]} onClick={() => act(v.id, () => api.post(`/api/vms/${v.id}/reboot`))}>Reboot</button>}
+          <button className="btn btn-danger text-xs" disabled={busy[v.id]} onClick={() => act(v.id, () => api.del(`/api/vms/${v.id}`))}>Delete</button>
         </div>
-        {v.last_error && <div className="text-bad text-xs mt-0.5">{v.last_error}</div>}
       </div>
-      <div className="flex gap-2 shrink-0">
-        {RUNNING.has(v.status)
-          ? <button className="btn text-xs" disabled={busy[v.id]} onClick={() => act(v.id, () => api.post(`/api/vms/${v.id}/stop`))}>Stop</button>
-          : <button className="btn text-xs" disabled={busy[v.id]} onClick={() => act(v.id, () => api.post(`/api/vms/${v.id}/reset`), "Starting…")}>Start</button>}
-        {v.status === "running" && <button className="btn text-xs" disabled={busy[v.id]} onClick={() => act(v.id, () => api.post(`/api/vms/${v.id}/reboot`))}>Reboot</button>}
-        <button className="btn btn-danger text-xs" disabled={busy[v.id]} onClick={() => act(v.id, () => api.del(`/api/vms/${v.id}`))}>Delete</button>
-      </div>
+      {v.status === "running" && v.ip_address && !v.simulated && (
+        <div className="mt-2 ml-0.5 rounded-lg bg-panel2 border border-line p-3">
+          <ConnectCommands ip={v.ip_address} />
+        </div>
+      )}
     </div>
   );
 
@@ -118,9 +126,16 @@ export default function Running() {
                 {l.machines.length > 0 && (
                   <div className="mt-1 ml-3 pl-3 border-l border-line">
                     {l.machines.map(m => (
-                      <div key={m.id} className="text-muted text-[11px] mono py-0.5 flex items-center gap-2">
-                        <span className={chipClass(m.status)} style={{ fontSize: "10px" }}>{m.status}</span>
-                        {m.name.includes("-") ? m.name.split("-").slice(1).join("-") : m.name}{m.ip_address ? ` · ${m.ip_address}` : ""}
+                      <div key={m.id} className="py-0.5">
+                        <div className="text-muted text-[11px] mono flex items-center gap-2">
+                          <span className={chipClass(m.status)} style={{ fontSize: "10px" }}>{m.status}</span>
+                          {m.name.includes("-") ? m.name.split("-").slice(1).join("-") : m.name}{m.ip_address ? ` · ${m.ip_address}` : ""}
+                        </div>
+                        {m.status === "running" && m.ip_address && !m.simulated && (
+                          <div className="mt-1.5 mb-1 rounded-lg bg-panel2 border border-line p-3">
+                            <ConnectCommands ip={m.ip_address} login={(m as any).login} target={(m as any).target} />
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>

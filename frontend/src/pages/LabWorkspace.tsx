@@ -4,6 +4,7 @@ import { Terminal } from "@xterm/xterm";
 import { FitAddon } from "@xterm/addon-fit";
 import { api, wsUrl } from "../api";
 import { Panel, Spinner } from "../ui";
+import { ConnectCommands } from "../components/Connect";
 
 export default function LabWorkspace() {
   const { id } = useParams();
@@ -40,6 +41,8 @@ export default function LabWorkspace() {
   };
 
   if (!li) return <Spinner />;
+  const activeM = li.machines.find((m: any) => m.id === active);
+  const labCidr = activeM?.network_cidr || li.topology?.networks?.[0]?.cidr || undefined;
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
@@ -128,6 +131,14 @@ export default function LabWorkspace() {
             real={!!li.machines.find((m: any) => m.id === active && !m.simulated && m.status === "running")} />}
         </Panel>
       </div>
+
+      {activeM?.ip_address && !activeM.simulated && (
+        <Panel>
+          <div className="font-semibold text-sm mb-2">Attack it from your own machine
+            <span className="text-muted font-normal font-mono"> · {activeM.ip_address}</span></div>
+          <ConnectCommands ip={activeM.ip_address} login={activeM.login} target={activeM.target} cidr={labCidr} />
+        </Panel>
+      )}
 
       {li.guide && (
         <Panel>
