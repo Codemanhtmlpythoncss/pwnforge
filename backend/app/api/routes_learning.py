@@ -132,6 +132,19 @@ def list_paths(db: Session = Depends(get_db)) -> dict:
     return {"items": paths.list_paths(db)}
 
 
+@router.get("/certificates")
+def my_certificates(user: User = Depends(current_user), db: Session = Depends(get_db)) -> dict:
+    return {"items": paths.list_certificates(db, user)}
+
+
+@router.get("/certificates/{serial}")
+def verify_certificate(serial: str, db: Session = Depends(get_db)) -> dict:
+    c = paths.verify_certificate(db, serial)
+    if not c:
+        raise HTTPException(404, "No such certificate")
+    return c
+
+
 @router.get("/paths/{path_id}")
 def path_detail(path_id: str, db: Session = Depends(get_db),
                 user: User | None = Depends(current_user_optional)) -> dict:

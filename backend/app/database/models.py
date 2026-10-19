@@ -394,6 +394,20 @@ class UserAchievement(Base):
     awarded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)
 
 
+class Certificate(Base):
+    """Issued once a learner completes a learning path. The serial lets a certificate be verified."""
+    __tablename__ = "certificates"
+    __table_args__ = (UniqueConstraint("user_id", "path_id", name="uq_user_path_certificate"),)
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=_uuid)
+    serial: Mapped[str] = mapped_column(String(32), unique=True, index=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    path_id: Mapped[str] = mapped_column(ForeignKey("learning_paths.id", ondelete="CASCADE"))
+    recipient: Mapped[str] = mapped_column(String(120), default="")   # display name at issue time
+    path_title: Mapped[str] = mapped_column(String(200), default="")
+    issued_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)
+
+
 class Bookmark(Base):
     __tablename__ = "bookmarks"
     __table_args__ = (UniqueConstraint("user_id", "kind", "ref_id", name="uq_bookmark"),)
