@@ -177,8 +177,10 @@ code, kbd, .mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo
   -webkit-mask-image: radial-gradient(70% 70% at 60% 30%, #000, transparent);
   mask-image: radial-gradient(70% 70% at 60% 30%, #000, transparent);
 }
-.ring { transform: rotate(-90deg); }
-.ring circle { fill: none; stroke-linecap: round; }
+/* Renamed from `.ring` to avoid colliding with Tailwind's `ring` utility,
+   which added a blue box-shadow ring around every progress/rank ring. */
+.pf-ring { transform: rotate(-90deg); }
+.pf-ring circle { fill: none; stroke-linecap: round; }
 .hairline { border-top: 1px solid var(--line); }
 .chip-count { background: var(--panel3); color: var(--muted); border-radius: 999px; padding: 1px 8px; font-size: 11px; font-weight: 700; }
 @keyframes spin { to { transform: rotate(360deg); } }

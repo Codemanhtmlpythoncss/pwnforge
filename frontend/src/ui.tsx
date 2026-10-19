@@ -83,7 +83,7 @@ export function Ring({ pct, size = 48, stroke = 5, color = "var(--brand)", child
   const off = c - (Math.max(0, Math.min(100, pct)) / 100) * c;
   return (
     <div className="relative grid place-items-center" style={{ width: size, height: size }}>
-      <svg width={size} height={size} className="ring">
+      <svg width={size} height={size} className="pf-ring" aria-hidden="true" focusable="false">
         <circle cx={size / 2} cy={size / 2} r={r} stroke="var(--line2)" strokeWidth={stroke} />
         <circle cx={size / 2} cy={size / 2} r={r} stroke={color} strokeWidth={stroke}
           strokeDasharray={c} strokeDashoffset={off}
