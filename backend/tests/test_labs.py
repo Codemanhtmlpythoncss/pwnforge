@@ -36,15 +36,23 @@ def test_two_labs_get_distinct_subnets(admin):
 
 
 def test_flag_submission_server_side(admin):
+    from backend.app.vms import provision
     lab = "web-security-lab"
-    # correct flag (provisioned scheme); only the hash is stored server-side
+    started = admin.post("/api/lab-instances", json={"lab_id": lab}).json()
+    poll_job(admin, started["job_id"])
+    li_id = started["lab_instance_id"]
+    # The real flag is the one planted in this lab instance (unguessable, re-derived to validate).
     good = admin.post("/api/flags/submit",
                       json={"scope_type": "lab", "scope_id": lab,
-                            "value": f"PWN{{{lab}}}"}).json()
+                            "value": provision.derive_flag(li_id)}).json()
     assert good["correct"] is True and good["points"] > 0
+    # The old guessable PWN{lab_id} and anything else are rejected.
+    assert admin.post("/api/flags/submit",
+                      json={"scope_type": "lab", "scope_id": lab, "value": f"PWN{{{lab}}}"}).json()["correct"] is False
     bad = admin.post("/api/flags/submit",
                      json={"scope_type": "lab", "scope_id": lab, "value": "nope"}).json()
     assert bad["correct"] is False
+    admin.delete(f"/api/lab-instances/{li_id}")
 
 
 def test_lab_capacity_failure_tears_down(admin):

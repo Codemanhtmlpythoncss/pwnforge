@@ -12,6 +12,12 @@ export default function LabWorkspace() {
   const [active, setActive] = useState<string | null>(null);
   const [flag, setFlag] = useState("");
   const [flagMsg, setFlagMsg] = useState("");
+  const [hintsShown, setHintsShown] = useState(0);
+  const [copied, setCopied] = useState("");
+
+  const copy = (text: string, what: string) => {
+    navigator.clipboard?.writeText(text).then(() => { setCopied(what); setTimeout(() => setCopied(""), 1200); }).catch(() => {});
+  };
 
   const load = () => api.get("/api/lab-instances").then(r => {
     const found = r.items.find((x: any) => x.id === id);
@@ -29,7 +35,8 @@ export default function LabWorkspace() {
   const submitFlag = async () => {
     setFlagMsg("");
     const r = await api.post("/api/flags/submit", { scope_type: "lab", scope_id: labId, value: flag });
-    setFlagMsg(r.correct ? `✓ Correct! +${r.points} pts` : "✗ Incorrect flag");
+    setFlagMsg(r.correct ? (r.already_solved ? "✓ Correct (already solved)" : `✓ Correct! +${r.points} pts — walkthrough unlocked below`) : "✗ Incorrect flag");
+    if (r.correct) load();
   };
 
   if (!li) return <Spinner />;
@@ -37,10 +44,22 @@ export default function LabWorkspace() {
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">{li.lab_id}</h1>
-          <div className="text-muted text-sm">Status: <span className={li.status === "running" ? "text-ok" : ""}>{li.status}</span></div>
+          <h1 className="text-2xl font-bold">{li.title || li.lab_id}</h1>
+          <div className="text-muted text-sm">Status: <span className={li.status === "running" ? "text-ok" : ""}>{li.status}</span>{li.solved && <span className="text-ok"> · solved ✓</span>}</div>
         </div>
       </div>
+
+      {li.description && <div className="text-muted text-sm">{li.description}</div>}
+      {li.objectives?.length > 0 && (
+        <Panel>
+          <div className="font-semibold mb-2 text-sm">Objectives</div>
+          <ul className="space-y-1">
+            {li.objectives.map((o: string, i: number) => (
+              <li key={i} className="text-sm text-muted flex gap-2"><span className="text-brand">▸</span>{o}</li>
+            ))}
+          </ul>
+        </Panel>
+      )}
 
       <div className="grid lg:grid-cols-3 gap-4">
         <Panel className="lg:col-span-1">
@@ -53,13 +72,40 @@ export default function LabWorkspace() {
                   <span className="font-medium text-sm">{m.name.split("-").slice(1).join("-")}</span>
                   <span className={`tag ${m.status === "running" ? "text-ok" : ""}`}>{m.status}</span>
                 </div>
-                <div className="text-muted text-xs mt-1 font-mono">{m.ip_address || (m.simulated ? "no ip" : "waiting for an address…")}{m.simulated ? " · simulated" : ""}</div>
+                <div className="text-muted text-xs mt-1 font-mono flex items-center gap-1">
+                  {m.ip_address || (m.simulated ? "no ip" : "waiting for an address…")}{m.simulated ? " · simulated" : ""}
+                  {m.ip_address && <span role="button" title="Copy IP" onClick={e => { e.stopPropagation(); copy(m.ip_address, "ip-" + m.id); }} className="cursor-pointer hover:text-brand">{copied === "ip-" + m.id ? "✓" : "⧉"}</span>}
+                </div>
+                {m.target && (
+                  <div className="text-xs mt-1 text-warn">🎯 Target — no credentials. Enumerate it and find your own way in.</div>
+                )}
                 {m.login && (
-                  <div className="text-muted text-xs mt-1 font-mono select-all">login: {m.login.username} / {m.login.password}</div>
+                  <div className="text-muted text-xs mt-1 font-mono flex items-center gap-2 flex-wrap">
+                    <span>login: <span className="select-all text-ink">{m.login.username}</span></span>
+                    <span role="button" title="Copy username" onClick={e => { e.stopPropagation(); copy(m.login.username, "u-" + m.id); }} className="cursor-pointer hover:text-brand">{copied === "u-" + m.id ? "✓" : "⧉"}</span>
+                    <span>/ <span className="select-all text-ink">{m.login.password}</span></span>
+                    <span role="button" title="Copy password" onClick={e => { e.stopPropagation(); copy(m.login.password, "p-" + m.id); }} className="cursor-pointer hover:text-brand">{copied === "p-" + m.id ? "✓" : "⧉"}</span>
+                  </div>
                 )}
               </button>
             ))}
           </div>
+          {li.hints?.length > 0 && (
+            <div className="mt-4">
+              <div className="font-semibold mb-1 text-sm">Hints <span className="text-muted font-normal">(getting the key)</span></div>
+              {li.hints.slice(0, hintsShown).map((h: any, i: number) => (
+                <div key={i} className="text-xs mb-1.5 p-2 rounded-lg bg-panel2 border border-line">
+                  <div className="font-medium text-ink">{i + 1}. {h.title}</div>
+                  <div className="text-muted mt-0.5">{h.text}</div>
+                </div>
+              ))}
+              {hintsShown < li.hints.length && (
+                <button className="btn text-xs" onClick={() => setHintsShown(hintsShown + 1)}>
+                  {hintsShown === 0 ? "Show a hint" : `Show hint ${hintsShown + 1} of ${li.hints.length}`}
+                </button>
+              )}
+            </div>
+          )}
           <div className="mt-4">
             <div className="font-semibold mb-1 text-sm">Network topology</div>
             {li.topology.networks.map((n: any) => (
@@ -82,6 +128,13 @@ export default function LabWorkspace() {
             real={!!li.machines.find((m: any) => m.id === active && !m.simulated && m.status === "running")} />}
         </Panel>
       </div>
+
+      {li.guide && (
+        <Panel>
+          <div className="font-semibold mb-2">Walkthrough {li.solved ? <span className="text-ok text-sm font-normal">· unlocked</span> : <span className="text-muted text-sm font-normal">· admin view</span>}</div>
+          <pre className="text-sm whitespace-pre-wrap font-mono text-muted leading-relaxed">{li.guide}</pre>
+        </Panel>
+      )}
     </div>
   );
 }

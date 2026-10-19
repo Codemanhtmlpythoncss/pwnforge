@@ -218,6 +218,8 @@ def _import_labs(session: Session) -> int:
         lab.reset_behavior = d["reset_behavior"]
         lab.objectives = d["objectives"]
         lab.tags = d["tags"]
+        lab.hints = d.get("hints", [])
+        lab.guide = d.get("guide", "")
         # A demo flag per lab enables the submission flow. The plaintext is
         # provisioned into the guest in a real deployment; only the hash is stored.
         fid = f"{d['id']}::flag1"
@@ -226,7 +228,15 @@ def _import_labs(session: Session) -> int:
             flag = Flag(id=fid, scope_type="lab", scope_id=d["id"])
             session.add(flag)
         flag.name = "root flag"
-        flag.value_hash = crypto.hash_flag(f"PWN{{{d['id']}}}")
+        # The real flag is planted per lab instance (provision.derive_flag) and validated by re-derivation, so you
+        # must read it off the box. This row only carries the points; its hash is a server-secret-derived token that
+        # no one can guess or submit (never the guessable PWN{lab_id}).
+        import hmac as _hmac
+        import hashlib as _hashlib
+        from backend.app.core.config import get_settings as _gs
+        _tok = _hmac.new(_gs().load_or_create_secret().encode(), b"lab-flag-row:" + d["id"].encode(),
+                         _hashlib.sha256).hexdigest()
+        flag.value_hash = crypto.hash_flag(_tok)
         flag.points = 50
         flag.competency_key = None
     return n

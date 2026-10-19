@@ -53,8 +53,8 @@ def hash_answer(value: str) -> str:
 
 def hash_flag(value: str) -> str:
     secret = get_settings().load_or_create_secret().encode()
-    # Flags are case-sensitive except surrounding whitespace.
-    return hashlib.sha256(secret + b"::flag::" + value.strip().encode()).hexdigest()
+    # Flags are case-insensitive and ignore surrounding whitespace, so a learner isn't tripped up by capitalisation.
+    return hashlib.sha256(secret + b"::flag::" + value.strip().lower().encode()).hexdigest()
 
 
 def constant_time_equals(a: str, b: str) -> bool:

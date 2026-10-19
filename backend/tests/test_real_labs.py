@@ -17,7 +17,7 @@ from backend.app.database.models import VMStatus
 from backend.app.vms import factory, provision
 from backend.app.vms import libvirt_driver as lv
 from backend.app.vms.driver import ConsoleInfo, HostCapabilities, VMDriver, VMSpec
-from backend.tests.conftest import poll_job
+from backend.tests.conftest import make_user, poll_job
 
 
 class FakeStream:
@@ -292,3 +292,37 @@ def test_windows_labs_are_refused_on_an_arm64_host_with_a_reason(real, admin):
     r = admin.post("/api/lab-instances", json={"lab_id": "enterprise-identity-lab"})
     job = poll_job(admin, r.json()["job_id"])
     assert job["status"] == "failed" and "aarch64" in job["error"]
+
+
+def test_black_box_target_hides_login_plants_flag_and_validates_per_instance(real, admin):
+    import yaml
+    from backend.app.vms import provision
+    learner, _ = make_user(admin, "learner")   # a learner: the walkthrough must stay hidden until they solve it
+    r = learner.post("/api/lab-instances", json={"lab_id": "foothold-weak-ssh"})
+    assert r.status_code == 200, r.text
+    job = poll_job(learner, r.json()["job_id"])
+    assert job["status"] == "succeeded", job
+    li_id = r.json()["lab_instance_id"]
+    li = next(x for x in learner.get("/api/lab-instances").json()["items"] if x["id"] == li_id)
+    m = li["machines"][0]
+    # No login for a target — getting in is the challenge.
+    assert m["target"] is True and m["login"] is None
+    assert li["hints"] and len(li["hints"]) == 3
+    assert li["guide"] is None            # walkthrough hidden until solved
+    # The target seed carries the weak account (not 'learner') and the planted flag, not shown anywhere in the API.
+    spec = real.specs[f"pwnforge-{m['id']}"]
+    seed = _seed_files(spec.cloud_init_iso)
+    doc = yaml.safe_load(seed["user-data"])
+    assert doc["users"][0]["name"] == "amy" and doc["users"][0]["name"] != "learner"
+    flag = provision.derive_flag(li_id)
+    assert flag in seed["user-data"]
+    assert flag not in str(li)            # the flag is never sent to the browser
+
+    # Wrong flag and the guessable PWN{lab_id} are rejected; the real planted flag is accepted once.
+    assert learner.post("/api/flags/submit", json={"scope_type": "lab", "scope_id": "foothold-weak-ssh", "value": "PWN{nope}"}).json()["correct"] is False
+    assert learner.post("/api/flags/submit", json={"scope_type": "lab", "scope_id": "foothold-weak-ssh", "value": "PWN{foothold-weak-ssh}"}).json()["correct"] is False
+    ok = learner.post("/api/flags/submit", json={"scope_type": "lab", "scope_id": "foothold-weak-ssh", "value": flag}).json()
+    assert ok["correct"] is True and ok["points"] > 0
+    # Now solved: the walkthrough is revealed.
+    li2 = next(x for x in learner.get("/api/lab-instances").json()["items"] if x["id"] == li_id)
+    assert li2["solved"] is True and li2["guide"] and "Walkthrough" in li2["guide"]
