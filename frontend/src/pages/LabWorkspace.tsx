@@ -14,6 +14,7 @@ export default function LabWorkspace() {
   const [flagMsg, setFlagMsg] = useState("");
   const [hintsShown, setHintsShown] = useState(0);
   const [copied, setCopied] = useState("");
+  const [showConn, setShowConn] = useState(false);
 
   const copy = (text: string, what: string) => {
     navigator.clipboard?.writeText(text).then(() => { setCopied(what); setTimeout(() => setCopied(""), 1200); }).catch(() => {});
@@ -40,6 +41,14 @@ export default function LabWorkspace() {
   };
 
   if (!li) return <Spinner />;
+  const activeM = li.machines.find((m: any) => m.id === active);
+  const labCidr = activeM?.network_cidr || li.topology?.networks?.[0]?.cidr || "the lab network";
+  const connCmds = activeM?.ip_address ? [
+    { label: "Scan", cmd: `nmap -sV -sC ${activeM.ip_address}` },
+    activeM.login
+      ? { label: "SSH", cmd: `ssh ${activeM.login.username}@${activeM.ip_address}` }
+      : { label: "All ports", cmd: `nmap -p- ${activeM.ip_address}` },
+  ] : [];
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
@@ -129,12 +138,71 @@ export default function LabWorkspace() {
         </Panel>
       </div>
 
+      {activeM?.ip_address && !activeM.simulated && (
+        <Panel>
+          <div className="flex items-center justify-between gap-3 flex-wrap mb-2">
+            <div className="font-semibold text-sm">Attack it from your own machine
+              <span className="text-muted font-normal font-mono"> · {activeM.ip_address}</span></div>
+            <button className="btn btn-ghost text-xs" onClick={() => setShowConn(s => !s)}>
+              {showConn ? "Hide setup" : "Can't reach this IP?"}
+            </button>
+          </div>
+          <div className="text-muted text-xs mb-2">Run these from a terminal on any device on your network (not the in-app console) to treat this like a real box.</div>
+          <div className="space-y-1.5">
+            {connCmds.map(c => (
+              <div key={c.label} className="flex items-center gap-2 bg-panel2 border border-line rounded-lg px-3 py-2">
+                <span className="text-muted text-xs w-16 shrink-0">{c.label}</span>
+                <code className="text-sm font-mono flex-1 select-all break-all text-ink">{c.cmd}</code>
+                <span role="button" title="Copy command" onClick={() => copy(c.cmd, "cmd-" + c.label)}
+                  className="cursor-pointer hover:text-brand text-sm shrink-0">{copied === "cmd-" + c.label ? "✓" : "⧉"}</span>
+              </div>
+            ))}
+          </div>
+          {showConn && <ConnGuide cidr={labCidr} />}
+        </Panel>
+      )}
+
       {li.guide && (
         <Panel>
           <div className="font-semibold mb-2">Walkthrough {li.solved ? <span className="text-ok text-sm font-normal">· unlocked</span> : <span className="text-muted text-sm font-normal">· admin view</span>}</div>
           <pre className="text-sm whitespace-pre-wrap font-mono text-muted leading-relaxed">{li.guide}</pre>
         </Panel>
       )}
+    </div>
+  );
+}
+
+function ConnGuide({ cidr }: { cidr: string }) {
+  return (
+    <div className="mt-3 pt-3 border-t border-line text-sm space-y-3">
+      <div className="text-muted">
+        Lab targets live on an isolated network (<span className="font-mono text-ink">{cidr}</span>) behind the PwnForge
+        host, so your own machine needs a route to them. Pick whichever fits — you only do this once per device.
+      </div>
+      <div>
+        <div className="font-semibold text-ink mb-1">On a Tailscale network</div>
+        <ol className="list-decimal ml-5 space-y-1 text-muted">
+          <li>Whoever runs the server enables lab access on the host (dashboard → PwnForge, or
+            <span className="font-mono text-ink"> pwnforge-host.sh tailnet-access on</span>) and approves the advertised
+            route in the Tailscale admin console.</li>
+          <li>On your device, accept the route:
+            <div className="mt-1"><code className="font-mono text-ink bg-panel2 border border-line rounded px-2 py-0.5">tailscale set --accept-routes</code></div>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <div className="font-semibold text-ink mb-1">On the local network (no Tailscale)</div>
+        <ol className="list-decimal ml-5 space-y-1 text-muted">
+          <li>Make sure the server admin turned lab access on (it also opens the LAN path).</li>
+          <li>Add a route to the lab network via the host's LAN IP (ask the admin for it):
+            <div className="mt-1 space-y-1">
+              <div><span className="text-muted">macOS/Linux:</span> <code className="font-mono text-ink bg-panel2 border border-line rounded px-2 py-0.5">sudo ip route add {cidr} via &lt;host-lan-ip&gt;</code></div>
+              <div><span className="text-muted">macOS alt:</span> <code className="font-mono text-ink bg-panel2 border border-line rounded px-2 py-0.5">sudo route -n add -net {cidr} &lt;host-lan-ip&gt;</code></div>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <div className="text-muted">Then the <span className="font-mono text-ink">nmap</span>/<span className="font-mono text-ink">ssh</span> commands above work straight from your terminal. Targets can't reach back out — only your inbound sessions get through.</div>
     </div>
   );
 }
