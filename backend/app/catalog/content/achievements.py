@@ -38,4 +38,32 @@ ACHIEVEMENTS = [
     dict(key="committed", title="Committed", category="streak", points=30,
          icon="calendar", description="Maintain a seven-day learning streak.",
          criteria={"type": "streak_days", "days": 7}),
+    # --- capture the flag ---
+    dict(key="flag-hunter", title="Flag Hunter", category="flags", points=15,
+         icon="flag", description="Capture your first flag.",
+         criteria={"type": "flags_captured", "count": 1}),
+    dict(key="flag-collector", title="Flag Collector", category="flags", points=35,
+         icon="flag", description="Capture flags on five labs.",
+         criteria={"type": "flags_captured", "count": 5}),
+    dict(key="flag-master", title="Flag Master", category="flags", points=75,
+         icon="flag", description="Capture flags on twenty labs.",
+         criteria={"type": "flags_captured", "count": 20}),
+    # --- breaking in (black-box targets) ---
+    dict(key="breaking-in", title="Breaking In", category="offense", points=30,
+         icon="key", description="Break into your first black-box target.",
+         criteria={"type": "black_box_solved", "count": 1}),
+    dict(key="red-teamer", title="Red Teamer", category="offense", points=60,
+         icon="shield", description="Break into three black-box targets.",
+         criteria={"type": "black_box_solved", "count": 3}),
+    # --- learning paths ---
+    dict(key="pathfinder", title="Pathfinder", category="path", points=40,
+         icon="route", description="Complete your first learning path.",
+         criteria={"type": "paths_completed", "count": 1}),
+    dict(key="trailblazer", title="Trailblazer", category="path", points=80,
+         icon="route", description="Complete three learning paths.",
+         criteria={"type": "paths_completed", "count": 3}),
+    # --- XP ---
+    dict(key="elite", title="Elite", category="xp", points=0,
+         icon="trophy", description="Reach 1000 XP.",
+         criteria={"type": "xp_reached", "amount": 1000}),
 ]

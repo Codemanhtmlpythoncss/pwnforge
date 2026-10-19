@@ -6,6 +6,7 @@ import { RankBadge, Spinner } from "./ui";
 import { Icon } from "./icons";
 import { Logo } from "./logo";
 import Login from "./pages/Login";
+import AchievementToaster from "./AchievementToaster";
 // Route pages are code-split: each loads on demand, keeping the initial bundle small
 // (LabWorkspace in particular pulls in the xterm terminal, which most sessions never open).
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -68,6 +69,7 @@ export default function App() {
 
   return (
     <div className="flex h-full">
+      <AchievementToaster />
       <Sidebar isAdmin={user.role === "administrator"} user={user} />
       <div className="flex-1 flex flex-col min-w-0">
         <TopBar />
