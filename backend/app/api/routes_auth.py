@@ -121,3 +121,30 @@ def change_password(body: schemas.ChangePasswordRequest, request: Request,
         raise HTTPException(status.HTTP_400_BAD_REQUEST, str(e))
     audit.record(db, action="auth.change_password", actor_id=user.id, ip=client_ip(request))
     return {"ok": True}
+
+
+@router.post("/account/reset")
+def reset_account(request: Request, user: User = Depends(current_user),
+                  db: Session = Depends(get_db)) -> dict:
+    """Wipe the caller's own learning progress for a fresh start.
+
+    Clears XP, streak, course/lesson/assessment progress, skill evidence, captured flags,
+    earned achievements and certificates.
+    The account, credentials and any running machines are left untouched.
+    """
+    from sqlalchemy import delete
+    from backend.app.database.models import (
+        AssessmentProgress, Certificate, CourseProgress, FlagSubmission,
+        LessonProgress, UserAchievement, UserCompetency,
+    )
+
+    # Clear all learner state, including the idempotency record that prevents repeat
+    # assessment XP. Keep the deletes, user update and audit entry in one transaction.
+    for model in (AssessmentProgress, LessonProgress, CourseProgress, UserCompetency,
+                  FlagSubmission, UserAchievement, Certificate):
+        db.execute(delete(model).where(model.user_id == user.id))
+    user.xp = 0
+    user.streak_days = 0
+    user.last_active_day = None
+    audit.record(db, action="account.reset", actor_id=user.id, ip=client_ip(request))
+    return {"ok": True}

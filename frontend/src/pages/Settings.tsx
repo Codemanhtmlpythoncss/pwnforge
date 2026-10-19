@@ -79,6 +79,42 @@ function Updates() {
   );
 }
 
+function AccountReset() {
+  const [confirming, setConfirming] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState("");
+  const reset = async () => {
+    setBusy(true); setMsg("");
+    try {
+      await api.post("/api/auth/account/reset");
+      setMsg("Your progress has been reset — reloading…");
+      setTimeout(() => window.location.reload(), 900);
+    } catch (e: any) { setMsg(e.message); setBusy(false); setConfirming(false); }
+  };
+  return (
+    <Panel>
+      <div className="font-semibold mb-1">Account</div>
+      <div className="text-muted text-sm mb-3">
+        Reset your learning progress for a fresh start — clears XP, rank, streak, course and lesson progress,
+        assessment attempts, skill evidence, captured flags, achievements and certificates. Your account, password,
+        saved items and any running machines are kept.
+      </div>
+      {!confirming ? (
+        <button className="btn btn-danger text-sm" onClick={() => setConfirming(true)}>Reset my progress…</button>
+      ) : (
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-sm text-warn">This can't be undone.</span>
+          <button className="btn btn-danger text-sm" disabled={busy} onClick={reset}>
+            {busy ? "Resetting…" : "Yes, reset everything"}
+          </button>
+          <button className="btn text-sm" disabled={busy} onClick={() => setConfirming(false)}>Cancel</button>
+        </div>
+      )}
+      {msg && <div className="text-sm mt-2 text-brand">{msg}</div>}
+    </Panel>
+  );
+}
+
 export default function Settings() {
   const [items, setItems] = useState<any[]>([]);
   const [edited, setEdited] = useState<Record<string, any>>({});
@@ -103,6 +139,7 @@ export default function Settings() {
         <div className="text-muted text-sm mt-1">Every setting has a real backend effect. RAM and limits are live-configurable.</div></div>
       {saved && <div className="text-sm text-brand">{saved}</div>}
       <Updates />
+      <AccountReset />
       {Object.entries(groups).map(([cat, list]) => (
         <Panel key={cat}>
           <div className="font-semibold capitalize mb-3">{cat}</div>

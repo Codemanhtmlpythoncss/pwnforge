@@ -48,6 +48,29 @@ def test_assessment_correct_vs_incorrect(admin):
     assert r2["passed"] is False
 
 
+def test_resubmitting_a_passed_assessment_awards_xp_only_once(admin):
+    from backend.tests.conftest import make_user
+
+    learner, _ = make_user(admin)
+    course = learner.get("/api/courses/cybersecurity-fundamentals").json()
+    assessment = course["assessments"][0]
+    known = {
+        "Which principle limits the blast radius of a compromised account?": "Least privilege",
+        "What combines likelihood and impact?": "risk",
+        "Encryption of data at rest primarily protects:": "Confidentiality",
+    }
+    answers = {q["id"]: known[q["prompt"]] for q in assessment["questions"]}
+    before = learner.get("/api/auth/me").json()["user"]["xp"]
+    first = learner.post(f"/api/assessments/{assessment['id']}/submit", json={"answers": answers})
+    assert first.status_code == 200 and first.json()["passed"] is True
+    after_first = learner.get("/api/auth/me").json()["user"]["xp"]
+    second = learner.post(f"/api/assessments/{assessment['id']}/submit", json={"answers": answers})
+    assert second.status_code == 200 and second.json()["passed"] is True
+    after_second = learner.get("/api/auth/me").json()["user"]["xp"]
+    assert after_first == before + 30
+    assert after_second == after_first
+
+
 def test_competency_tracking(admin):
     # After the above, linux-fundamentals competency should be demonstrated.
     comps = {c["key"]: c["level"] for c in admin.get("/api/competencies").json()["items"]}
@@ -120,3 +143,21 @@ def test_certificate_issued_on_path_completion(admin):
     assert any(c["serial"] == serial and c["path_id"] == pid for c in certs)
     assert learner.get(f"/api/certificates/{serial}").json()["path_title"]
     assert learner.get("/api/certificates/PF-NOPE").status_code == 404
+
+
+def test_learning_paths_resolve_optional_labs_to_friendly_machine_names(admin):
+    from backend.app.database.base import session_scope
+    from backend.app.database.models import LearningPath
+
+    with session_scope() as db:
+        paths = list(db.query(LearningPath).all())
+        assert paths
+        lab_counts = [sum(step.lab_id is not None for step in path.steps) for path in paths]
+        assert all(2 <= count <= 5 for count in lab_counts)
+        path_id = next(path.id for path in paths if any(step.lab_id for step in path.steps))
+
+    detail = admin.get(f"/api/paths/{path_id}").json()
+    lab_steps = [step for step in detail["steps"] if step["kind"] == "lab"]
+    assert lab_steps
+    assert all(step["title"] != step["lab_id"] for step in lab_steps)
+    assert all(step["difficulty"] for step in lab_steps)
