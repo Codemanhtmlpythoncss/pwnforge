@@ -6,11 +6,12 @@ function Updates() {
   const [v, setV] = useState<any>(null);
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
+  const [out, setOut] = useState("");
   const load = () => api.get("/api/admin/version").then(setV).catch(() => {});
   useEffect(() => { load(); }, []);
 
   const update = async () => {
-    setMsg(""); setBusy(true);
+    setMsg(""); setOut(""); setBusy(true);
     try {
       const { job_id } = await api.post("/api/admin/update");
       setMsg("Updating… (the service restarts when it's done)");
@@ -18,8 +19,8 @@ function Updates() {
         await new Promise(r => setTimeout(r, 2000));
         let j;
         try { j = await api.get(`/api/jobs/${job_id}`); } catch { setMsg("Update finished (the server restarted). Reload the page."); break; }
-        if (j.status === "succeeded") { setMsg("Update complete. Reload the page."); break; }
-        if (j.status === "failed") { setMsg(j.error || "Update failed."); break; }
+        if (j.status === "succeeded") { setOut(j.result?.output || ""); setMsg("Update finished. Reload the page to load it."); break; }
+        if (j.status === "failed") { setOut(j.error || ""); setMsg("Update failed."); break; }
       }
     } catch (e: any) { setMsg(e.message); }
     finally { setBusy(false); load(); }
@@ -44,6 +45,9 @@ function Updates() {
         </button>
       </div>
       {msg && <div className="text-sm text-brand mt-2">{msg}</div>}
+      {out
+        ? <pre className="mt-2 text-xs font-mono bg-panel2 rounded-lg p-3 overflow-auto max-h-56 whitespace-pre-wrap">{out}</pre>
+        : (msg && !busy) ? <div className="text-muted text-xs mt-1">The updater produced no output — check that admin.update_command actually updates (the default is <span className="font-mono">bash scripts/update.sh</span>).</div> : null}
     </Panel>
   );
 }

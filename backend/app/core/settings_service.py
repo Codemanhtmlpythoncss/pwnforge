@@ -37,9 +37,10 @@ DEFAULTS: list[SettingDef] = [
                "Session lifetime in hours before re-login is required."),
     SettingDef("auth.registration_open", False, "bool", "auth",
                "Allow self-service learner registration."),
-    SettingDef("admin.update_command", "", "string", "maintenance",
+    SettingDef("admin.update_command", "bash scripts/update.sh", "string", "maintenance",
                "Command the in-app Update button runs to update PwnForge (pull, reinstall, migrate, "
-               "rebuild, restart). Empty means updates are host-managed and the button is disabled."),
+               "rebuild, restart). The default is the bundled updater; clear it to disable the button "
+               "(e.g. on a host where updates are managed elsewhere)."),
     SettingDef("auth.min_password_length", 1, "int", "auth",
                "Minimum password length enforced on create/change (1: any password that isn't empty)."),
     # --- resource limits (consumed by the VM capacity planner) ---
