@@ -91,7 +91,7 @@ STACKS: dict[str, Stack] = {s.slug: s for s in [
     Stack("debian-monitor", "Debian monitoring", "debian", "debian-13-monitoring",
           ["rsyslog", "auditd"], ["rsyslog"]),
     Stack("osint-station", "OSINT workstation", "debian", "debian-13-desktop",
-          ["exiftool", "python3", "firefox-esr"], ["lightdm"]),
+          ["libimage-exiftool-perl", "python3", "firefox-esr"], ["lightdm"]),
 ]}
 
 WEB_STACKS = ["nginx-php", "apache-python", "node-express", "tomcat-java"]
