@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api";
-import { Diff, Panel, Ring, Spinner, Stat, rankFor } from "../ui";
+import { Diff, Panel, Ring, Skeleton, Stat, rankFor } from "../ui";
 import { Icon } from "../icons";
 
 export default function Dashboard() {
@@ -19,7 +19,7 @@ export default function Dashboard() {
     document.addEventListener("visibilitychange", poll);
     return () => { clearInterval(t); document.removeEventListener("visibilitychange", poll); };
   }, []);
-  if (!d) return <Spinner />;
+  if (!d) return <DashboardSkeleton />;
   const h = host || d.host;
   const rank = rankFor(d.xp);
 
@@ -128,6 +128,45 @@ function Metric({ label, pct, sub }: { label: string; pct: number; sub: string }
       <div className="text-center">
         <div className="text-sm font-semibold">{label}</div>
         <div className="text-muted text-[11px]">{sub}</div>
+      </div>
+    </div>
+  );
+}
+
+function DashboardSkeleton() {
+  return (
+    <div className="space-y-6">
+      <div className="card p-5 flex items-center gap-5">
+        <Skeleton className="rounded-full shrink-0" style={{ width: 86, height: 86 }} />
+        <div className="flex-1 space-y-2.5">
+          <Skeleton style={{ height: 24, width: 200 }} />
+          <Skeleton style={{ height: 14, width: 260 }} />
+          <Skeleton style={{ height: 8, width: "60%" }} />
+        </div>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="card p-4 space-y-2.5">
+            <Skeleton style={{ height: 11, width: 80 }} />
+            <Skeleton style={{ height: 28, width: 48 }} />
+            <Skeleton style={{ height: 11, width: 90 }} />
+          </div>
+        ))}
+      </div>
+      <div className="card p-5">
+        <Skeleton style={{ height: 16, width: 140 }} className="mb-5" />
+        <div className="grid grid-cols-3 gap-4">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="flex flex-col items-center gap-2.5">
+              <Skeleton className="rounded-full" style={{ width: 78, height: 78 }} />
+              <Skeleton style={{ height: 12, width: 64 }} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="grid md:grid-cols-2 gap-4">
+        <Skeleton style={{ height: 170 }} />
+        <Skeleton style={{ height: 170 }} />
       </div>
     </div>
   );

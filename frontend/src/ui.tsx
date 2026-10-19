@@ -1,4 +1,4 @@
-import { KeyboardEvent, ReactNode, useState } from "react";
+import { CSSProperties, KeyboardEvent, ReactNode, useState } from "react";
 import { diffClass } from "./api";
 
 export function Panel({ children, className = "", hover = false }:
@@ -22,9 +22,9 @@ export function Spinner({ label }: { label?: string }) {
 export function Stat({ label, value, sub, accent }:
   { label: string; value: ReactNode; sub?: ReactNode; accent?: boolean }) {
   return (
-    <div className="card p-4 fade-in">
+    <div className="card card-hover p-4 fade-in">
       <div className="text-muted text-[11px] uppercase tracking-wider font-semibold">{label}</div>
-      <div className={`text-2xl font-extrabold mt-1 ${accent ? "text-brand glow-text" : ""}`}>{value}</div>
+      <div className={`text-2xl font-extrabold mt-1 tnum ${accent ? "text-brand glow-text" : ""}`}>{value}</div>
       {sub && <div className="text-muted text-xs mt-1">{sub}</div>}
     </div>
   );
@@ -34,8 +34,36 @@ export function Bar({ pct }: { pct: number }) {
   return <div className="bar"><i style={{ width: `${Math.max(0, Math.min(100, pct))}%` }} /></div>;
 }
 
-export function Empty({ msg }: { msg: string }) {
-  return <div className="text-muted text-sm py-10 text-center">{msg}</div>;
+export function Empty({ msg, icon, action }: { msg: string; icon?: ReactNode; action?: ReactNode }) {
+  return (
+    <div className="flex flex-col items-center gap-3 py-12 text-center">
+      {icon && <div className="text-3xl opacity-60" aria-hidden="true">{icon}</div>}
+      <div className="text-muted text-sm max-w-sm">{msg}</div>
+      {action}
+    </div>
+  );
+}
+
+/** Shimmer placeholder block; sized with Tailwind classes or style. */
+export function Skeleton({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return <div className={`skeleton ${className}`} style={style} aria-hidden="true" />;
+}
+
+/** Copy-to-clipboard button with a brief "Copied" tick. */
+export function CopyButton({ value, label = "Copy", className = "" }:
+  { value: string; label?: string; className?: string }) {
+  const [done, setDone] = useState(false);
+  const copy = () => {
+    navigator.clipboard?.writeText(value)
+      .then(() => { setDone(true); setTimeout(() => setDone(false), 1200); })
+      .catch(() => {});
+  };
+  return (
+    <button type="button" onClick={copy} className={`btn btn-ghost text-xs ${className}`}
+      aria-label={`Copy ${label}`}>
+      {done ? "✓ Copied" : label}
+    </button>
+  );
 }
 
 /* ---- HTB-style rank derived from XP ---- */
@@ -83,7 +111,7 @@ export function Ring({ pct, size = 48, stroke = 5, color = "var(--brand)", child
   const off = c - (Math.max(0, Math.min(100, pct)) / 100) * c;
   return (
     <div className="relative grid place-items-center" style={{ width: size, height: size }}>
-      <svg width={size} height={size} className="ring">
+      <svg width={size} height={size} className="pf-ring" aria-hidden="true" focusable="false">
         <circle cx={size / 2} cy={size / 2} r={r} stroke="var(--line2)" strokeWidth={stroke} />
         <circle cx={size / 2} cy={size / 2} r={r} stroke={color} strokeWidth={stroke}
           strokeDasharray={c} strokeDashoffset={off}
