@@ -35,6 +35,47 @@ def test_password_hash_not_leaked(admin):
     assert "password" not in me and "password_hash" not in me
 
 
+def test_account_reset_clears_all_progress_but_keeps_account(admin):
+    from backend.tests.conftest import make_user
+    from backend.app.database.base import session_scope
+    from backend.app.database.models import (
+        Achievement, Assessment, AssessmentProgress, Certificate, Course, CourseProgress,
+        Flag, FlagSubmission, LearningPath, Lesson, LessonProgress, User, UserAchievement,
+        UserCompetency,
+    )
+
+    learner, info = make_user(admin)
+    with session_scope() as db:
+        user = db.query(User).filter_by(username=info["username"]).one()
+        course = db.query(Course).first()
+        lesson = db.query(Lesson).first()
+        assessment = db.query(Assessment).first()
+        flag = db.query(Flag).first()
+        achievement = db.query(Achievement).first()
+        path = db.query(LearningPath).first()
+        assert all((course, lesson, assessment, flag, achievement, path))
+        user.xp, user.streak_days, user.last_active_day = 420, 3, "2026-10-19"
+        db.add_all([
+            CourseProgress(user_id=user.id, course_id=course.id),
+            LessonProgress(user_id=user.id, lesson_id=lesson.id),
+            AssessmentProgress(user_id=user.id, assessment_id=assessment.id, xp_awarded=True),
+            UserCompetency(user_id=user.id, competency_key="linux", level=2, evidence_count=4),
+            FlagSubmission(user_id=user.id, flag_id=flag.id, correct=True),
+            UserAchievement(user_id=user.id, achievement_key=achievement.key),
+            Certificate(user_id=user.id, path_id=path.id, serial="PF-RESET-TEST", path_title=path.title),
+        ])
+
+    response = learner.post("/api/auth/account/reset")
+    assert response.status_code == 200, response.text
+    assert learner.get("/api/auth/me").json()["user"]["xp"] == 0
+    with session_scope() as db:
+        user = db.query(User).filter_by(username=info["username"]).one()
+        assert (user.xp, user.streak_days, user.last_active_day) == (0, 0, None)
+        for model in (CourseProgress, LessonProgress, AssessmentProgress, UserCompetency,
+                      FlagSubmission, UserAchievement, Certificate):
+            assert db.query(model).filter_by(user_id=user.id).count() == 0
+
+
 def test_no_password_minimum_unless_an_admin_sets_one(admin):
     # By default any password that isn't empty is accepted.
     assert admin.post("/api/users", json={"username": "shorty", "password": "x", "role": "learner"}).status_code == 200

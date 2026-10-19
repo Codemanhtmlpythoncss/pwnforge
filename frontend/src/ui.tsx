@@ -39,14 +39,17 @@ export function Empty({ msg }: { msg: string }) {
 }
 
 /* ---- HTB-style rank derived from XP ---- */
+// Thresholds are deliberately demanding so a rank reflects real progress — roughly
+// ~8,150 XP is available across all courses, labs and achievements, so "Hacker" (600)
+// is several courses deep and "Omniscient" (7,000) is near-total mastery.
 const RANKS = [
   { min: 0, name: "Noob", color: "#8a97b1" },
-  { min: 50, name: "Script Kiddie", color: "#9fb0cc" },
-  { min: 150, name: "Hacker", color: "#9fef00" },
-  { min: 400, name: "Pro Hacker", color: "#2ee6a6" },
-  { min: 800, name: "Elite Hacker", color: "#5cb2ff" },
-  { min: 1500, name: "Guru", color: "#ffb01f" },
-  { min: 3000, name: "Omniscient", color: "#ff5c9c" },
+  { min: 150, name: "Script Kiddie", color: "#9fb0cc" },
+  { min: 600, name: "Hacker", color: "#9fef00" },
+  { min: 1400, name: "Pro Hacker", color: "#2ee6a6" },
+  { min: 2800, name: "Elite Hacker", color: "#5cb2ff" },
+  { min: 4500, name: "Guru", color: "#ffb01f" },
+  { min: 7000, name: "Omniscient", color: "#ff5c9c" },
 ];
 export function rankFor(xp: number) {
   let cur = RANKS[0], next = RANKS[RANKS.length - 1];

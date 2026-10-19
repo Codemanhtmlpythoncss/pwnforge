@@ -58,6 +58,38 @@ On first launch the site asks you to create the administrator account and binds
 to **localhost only**. LAN access is an explicit setting (Admin → Settings →
 `server.lan_access`).
 
+## Connect to lab machines from macOS or Linux
+
+When the PwnForge host has enabled direct lab access and the Tailscale subnet
+route has been approved, install the small client command on your Mac:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/Codemanhtmlpythoncss/nodeyard/tailnet-lab-access/share/nodeyard/dashboard/web/pwnforge-install-macos.sh | sh
+pwnforge install 10.200.0.0/16 <server-lan-ip>
+```
+
+For a Linux client with systemd and iproute2:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/Codemanhtmlpythoncss/nodeyard/tailnet-lab-access/share/nodeyard/dashboard/web/pwnforge-install-linux.sh | sh
+pwnforge install 10.200.0.0/16 <server-lan-ip>
+```
+
+Use the lab network and server LAN address shown by the Nodeyard dashboard.
+After installation, `pwnforge status` shows which route is active,
+`pwnforge test <lab-IP> 22` checks a running target, and `pwnforge remove`
+removes the client helper. The helper adds a persistent LAN fallback and
+leaves approved Tailscale routes in control. On Linux, enable route acceptance
+if needed with `sudo tailscale set --accept-routes=true`.
+
+The installers install the client command at `/usr/local/bin/pwnforge`. They
+stop rather than overwrite an unrelated command already using that name. Do
+not install the client helper on the PwnForge server itself; configure its
+routes from the Nodeyard dashboard.
+
+The [Nodeyard GitHub README](https://github.com/Codemanhtmlpythoncss/nodeyard/tree/tailnet-lab-access#pwnforge-lab-access-from-a-mac-or-linux-client)
+has the same instructions and dashboard download links.
+
 ## Production install (Debian + KVM)
 
 ```bash

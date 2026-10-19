@@ -7,7 +7,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
 from backend.app.database.models import (
-    Certificate, CourseProgress, LearningPath, LearningPathStep, ProgressStatus, User, Course,
+    Certificate, CourseProgress, Lab, LearningPath, LearningPathStep, ProgressStatus, User, Course,
 )
 
 
@@ -80,18 +80,26 @@ def path_detail(session: Session, path_id: str, user: User | None = None) -> dic
     if p is None:
         raise KeyError(path_id)
 
+    course_ids = {step.course_id for step in p.steps if step.course_id}
+    lab_ids = {step.lab_id for step in p.steps if step.lab_id}
+    courses = {course.id: course for course in session.execute(
+        select(Course).where(Course.id.in_(course_ids))).scalars()} if course_ids else {}
+    labs = {lab.id: lab for lab in session.execute(
+        select(Lab).where(Lab.id.in_(lab_ids))).scalars()} if lab_ids else {}
     progress: dict[str, CourseProgress] = {}
     solved_labs: set[str] = set()
     if user:
         progress = {cp.course_id: cp for cp in session.execute(
-            select(CourseProgress).where(CourseProgress.user_id == user.id)).scalars()}
+            select(CourseProgress).where(CourseProgress.user_id == user.id,
+                                         CourseProgress.course_id.in_(course_ids))).scalars()} if course_ids else {}
         solved_labs = _solved_lab_ids(session, user.id)
 
     steps = []
     next_step = None
     completed = 0
     for step in sorted(p.steps, key=lambda s: s.order):
-        course = session.get(Course, step.course_id) if step.course_id else None
+        course = courses.get(step.course_id) if step.course_id else None
+        lab = labs.get(step.lab_id) if step.lab_id else None
         cp = progress.get(step.course_id) if step.course_id else None
         if step.lab_id:
             # A lab step is complete once the learner has captured that lab's flag.
@@ -109,8 +117,10 @@ def path_detail(session: Session, path_id: str, user: User | None = None) -> dic
                     break
         entry = {
             "order": step.order, "course_id": step.course_id, "lab_id": step.lab_id,
-            "title": course.title if course else (step.lab_id or "step"),
-            "difficulty": course.difficulty.value if course else None,
+            "title": course.title if course else (lab.title if lab else (step.lab_id or "step")),
+            "difficulty": (course.difficulty.value if course
+                           else lab.difficulty.value if lab else None),
+            "kind": "lab" if step.lab_id else "course",
             "required": step.required, "note": step.note,
             "status": status, "locked": locked,
         }
