@@ -95,6 +95,25 @@ def create_app() -> FastAPI:
     _openapi_security(app)
     _api_docs(app)
 
+    @app.on_event("startup")
+    def _refresh_readiness() -> None:
+        if settings.environment.lower() == "test":
+            return   # tests seed readiness themselves; don't race the test DB
+        # Profile readiness depends on the host's VM capabilities, which change when real machines are
+        # set up. Recompute it on startup (in the background, best-effort) so a restart after setup flips
+        # profiles to 'ready' without a reseed. recompute_readiness only writes rows that actually change.
+        import threading
+
+        def run() -> None:
+            try:
+                from backend.app.database.base import session_scope
+                from backend.app.profiles import service as profiles
+                with session_scope() as db:
+                    profiles.recompute_readiness(db)
+            except Exception:  # noqa: BLE001 - never block or crash startup
+                pass
+        threading.Thread(target=run, name="readiness-refresh", daemon=True).start()
+
     @app.get("/api/health")
     def health() -> dict:
         return {"status": "ok", "version": app.version}
