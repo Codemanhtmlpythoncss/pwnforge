@@ -78,11 +78,16 @@ def verify_image(session: Session, image: BaseImage) -> bool:
     return ok
 
 
-def fetch_image(session: Session, key: str, *, progress=None) -> BaseImage:
-    """Explicitly download/build a base image. Never called automatically."""
+def fetch_image(session: Session, key: str, *, progress=None, force: bool = False) -> BaseImage:
+    """Explicitly download/build a base image. Never called automatically.
+
+    Idempotent: an image already present on disk is left as-is (so re-running a setup or
+    update doesn't re-download gigabytes) unless ``force`` is set."""
     image = get_image(session, key)
     if image is None:
         raise ImageError(f"Unknown image {key}")
+    if not force and refresh_status(session, image) == ImageStatus.present and verify_image(session, image):
+        return image
     if image.source_kind == "build":
         raise ImageError(
             f"Image {key} must be built from its recipe (see build_instructions); "
