@@ -221,14 +221,14 @@ def images_list() -> None:
 
 
 @images_app.command("fetch")
-def images_fetch(key: str) -> None:
-    """Download/build a base image ON THIS HOST (never automatic)."""
+def images_fetch(key: str, force: bool = False) -> None:
+    """Download/build a base image ON THIS HOST (never automatic). Already-present images are skipped unless --force."""
     from backend.app.database.base import session_scope
     from backend.app.images import service as images
     console.print(f"Fetching {key} (this runs only on the host, when you invoke it)…")
     with session_scope() as s:
         try:
-            img = images.fetch_image(s, key, progress=lambda p: console.print(f"  {p}%", end="\r"))
+            img = images.fetch_image(s, key, progress=lambda p: console.print(f"  {p}%", end="\r"), force=force)
             console.print(f"[green]{key}: {img.status.value}[/green]")
         except images.ImageError as e:
             console.print(f"[red]{e}[/red]"); raise typer.Exit(1)
