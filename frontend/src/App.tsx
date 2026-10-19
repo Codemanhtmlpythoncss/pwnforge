@@ -18,6 +18,7 @@ const Skills = lazy(() => import("./pages/Skills"));
 const Labs = lazy(() => import("./pages/Labs"));
 const Running = lazy(() => import("./pages/Running"));
 const LabWorkspace = lazy(() => import("./pages/LabWorkspace"));
+const Guide = lazy(() => import("./pages/Guide"));
 const Achievements = lazy(() => import("./pages/Achievements"));
 const Admin = lazy(() => import("./pages/Admin"));
 const Settings = lazy(() => import("./pages/Settings"));
@@ -34,6 +35,7 @@ const GROUPS: { label: string; items: [string, string, string][] }[] = [
     ["/machines", "Machines", "cpu"],
     ["/labs", "Labs", "box"],
     ["/running", "Running", "server"],
+    ["/guide", "Guide", "globe"],
   ]},
 ];
 const ADMIN_ITEMS: [string, string, string][] = [
@@ -44,7 +46,7 @@ const ADMIN_ITEMS: [string, string, string][] = [
 const TITLES: Record<string, string> = {
   "/": "Dashboard", "/courses": "Course Catalogue", "/paths": "Learning Paths",
   "/skills": "Skills", "/achievements": "Achievements", "/machines": "Machine Catalogue",
-  "/labs": "Labs", "/running": "Running", "/admin": "Administration", "/settings": "Settings",
+  "/labs": "Labs", "/running": "Running", "/guide": "Guide", "/admin": "Administration", "/settings": "Settings",
 };
 
 function toggleTheme() {
@@ -84,6 +86,7 @@ export default function App() {
               <Route path="/labs" element={<Labs />} />
               <Route path="/labs/instance/:id" element={<LabWorkspace />} />
               <Route path="/running" element={<Running />} />
+              <Route path="/guide" element={<Guide />} />
               <Route path="/skills" element={<Skills />} />
               <Route path="/achievements" element={<Achievements />} />
               {user.role === "administrator" && <Route path="/admin" element={<Admin />} />}
