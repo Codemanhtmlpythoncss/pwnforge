@@ -132,14 +132,19 @@ def _assess(p: VMProfile, images: dict, real_virt: bool, host_arch: str) -> Prof
     if not real_virt:
         # Simulation driver: launchable as a simulation regardless of image bytes.
         return ProfileReadiness.ready
-    arch_alias = {"x86_64": "amd64", "amd64": "x86_64",
-                  "aarch64": "arm64", "arm64": "aarch64"}.get(host_arch, host_arch)
-    if p.arch not in (host_arch, arch_alias):
+    # The image this host actually boots (a Linux role image runs on the distro's image for this CPU).
+    from backend.app.vms.provision import host_image_from
+
+    host = host_image_from(images, p.base_image_key, host_arch)
+    if host is None:
+        root = img
+        while root is not None and root.parent_key:
+            root = images.get(root.parent_key)
+        if root is not None and root.source_kind == "iso":
+            return ProfileReadiness.requires_install_media
         return ProfileReadiness.unsupported_on_host
-    if img.status == ImageStatus.present:
+    if host.status in (ImageStatus.present, ImageStatus.unverified):
         return ProfileReadiness.ready
-    if img.source_kind == "iso":
-        return ProfileReadiness.requires_install_media
     return ProfileReadiness.requires_base_image
 
 

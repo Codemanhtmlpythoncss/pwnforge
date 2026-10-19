@@ -139,3 +139,79 @@ async def ws_terminal(ws: WebSocket, vm_id: str) -> None:
             await ws.close()
         except RuntimeError:
             pass
+
+
+def _same_origin(ws: WebSocket) -> bool:
+    """Refuse a browser page on another site opening this socket with the user's cookie."""
+    origin = ws.headers.get("origin")
+    if not origin:
+        return True                      # not a browser (CLI tools send no Origin)
+    from urllib.parse import urlsplit
+
+    hosts = {(ws.headers.get(h) or "").lower() for h in ("host", "x-forwarded-host")}   # (behind Tailscale Serve)
+    return urlsplit(origin).netloc.lower() in hosts - {""}
+
+
+@router.websocket("/api/ws/console/{vm_id}")
+async def ws_console(ws: WebSocket, vm_id: str) -> None:
+    """A real machine's serial console: raw bytes both ways, for its owner (or an administrator) only."""
+    await ws.accept()
+    if not _same_origin(ws):
+        await ws.close(code=4403)
+        return
+    db = get_session_factory()()
+    con = None
+    try:
+        user = _authenticate_ws(ws, db)
+        inst = db.get(VMInstance, vm_id) if user else None
+        if user is None or inst is None or (inst.owner_id != user.id and user.role.value != "administrator"):
+            await ws.send_text("\r\nNot authorised for this machine.\r\n")
+            return
+        if inst.driver == "simulation" or not inst.driver_ref:
+            await ws.send_text("\r\nThis machine is simulated: it has no real console.\r\n")
+            return
+        from backend.app.vms.factory import get_driver
+
+        driver = get_driver()
+        if not hasattr(driver, "open_console"):
+            await ws.send_text("\r\nThis host's driver has no console access.\r\n")
+            return
+        try:
+            con = await asyncio.to_thread(driver.open_console, inst.driver_ref)
+        except Exception as exc:  # noqa: BLE001 - shown to the user, never a host shell
+            await ws.send_text(f"\r\nCouldn't open the console: {exc}\r\n")
+            return
+        await ws.send_text(f"\r\n[PwnForge: serial console of {inst.name}. Press Enter for a login prompt.]\r\n")
+
+        async def guest_to_browser() -> None:
+            while True:
+                data = await asyncio.to_thread(con.read, 0.5)
+                if data is None:
+                    await ws.send_text("\r\n[the console closed]\r\n")
+                    return
+                if data:
+                    await ws.send_bytes(data)
+
+        async def browser_to_guest() -> None:
+            while True:
+                msg = await ws.receive()
+                if msg.get("type") == "websocket.disconnect":
+                    return
+                data = msg.get("bytes") or (msg.get("text") or "").encode()
+                if data:
+                    await asyncio.to_thread(con.write, data)
+
+        tasks = [asyncio.create_task(guest_to_browser()), asyncio.create_task(browser_to_guest())]
+        _done, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
+        for t in pending:
+            t.cancel()
+    except WebSocketDisconnect:
+        pass
+    finally:
+        if con is not None:
+            await asyncio.to_thread(con.close)
+        db.close()
+        try:
+            await ws.close()
+        except RuntimeError:
+            pass

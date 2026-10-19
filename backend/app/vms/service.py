@@ -17,12 +17,12 @@ from sqlalchemy.orm import Session
 from backend.app.core import settings_service as cfg
 from backend.app.core.config import get_settings
 from backend.app.database.models import (
-    BaseImage, ImageStatus, ProfileReadiness, ResourceReservation,
+    ImageStatus, ProfileReadiness, ResourceReservation,
     VMInstance, VMProfile, VMStatus,
 )
 from backend.app.images import service as images
 from backend.app.security import audit
-from backend.app.vms import capacity
+from backend.app.vms import capacity, provision
 from backend.app.vms.driver import DriverError, VMSpec
 from backend.app.vms.factory import get_driver
 
@@ -98,11 +98,16 @@ def start_instance(session: Session, inst: VMInstance, progress=None) -> VMInsta
         if profile is None:
             raise VMServiceError("instance has no profile")
 
-        # 2. host compatibility (architecture)
+        # 2. host compatibility: an image this host's CPU can run (a Linux profile built for
+        # x86_64 runs on the same distro's arm64 image on an arm64 host)
         step(1, f"driver={caps.driver} arch={caps.arch}")
-        if caps.real_virtualization and profile.arch not in (caps.arch, _alias(caps.arch)):
-            raise VMServiceError(
-                f"Profile arch {profile.arch} not supported on host arch {caps.arch}")
+        host_base = None
+        if caps.real_virtualization:
+            host_base = provision.host_image(session, profile.base_image_key, caps.arch)
+            if host_base is None:
+                raise VMServiceError(
+                    f"This machine ({profile.os_family}, {profile.arch}) can't run on this host's "
+                    f"{caps.arch} CPU: there's no {caps.arch} image for it.")
 
         # 3. capacity
         step(2)
@@ -116,19 +121,16 @@ def start_instance(session: Session, inst: VMInstance, progress=None) -> VMInsta
         rep_free = get_settings().data_dir
         # (physical free-space check handled by capacity/storage layers; recorded here)
 
-        overlay_path = base_path = None
+        overlay_path = base_path = seed_path = None
         if caps.real_virtualization:
             # 5. resolve image
-            step(4)
-            image = session.get(BaseImage, profile.base_image_key) if profile.base_image_key else None
-            if image is None:
-                raise VMServiceError(f"Profile requires base image '{profile.base_image_key}' "
-                                     "which is not registered.")
+            step(4, host_base.key)
+            image = host_base
             images.refresh_status(session, image)
-            if image.status != ImageStatus.present:
+            if image.status not in (ImageStatus.present, ImageStatus.unverified):
                 raise VMServiceError(
-                    f"Base image '{image.key}' is {image.status.value}; fetch/build it "
-                    "before starting this VM (pwnforge images fetch).")
+                    f"Base image '{image.key}' isn't downloaded yet. An administrator can fetch it "
+                    f"with: pwnforge images fetch {image.key}")
             base_path = str(images.image_path(image))
 
             # 6. verify image
@@ -136,11 +138,22 @@ def start_instance(session: Session, inst: VMInstance, progress=None) -> VMInsta
             if not images.verify_image(session, image):
                 raise VMServiceError(f"Base image '{image.key}' failed checksum verification.")
 
-            # 7. overlay
-            step(6)
+            # 7. the role image (built once per set of packages), then this machine's overlay on it
+            step(6, "preparing the machine image")
+            session.commit()          # don't hold the database while a first-time build runs
+            role = provision.role_image(
+                driver, image, images.image_path(image), os_family=profile.os_family,
+                packages=list(profile.packages or []), services=list(profile.services or []),
+                arch=caps.arch, disk_gb=profile.disk_gb,
+                log=(lambda msg: progress.update(stage=_START_STAGES[6][1], detail=msg)) if progress else None)
             overlay_path = str(get_settings().overlays_dir / f"{inst.id}.qcow2")
-            driver.create_overlay(base_path, overlay_path, profile.disk_gb)
+            driver.create_overlay(str(role), overlay_path, profile.disk_gb)
             inst.overlay_path = overlay_path
+            host = provision.hostname_for(inst.name)
+            seed_path = str(provision.write_seed(
+                get_settings().overlays_dir / f"{inst.id}-seed.iso",
+                provision.instance_user_data(host, provision.login_password(inst.id), profile.os_family),
+                provision.meta_data(inst.id, host)))
         else:
             # Simulation: no real image needed; be explicit about it.
             step(4, "simulation driver: no real base image required")
@@ -154,8 +167,10 @@ def start_instance(session: Session, inst: VMInstance, progress=None) -> VMInsta
         step(7)
         spec = VMSpec(
             name=f"pwnforge-{inst.id}", vcpu=inst.vcpu, memory_mb=inst.memory_mb,
-            arch=profile.arch, base_image_path=base_path, overlay_path=overlay_path,
+            arch=caps.arch if caps.real_virtualization else profile.arch,
+            base_image_path=base_path, overlay_path=overlay_path,
             disk_gb=profile.disk_gb, network_ref=inst.network_id, headless=True,
+            cloud_init_iso=seed_path,
         )
         inst.driver_ref = driver.define(spec)
         inst.status = VMStatus.creating
@@ -176,9 +191,9 @@ def start_instance(session: Session, inst: VMInstance, progress=None) -> VMInsta
         if not _wait_running(driver, inst.driver_ref, timeout_s=120 if caps.real_virtualization else 2):
             raise VMServiceError("VM did not reach running state within timeout")
 
-        # 12. ip
+        # 12. ip (a real guest asks DHCP for one once it has booted: give it a minute or two)
         step(11)
-        inst.ip_address = driver.get_ip(inst.driver_ref)
+        inst.ip_address = _wait_ip(driver, inst.driver_ref, 150 if caps.real_virtualization else 0)
 
         # 13. services (real readiness checks belong to lab definitions; here we
         # record that the domain is up — never claim service health we didn't check)
@@ -203,6 +218,7 @@ def start_instance(session: Session, inst: VMInstance, progress=None) -> VMInsta
                 get_driver().delete_overlay(inst.overlay_path)
             except DriverError:
                 pass
+            _seed_file(inst).unlink(missing_ok=True)
         session.flush()
         raise
 
@@ -271,6 +287,7 @@ def delete_instance(session: Session, inst: VMInstance) -> None:
             driver.delete_overlay(inst.overlay_path)
         except DriverError:
             pass
+    _seed_file(inst).unlink(missing_ok=True)
     _release(session, inst)
     audit.record(session, action="vm.delete", actor_id=inst.owner_id,
                  target_type="vm", target_id=inst.id)
@@ -347,6 +364,17 @@ def _wait_running(driver, ref: str, timeout_s: int) -> bool:
     return driver.status(ref) == VMStatus.running
 
 
-def _alias(arch: str) -> str:
-    return {"x86_64": "amd64", "amd64": "x86_64",
-            "aarch64": "arm64", "arm64": "aarch64"}.get(arch, arch)
+def _wait_ip(driver, ref: str, timeout_s: int) -> str | None:
+    deadline = time.time() + timeout_s
+    while True:
+        try:
+            ip = driver.get_ip(ref)
+        except DriverError:
+            ip = None
+        if ip or time.time() >= deadline:
+            return ip
+        time.sleep(3)
+
+
+def _seed_file(inst: VMInstance):
+    return get_settings().overlays_dir / f"{inst.id}-seed.iso"

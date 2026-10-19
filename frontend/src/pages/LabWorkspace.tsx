@@ -47,7 +47,10 @@ export default function LabWorkspace() {
                   <span className="font-medium text-sm">{m.name.split("-").slice(1).join("-")}</span>
                   <span className={`tag ${m.status === "running" ? "text-ok" : ""}`}>{m.status}</span>
                 </div>
-                <div className="text-muted text-xs mt-1 font-mono">{m.ip_address || "no ip"}{m.simulated ? " · simulated" : ""}</div>
+                <div className="text-muted text-xs mt-1 font-mono">{m.ip_address || (m.simulated ? "no ip" : "waiting for an address…")}{m.simulated ? " · simulated" : ""}</div>
+                {m.login && (
+                  <div className="text-muted text-xs mt-1 font-mono select-all">login: {m.login.username} / {m.login.password}</div>
+                )}
               </button>
             ))}
           </div>
@@ -69,14 +72,15 @@ export default function LabWorkspace() {
 
         <Panel className="lg:col-span-2">
           <div className="font-semibold mb-2">Terminal</div>
-          {active && <Xterm vmId={active} key={active} />}
+          {active && <Xterm vmId={active} key={active}
+            real={!!li.machines.find((m: any) => m.id === active && !m.simulated && m.status === "running")} />}
         </Panel>
       </div>
     </div>
   );
 }
 
-function Xterm({ vmId }: { vmId: string }) {
+function Xterm({ vmId, real }: { vmId: string; real: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState("connecting…");
   useEffect(() => {
@@ -88,12 +92,15 @@ function Xterm({ vmId }: { vmId: string }) {
     term.loadAddon(fit);
     term.open(ref.current);
     try { fit.fit(); } catch {}
-    const ws = new WebSocket(wsUrl(`/api/ws/terminal/${vmId}`));
+    // A real machine: its serial console, keystrokes sent as typed. A simulated one: a line-based practice shell.
+    const ws = new WebSocket(wsUrl(real ? `/api/ws/console/${vmId}` : `/api/ws/terminal/${vmId}`));
+    ws.binaryType = "arraybuffer";
     let line = "";
-    ws.onopen = () => setStatus("connected");
+    ws.onopen = () => { setStatus(real ? "connected to the machine's console" : "connected"); if (real) ws.send("\r"); };
     ws.onclose = () => setStatus("disconnected");
-    ws.onmessage = (ev) => term.write(ev.data);
+    ws.onmessage = (ev) => term.write(typeof ev.data === "string" ? ev.data : new Uint8Array(ev.data));
     term.onData((d) => {
+      if (real) { if (ws.readyState === WebSocket.OPEN) ws.send(d); return; }
       if (d === "\r") { ws.send(line + "\r"); term.write("\r\n"); line = ""; }
       else if (d === "\u007f") { if (line) { line = line.slice(0, -1); term.write("\b \b"); } }
       else { line += d; term.write(d); }
@@ -101,7 +108,7 @@ function Xterm({ vmId }: { vmId: string }) {
     const onResize = () => { try { fit.fit(); } catch {} };
     window.addEventListener("resize", onResize);
     return () => { window.removeEventListener("resize", onResize); ws.close(); term.dispose(); };
-  }, [vmId]);
+  }, [vmId, real]);
   return (
     <div>
       <div ref={ref} style={{ height: 420 }} className="rounded-lg overflow-hidden" />

@@ -18,8 +18,9 @@ from backend.app.labs import service as labs
 from backend.app.networks import service as networks
 from backend.app.profiles import service as profiles
 from backend.app.storage import service as storage
+from backend.app.vms import provision
 from backend.app.vms import service as vms
-from backend.app.vms.factory import active_capabilities
+from backend.app.vms.factory import active_capabilities, get_driver
 
 router = APIRouter(prefix="/api", tags=["infra"])
 
@@ -71,12 +72,29 @@ def profile_detail(profile_id: str, db: Session = Depends(get_db)) -> dict:
 
 # ---- VM instances ----
 def _vm_out(i: VMInstance) -> dict:
-    return {"id": i.id, "name": i.name, "profile_id": i.profile_id,
-            "status": i.status.value, "driver": i.driver,
-            "ip_address": i.ip_address, "vcpu": i.vcpu, "memory_mb": i.memory_mb,
-            "disposable": i.disposable, "persistent": i.persistent,
-            "lab_instance_id": i.lab_instance_id, "last_error": i.last_error,
-            "simulated": i.driver == "simulation"}
+    """A machine as its owner (or an administrator) sees it; only those callers reach this."""
+    out = {"id": i.id, "name": i.name, "profile_id": i.profile_id,
+           "status": i.status.value, "driver": i.driver,
+           "ip_address": i.ip_address, "vcpu": i.vcpu, "memory_mb": i.memory_mb,
+           "disposable": i.disposable, "persistent": i.persistent,
+           "lab_instance_id": i.lab_instance_id, "last_error": i.last_error,
+           "simulated": i.driver == "simulation", "login": None}
+    if i.driver != "simulation" and i.overlay_path:
+        out["login"] = {"username": provision.LOGIN_USER, "password": provision.login_password(i.id)}
+    return out
+
+
+def _refresh_ip(db: Session, i: VMInstance) -> None:
+    """A real guest gets its address from DHCP after it boots: look it up while it's still unknown."""
+    if i.ip_address or i.driver == "simulation" or i.status != VMStatus.running or not i.driver_ref:
+        return
+    try:
+        ip = get_driver().get_ip(i.driver_ref)
+    except Exception:  # noqa: BLE001 - best effort; the page asks again
+        return
+    if ip:
+        i.ip_address = ip
+        db.commit()
 
 
 @router.get("/vms")
@@ -199,7 +217,9 @@ def list_lab_instances(user: User = Depends(current_user), db: Session = Depends
     rows = db.execute(select(LabInstance).where(LabInstance.owner_id == user.id)).scalars()
     out = []
     for li in rows:
-        vmrows = db.execute(select(VMInstance).where(VMInstance.lab_instance_id == li.id)).scalars()
+        vmrows = list(db.execute(select(VMInstance).where(VMInstance.lab_instance_id == li.id)).scalars())
+        for v in vmrows:
+            _refresh_ip(db, v)
         out.append({"id": li.id, "lab_id": li.lab_id, "status": li.status.value,
                     "last_error": li.last_error,
                     "machines": [_vm_out(v) for v in vmrows],
