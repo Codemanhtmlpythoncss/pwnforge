@@ -89,6 +89,7 @@ def register(body: schemas.RegisterRequest, request: Request, response: Response
         raise HTTPException(status.HTTP_400_BAD_REQUEST, str(e))
     us = auth_service.create_session(db, user, int(cfg.get_setting(db, "auth.session_ttl_hours", 168)),
                                      request.headers.get("user-agent"), client_ip(request))
+    audit.record(db, action="auth.register", actor_id=user.id, ip=client_ip(request))
     _set_cookie(response, crypto.sign_session(us.id), db, request)
     return {"user": _user_out(user)}
 

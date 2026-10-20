@@ -56,17 +56,19 @@ export default function Guide() {
 
         {net === "tailscale" && (
           <div className="space-y-3">
-            <p className="text-sm text-muted">Best if your devices are on a Tailscale tailnet — works from anywhere.</p>
+            <p className="text-sm text-muted">Best if your devices are on a Tailscale tailnet — works from anywhere without a public IP or router port forwarding.</p>
             <ol className="list-decimal ml-5 space-y-2 text-sm text-muted">
-              <li>On the PwnForge host, turn lab access on (nodeyard dashboard → PwnForge, or run the host helper):
-                <CodeBlock label="on the host" code={"pwnforge-host.sh tailnet-access on"} />
-              </li>
-              <li>Approve the advertised subnet route for that machine in the{" "}
+              <li>On a Nodeyard-hosted PwnForge server, open <strong className="text-ink">Nodeyard → PwnForge → Tailscale VPN and direct lab access</strong>, then click <strong className="text-ink">Set up Tailscale access</strong>. This makes the website tailnet-only and configures persistent forwarding for <code>{cidr}</code>.</li>
+              <li>Approve the advertised subnet route for the PwnForge host once in the{" "}
                 <a className="text-brand" href="https://login.tailscale.com/admin/machines" target="_blank" rel="noreferrer">Tailscale admin console</a>.</li>
-              <li>On <em>your</em> device, accept subnet routes (use <code>set</code>, not <code>up</code>):
-                <CodeBlock label="on your device" code={"tailscale set --accept-routes"} />
+              <li>Install Tailscale on your device and sign in to the same tailnet (or have its admin invite you). macOS uses approved routes automatically. Linux may need this once:
+                <CodeBlock label="on Linux" code={"sudo tailscale set --accept-routes=true"} />
               </li>
             </ol>
+            <Callout kind="info" title="Website and lab access">
+              Use the tailnet URL shown in Nodeyard to open PwnForge. After the route is approved, open a running lab's private IP directly from your device. The server's `100.x` Tailscale address is not a public VPN address.
+            </Callout>
+            <p className="text-muted text-xs">For a standalone PwnForge host, ask its administrator to configure Tailscale subnet routing and host firewall rules for the lab network.</p>
           </div>
         )}
 
