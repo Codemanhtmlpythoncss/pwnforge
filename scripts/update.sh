@@ -24,6 +24,18 @@ say "installing Python dependencies"
 say "applying database migrations"
 "$VENV/bin/alembic" upgrade head
 
+# Course text and assessments live in the authored catalogue, so refresh their
+# database rows on every update. This touches course content only and preserves
+# learner progress, submissions and achievements.
+say "refreshing course content"
+"$VENV/bin/python" - <<'PY'
+from backend.app.catalog.importer import import_courses
+from backend.app.database.base import session_scope
+with session_scope() as session:
+    count = import_courses(session)
+print(f"update: refreshed {count} courses")
+PY
+
 if command -v npm >/dev/null 2>&1; then
     say "building the website"
     ( cd frontend && { npm ci --no-audit --no-fund --loglevel=error >/dev/null 2>&1 \

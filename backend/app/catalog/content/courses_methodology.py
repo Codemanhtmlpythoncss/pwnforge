@@ -75,16 +75,36 @@ COURSES = [
           "Passive recon uses information already available without touching the target "
           "(public records, documentation). Active recon interacts with in-scope systems "
           "(resolving names, checking which services respond). Record everything you "
-          "learn; a good asset inventory shapes the whole assessment.",
+          "learn; reconnaissance must stay within the written scope.",
           exercises=[mcq("Interacting directly with an in-scope host is:",
                          ["Passive recon", "Active recon", "Reporting", "Scoping"],
                          "Active recon", "reconnaissance", "Direct interaction is active.")],
-          hints=["Passive = no interaction; active = interaction with in-scope assets."])],
+          hints=["Passive = no interaction; active = interaction with in-scope assets."]),
+        L("Building an asset inventory", "easy", 10, "reconnaissance",
+          "Reconnaissance should produce an **asset inventory**: a structured record "
+          "of the in-scope systems you discovered and the evidence about each one. "
+          "For each asset, record its hostname or IP address, role if known, exposed "
+          "ports and services, where and when you observed the information, and your "
+          "confidence in it. For example: `web-01 | 10.10.10.20 | HTTPS on 443 | "
+          "DNS lookup | observed today | high confidence`. This inventory is the map "
+          "for later enumeration and prioritisation; it is not a claim that every "
+          "listed system is vulnerable. Do not add systems outside the authorised scope.",
+          exercises=[mcq("Which is a useful asset-inventory entry?",
+                         ["An in-scope host's IP, observed services and evidence source",
+                          "A guessed password for an unknown user",
+                          "A system discovered outside the agreed scope",
+                          "A vulnerability assumed without checking"],
+                         "An in-scope host's IP, observed services and evidence source",
+                         "reconnaissance",
+                         "Record scoped systems and observed facts, with their evidence.")],
+          hints=["Record observed facts about each in-scope system, not guesses."])],
        [mcq("Reading public documentation about a target is:",
             ["Active recon", "Passive recon", "Exploitation", "Reporting"],
             "Passive recon", "reconnaissance", "No interaction = passive."),
-        short("Recon should produce an asset ___.", "inventory", "reconnaissance",
-              "An inventory of assets.")]),
+        short("The structured list of in-scope systems and their observed services is an asset ___.",
+              "inventory", "reconnaissance",
+              "Recon records scoped assets and verified details in an asset inventory.",
+              hints=["It is the organised record you use as a map for later enumeration."]) ]),
 
     _c("service-enumeration", "Service Enumeration",
        "Identify and fingerprint the services a host exposes.",
