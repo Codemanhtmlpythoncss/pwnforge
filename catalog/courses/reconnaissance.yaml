@@ -4,9 +4,10 @@ description: Gather information about in-scope systems methodically.
 difficulty: easy
 category: methodology
 specialization: pentest
-estimated_minutes: 35
+estimated_minutes: 45
 objectives:
 - Understand passive vs active
+- Understand building an asset inventory
 prerequisites:
 - networking-fundamentals
 competency_prereqs: []
@@ -23,7 +24,7 @@ lessons:
   competency: reconnaissance
   body: Passive recon uses information already available without touching the target (public records,
     documentation). Active recon interacts with in-scope systems (resolving names, checking which services
-    respond). Record everything you learn; a good asset inventory shapes the whole assessment.
+    respond). Record everything you learn; reconnaissance must stay within the written scope.
   exercises:
   - kind: mcq
     prompt: 'Interacting directly with an in-scope host is:'
@@ -39,6 +40,32 @@ lessons:
     hints: []
   hints:
   - text: Passive = no interaction; active = interaction with in-scope assets.
+  walkthrough: []
+- title: Building an asset inventory
+  difficulty: easy
+  minutes: 10
+  competency: reconnaissance
+  body: 'Reconnaissance should produce an **asset inventory**: a structured record of the in-scope systems
+    you discovered and the evidence about each one. For each asset, record its hostname or IP address,
+    role if known, exposed ports and services, where and when you observed the information, and your confidence
+    in it. For example: `web-01 | 10.10.10.20 | HTTPS on 443 | DNS lookup | observed today | high confidence`.
+    This inventory is the map for later enumeration and prioritisation; it is not a claim that every listed
+    system is vulnerable. Do not add systems outside the authorised scope.'
+  exercises:
+  - kind: mcq
+    prompt: Which is a useful asset-inventory entry?
+    choices:
+    - An in-scope host's IP, observed services and evidence source
+    - A guessed password for an unknown user
+    - A system discovered outside the agreed scope
+    - A vulnerability assumed without checking
+    answer: An in-scope host's IP, observed services and evidence source
+    competency: reconnaissance
+    explanation: Record scoped systems and observed facts, with their evidence.
+    points: 10
+    hints: []
+  hints:
+  - text: Record observed facts about each in-scope system, not guesses.
   walkthrough: []
 assessment:
   title: Reconnaissance in Authorised Environments Assessment
@@ -56,12 +83,13 @@ assessment:
     points: 10
     hints: []
   - kind: short_answer
-    prompt: Recon should produce an asset ___.
+    prompt: The structured list of in-scope systems and their observed services is an asset ___.
     answer: inventory
     competency: reconnaissance
-    explanation: An inventory of assets.
+    explanation: Recon records scoped assets and verified details in an asset inventory.
     points: 10
-    hints: []
+    hints:
+    - It is the organised record you use as a map for later enumeration.
   difficulty: easy
   passing_score: 70
   description: ''

@@ -41,6 +41,14 @@ def import_all(session: Session, *, include_profiles: bool = True) -> dict:
     return counts
 
 
+def import_courses(session: Session) -> int:
+    """Refresh authored course text and assessments without touching other catalogue data."""
+    validate_unique_ids()
+    count = _import_courses(session)
+    session.flush()
+    return count
+
+
 def _import_competencies(session: Session) -> int:
     n = 0
     for domain, key, name, desc in COMPETENCIES:
