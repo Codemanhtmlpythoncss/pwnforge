@@ -41,6 +41,7 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
   <key>CFBundleName</key><string>PwnForge</string>
   <key>CFBundleDisplayName</key><string>PwnForge</string>
+  <key>CFBundleIconFile</key><string>AppIcon</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleShortVersionString</key><string>1.0.0</string>
   <key>CFBundleVersion</key><string>1</string>
@@ -78,6 +79,7 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 </plist>
 PLIST
 
+cp "$CLIENT/Resources/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
 codesign --force --deep --sign "${APPLE_SIGN_IDENTITY:--}" --timestamp=none "$APP"
 codesign --verify --deep --strict "$APP"
 ditto -c -k --keepParent "$APP" "$DIST/PwnForge-macOS.app.zip"
