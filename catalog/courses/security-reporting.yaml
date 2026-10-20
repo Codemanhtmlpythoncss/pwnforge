@@ -4,9 +4,11 @@ description: Communicate findings clearly, ethically and actionably.
 difficulty: intermediate
 category: methodology
 specialization: methodology
-estimated_minutes: 40
+estimated_minutes: 80
 objectives:
 - Understand writing a useful report
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - vulnerability-assessment
 competency_prereqs: []
@@ -41,6 +43,71 @@ lessons:
     hints: []
   hints:
   - text: Write for the person who must fix it.
+  walkthrough: []
+- title: Follow an evidence-led assessment workflow
+  difficulty: intermediate
+  minutes: 20
+  competency: security-reporting
+  body: 'Begin with written authorisation, scope, exclusions, timing, and stop conditions. Discover only
+    what the scope permits. For each possible issue, keep the raw observation, the affected asset, the
+    method, and the timestamp. Validate impact with the least intrusive safe check that answers the question;
+    do not turn a scanner warning into a confirmed vulnerability without evidence.
+
+
+    Use the methods from **Security Reporting and Professional Practice** to work this checklist:
+
+
+    - Understand writing a useful report
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: What must be agreed before active testing begins?
+    choices:
+    - Written authorisation and scope
+    - A public IP address
+    - A scanner version
+    - A vulnerability score
+    answer: Written authorisation and scope
+    competency: security-reporting
+    explanation: Active tests must stay within explicit authorisation, scope, and stop conditions.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Prioritise and communicate findings
+  difficulty: intermediate
+  minutes: 20
+  competency: security-reporting
+  body: 'A useful finding names the affected asset and condition, explains realistic impact, and gives
+    reproducible evidence. Rate severity using a stated method and explain assumptions. Recommend a fix
+    that addresses the root cause, then define a retest that would demonstrate success. State limitations
+    and out-of-scope observations separately so readers can distinguish confirmed results from leads.
+
+
+    ## Apply this to Security Reporting and Professional Practice
+
+
+    Communicate findings clearly, ethically and actionably.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: security-reporting
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Security Reporting and Professional Practice Assessment

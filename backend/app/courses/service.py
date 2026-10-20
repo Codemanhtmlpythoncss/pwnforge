@@ -84,13 +84,26 @@ def get_course_detail(session: Session, course_id: str, user: User | None = None
         cp = _get_progress(session, user.id, course_id)
 
     data = _course_summary(course)
+    live_percent = None
+    effective_status = None
+    if cp:
+        total_lessons = len(course.lessons)
+        completed_lessons = sum(
+            1 for lesson in course.lessons
+            if lesson_progress.get(lesson.id)
+            and lesson_progress[lesson.id].status == ProgressStatus.completed
+        )
+        live_percent = completed_lessons / total_lessons * 100 if total_lessons else cp.percent
+        effective_status = cp.status.value
+        if effective_status == ProgressStatus.completed.value and live_percent < 100:
+            effective_status = ProgressStatus.in_progress.value
     data.update({
         "references": course.references,
         "competency_prereqs": course.competency_prereqs,
         "lab_id": course.lab_id,
         "lessons": [_lesson_view(l, lesson_progress.get(l.id)) for l in course.lessons],
         "assessments": [_assessment_view(a) for a in course.assessments],
-        "progress": _progress_view(cp) if cp else None,
+        "progress": _progress_view(cp, status=effective_status, percent=live_percent) if cp else None,
     })
     if user:
         data["prerequisite_status"] = prerequisite_status(session, user, course)
@@ -167,9 +180,11 @@ def _get_progress(session: Session, user_id: int, course_id: str) -> CourseProgr
     ).scalar_one_or_none()
 
 
-def _progress_view(cp: CourseProgress) -> dict:
+def _progress_view(cp: CourseProgress, *, status: str | None = None,
+                   percent: float | None = None) -> dict:
     return {
-        "status": cp.status.value, "percent": round(cp.percent, 1),
+        "status": status or cp.status.value,
+        "percent": round(cp.percent if percent is None else percent, 1),
         "best_assessment_score": cp.best_assessment_score,
         "started_at": cp.started_at.isoformat() if cp.started_at else None,
         "completed_at": cp.completed_at.isoformat() if cp.completed_at else None,

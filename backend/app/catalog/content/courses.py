@@ -17,6 +17,10 @@ ALL_COURSES: list[dict] = (
     + courses_tools.COURSES
 )
 
+from backend.app.catalog.content.courses_path_extensions import extend_path_courses
+
+extend_path_courses(ALL_COURSES)
+
 
 def validate_unique_ids() -> None:
     ids = [c["id"] for c in ALL_COURSES]

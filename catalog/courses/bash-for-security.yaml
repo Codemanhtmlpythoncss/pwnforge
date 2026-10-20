@@ -4,10 +4,12 @@ description: Automate repetitive tasks and parse data safely with Bash.
 difficulty: easy
 category: scripting
 specialization: linux
-estimated_minutes: 50
+estimated_minutes: 90
 objectives:
 - Understand variables, loops and pipes
 - Understand writing safe scripts
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - linux-fundamentals
 competency_prereqs: []
@@ -57,6 +59,73 @@ lessons:
     points: 10
     hints: []
   hints: []
+  walkthrough: []
+- title: Make security scripts predictable
+  difficulty: intermediate
+  minutes: 20
+  competency: bash-scripting
+  body: 'A useful automation script has a narrow input, a clear output, and safe defaults. Quote variable
+    expansions, validate file paths and target ranges, and keep secrets out of command-line arguments
+    and logs. In Bash, use explicit exit checks and distinguish standard output from errors. In Python,
+    parse structured data with a parser rather than regular expressions when a format has a real grammar.
+
+
+    Use the methods from **Bash for Security** to work this checklist:
+
+
+    - Understand variables, loops and pipes
+
+    - Understand writing safe scripts
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: Why should shell variable expansions generally be quoted?
+    choices:
+    - To prevent word splitting and glob expansion
+    - To make scripts run as root
+    - To disable exit codes
+    - To encrypt the variable
+    answer: To prevent word splitting and glob expansion
+    competency: bash-scripting
+    explanation: Quoting keeps spaces and wildcard characters inside the intended argument.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Validate input and handle failures
+  difficulty: intermediate
+  minutes: 20
+  competency: bash-scripting
+  body: 'Test a script with a normal input, an empty input, malformed data, and a permission or network
+    failure. Confirm that a failure returns a non-zero status and does not leave partial output that looks
+    successful. Make repeated runs safe: use temporary files, atomic replacement where appropriate, and
+    document destructive options before enabling them.
+
+
+    ## Apply this to Bash for Security
+
+
+    Automate repetitive tasks and parse data safely with Bash.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: bash-scripting
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Bash for Security Assessment

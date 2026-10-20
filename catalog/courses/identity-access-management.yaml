@@ -4,9 +4,11 @@ description: Managing identities, roles and entitlements.
 difficulty: intermediate
 category: identity
 specialization: identity
-estimated_minutes: 40
+estimated_minutes: 80
 objectives:
 - Understand lifecycle and least privilege
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - access-control-course
 competency_prereqs: []
@@ -40,6 +42,71 @@ lessons:
     hints: []
   hints:
   - text: Deprovision promptly; review regularly.
+  walkthrough: []
+- title: Trace an identity's effective access
+  difficulty: intermediate
+  minutes: 20
+  competency: identity-security
+  body: 'For an account, trace authentication, group membership, assigned roles, and the resources those
+    roles can reach. Effective access is the combined result of direct grants, inherited group permissions,
+    and policy. Check both the intended path and unintended paths; a user may inherit access from a nested
+    group or stale assignment.
+
+
+    Use the methods from **Identity and Access Management** to work this checklist:
+
+
+    - Understand lifecycle and least privilege
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: Which principle limits accounts to only the access they need?
+    choices:
+    - Least privilege
+    - Open access
+    - Security by obscurity
+    - Shared administration
+    answer: Least privilege
+    competency: identity-security
+    explanation: Least privilege limits standing permissions to the minimum required for the role.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Reduce standing privilege
+  difficulty: intermediate
+  minutes: 20
+  competency: identity-security
+  body: 'Remove permissions only after identifying the owner and required workflow. Prefer a narrow role
+    over a broad administrator grant, use separate privileged accounts, and define how elevated access
+    is approved and reviewed. Verify the new effective access with a representative allowed action and
+    a representative denied action. Record the account, role, resource, and evidence for each result.
+
+
+    ## Apply this to Identity and Access Management
+
+
+    Managing identities, roles and entitlements.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: identity-security
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Identity and Access Management Assessment

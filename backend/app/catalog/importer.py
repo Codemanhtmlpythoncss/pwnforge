@@ -7,7 +7,7 @@ progress.
 """
 from __future__ import annotations
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from backend.app.catalog.content import achievements as ach_content
@@ -18,11 +18,12 @@ from backend.app.catalog.content.competencies import COMPETENCIES
 from backend.app.catalog.content.courses import ALL_COURSES, validate_unique_ids
 from backend.app.catalog.content.profiles import generate_profiles
 from backend.app.database.models import (
-    Achievement, Assessment, AssessmentQuestion, BaseImage, Competency, Course,
+    Achievement, Assessment, AssessmentQuestion, BaseImage, Competency, Course, CourseProgress,
     Difficulty, Exercise, Flag, ImageStatus, Lab, LearningPath, LearningPathStep,
-    Lesson, VMProfile,
+    Lesson, LessonProgress, ProgressStatus, VMProfile,
 )
 from backend.app.security import crypto
+from backend.app.labs.tasks import canonical_answer
 
 
 def import_all(session: Session, *, include_profiles: bool = True) -> dict:
@@ -47,6 +48,18 @@ def import_courses(session: Session) -> int:
     count = _import_courses(session)
     session.flush()
     return count
+
+
+def refresh_learning_content(session: Session) -> dict[str, int]:
+    """Refresh authored courses, paths and labs while preserving learner progress."""
+    validate_unique_ids()
+    counts = {
+        "courses": _import_courses(session),
+        "learning_paths": _import_paths(session),
+        "labs": _import_labs(session),
+    }
+    session.flush()
+    return counts
 
 
 def _import_competencies(session: Session) -> int:
@@ -106,7 +119,37 @@ def _import_courses(session: Session) -> int:
         session.flush()
         _import_lessons(session, c)
         _import_assessment(session, c)
+        _refresh_existing_course_progress(session, c)
     return n
+
+
+def _refresh_existing_course_progress(session: Session, course_content: dict) -> None:
+    """Recalculate lesson percentages after content grows, without resetting XP state.
+
+    Existing lesson records remain complete, while newly added lesson records
+    lower the learner's current percentage until they finish the added content.
+    Keep the stored completed status untouched so reaching 100% again cannot
+    award course-completion XP a second time.
+    """
+    lesson_ids = [f"{course_content['id']}::l{order}"
+                  for order, _ in enumerate(course_content["lessons"], start=1)]
+    total = len(lesson_ids)
+    if not total:
+        return
+    completed_counts = select(
+        LessonProgress.user_id.label("user_id"),
+        func.count(LessonProgress.id).label("done"),
+    ).where(
+        LessonProgress.lesson_id.in_(lesson_ids),
+        LessonProgress.status == ProgressStatus.completed,
+    ).group_by(LessonProgress.user_id).subquery()
+    progress_rows = session.execute(
+        select(CourseProgress, func.coalesce(completed_counts.c.done, 0))
+        .outerjoin(completed_counts, completed_counts.c.user_id == CourseProgress.user_id)
+        .where(CourseProgress.course_id == course_content["id"])
+    )
+    for progress, done in progress_rows:
+        progress.percent = done / total * 100
 
 
 def _import_lessons(session: Session, c: dict) -> None:
@@ -193,6 +236,8 @@ def _import_paths(session: Session) -> int:
         path.difficulty_min = Difficulty(p["difficulty_min"])
         path.difficulty_max = Difficulty(p["difficulty_max"])
         path.tags = p["tags"]
+        path.outcomes = p.get("outcomes", [])
+        path.capstone = p.get("capstone", {})
         session.flush()
         # Replace steps (they carry no learner state).
         for existing in list(path.steps):
@@ -228,6 +273,26 @@ def _import_labs(session: Session) -> int:
         lab.tags = d["tags"]
         lab.hints = d.get("hints", [])
         lab.guide = d.get("guide", "")
+        lab.tasks = []
+        for task in d.get("tasks", []):
+            kind = task.get("kind", "short_answer")
+            raw_answer = task.get("answer", "")
+            answers = ([raw_answer] if kind == "service_list"
+                       else task.get("answers", [raw_answer]))
+            required_services = (raw_answer if isinstance(raw_answer, list) else [raw_answer])
+            lab.tasks.append({
+                "id": task["id"],
+                "prompt": task["prompt"],
+                "kind": kind,
+                "answer_hashes": [crypto.hash_answer(canonical_answer(answer, kind))
+                                  for answer in answers if str(answer).strip()],
+                "required_service_hashes": ([crypto.hash_answer(canonical_answer(answer, "service_list"))
+                                             for answer in required_services if str(answer).strip()]
+                                            if kind == "service_list" else []),
+                "hint": task.get("hint", ""),
+                "explanation": task.get("explanation", ""),
+                "points": task.get("points", 10),
+            })
         # A demo flag per lab enables the submission flow. The plaintext is
         # provisioned into the guest in a real deployment; only the hash is stored.
         fid = f"{d['id']}::flag1"

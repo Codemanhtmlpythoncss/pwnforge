@@ -4,9 +4,11 @@ description: Understand Windows privilege weaknesses and their remediation.
 difficulty: hard
 category: methodology
 specialization: pentest
-estimated_minutes: 40
+estimated_minutes: 80
 objectives:
 - Understand common windows weaknesses
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - windows-administration
 - service-enumeration
@@ -41,6 +43,71 @@ lessons:
     hints: []
   hints:
   - text: Check service ACLs and path quoting.
+  walkthrough: []
+- title: Inventory Windows services and identities
+  difficulty: intermediate
+  minutes: 20
+  competency: windows-privesc
+  body: 'Use `Get-Service` to inventory service state, `Get-NetTCPConnection` or `netstat -ano` to map
+    listeners, and `Get-LocalGroupMember` to review local group membership. Record the service, account,
+    startup mode, port, and process identifier together. In a domain environment, distinguish local configuration
+    from centrally applied policy; a local change may be overwritten by Group Policy.
+
+
+    Use the methods from **Windows Privilege-Escalation Concepts** to work this checklist:
+
+
+    - Understand common windows weaknesses
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: Which PowerShell command inventories Windows services?
+    choices:
+    - Get-Service
+    - Get-ProcessRoute
+    - Get-FileHash
+    - Get-DnsClient
+    answer: Get-Service
+    competency: windows-privesc
+    explanation: '`Get-Service` reports installed service names and their current states.'
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Verify policy and event evidence
+  difficulty: intermediate
+  minutes: 20
+  competency: windows-privesc
+  body: 'Before changing a service or permission, record its current value and the expected business function.
+    Apply the smallest policy change, then verify both the setting and the service''s behaviour. Use the
+    relevant Windows event channel to confirm the change or investigate a failure. Preserve event time,
+    host, account, and event identifier so another analyst can reproduce your conclusion.
+
+
+    ## Apply this to Windows Privilege-Escalation Concepts
+
+
+    Understand Windows privilege weaknesses and their remediation.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: windows-privesc
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Windows Privilege-Escalation Concepts Assessment

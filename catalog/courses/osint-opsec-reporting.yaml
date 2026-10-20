@@ -4,10 +4,12 @@ description: Protect the investigation and the investigator, and communicate fin
 difficulty: intermediate
 category: osint
 specialization: osint
-estimated_minutes: 50
+estimated_minutes: 90
 objectives:
 - Understand investigator opsec
 - Understand responsible reporting
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - osint-techniques
 competency_prereqs:
@@ -60,6 +62,73 @@ lessons:
     points: 10
     hints: []
   hints: []
+  walkthrough: []
+- title: Plan a bounded public-source investigation
+  difficulty: intermediate
+  minutes: 20
+  competency: osint-ethics
+  body: 'Define the question, subject, timeframe, lawful basis, and collection limits before searching.
+    Prefer primary sources and retain the exact URL, collection time, and relevant excerpt. Keep personal
+    data to the minimum needed. A search result snippet is a lead; open and assess the source before treating
+    it as evidence.
+
+
+    Use the methods from **OSINT OPSEC & Reporting** to work this checklist:
+
+
+    - Understand investigator opsec
+
+    - Understand responsible reporting
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: Which fields make a public-source observation auditable?
+    choices:
+    - Source, collection time, and confidence
+    - Colour, font, and page size
+    - Search order only
+    - The analyst's guess
+    answer: Source, collection time, and confidence
+    competency: osint-ethics
+    explanation: Provenance, time, and confidence help another analyst assess an OSINT observation.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Corroborate claims and write with confidence
+  difficulty: intermediate
+  minutes: 20
+  competency: osint-ethics
+  body: 'Corroborate important claims with independent sources and check whether they refer to the same
+    person, organisation, or time period. Record confidence and contradictory evidence. Separate fact
+    from inference in the report, explain source limitations, and remove sensitive details that do not
+    support the stated purpose.
+
+
+    ## Apply this to OSINT OPSEC & Reporting
+
+
+    Protect the investigation and the investigator, and communicate findings responsibly.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: osint-ethics
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: OSINT OPSEC & Reporting Assessment

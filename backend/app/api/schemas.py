@@ -61,6 +61,10 @@ class SubmitFlagRequest(BaseModel):
     value: str
 
 
+class SubmitLabTaskRequest(BaseModel):
+    answer: str = Field(..., min_length=1, max_length=2000)
+
+
 class StartVMRequest(BaseModel):
     profile_id: str
     name: str | None = None

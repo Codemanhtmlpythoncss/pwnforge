@@ -5,11 +5,13 @@ description: 'Learn to use the Pwnforge platform: starting labs, using terminals
 difficulty: orientation
 category: platform
 specialization: null
-estimated_minutes: 50
+estimated_minutes: 90
 objectives:
 - Navigate the Pwnforge interface
 - Start, stop and reset a disposable lab VM
 - Understand isolated lab networking and safe practice
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites: []
 competency_prereqs: []
 tags:
@@ -97,6 +99,77 @@ lessons:
     \ simply recorded so recommendations can adapt."
   exercises: []
   hints: []
+  walkthrough: []
+- title: Operate the lab safely
+  difficulty: intermediate
+  minutes: 20
+  competency: platform-orientation
+  body: 'A productive lab session starts with the objective and the assigned target. Confirm the lab is
+    disposable and isolated, keep real credentials out of the guest, and use the workspace terminal or
+    connection details shown for that instance. Change one thing at a time so you can tell which action
+    produced a result. Stop the instance when you are finished; the saved course record and the guest''s
+    temporary disk are separate.
+
+
+    Use the methods from **Pwnforge Orientation** to work this checklist:
+
+
+    - Navigate the Pwnforge interface
+
+    - Start, stop and reset a disposable lab VM
+
+    - Understand isolated lab networking and safe practice
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: What should you do with a lab instance when you are finished using it?
+    choices:
+    - Leave every machine running
+    - Stop it to release resources
+    - Delete your course progress
+    - Share its network with other users
+    answer: Stop it to release resources
+    competency: platform-orientation
+    explanation: Stopping the lab frees host resources while course progress remains stored separately.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Keep useful notes and finish cleanly
+  difficulty: intermediate
+  minutes: 20
+  competency: platform-orientation
+  body: 'Write down the target, commands, observations, and the meaning of each result while you work.
+    Record exact errors instead of paraphrasing them. Before you finish, verify that the task is complete,
+    submit any requested answer or flag, and stop the lab. If a result is surprising, reset the disposable
+    instance and repeat the smallest relevant step. A repeatable process is more useful than a lucky result.
+
+
+    ## Apply this to Pwnforge Orientation
+
+
+    Learn to use the Pwnforge platform: starting labs, using terminals, understanding isolated networks,
+    and working safely.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: platform-orientation
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Orientation Check

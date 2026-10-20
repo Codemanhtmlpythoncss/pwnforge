@@ -4,10 +4,12 @@ description: Chaining weaknesses, assessment methodology and a capstone web lab.
 difficulty: advanced
 category: web-security
 specialization: web
-estimated_minutes: 65
+estimated_minutes: 105
 objectives:
 - Understand thinking in attack paths
 - Understand structured assessment and reporting
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - ssrf-course
 - cross-site-scripting
@@ -62,6 +64,75 @@ lessons:
     points: 10
     hints: []
   hints: []
+  walkthrough: []
+- title: Trace a browser request through the application
+  difficulty: intermediate
+  minutes: 20
+  competency: advanced-web
+  body: 'Follow an input from the request into application logic, storage, and the response. Identify
+    the trust boundary at each step. Authentication answers who the user is; authorization decides what
+    that user may do. For output, note whether data enters HTML text, an attribute, JavaScript, or a URL,
+    because each context needs the correct encoding. For database operations, parameterize values rather
+    than joining user text into query strings.
+
+
+    Use the methods from **Advanced Web Application Security** to work this checklist:
+
+
+    - Understand thinking in attack paths
+
+    - Understand structured assessment and reporting
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: What should be used for values in a database query?
+    choices:
+    - Parameterized queries
+    - String concatenation
+    - A hidden form field
+    - Client-side validation alone
+    answer: Parameterized queries
+    competency: advanced-web
+    explanation: Parameterized queries keep user-controlled values separate from SQL syntax.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Verify fixes at the right context
+  difficulty: intermediate
+  minutes: 20
+  competency: advanced-web
+  body: 'Use a harmless test value in an authorised environment and record the request, response, and
+    affected account. Change one control, then repeat the same request and confirm the unsafe result is
+    gone. Also verify normal input still succeeds and access checks apply to direct API requests, not
+    only hidden or disabled buttons. Document the exact affected route and the evidence supporting the
+    result.
+
+
+    ## Apply this to Advanced Web Application Security
+
+
+    Chaining weaknesses, assessment methodology and a capstone web lab.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: advanced-web
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Advanced Web Application Security Assessment

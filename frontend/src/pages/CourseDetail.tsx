@@ -11,18 +11,21 @@ export default function CourseDetail() {
   const [c, setC] = useState<any>(null);
   const [nextStep, setNextStep] = useState<any>(null);
   const [pathTitle, setPathTitle] = useState("");
+  const [starting, setStarting] = useState(false);
+  const [pathError, setPathError] = useState("");
   const load = () => api.get(`/api/courses/${id}`).then(setC);
   useEffect(() => { load(); }, [id]);
 
-  // When arrived from a learning path, work out the next course so we can offer "Continue".
+  // Preserve the path's authored course/lab order when offering the next step.
   useEffect(() => {
     setNextStep(null); setPathTitle("");
     if (!pathId) return;
     api.get(`/api/paths/${pathId}`).then(p => {
       setPathTitle(p.title || "");
+      if (p.percent >= 100) { setNextStep(null); return; }
       const steps = p.steps || [];
       const i = steps.findIndex((s: any) => s.course_id === id);
-      const next = i >= 0 ? steps.slice(i + 1).find((s: any) => s.course_id) : null;
+      const next = i >= 0 ? steps.slice(i + 1).find((s: any) => s.status !== "completed") : null;
       setNextStep(next || null);
     }).catch(() => {});
   }, [pathId, id]);
@@ -31,7 +34,23 @@ export default function CourseDetail() {
 
   const completed = c.progress?.status === "completed";
   const start = async () => { await api.post(`/api/courses/${id}/start`); load(); };
-  const goNext = () => nextStep && navigate(`/courses/${nextStep.course_id}?path=${pathId}`);
+  const goNext = async () => {
+    if (!nextStep || !pathId || starting) return;
+    setPathError("");
+    if (nextStep.course_id) {
+      navigate(`/courses/${nextStep.course_id}?path=${pathId}`);
+      return;
+    }
+    setStarting(true);
+    try {
+      const result = await api.post("/api/lab-instances", { lab_id: nextStep.lab_id });
+      navigate(`/labs/instance/${result.lab_instance_id}?path=${pathId}`);
+    } catch (error: any) {
+      setPathError(error?.message || "Could not start this lab. Please try again.");
+    } finally {
+      setStarting(false);
+    }
+  };
 
   return (
     <div className="space-y-5">
@@ -54,17 +73,18 @@ export default function CourseDetail() {
               <Link to={`/paths/${pathId}`} className="text-muted hover:text-brand">← {pathTitle || "Learning path"}</Link>
               <div className="mt-0.5">
                 {completed
-                  ? (nextStep ? <span className="text-ok">Course complete ✓ — ready for the next one.</span>
-                              : <span className="text-ok">Course complete ✓ — that's the last course in this path!</span>)
+                  ? (nextStep ? <span className="text-ok">Course complete ✓ — ready for the next path step.</span>
+                              : <span className="text-ok">Course complete ✓ — that's the last step in this path!</span>)
                   : <span className="text-muted">Part of the <b>{pathTitle}</b> path. Finish it to continue.</span>}
               </div>
             </div>
             {completed && nextStep && (
-              <button className="btn btn-primary text-sm" onClick={goNext}>
-                Continue to {nextStep.title || "next course"} →
+              <button className="btn btn-primary text-sm" onClick={goNext} disabled={starting}>
+                {starting ? "Starting lab…" : `Continue to ${nextStep.title || "next step"} →`}
               </button>
             )}
           </div>
+          {pathError && <div className="text-bad text-sm mt-2">{pathError}</div>}
         </Panel>
       )}
 

@@ -4,9 +4,11 @@ description: Securing declarative infrastructure and pipelines.
 difficulty: hard
 category: cloud
 specialization: cloud
-estimated_minutes: 40
+estimated_minutes: 80
 objectives:
 - Understand shift security left
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - cloud-security-fundamentals
 competency_prereqs: []
@@ -40,6 +42,71 @@ lessons:
     hints: []
   hints:
   - text: Review and scan templates pre-deploy.
+  walkthrough: []
+- title: Review identity and configuration as code
+  difficulty: intermediate
+  minutes: 20
+  competency: iac-security
+  body: 'Trace a cloud resource back to the identity and configuration that created it. Review role assignments,
+    public exposure, encryption, logging, and data retention together; each setting affects the others.
+    In infrastructure as code, inspect both the source and the rendered plan because variables and modules
+    can change the final resource.
+
+
+    Use the methods from **Infrastructure-as-Code Security** to work this checklist:
+
+
+    - Understand shift security left
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: What should be reviewed before applying an infrastructure plan?
+    choices:
+    - The rendered changes and affected resources
+    - Only the file name
+    - Only the last line
+    - The terminal colour scheme
+    answer: The rendered changes and affected resources
+    competency: iac-security
+    explanation: A plan should be reviewed for its full resource and permission impact before it is applied.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Check plans, secrets, and drift
+  difficulty: intermediate
+  minutes: 20
+  competency: iac-security
+  body: 'Keep secrets out of code and state files, pin trusted module and image versions, and require
+    review for broad permissions or public ingress. Compare declared configuration with the live environment
+    to detect drift. After remediation, render the plan again and verify that it changes only the intended
+    resources.
+
+
+    ## Apply this to Infrastructure-as-Code Security
+
+
+    Securing declarative infrastructure and pipelines.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: iac-security
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Infrastructure-as-Code Security Assessment

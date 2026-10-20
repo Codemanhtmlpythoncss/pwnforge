@@ -4,11 +4,13 @@ description: IP addressing, ports, protocols and routing — how machines talk.
 difficulty: beginner
 category: networking
 specialization: infrastructure
-estimated_minutes: 60
+estimated_minutes: 100
 objectives:
 - Understand ip addressing and subnets
 - Understand ports and protocols
 - Understand routing and the gateway
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - cybersecurity-fundamentals
 competency_prereqs: []
@@ -72,6 +74,75 @@ lessons:
     hints: []
   hints: []
   walkthrough: []
+- title: Map interfaces, routes, and services
+  difficulty: intermediate
+  minutes: 20
+  competency: networking-fundamentals
+  body: 'Start with local facts: `ip addr` shows interfaces and addresses, `ip route` shows where traffic
+    goes, and `ss -lntup` shows local listeners. For an authorised remote target, scan only the agreed
+    range and use service detection to identify what answers. Record address, port, transport, service
+    name, and evidence separately; an open port is evidence of a listener, not proof of a vulnerability.
+
+
+    Use the methods from **Networking Fundamentals** to work this checklist:
+
+
+    - Understand ip addressing and subnets
+
+    - Understand ports and protocols
+
+    - Understand routing and the gateway
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: Which command shows the host's routing table on Linux?
+    choices:
+    - ip route
+    - ip addr
+    - ss -lntup
+    - cat /etc/passwd
+    answer: ip route
+    competency: networking-fundamentals
+    explanation: '`ip route` displays the local routing table and default gateway.'
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Diagnose reachability in layers
+  difficulty: intermediate
+  minutes: 20
+  competency: networking-fundamentals
+  body: 'When a connection fails, check the path in order: address and subnet, local route and gateway,
+    name resolution if a hostname is involved, filtering policy, and finally whether the service is listening.
+    ICMP failure alone does not prove a host is down. Compare a permitted test with a deliberately blocked
+    path so the expected segmentation policy is clear.
+
+
+    ## Apply this to Networking Fundamentals
+
+
+    IP addressing, ports, protocols and routing — how machines talk.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: networking-fundamentals
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
+  walkthrough: []
 assessment:
   title: Networking Fundamentals Assessment
   questions:
@@ -95,7 +166,8 @@ assessment:
     explanation: UDP is connectionless.
     points: 10
     hints:
-    - Which transport protocol sends datagrams without first establishing a connection or performing a handshake?
+    - Which transport protocol sends datagrams without first establishing a connection or performing a
+      handshake?
   - kind: short_answer
     prompt: Usable hosts in a /28?
     answer: '14'
