@@ -198,9 +198,9 @@ def update(user: User = Depends(require_admin), db: Session = Depends(get_db)) -
     from backend.app.core import updater
     from backend.app.jobs import runner
 
-    if not updater.version_info(db)["update_enabled"]:
-        raise HTTPException(409, "No in-app updater is configured; updates are applied by the host "
-                                 "(set admin.update_command to enable this button).")
+    update_info = updater.version_info(db)
+    if not update_info["update_enabled"]:
+        raise HTTPException(409, update_info["update_message"])
     audit.record(db, action="admin.update", actor_id=user.id)
     db.commit()
     job_id = runner.enqueue("admin.update", params={}, owner_id=user.id, target_type="system")
