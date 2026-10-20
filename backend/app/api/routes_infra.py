@@ -20,6 +20,7 @@ from backend.app.images import service as images
 from backend.app.jobs import runner
 from backend.app.labs import flags as lab_flags
 from backend.app.labs import service as labs
+from backend.app.labs import tasks as lab_tasks
 from backend.app.networks import service as networks
 from backend.app.profiles import service as profiles
 from backend.app.storage import service as storage
@@ -258,6 +259,7 @@ def _lab_instance_out(db: Session, user: User, li: LabInstance) -> dict:
             "description": lab.description if lab else "",
             "objectives": lab.objectives if lab else [],
             "hints": lab.hints if lab else [],
+            "tasks": lab_tasks.public_tasks(db, lab, user.id) if lab else [],
             "solved": solved,
             # The walkthrough is only revealed once the flag is in (or to an admin).
             "guide": (lab.guide if lab and (solved or user.role.value == "administrator") else None),
@@ -303,6 +305,19 @@ def stop_lab(li_id: str, user: User = Depends(current_user), db: Session = Depen
     return {"ok": True}
 
 
+@router.post("/lab-instances/{li_id}/tasks/{task_id}/submit")
+def submit_lab_task(li_id: str, task_id: str, body: schemas.SubmitLabTaskRequest,
+                    user: User = Depends(current_user), db: Session = Depends(get_db)) -> dict:
+    li = db.get(LabInstance, li_id)
+    if li is None or (li.owner_id != user.id and user.role.value != "administrator"):
+        raise HTTPException(404, "Unknown lab instance")
+    if len(task_id) > 80:
+        raise HTTPException(404, "Unknown lab task")
+    if li.status != VMStatus.running:
+        raise HTTPException(409, "Wait for the lab to finish starting before submitting worksheet answers.")
+    return lab_tasks.submit_task(db, user, li, task_id, body.answer)
+
+
 @router.delete("/lab-instances/{li_id}")
 def delete_lab(li_id: str, user: User = Depends(current_user), db: Session = Depends(get_db)) -> dict:
     li = db.get(LabInstance, li_id)
@@ -315,6 +330,10 @@ def delete_lab(li_id: str, user: User = Depends(current_user), db: Session = Dep
 @router.post("/flags/submit")
 def submit_flag(body: schemas.SubmitFlagRequest, user: User = Depends(current_user),
                 db: Session = Depends(get_db)) -> dict:
+    if body.scope_type == "lab":
+        lab = db.get(Lab, body.scope_id)
+        if lab and not lab_tasks.all_tasks_complete(db, lab, user.id):
+            raise HTTPException(409, "Complete the lab worksheet tasks before submitting its flag.")
     return lab_flags.submit_flag(db, user, scope_type=body.scope_type,
                                  scope_id=body.scope_id, value=body.value)
 

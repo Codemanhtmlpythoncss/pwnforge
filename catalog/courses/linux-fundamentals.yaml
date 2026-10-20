@@ -5,11 +5,13 @@ description: The Linux shell, filesystem, permissions and processes — the bedr
 difficulty: beginner
 category: linux
 specialization: linux
-estimated_minutes: 70
+estimated_minutes: 110
 objectives:
 - Navigate the filesystem
 - Read and reason about permissions
 - Inspect processes and services
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - cybersecurity-fundamentals
 competency_prereqs: []
@@ -139,6 +141,77 @@ lessons:
     points: 10
     hints: []
   hints: []
+  walkthrough: []
+- title: Build a Linux host inventory
+  difficulty: intermediate
+  minutes: 20
+  competency: linux-fundamentals
+  body: 'Work from identity to processes to network exposure. Use `id` and `groups` to understand the
+    current account, `ps` to inspect running processes, `systemctl --type=service --state=running` (or
+    `rc-service -l` on Alpine) to inspect services, and `ss -lntup` to map listening sockets to processes.
+    Check important files with `stat` or `ls -l`; inspect sudo rules only with authorisation. Save the
+    command and the relevant output as evidence.
+
+
+    Use the methods from **Linux Fundamentals** to work this checklist:
+
+
+    - Navigate the filesystem
+
+    - Read and reason about permissions
+
+    - Inspect processes and services
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: Which command is the modern default for listing listening sockets?
+    choices:
+    - ss
+    - chmod
+    - grep
+    - whoami
+    answer: ss
+    competency: linux-fundamentals
+    explanation: '`ss` reports socket state and can include listening ports and process information.'
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Trace permissions and service exposure
+  difficulty: intermediate
+  minutes: 20
+  competency: linux-fundamentals
+  body: 'For each finding, state the observed owner, group, mode, process, service, or socket before recommending
+    a change. Compare the access that is configured with the access the service needs. Apply one least-privilege
+    correction at a time, then repeat the exact observation that exposed the issue. Check the service
+    still works, read its journal for errors, and note any remaining access that is intentional.
+
+
+    ## Apply this to Linux Fundamentals
+
+
+    The Linux shell, filesystem, permissions and processes — the bedrock skill for almost every security
+    discipline.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: linux-fundamentals
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Linux Fundamentals Assessment

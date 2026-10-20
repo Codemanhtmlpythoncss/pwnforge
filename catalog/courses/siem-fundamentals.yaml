@@ -4,9 +4,11 @@ description: Centralised collection, normalisation and alerting.
 difficulty: intermediate
 category: defensive
 specialization: defensive
-estimated_minutes: 35
+estimated_minutes: 75
 objectives:
 - Understand why centralise
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - log-analysis
 competency_prereqs: []
@@ -39,6 +41,71 @@ lessons:
     hints: []
   hints:
   - text: Normalisation makes cross-source rules possible.
+  walkthrough: []
+- title: Turn an alert into a testable question
+  difficulty: intermediate
+  minutes: 20
+  competency: siem-fundamentals
+  body: 'Start from a specific hypothesis: which account or process did what, on which host, and when?
+    Identify the log sources that can answer it, check time zones and clock offsets, and preserve the
+    original event fields. Search a narrow time window first, then widen it only when evidence suggests
+    a longer sequence. A missing event may reflect a logging gap, not proof that an action did not happen.
+
+
+    Use the methods from **SIEM Fundamentals** to work this checklist:
+
+
+    - Understand why centralise
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: What time-ordered record helps reconstruct a sequence of events?
+    choices:
+    - Timeline
+    - Asset tag
+    - Firewall zone
+    - Package manifest
+    answer: Timeline
+    competency: siem-fundamentals
+    explanation: A timeline aligns related observations chronologically across sources.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Build a timeline and validate a detection
+  difficulty: intermediate
+  minutes: 20
+  competency: siem-fundamentals
+  body: 'Correlate independent sources and mark each statement as confirmed, inferred, or unknown. For
+    a detection rule, write the behaviour it is meant to catch, the required fields, and known benign
+    lookalikes. Test it against representative positive and negative events. Record precision limits and
+    the response an analyst should take when it fires.
+
+
+    ## Apply this to SIEM Fundamentals
+
+
+    Centralised collection, normalisation and alerting.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: siem-fundamentals
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: SIEM Fundamentals Assessment

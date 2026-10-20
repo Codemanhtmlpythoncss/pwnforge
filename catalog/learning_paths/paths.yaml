@@ -1,6 +1,8 @@
 - id: path-complete-beginner
   title: Complete Beginner
-  description: Start from zero and build the foundations for every other path.
+  description: Build a practical foundation in safe lab use, Linux, networks, HTTP, service discovery,
+    and basic reporting. Finish by demonstrating that you can inventory a host and explain what your evidence
+    shows.
   specialization: null
   difficulty_min: orientation
   difficulty_max: easy
@@ -24,43 +26,100 @@
     required: true
     note: ''
   - order: 4
-    course_id: networking-fundamentals
-    lab_id: null
-    required: true
-    note: ''
+    course_id: null
+    lab_id: linux-practice-basic
+    required: false
+    note: Practise core Linux on a real machine
   - order: 5
-    course_id: bash-for-security
-    lab_id: null
+    course_id: null
+    lab_id: lab-linux-smb-enumeration
     required: true
-    note: ''
+    note: Inventory Linux and SMB services
   - order: 6
-    course_id: http-https
-    lab_id: null
+    course_id: null
+    lab_id: lab-alpine-service-hardening
     required: true
-    note: ''
+    note: Review service state and exposure
   - order: 7
-    course_id: service-enumeration
+    course_id: networking-fundamentals
     lab_id: null
     required: true
     note: ''
   - order: 8
     course_id: null
-    lab_id: web-security-lab
-    required: false
-    note: First easy security lab
+    lab_id: lab-first-firewall-map
+    required: true
+    note: Map ports and firewall exposure
   - order: 9
-    course_id: vulnerability-assessment
+    course_id: bash-for-security
     lab_id: null
     required: true
     note: ''
   - order: 10
+    course_id: http-https
+    lab_id: null
+    required: true
+    note: ''
+  - order: 11
+    course_id: null
+    lab_id: lab-http-input-validation
+    required: true
+    note: Trace input through an HTTP request
+  - order: 12
+    course_id: service-enumeration
+    lab_id: null
+    required: true
+    note: ''
+  - order: 13
+    course_id: null
+    lab_id: lab-nginx-service-inventory
+    required: true
+    note: Connect service names to listening sockets
+  - order: 14
+    course_id: null
+    lab_id: network-basics-lab
+    required: false
+    note: Scan and enumerate a small network
+  - order: 15
+    course_id: null
+    lab_id: web-security-lab
+    required: false
+    note: Your first security lab
+  - order: 16
+    course_id: vulnerability-assessment
+    lab_id: null
+    required: true
+    note: ''
+  - order: 17
     course_id: security-reporting
     lab_id: null
     required: true
     note: ''
+  - order: 18
+    course_id: null
+    lab_id: foothold-default-creds
+    required: false
+    note: 'Break into your first box: default credentials'
+  outcomes:
+  - Navigate a Linux host and explain file ownership and permissions
+  - Map a subnet, route, open port, and listening service using evidence
+  - Explain how an HTTP request reaches an application and where input is handled
+  - Distinguish an observation from an assumption in a security finding
+  - Write a concise finding with impact, evidence, and a practical fix
+  capstone:
+    title: Host and service inventory
+    scenario: Given an isolated host and its network scope, create a reproducible inventory and explain
+      what is exposed.
+    success_criteria:
+    - Identify the target and scope before active checks
+    - Report discovered services with command output or equivalent evidence
+    - Explain one relevant risk and a proportionate remediation
+    - Separate verified facts from assumptions
 - id: path-web-pentest
   title: Web Penetration Testing
-  description: Progress from HTTP basics to chained web application assessment.
+  description: Progress from HTTP fundamentals through input handling, authentication, sessions, access
+    control, SQL injection, and XSS. Practise each stage on an isolated application, then verify a fix
+    and write a reproducible finding.
   specialization: web
   difficulty_min: beginner
   difficulty_max: expert
@@ -79,68 +138,120 @@
     required: true
     note: ''
   - order: 3
+    course_id: null
+    lab_id: lab-web-input-validation-review
+    required: true
+    note: Trace input to a validation boundary
+  - order: 4
     course_id: linux-fundamentals
     lab_id: null
     required: true
     note: ''
-  - order: 4
+  - order: 5
     course_id: sql-fundamentals
     lab_id: null
     required: true
     note: ''
-  - order: 5
+  - order: 6
     course_id: authentication-security
     lab_id: null
     required: true
     note: ''
-  - order: 6
+  - order: 7
+    course_id: null
+    lab_id: lab-web-authentication-audit
+    required: true
+    note: Review a login service
+  - order: 8
     course_id: session-management-course
     lab_id: null
     required: true
     note: ''
-  - order: 7
+  - order: 9
+    course_id: null
+    lab_id: lab-session-token-audit
+    required: true
+    note: Inspect session handling
+  - order: 10
     course_id: access-control-course
     lab_id: null
     required: true
     note: ''
-  - order: 8
-    course_id: web-application-security
-    lab_id: null
-    required: true
-    note: ''
-  - order: 9
-    course_id: sql-injection-labs
-    lab_id: null
-    required: true
-    note: ''
-  - order: 10
-    course_id: cross-site-scripting
-    lab_id: null
-    required: true
-    note: ''
   - order: 11
-    course_id: api-security
+    course_id: web-application-security
     lab_id: null
     required: true
     note: ''
   - order: 12
     course_id: null
-    lab_id: web-security-lab
-    required: true
-    note: Intermediate web lab
+    lab_id: foothold-default-creds
+    required: false
+    note: 'Warm up: get a foothold on a host'
   - order: 13
-    course_id: advanced-web-security
+    course_id: sql-injection-labs
     lab_id: null
     required: true
     note: ''
   - order: 14
+    course_id: null
+    lab_id: lab-sql-injection-practice
+    required: true
+    note: Verify a database-backed endpoint safely
+  - order: 15
+    course_id: cross-site-scripting
+    lab_id: null
+    required: true
+    note: ''
+  - order: 16
+    course_id: null
+    lab_id: lab-xss-output-encoding
+    required: true
+    note: Check output encoding
+  - order: 17
+    course_id: api-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 18
+    course_id: null
+    lab_id: web-security-lab
+    required: true
+    note: Intermediate web lab
+  - order: 19
+    course_id: advanced-web-security
+    lab_id: null
+    required: true
+    note: ''
+  - order: 20
+    course_id: null
+    lab_id: foothold-weak-ssh
+    required: false
+    note: 'Pivot: gain access to a host behind the app'
+  - order: 21
     course_id: security-reporting
     lab_id: null
     required: true
     note: Final web assessment reporting
+  outcomes:
+  - Trace browser requests, application logic, and database interactions
+  - Test authentication, sessions, access control, and input handling safely
+  - Verify SQL injection and cross-site scripting findings with controlled evidence
+  - Recommend fixes that address the underlying cause and retest them
+  - Write a reproducible web finding with scope, impact, and evidence
+  capstone:
+    title: Web application assessment
+    scenario: Assess an isolated application from its exposed endpoints through one verified weakness
+      and its remediation.
+    success_criteria:
+    - Record the exact request and response that support each finding
+    - Demonstrate the issue with a controlled input and no unrelated data access
+    - Explain impact and the vulnerable trust boundary
+    - Retest the proposed fix and document residual limitations
 - id: path-infra-pentest
   title: Infrastructure Penetration Testing
-  description: Network and host assessment across Linux and Windows.
+  description: Learn to scope an infrastructure assessment, map routes and services, inspect Linux and
+    Windows hosts, validate exposure safely, and explain initial access and privilege boundaries with
+    evidence.
   specialization: pentest
   difficulty_min: beginner
   difficulty_max: advanced
@@ -154,58 +265,119 @@
     required: true
     note: ''
   - order: 2
+    course_id: null
+    lab_id: lab-linux-firewall-enumeration
+    required: true
+    note: Compare listeners and firewall policy
+  - order: 3
     course_id: linux-fundamentals
     lab_id: null
     required: true
     note: ''
-  - order: 3
+  - order: 4
     course_id: windows-fundamentals
     lab_id: null
     required: true
     note: ''
-  - order: 4
+  - order: 5
     course_id: dns-network-services
     lab_id: null
     required: true
     note: ''
-  - order: 5
+  - order: 6
+    course_id: null
+    lab_id: lab-samba-service-enumeration
+    required: true
+    note: Enumerate a file-sharing service
+  - order: 7
     course_id: reconnaissance
     lab_id: null
     required: true
     note: ''
-  - order: 6
-    course_id: service-enumeration
-    lab_id: null
-    required: true
-    note: ''
-  - order: 7
-    course_id: vulnerability-assessment
-    lab_id: null
-    required: true
-    note: ''
   - order: 8
-    course_id: linux-privilege-escalation-concepts
-    lab_id: null
+    course_id: null
+    lab_id: lab-alpine-host-enumeration
     required: true
-    note: ''
+    note: Build an evidence-backed host inventory
   - order: 9
-    course_id: windows-privilege-escalation-concepts
+    course_id: service-enumeration
     lab_id: null
     required: true
     note: ''
   - order: 10
     course_id: null
+    lab_id: lab-tls-nginx-audit
+    required: true
+    note: Inspect service and certificate evidence
+  - order: 11
+    course_id: null
+    lab_id: network-basics-lab
+    required: false
+    note: Enumerate a small isolated network
+  - order: 12
+    course_id: vulnerability-assessment
+    lab_id: null
+    required: true
+    note: ''
+  - order: 13
+    course_id: null
+    lab_id: foothold-default-creds
+    required: false
+    note: 'Initial access: default credentials'
+  - order: 14
+    course_id: linux-privilege-escalation-concepts
+    lab_id: null
+    required: true
+    note: ''
+  - order: 15
+    course_id: null
+    lab_id: lab-smb-privilege-boundaries
+    required: true
+    note: Review local and share permissions
+  - order: 16
+    course_id: windows-privilege-escalation-concepts
+    lab_id: null
+    required: true
+    note: ''
+  - order: 17
+    course_id: null
+    lab_id: foothold-weak-ssh
+    required: false
+    note: 'Initial access: a weak password'
+  - order: 18
+    course_id: null
+    lab_id: foothold-enumerate-user
+    required: false
+    note: 'Initial access: find the user, then the password'
+  - order: 19
+    course_id: null
     lab_id: enterprise-identity-lab
     required: true
     note: Advanced multi-service lab
-  - order: 11
+  - order: 20
     course_id: security-reporting
     lab_id: null
     required: true
     note: ''
+  outcomes:
+  - Scope an infrastructure assessment and map hosts, routes, and services
+  - Identify service software and versions using safe, bounded probes
+  - Assess Linux and Windows configuration and privilege boundaries
+  - Validate a security issue without exceeding the lab's written scope
+  - Deliver an evidence-based report with prioritised remediation
+  capstone:
+    title: Isolated infrastructure assessment
+    scenario: Assess a small isolated network from discovery through validation and reporting.
+    success_criteria:
+    - List in-scope hosts and discovered services with evidence
+    - Explain how the observed network path and filtering affect reachability
+    - Validate one weakness and state what the result does not prove
+    - Prioritise a fix and include a verification step
 - id: path-active-directory
   title: Active Directory Security
-  description: Windows and directory services from fundamentals to identity security.
+  description: Build from Windows and authentication fundamentals to directory enumeration, identity permissions,
+    privilege boundaries, and an isolated enterprise directory capstone. You will document effective access
+    and justify least-privilege changes.
   specialization: active-directory
   difficulty_min: beginner
   difficulty_max: expert
@@ -219,38 +391,85 @@
     required: true
     note: ''
   - order: 2
+    course_id: null
+    lab_id: lab-identity-linux-groups
+    required: true
+    note: Review users and effective group access
+  - order: 3
     course_id: windows-administration
     lab_id: null
     required: true
     note: ''
-  - order: 3
+  - order: 4
     course_id: authentication-security
     lab_id: null
     required: true
     note: ''
-  - order: 4
-    course_id: active-directory-fundamentals
-    lab_id: null
-    required: true
-    note: ''
   - order: 5
-    course_id: identity-access-management
-    lab_id: null
-    required: true
-    note: ''
+    course_id: null
+    lab_id: foothold-default-creds
+    required: false
+    note: Get an initial foothold on a host
   - order: 6
-    course_id: windows-privilege-escalation-concepts
+    course_id: active-directory-fundamentals
     lab_id: null
     required: true
     note: ''
   - order: 7
     course_id: null
+    lab_id: lab-samba-share-inventory
+    required: true
+    note: Inventory SMB shares before the domain lab
+  - order: 8
+    course_id: null
+    lab_id: lab-samba-account-enumeration
+    required: true
+    note: Record account and service questions
+  - order: 9
+    course_id: identity-access-management
+    lab_id: null
+    required: true
+    note: ''
+  - order: 10
+    course_id: null
+    lab_id: lab-samba-service-hardening
+    required: true
+    note: Recommend a least-privilege change
+  - order: 11
+    course_id: windows-privilege-escalation-concepts
+    lab_id: null
+    required: true
+    note: ''
+  - order: 12
+    course_id: null
+    lab_id: lab-identity-privilege-boundaries
+    required: true
+    note: Trace an identity privilege boundary
+  - order: 13
+    course_id: null
     lab_id: enterprise-identity-lab
     required: true
     note: Enterprise directory lab
+  outcomes:
+  - Explain domain, user, group, authentication, and policy relationships
+  - Enumerate directory objects and effective permissions with approved methods
+  - Trace inherited access and identify an excessive privilege path
+  - Recommend least-privilege changes without breaking required access
+  - Document a directory finding and the evidence needed to reproduce it
+  capstone:
+    title: Directory access review
+    scenario: Review the isolated directory lab and explain how a selected identity reaches a protected
+      resource.
+    success_criteria:
+    - Map the relevant users, groups, roles, and resource
+    - Show the effective permission path with supporting evidence
+    - Identify one excessive grant and a least-privilege correction
+    - Verify both an allowed workflow and the intended restriction
 - id: path-defensive
   title: Defensive Security
-  description: Build blue-team skills from logging to incident response.
+  description: Move from host and network telemetry to SIEM searches, detection engineering, threat hunting,
+    incident timelines, and forensic reporting. Finish by validating a detection and communicating what
+    the evidence can—and cannot—prove.
   specialization: defensive
   difficulty_min: beginner
   difficulty_max: advanced
@@ -269,53 +488,105 @@
     required: true
     note: ''
   - order: 3
+    course_id: null
+    lab_id: linux-admin-lab
+    required: false
+    note: Administer and harden a real server
+  - order: 4
     course_id: windows-administration
     lab_id: null
     required: true
     note: ''
-  - order: 4
+  - order: 5
     course_id: log-analysis
     lab_id: null
     required: true
     note: ''
-  - order: 5
+  - order: 6
+    course_id: null
+    lab_id: lab-linux-auth-log-review
+    required: true
+    note: Review authentication evidence
+  - order: 7
     course_id: network-monitoring
     lab_id: null
     required: true
     note: ''
-  - order: 6
+  - order: 8
+    course_id: null
+    lab_id: lab-network-evidence-review
+    required: true
+    note: Interpret endpoint and time context
+  - order: 9
     course_id: siem-fundamentals
     lab_id: null
     required: true
     note: ''
-  - order: 7
-    course_id: detection-engineering
-    lab_id: null
-    required: true
-    note: ''
-  - order: 8
-    course_id: threat-hunting
-    lab_id: null
-    required: true
-    note: ''
-  - order: 9
-    course_id: incident-response
-    lab_id: null
-    required: true
-    note: ''
   - order: 10
-    course_id: digital-forensics
+    course_id: detection-engineering
     lab_id: null
     required: true
     note: ''
   - order: 11
     course_id: null
+    lab_id: lab-detection-rule-practice
+    required: true
+    note: Create and validate a detection idea
+  - order: 12
+    course_id: threat-hunting
+    lab_id: null
+    required: true
+    note: ''
+  - order: 13
+    course_id: null
+    lab_id: lab-threat-hunt-practice
+    required: true
+    note: Test a hunt hypothesis
+  - order: 14
+    course_id: incident-response
+    lab_id: null
+    required: true
+    note: ''
+  - order: 15
+    course_id: null
+    lab_id: lab-incident-timeline-practice
+    required: true
+    note: Build an incident timeline
+  - order: 16
+    course_id: digital-forensics
+    lab_id: null
+    required: true
+    note: ''
+  - order: 17
+    course_id: null
+    lab_id: malware-analysis-lab
+    required: false
+    note: Triage a sample to build detections
+  - order: 18
+    course_id: null
     lab_id: defensive-monitoring-lab
     required: true
     note: Advanced investigation lab
+  outcomes:
+  - Collect and interpret host, identity, and network telemetry with time context
+  - Build a detection from an observable behaviour and test it against evidence
+  - Hunt a stated hypothesis and record supporting and contradicting evidence
+  - Reconstruct an incident timeline while preserving source provenance
+  - Communicate confirmed facts, uncertainty, impact, and next actions
+  capstone:
+    title: Detection and incident investigation
+    scenario: Investigate a seeded activity sequence, validate one detection, and report the incident
+      evidence.
+    success_criteria:
+    - Cite the source, timestamp, and event details for key claims
+    - Explain why the detection matches and where false positives may occur
+    - Build an ordered timeline that distinguishes facts from hypotheses
+    - Recommend containment and follow-up evidence collection
 - id: path-reverse-engineering
   title: Reverse Engineering
-  description: From programming foundations to binary analysis and memory safety.
+  description: Build the programming and memory-safety foundation for safe binary triage, static analysis,
+    controlled dynamic analysis, and malware reporting. Practise an evidence-led workflow in isolated
+    analysis environments.
   specialization: reverse
   difficulty_min: easy
   difficulty_max: expert
@@ -334,28 +605,74 @@
     required: true
     note: ''
   - order: 3
+    course_id: null
+    lab_id: lab-static-analysis-capstone
+    required: true
+    note: Start a static triage workflow
+  - order: 4
     course_id: reverse-engineering-fundamentals
     lab_id: null
     required: true
     note: ''
-  - order: 4
+  - order: 5
+    course_id: null
+    lab_id: lab-re-backup-agent
+    required: true
+    note: Inspect component metadata and strings
+  - order: 6
     course_id: memory-safety
     lab_id: null
     required: true
     note: ''
-  - order: 5
+  - order: 7
+    course_id: null
+    lab_id: lab-re-job-runner
+    required: true
+    note: Relate code behaviour to memory-safety risks
+  - order: 8
     course_id: malware-analysis-fundamentals
     lab_id: null
     required: true
     note: ''
-  - order: 6
+  - order: 9
+    course_id: null
+    lab_id: lab-malware-triage-capstone
+    required: true
+    note: Triage within an isolated environment
+  - order: 10
+    course_id: null
+    lab_id: malware-analysis-lab
+    required: false
+    note: Triage a real sample in isolation
+  - order: 11
     course_id: null
     lab_id: reverse-engineering-lab
     required: true
     note: Final RE challenge
+  - order: 12
+    course_id: null
+    lab_id: lab-re-message-queue
+    required: true
+    note: Complete a final isolated component analysis
+  outcomes:
+  - Identify binary format, architecture, hashes, strings, and relevant metadata
+  - Use disassembly and controlled debugging to trace a program's behaviour
+  - Explain memory-safety issues from code paths and observed effects
+  - Contain samples and avoid unsafe execution outside the isolated lab
+  - Produce a cautious analysis report with indicators and limitations
+  capstone:
+    title: Contained binary triage
+    scenario: Analyse the supplied isolated sample from static triage to a supported behaviour report.
+    success_criteria:
+    - Record hash, file type, architecture, and analysis environment
+    - Support behaviour claims with static or controlled dynamic evidence
+    - Separate indicators from hypotheses and identify uncertainty
+    - Describe containment and a safe next analysis step
 - id: path-container-infra
   title: Container and Infrastructure Security
-  description: Secure containers, orchestration and declarative infrastructure.
+  description: Progress from Linux and network foundations to container runtime controls, Kubernetes isolation,
+    segmentation, and infrastructure-as-code review. Practise checking image provenance, identity, capabilities,
+    mounts, and network policy.
   specialization: cloud
   difficulty_min: easy
   difficulty_max: advanced
@@ -369,43 +686,95 @@
     required: true
     note: ''
   - order: 2
+    course_id: null
+    lab_id: linux-practice-basic
+    required: false
+    note: Practise Linux on a real box
+  - order: 3
     course_id: linux-administration
     lab_id: null
     required: true
     note: ''
-  - order: 3
+  - order: 4
+    course_id: null
+    lab_id: lab-container-host-audit
+    required: true
+    note: Inventory container host services
+  - order: 5
+    course_id: null
+    lab_id: linux-admin-lab
+    required: false
+    note: Administer and harden a server
+  - order: 6
     course_id: networking-fundamentals
     lab_id: null
     required: true
     note: ''
-  - order: 4
+  - order: 7
+    course_id: null
+    lab_id: lab-segmentation-verification
+    required: true
+    note: Verify allowed and blocked paths
+  - order: 8
     course_id: docker-security
     lab_id: null
     required: true
     note: ''
-  - order: 5
+  - order: 9
+    course_id: null
+    lab_id: lab-container-runtime-hardening
+    required: true
+    note: Review runtime privileges and mounts
+  - order: 10
     course_id: kubernetes-security
     lab_id: null
     required: true
     note: ''
-  - order: 6
+  - order: 11
+    course_id: null
+    lab_id: lab-container-image-policy
+    required: true
+    note: Review image and workload identity
+  - order: 12
     course_id: network-segmentation
     lab_id: null
     required: true
     note: ''
-  - order: 7
+  - order: 13
     course_id: iac-security
     lab_id: null
     required: true
     note: ''
-  - order: 8
+  - order: 14
+    course_id: null
+    lab_id: lab-container-iac-review
+    required: true
+    note: Review rendered configuration and drift
+  - order: 15
     course_id: null
     lab_id: container-security-lab
     required: true
     note: Advanced container lab
+  outcomes:
+  - Explain container images, registries, runtime isolation, and workload identity
+  - Identify risky capabilities, mounts, privileges, and exposed ports
+  - Review Kubernetes identity and network policy boundaries
+  - Inspect infrastructure-as-code plans for secrets, exposure, and drift
+  - Verify a least-privilege remediation against the resulting workload
+  capstone:
+    title: Container workload hardening review
+    scenario: Review a disposable container host and its declared workload configuration, then verify
+      a scoped hardening change.
+    success_criteria:
+    - Inventory images, identities, privileges, mounts, and exposed services
+    - Explain one concrete path from configuration to workload risk
+    - Propose a minimal change and inspect the rendered result
+    - Verify required behaviour still works and excess access is removed
 - id: path-digital-forensics
   title: Digital Forensics
-  description: Evidence handling through incident reconstruction.
+  description: Learn evidence preservation, hashes, file and network artefacts, event timelines, and incident
+    reconstruction. Each practice lab reinforces provenance, time context, and conclusions that stay within
+    the evidence.
   specialization: forensics
   difficulty_min: easy
   difficulty_max: advanced
@@ -419,34 +788,80 @@
     required: true
     note: ''
   - order: 2
+    course_id: null
+    lab_id: lab-disk-forensics-import-tool
+    required: true
+    note: Preserve and inventory evidence
+  - order: 3
     course_id: digital-forensics
     lab_id: null
     required: true
     note: ''
-  - order: 3
-    course_id: network-monitoring
-    lab_id: null
-    required: true
-    note: ''
   - order: 4
-    course_id: incident-response
-    lab_id: null
+    course_id: null
+    lab_id: lab-disk-forensics-backup-agent
     required: true
-    note: ''
+    note: Verify integrity and file-system artefacts
   - order: 5
-    course_id: malware-analysis-fundamentals
+    course_id: network-monitoring
     lab_id: null
     required: true
     note: ''
   - order: 6
     course_id: null
+    lab_id: lab-network-forensics-webhook
+    required: true
+    note: Review network artefacts
+  - order: 7
+    course_id: incident-response
+    lab_id: null
+    required: true
+    note: ''
+  - order: 8
+    course_id: null
+    lab_id: lab-incident-evidence-timeline
+    required: true
+    note: Correlate events in time
+  - order: 9
+    course_id: malware-analysis-fundamentals
+    lab_id: null
+    required: true
+    note: ''
+  - order: 10
+    course_id: null
+    lab_id: lab-malware-triage-search-index
+    required: true
+    note: Perform safe first-pass triage
+  - order: 11
+    course_id: null
+    lab_id: malware-analysis-lab
+    required: false
+    note: Safe malware triage
+  - order: 12
+    course_id: null
     lab_id: forensics-workstation-lab
     required: true
     note: Advanced investigation challenge
+  outcomes:
+  - Acquire and hash evidence while preserving provenance and chain of custody
+  - Extract file-system, event, and network artefacts using repeatable methods
+  - Correlate timestamps across sources and record time-zone assumptions
+  - Identify indicators while distinguishing them from attribution claims
+  - Write a forensic report whose conclusions are bounded by the evidence
+  capstone:
+    title: Evidence-led incident reconstruction
+    scenario: Examine the provided host and network evidence, preserve integrity, and reconstruct the
+      supported event sequence.
+    success_criteria:
+    - Record evidence identifiers and pre/post analysis hashes
+    - Cite artefacts and time context for each timeline entry
+    - Explain alternative interpretations and evidence gaps
+    - Keep conclusions and recommendations within what the evidence supports
 - id: path-hacker-toolkit
   title: The Hacker's Toolkit
-  description: Learn to actually use the essential security tools — from scanning to exploitation frameworks
-    to reverse engineering — in authorised labs.
+  description: Learn when and how to use scanners, HTTP clients, proxies, authentication auditors, SMB
+    tooling, packet analysers, and reverse-engineering tools. Every practical step stays in the authorised
+    lab scope and requires you to validate the output.
   specialization: pentest
   difficulty_min: easy
   difficulty_max: advanced
@@ -460,84 +875,145 @@
     required: true
     note: ''
   - order: 2
+    course_id: null
+    lab_id: lab-tool-range-ssh
+    required: true
+    note: Use service detection against an isolated host
+  - order: 3
+    course_id: null
+    lab_id: network-basics-lab
+    required: false
+    note: Use nmap against a real network
+  - order: 4
     course_id: tool-content-discovery
     lab_id: null
     required: true
     note: ''
-  - order: 3
+  - order: 5
+    course_id: null
+    lab_id: lab-tool-web-proxy
+    required: true
+    note: Inspect application requests through a proxy
+  - order: 6
     course_id: tool-http-clients
     lab_id: null
     required: true
     note: ''
-  - order: 4
+  - order: 7
+    course_id: null
+    lab_id: lab-toolkit-ctf-web
+    required: true
+    note: Verify a response with an HTTP client
+  - order: 8
     course_id: tool-burp
     lab_id: null
     required: true
     note: ''
-  - order: 5
+  - order: 9
     course_id: tool-sqlmap
     lab_id: null
     required: true
     note: ''
-  - order: 6
+  - order: 10
     course_id: tool-netcat
     lab_id: null
     required: true
     note: ''
-  - order: 7
+  - order: 11
     course_id: tool-hydra
     lab_id: null
     required: true
     note: ''
-  - order: 8
+  - order: 12
+    course_id: null
+    lab_id: foothold-default-creds
+    required: false
+    note: 'Crack a login: default credentials'
+  - order: 13
     course_id: tool-john
     lab_id: null
     required: true
     note: ''
-  - order: 9
+  - order: 14
     course_id: tool-hashcat
     lab_id: null
     required: true
     note: ''
-  - order: 10
+  - order: 15
+    course_id: null
+    lab_id: foothold-weak-ssh
+    required: false
+    note: 'Crack a login: a weak SSH password'
+  - order: 16
     course_id: tool-metasploit
     lab_id: null
     required: true
     note: ''
-  - order: 11
+  - order: 17
     course_id: tool-smb-enum
     lab_id: null
     required: true
     note: ''
-  - order: 12
+  - order: 18
+    course_id: null
+    lab_id: lab-tool-range-smb
+    required: true
+    note: Enumerate SMB in the lab scope
+  - order: 19
     course_id: tool-impacket
     lab_id: null
     required: true
     note: ''
-  - order: 13
+  - order: 20
+    course_id: null
+    lab_id: foothold-enumerate-user
+    required: false
+    note: Find the user, then crack the password
+  - order: 21
     course_id: tool-bloodhound
     lab_id: null
     required: true
     note: ''
-  - order: 14
+  - order: 22
     course_id: tool-wireshark
     lab_id: null
     required: true
     note: ''
-  - order: 15
+  - order: 23
+    course_id: null
+    lab_id: lab-toolkit-service-discovery
+    required: true
+    note: Compare packet and socket evidence
+  - order: 24
     course_id: tool-ghidra
     lab_id: null
     required: true
     note: ''
-  - order: 16
+  - order: 25
     course_id: null
     lab_id: enterprise-identity-lab
     required: false
     note: Put the toolkit to work
+  outcomes:
+  - Choose scanners, HTTP clients, proxies, and packet tools for a stated question
+  - Keep every probe within a written target and rate scope
+  - Interpret output and validate important results with a second observation
+  - Protect credentials and preserve relevant command and response evidence
+  - Explain tool limitations and produce a reproducible result
+  capstone:
+    title: Scoped multi-tool assessment
+    scenario: Use a small approved range to answer a service and application question with complementary
+      tools.
+    success_criteria:
+    - State target scope and use bounded options
+    - Identify services using both remote and host-side evidence where available
+    - Correlate tool output and explain discrepancies
+    - Save reproducible evidence without exposing secrets
 - id: path-osint
   title: OSINT & Reconnaissance
-  description: Open-source intelligence from fundamentals and ethics through practical tooling, OPSEC
-    and responsible reporting.
+  description: Define a lawful collection question, gather public-source information, corroborate it,
+    assess confidence, protect operational security, and write a careful report. Labs require source and
+    time notes so claims remain auditable.
   specialization: osint
   difficulty_min: easy
   difficulty_max: advanced
@@ -551,27 +1027,72 @@
     required: true
     note: ''
   - order: 2
+    course_id: null
+    lab_id: lab-osint-source-confidence
+    required: true
+    note: Record provenance and confidence
+  - order: 3
     course_id: reconnaissance
     lab_id: null
     required: true
     note: ''
-  - order: 3
+  - order: 4
+    course_id: null
+    lab_id: lab-osint-recon-tooling
+    required: true
+    note: Choose a bounded collection method
+  - order: 5
+    course_id: null
+    lab_id: network-basics-lab
+    required: false
+    note: 'Hands-on recon: enumerate a target network'
+  - order: 6
     course_id: osint-techniques
     lab_id: null
     required: true
     note: ''
-  - order: 4
+  - order: 7
+    course_id: null
+    lab_id: lab-osint-corroboration
+    required: true
+    note: Corroborate independent observations
+  - order: 8
     course_id: osint-tools
     lab_id: null
     required: true
     note: ''
-  - order: 5
+  - order: 9
+    course_id: null
+    lab_id: lab-osint-api-gateway-footprint
+    required: true
+    note: Analyse a bounded simulated footprint
+  - order: 10
     course_id: osint-opsec-reporting
     lab_id: null
     required: true
     note: ''
-  - order: 6
+  - order: 11
+    course_id: null
+    lab_id: lab-osint-opsec-review
+    required: true
+    note: Plan ethical collection and reporting
+  - order: 12
     course_id: null
     lab_id: osint-investigation-lab
     required: true
     note: OSINT investigation challenge
+  outcomes:
+  - Define a lawful collection question, subject, timeframe, and data limits
+  - Record source provenance, collection time, and the exact claim supported
+  - Corroborate important claims with independent sources and check contradictions
+  - Assign confidence and distinguish fact from inference
+  - Write a privacy-aware report that explains source and collection limitations
+  capstone:
+    title: Auditable public-source investigation
+    scenario: Investigate a bounded fictional subject, corroborate a claim, and produce a source-linked
+      report.
+    success_criteria:
+    - Record source URL, collection time, and relevant evidence for each claim
+    - Use independent corroboration and note contradictory information
+    - Explain confidence and separate inference from fact
+    - Minimise personal data and document the lawful scope

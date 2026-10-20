@@ -4,10 +4,12 @@ description: Cluster architecture, RBAC and network policies.
 difficulty: hard
 category: container
 specialization: cloud
-estimated_minutes: 55
+estimated_minutes: 95
 objectives:
 - Understand cluster and rbac
 - Understand network policies
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - docker-security
 competency_prereqs: []
@@ -57,6 +59,73 @@ lessons:
     points: 10
     hints: []
   hints: []
+  walkthrough: []
+- title: Inspect the container's full trust boundary
+  difficulty: intermediate
+  minutes: 20
+  competency: kubernetes-security
+  body: 'Review the image source and digest, user identity, capabilities, mounts, secrets, network attachments,
+    and exposed ports. A container shares the host kernel, so a root process, privileged mode, or writable
+    host mount can expand impact beyond the container. Check what the workload actually needs instead
+    of assuming the image''s defaults are safe.
+
+
+    Use the methods from **Kubernetes Security** to work this checklist:
+
+
+    - Understand cluster and rbac
+
+    - Understand network policies
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: Which principle should guide container capabilities and privileges?
+    choices:
+    - Least privilege
+    - Privileged by default
+    - Shared root access
+    - Disable logging
+    answer: Least privilege
+    competency: kubernetes-security
+    explanation: Containers should receive only the privileges and capabilities the workload requires.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Reduce runtime privilege and verify isolation
+  difficulty: intermediate
+  minutes: 20
+  competency: kubernetes-security
+  body: 'Apply one restriction at a time: run as a non-root user, drop unused capabilities, make the filesystem
+    read-only where possible, limit resources, and use narrow network policy. Verify the workload still
+    functions, then inspect the effective runtime configuration rather than relying only on a deployment
+    file. Record the image digest and policy evidence for repeatability.
+
+
+    ## Apply this to Kubernetes Security
+
+
+    Cluster architecture, RBAC and network policies.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: kubernetes-security
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Kubernetes Security Assessment

@@ -4,10 +4,12 @@ description: Identify and fingerprint the services a host exposes.
 difficulty: easy
 category: methodology
 specialization: pentest
-estimated_minutes: 50
+estimated_minutes: 90
 objectives:
 - Understand from open port to service
 - Understand mapping the attack surface
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - reconnaissance
 - networking-fundamentals
@@ -58,6 +60,73 @@ lessons:
     points: 10
     hints: []
   hints: []
+  walkthrough: []
+- title: Map the service and management planes
+  difficulty: intermediate
+  minutes: 20
+  competency: service-enumeration
+  body: 'Inventory interfaces, routes, listening sockets, service accounts, and management endpoints.
+    Separate user-facing traffic from administration and monitoring. For every open service, record its
+    owner, purpose, expected clients, and whether it is reachable from each network zone. An exposed port
+    alone is not a finding until you understand what listens there and who should reach it.
+
+
+    Use the methods from **Service Enumeration** to work this checklist:
+
+
+    - Understand from open port to service
+
+    - Understand mapping the attack surface
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: What does `ss -lntup` help identify?
+    choices:
+    - Listening sockets and associated processes
+    - The default route
+    - Installed packages
+    - User group membership
+    answer: Listening sockets and associated processes
+    competency: service-enumeration
+    explanation: '`ss -lntup` displays listening sockets, numeric ports, and owning processes when permitted.'
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Verify the smallest safe configuration change
+  difficulty: intermediate
+  minutes: 20
+  competency: service-enumeration
+  body: 'Write the intended allowed and denied flows before adjusting a firewall or service binding. Apply
+    the narrowest rule, then test both a permitted connection and a blocked connection from the right
+    network locations. Confirm logs show the expected decision and that management access remains available.
+    Capture the before-and-after evidence with the rule identifier.
+
+
+    ## Apply this to Service Enumeration
+
+
+    Identify and fingerprint the services a host exposes.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: service-enumeration
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Service Enumeration Assessment

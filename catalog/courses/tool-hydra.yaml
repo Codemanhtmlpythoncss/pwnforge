@@ -4,9 +4,11 @@ description: Test login resilience against guessing on systems you own.
 difficulty: hard
 category: tools
 specialization: pentest
-estimated_minutes: 35
+estimated_minutes: 75
 objectives:
 - Understand how hydra works
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - authentication-security
 - tool-nmap
@@ -45,6 +47,72 @@ lessons:
     hints: []
   hints:
   - text: '`-l` single user, `-L` user list; `-p`/`-P` likewise for passwords.'
+  walkthrough: []
+- title: Choose a tool for a specific question
+  difficulty: intermediate
+  minutes: 20
+  competency: tool-password-auditing
+  body: 'State the question you need answered before choosing a scanner, proxy, packet analyser, or password
+    auditor. Confirm the target and limits, select the smallest useful option set, and save the complete
+    output with tool version and timestamp. Understand what the tool measures and what it cannot see;
+    a result may be incomplete because of filtering, authentication, or protocol behaviour.
+
+
+    Use the methods from **Hydra: Authorised Authentication Testing** to work this checklist:
+
+
+    - Understand how hydra works
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: What should you do with a security tool's important result?
+    choices:
+    - Validate it with evidence
+    - Assume it is always correct
+    - Ignore its scope
+    - Publish it without review
+    answer: Validate it with evidence
+    competency: tool-password-auditing
+    explanation: Tools are aids to analysis; validate important output and preserve enough context to
+      reproduce it.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Validate tool output and preserve context
+  difficulty: intermediate
+  minutes: 20
+  competency: tool-password-auditing
+  body: 'Verify important results with a second method or direct observation. For a finding, include the
+    command or request, relevant output, target, and time. Avoid broad or high-rate options when a narrow
+    check answers the question. Keep credentials and tokens out of saved transcripts, and stop if the
+    tool behaves outside the authorised scope.
+
+
+    ## Apply this to Hydra: Authorised Authentication Testing
+
+
+    Test login resilience against guessing on systems you own.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: tool-password-auditing
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: 'Hydra: Authorised Authentication Testing Assessment'

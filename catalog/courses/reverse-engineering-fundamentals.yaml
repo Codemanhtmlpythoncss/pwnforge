@@ -4,10 +4,12 @@ description: Static and dynamic analysis of compiled programs.
 difficulty: advanced
 category: reverse
 specialization: reverse
-estimated_minutes: 55
+estimated_minutes: 95
 objectives:
 - Understand static vs dynamic
 - Understand binary formats
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - python-for-security
 competency_prereqs: []
@@ -57,6 +59,73 @@ lessons:
     points: 10
     hints: []
   hints: []
+  walkthrough: []
+- title: Triage a binary without executing it
+  difficulty: intermediate
+  minutes: 20
+  competency: reverse-engineering
+  body: 'Before analysis, record the sample''s source and calculate a hash. Use `file`, metadata tools,
+    strings, and section/import listings to learn what the file appears to be. Treat embedded text as
+    clues, not proof. Inspect control flow and dangerous API use only after the basic file format and
+    architecture are known.
+
+
+    Use the methods from **Reverse Engineering Fundamentals** to work this checklist:
+
+
+    - Understand static vs dynamic
+
+    - Understand binary formats
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: What is analysis of a binary without running it called?
+    choices:
+    - Static analysis
+    - Dynamic analysis
+    - Fuzzing
+    - Packet capture
+    answer: Static analysis
+    competency: reverse-engineering
+    explanation: Static analysis examines a file without executing it.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Analyse behaviour in a contained environment
+  difficulty: intermediate
+  minutes: 20
+  competency: reverse-engineering
+  body: 'If dynamic analysis is authorised, use a disposable snapshot with network access disabled or
+    explicitly controlled. Observe process, file, registry, and network behaviour, then revert the snapshot.
+    Compare observed behaviour with the static hypothesis and record differences. Never execute an unknown
+    sample on a workstation that holds personal or production data.
+
+
+    ## Apply this to Reverse Engineering Fundamentals
+
+
+    Static and dynamic analysis of compiled programs.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: reverse-engineering
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Reverse Engineering Fundamentals Assessment

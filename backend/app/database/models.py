@@ -308,6 +308,8 @@ class LearningPath(TimestampMixin, Base):
     difficulty_min: Mapped[Difficulty] = mapped_column(Enum(Difficulty), default=Difficulty.beginner)
     difficulty_max: Mapped[Difficulty] = mapped_column(Enum(Difficulty), default=Difficulty.expert)
     tags: Mapped[list] = mapped_column(JSON, default=list)
+    outcomes: Mapped[list] = mapped_column(JSON, default=list)
+    capstone: Mapped[dict] = mapped_column(JSON, default=dict)
 
     steps: Mapped[list["LearningPathStep"]] = relationship(
         back_populates="path", cascade="all, delete-orphan", order_by="LearningPathStep.order"
@@ -528,6 +530,20 @@ class Lab(TimestampMixin, Base):
     tags: Mapped[list] = mapped_column(JSON, default=list)
     hints: Mapped[list] = mapped_column(JSON, default=list)        # [{title, text}] tiered hints
     guide: Mapped[str] = mapped_column(Text, default="")           # walkthrough, revealed after the flag is in
+    tasks: Mapped[list] = mapped_column(JSON, default=list)         # [{id, prompt, kind, answer_hash, hint, explanation}]
+
+
+class LabTaskSubmission(Base):
+    """A learner's verified completion of one authored lab worksheet task."""
+    __tablename__ = "lab_task_submissions"
+    __table_args__ = (UniqueConstraint("user_id", "lab_id", "task_id",
+                                       name="uq_lab_task_submission_user_lab_task"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    lab_id: Mapped[str] = mapped_column(ForeignKey("labs.id", ondelete="CASCADE"), index=True)
+    task_id: Mapped[str] = mapped_column(String(80))
+    completed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_utcnow)
 
 
 class LabInstance(TimestampMixin, Base):

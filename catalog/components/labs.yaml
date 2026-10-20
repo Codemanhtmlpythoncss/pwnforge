@@ -36,6 +36,18 @@
   tags:
   - web
   - multi-machine
+  tasks: []
+  hints: &id001
+  - title: Where to start
+    text: You're given the target's IP and nothing else. Begin with host and service discovery — find
+      which ports are open and what's listening before anything else.
+  - title: Enumerate the service
+    text: Identify the software and version behind each open port. Weak or default configurations, exposed
+      files and known issues are usually found by careful enumeration, not guessing.
+  - title: Get in, then look around
+    text: 'Once you have access, treat the box like any system: check the home directory, running services
+      and privileges. The flag is a file on the machine — read it and submit its contents.'
+  guide: ''
 - id: enterprise-identity-lab
   title: Enterprise Identity Lab
   description: A Windows domain controller, a member server and a workstation with a monitoring host.
@@ -75,6 +87,9 @@
   - ad
   - identity
   - multi-machine
+  tasks: []
+  hints: *id001
+  guide: ''
 - id: defensive-monitoring-lab
   title: Defensive Monitoring Lab
   description: A log collector / SIEM host, an endpoint and an investigation workstation. Detect and reconstruct
@@ -109,6 +124,9 @@
   tags:
   - defensive
   - multi-machine
+  tasks: []
+  hints: *id001
+  guide: ''
 - id: forensics-workstation-lab
   title: Forensics Workstation Lab
   description: An investigation workstation with disk and network evidence to examine.
@@ -138,6 +156,9 @@
   tags:
   - forensics
   - multi-machine
+  tasks: []
+  hints: *id001
+  guide: ''
 - id: reverse-engineering-lab
   title: Reverse Engineering Lab
   description: An isolated analysis workstation for static and dynamic analysis of a sample.
@@ -163,6 +184,9 @@
   tags:
   - reverse
   - single-host
+  tasks: []
+  hints: *id001
+  guide: ''
 - id: container-security-lab
   title: Container Security Lab
   description: A container host to assess image hygiene, runtime flags and segmentation.
@@ -188,6 +212,9 @@
   tags:
   - container
   - single-host
+  tasks: []
+  hints: *id001
+  guide: ''
 - id: linux-practice-basic
   title: Linux Practice (Basic)
   description: A single Debian host for practising core Linux commands safely.
@@ -213,6 +240,9 @@
   tags:
   - linux
   - beginner
+  tasks: []
+  hints: *id001
+  guide: ''
 - id: linux-admin-lab
   title: Linux Administration Lab
   description: A Debian server to practise user, service and package administration.
@@ -238,6 +268,9 @@
   tags:
   - linux
   - admin
+  tasks: []
+  hints: *id001
+  guide: ''
 - id: network-basics-lab
   title: Network Basics Lab
   description: A small isolated network for enumeration and service identification.
@@ -267,6 +300,9 @@
   tags:
   - networking
   - enum
+  tasks: []
+  hints: *id001
+  guide: ''
 - id: malware-analysis-lab
   title: Malware Analysis Lab
   description: An isolated, monitored analysis host for safe sample triage.
@@ -292,6 +328,9 @@
   tags:
   - forensics
   - malware
+  tasks: []
+  hints: *id001
+  guide: ''
 - id: osint-investigation-lab
   title: OSINT Investigation Lab
   description: An OSINT workstation plus a sandboxed 'public footprint' host to collect from and corroborate
@@ -322,3 +361,3218 @@
   tags:
   - osint
   - multi-machine
+  tasks: []
+  hints: *id001
+  guide: ''
+- id: foothold-weak-ssh
+  title: 'Foothold: Weak SSH Password'
+  description: A black-box target. You are given only its IP address — no credentials. The machine runs
+    a remote-access service that was left with a weak password. Discover the service, gain access, and
+    read the flag from the account's home directory.
+  difficulty: easy
+  category: initial-access
+  machines:
+  - role: target
+    profile_id: linux-enum-ssh-linux-e
+    network: lab
+    target:
+      user: amy
+      password: sunshine
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: null
+  estimated_minutes: 45
+  reset_behavior: disposable
+  objectives:
+  - Discover the open service on the target
+  - Gain access by finding the weak credential
+  - Read and submit the flag
+  tags:
+  - initial-access
+  - ssh
+  - brute-force
+  - black-box
+  tasks: []
+  hints:
+  - title: What's exposed?
+    text: You only have an IP. Start with a port scan (e.g. nmap). What service is listening, and what
+      does it let you do remotely?
+  - title: A way in
+    text: The service accepts password logins and the password left on it is weak. You'll need a username
+      — common first names are a good guess — and a common-password wordlist.
+  - title: Guess the password
+    text: Use a login-guessing tool (such as hydra or ncrack) against the service with a common-password
+      list and likely usernames. Once you're in, the flag is a file in the user's home directory (try
+      `ls` and `cat flag.txt`).
+  guide: 'Walkthrough — Foothold: Weak SSH Password
+
+
+    1. Enumerate: `nmap -sV <target-ip>` shows TCP 22 (OpenSSH) open.
+
+    2. The box has a user with a weak password. The account is `amy` (a common first name — you could
+    also brute a small username list). The password, `sunshine`, is near the top of common wordlists such
+    as rockyou.txt.
+
+    3. Guess it: `hydra -l amy -P /usr/share/wordlists/rockyou.txt ssh://<target-ip>` (or simply try common
+    passwords by hand). It recovers `amy:sunshine` quickly.
+
+    4. Log in: `ssh amy@<target-ip>`, then `cat ~/flag.txt` and submit the value.
+
+
+    Why it exists: password authentication plus a weak, guessable password is one of the most common ways
+    real systems are compromised.
+
+    How to prevent it: disable SSH password auth in favour of keys, enforce strong passwords, and add
+    rate-limiting/lockout (e.g. fail2ban) so guessing is impractical.'
+- id: foothold-default-creds
+  title: 'Foothold: Default Credentials'
+  description: A black-box target that was deployed and never had its default administrator credentials
+    changed. Find the service, log in with the credentials it shipped with, and read the flag.
+  difficulty: beginner
+  category: initial-access
+  machines:
+  - role: target
+    profile_id: service-config-ssh-linux-e
+    network: lab
+    target:
+      user: admin
+      password: admin
+      sudo: true
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: null
+  estimated_minutes: 30
+  reset_behavior: disposable
+  objectives:
+  - Find the exposed service
+  - Log in with default credentials
+  - Read and submit the flag
+  tags:
+  - initial-access
+  - default-credentials
+  - black-box
+  tasks: []
+  hints:
+  - title: Find the service
+    text: Scan the target. A remote-login service is exposed.
+  - title: Think defaults
+    text: Appliances and quick deployments often keep the credentials they ship with. The most common
+      administrator username and password pair is worth trying first.
+  - title: Log in
+    text: Try admin / admin (and other common default pairs) over SSH. Once in, the flag is in the home
+      directory — `cat flag.txt`.
+  guide: 'Walkthrough — Foothold: Default Credentials
+
+
+    1. `nmap -sV <target-ip>` → TCP 22 open (OpenSSH).
+
+    2. The box was left with its default admin login: `admin:admin`.
+
+    3. `ssh admin@<target-ip>` with password `admin`, then `cat ~/flag.txt`.
+
+
+    Why: unchanged default credentials are a leading cause of real breaches.
+
+    Prevent: force a credential change on first boot, and never ship guessable defaults.'
+- id: foothold-enumerate-user
+  title: 'Foothold: Name the User'
+  description: A black-box target with a weak password — but you'll have to work out the username first.
+    Enumerate the box, identify a valid account, then recover its weak password and read the flag.
+  difficulty: intermediate
+  category: initial-access
+  machines:
+  - role: target
+    profile_id: linux-enum-ssh-linux-e
+    network: lab
+    target:
+      user: mwilson
+      password: liverpool
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: null
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Enumerate the target and identify a valid username
+  - Recover the weak password
+  - Read and submit the flag
+  tags:
+  - initial-access
+  - enumeration
+  - brute-force
+  - black-box
+  tasks: []
+  hints:
+  - title: Service first
+    text: As always, scan first. SSH is open — but you need a username before a password guess is any
+      use.
+  - title: Usernames
+    text: Real accounts often follow a pattern (first initial + surname is common). A small username wordlist
+      of likely names, tried against SSH, will reveal which ones exist.
+  - title: Then the password
+    text: With a valid username, run a password guess against SSH with a common wordlist (football clubs
+      and the like are common weak passwords). Then `cat ~/flag.txt`.
+  guide: 'Walkthrough — Foothold: Name the User
+
+
+    1. `nmap -sV <target-ip>` → SSH on 22.
+
+    2. Usernames follow first-initial+surname: the valid account is `mwilson`. A username wordlist (e.g.
+    hydra with `-L names.txt`) confirms which accounts exist.
+
+    3. Guess the password with a wordlist: it''s `liverpool` (a common weak password). `hydra -l mwilson
+    -P rockyou.txt ssh://<target-ip>`.
+
+    4. `ssh mwilson@<target-ip>`, `cat ~/flag.txt`.
+
+
+    Prevent: don''t use guessable usernames as a security layer; enforce strong passwords and key auth.'
+- id: lab-linux-smb-enumeration
+  title: Linux and SMB Service Inventory
+  description: Inspect a small Linux host, identify its active services, and record the evidence you used.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: easy
+  category: linux
+  machines:
+  - role: target
+    profile_id: linux-enum-smb-linux-e
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: linux-fundamentals
+  estimated_minutes: 40
+  reset_behavior: disposable
+  objectives:
+  - Inspect a small Linux host, identify its active services, and record the evidence you used.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - linux
+  - enum
+  - easy
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - smbd
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which command lists listening sockets together with process names on Linux?
+    answers: &id002
+    - ss -lntup
+    - ss -tulpen
+    - ss -tunlp
+    hint: Use the modern socket-statistics utility and request listening TCP/UDP sockets plus process
+      details.
+    explanation: '`ss` reports socket state; `-lntup` selects listening sockets and includes numeric ports
+      and process information.'
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-alpine-service-hardening
+  title: Alpine Service Hardening
+  description: Review a minimal Alpine host and distinguish required services from unnecessary exposure.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: easy
+  category: linux
+  machines:
+  - role: target
+    profile_id: linux-hardening-alpine-min-e
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: linux-fundamentals
+  estimated_minutes: 40
+  reset_behavior: disposable
+  objectives:
+  - Review a minimal Alpine host and distinguish required services from unnecessary exposure.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - linux
+  - hardening
+  - easy
+  - alpine
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - sshd
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which command lists listening sockets together with process names on Linux?
+    answers: *id002
+    hint: Use the modern socket-statistics utility and request listening TCP/UDP sockets plus process
+      details.
+    explanation: '`ss` reports socket state; `-lntup` selects listening sockets and includes numeric ports
+      and process information.'
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-first-firewall-map
+  title: First Firewall and Port Map
+  description: Map the host's reachable services and explain how a firewall changes the visible attack
+    surface. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: intermediate
+  category: network-appliance
+  machines:
+  - role: target
+    profile_id: net-appliance-alpine-min-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: networking-fundamentals
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Map the host's reachable services and explain how a firewall changes the visible attack surface.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - alpine
+  - learning-path
+  - guided
+  - networking
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - sshd
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Nmap option requests service and version detection?
+    answers: &id004
+    - -sV
+    - nmap -sV
+    hint: It is the short option with a capital V.
+    explanation: Nmap's `-sV` probes discovered ports to identify service names and versions.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-http-input-validation
+  title: HTTP Input Validation Practice
+  description: Trace an HTTP request to the application and identify where untrusted input must be validated.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: easy
+  category: web-security
+  machines:
+  - role: target
+    profile_id: input-validation-apache-python-e
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: web-technologies
+  estimated_minutes: 40
+  reset_behavior: disposable
+  objectives:
+  - Trace an HTTP request to the application and identify where untrusted input must be validated.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - web
+  - owasp
+  - easy
+  - debian
+  - learning-path
+  - guided
+  - web-security
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - apache2
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which response header lets a site restrict script sources as a defence against injection?
+    answers: &id003
+    - content-security-policy
+    - csp
+    - content security policy
+    hint: It is commonly abbreviated CSP.
+    explanation: Content-Security-Policy defines allowed resource sources and can reduce the impact of
+      script injection.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-nginx-service-inventory
+  title: Nginx Service Inventory
+  description: Inventory the web and application services on a host, then connect each service to its
+    listening socket. This is a disposable, isolated VM. Complete the service inventory and course check,
+    then capture the instance flag.
+  difficulty: easy
+  category: infrastructure
+  machines:
+  - role: target
+    profile_id: service-config-nginx-php-e
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: service-enumeration
+  estimated_minutes: 40
+  reset_behavior: disposable
+  objectives:
+  - Inventory the web and application services on a host, then connect each service to its listening socket.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - infra
+  - config
+  - easy
+  - debian
+  - learning-path
+  - guided
+  - infrastructure
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - nginx
+    - php-fpm
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Linux command shows the local routing table?
+    answers: &id005
+    - ip route
+    - ip route show
+    hint: It begins with the `ip` networking utility.
+    explanation: '`ip route` displays routes and the default gateway used by the host.'
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-web-input-validation-review
+  title: Web Input Validation Review
+  description: Follow user-controlled input through a web request and identify the validation boundary.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: intermediate
+  category: web-security
+  machines:
+  - role: target
+    profile_id: input-validation-apache-python-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: web-application-security
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Follow user-controlled input through a web request and identify the validation boundary.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - web
+  - owasp
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - web-security
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - apache2
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which response header lets a site restrict script sources as a defence against injection?
+    answers: *id003
+    hint: It is commonly abbreviated CSP.
+    explanation: Content-Security-Policy defines allowed resource sources and can reduce the impact of
+      script injection.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-web-authentication-audit
+  title: Web Authentication Audit
+  description: Inspect an authentication service and assess password handling and login protections. This
+    is a disposable, isolated VM. Complete the service inventory and course check, then capture the instance
+    flag.
+  difficulty: intermediate
+  category: web-security
+  machines:
+  - role: target
+    profile_id: auth-weakness-nginx-php-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: authentication-security
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Inspect an authentication service and assess password handling and login protections.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - web
+  - auth
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - web-security
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - nginx
+    - php-fpm
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which response header lets a site restrict script sources as a defence against injection?
+    answers: *id003
+    hint: It is commonly abbreviated CSP.
+    explanation: Content-Security-Policy defines allowed resource sources and can reduce the impact of
+      script injection.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-session-token-audit
+  title: Session Token Audit
+  description: Inspect how an application issues and handles session tokens, then record the controls
+    that matter. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: intermediate
+  category: web-security
+  machines:
+  - role: target
+    profile_id: session-flaws-node-express-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: session-management-course
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Inspect how an application issues and handles session tokens, then record the controls that matter.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - web
+  - session
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - web-security
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - app-node
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which response header lets a site restrict script sources as a defence against injection?
+    answers: *id003
+    hint: It is commonly abbreviated CSP.
+    explanation: Content-Security-Policy defines allowed resource sources and can reduce the impact of
+      script injection.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-sql-injection-practice
+  title: SQL Injection Verification Practice
+  description: Use controlled inputs to recognise a database-backed endpoint and describe how to verify
+    it safely. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: intermediate
+  category: web-security
+  machines:
+  - role: target
+    profile_id: sqli-nginx-php-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: sql-injection-labs
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Use controlled inputs to recognise a database-backed endpoint and describe how to verify it safely.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - web
+  - sqli
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - web-security
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - nginx
+    - php-fpm
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which response header lets a site restrict script sources as a defence against injection?
+    answers: *id003
+    hint: It is commonly abbreviated CSP.
+    explanation: Content-Security-Policy defines allowed resource sources and can reduce the impact of
+      script injection.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-xss-output-encoding
+  title: Cross-Site Scripting and Output Encoding
+  description: Trace a value into an HTML response and identify the context-appropriate output encoding
+    control. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: intermediate
+  category: web-security
+  machines:
+  - role: target
+    profile_id: xss-apache-python-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: cross-site-scripting
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Trace a value into an HTML response and identify the context-appropriate output encoding control.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - web
+  - xss
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - web-security
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - apache2
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which response header lets a site restrict script sources as a defence against injection?
+    answers: *id003
+    hint: It is commonly abbreviated CSP.
+    explanation: Content-Security-Policy defines allowed resource sources and can reduce the impact of
+      script injection.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-linux-firewall-enumeration
+  title: Linux Firewall Enumeration
+  description: Compare the host's listening services with its firewall policy and document allowed paths.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: intermediate
+  category: network-appliance
+  machines:
+  - role: target
+    profile_id: net-appliance-ssh-linux-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: firewall-configuration
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Compare the host's listening services with its firewall policy and document allowed paths.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - network
+  - firewall
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - networking
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Nmap option requests service and version detection?
+    answers: *id004
+    hint: It is the short option with a capital V.
+    explanation: Nmap's `-sV` probes discovered ports to identify service names and versions.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-samba-service-enumeration
+  title: Samba Service Enumeration
+  description: Enumerate a Samba-enabled host and report the service names and exposed network surface.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: intermediate
+  category: infrastructure
+  machines:
+  - role: target
+    profile_id: service-config-smb-linux-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: service-enumeration
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Enumerate a Samba-enabled host and report the service names and exposed network surface.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - infra
+  - config
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - infrastructure
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - smbd
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Linux command shows the local routing table?
+    answers: *id005
+    hint: It begins with the `ip` networking utility.
+    explanation: '`ip route` displays routes and the default gateway used by the host.'
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-alpine-host-enumeration
+  title: Alpine Host Enumeration
+  description: Build a concise host inventory from processes, listening sockets, and service status. This
+    is a disposable, isolated VM. Complete the service inventory and course check, then capture the instance
+    flag.
+  difficulty: intermediate
+  category: linux
+  machines:
+  - role: target
+    profile_id: linux-enum-alpine-min-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: service-enumeration
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Build a concise host inventory from processes, listening sockets, and service status.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - linux
+  - enum
+  - intermediate
+  - alpine
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - sshd
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which command lists listening sockets together with process names on Linux?
+    answers: *id002
+    hint: Use the modern socket-statistics utility and request listening TCP/UDP sockets plus process
+      details.
+    explanation: '`ss` reports socket state; `-lntup` selects listening sockets and includes numeric ports
+      and process information.'
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-smb-privilege-boundaries
+  title: SMB and Linux Privilege Boundaries
+  description: Review file-sharing and local permission boundaries, then explain the least-privilege issue
+    you identify. This is a disposable, isolated VM. Complete the service inventory and course check,
+    then capture the instance flag.
+  difficulty: hard
+  category: linux
+  machines:
+  - role: target
+    profile_id: linux-privesc-smb-linux-h
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: linux-privilege-escalation-concepts
+  estimated_minutes: 90
+  reset_behavior: disposable
+  objectives:
+  - Review file-sharing and local permission boundaries, then explain the least-privilege issue you identify.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - linux
+  - privesc
+  - hard
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - smbd
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which command lists listening sockets together with process names on Linux?
+    answers: *id002
+    hint: Use the modern socket-statistics utility and request listening TCP/UDP sockets plus process
+      details.
+    explanation: '`ss` reports socket state; `-lntup` selects listening sockets and includes numeric ports
+      and process information.'
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-tls-nginx-audit
+  title: TLS Configuration Audit
+  description: Inspect a web service's TLS endpoint and record the certificate and protocol evidence.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: intermediate
+  category: infrastructure
+  machines:
+  - role: target
+    profile_id: tls-config-nginx-php-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: tls-and-certificates
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Inspect a web service's TLS endpoint and record the certificate and protocol evidence.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - crypto
+  - tls
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - infrastructure
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - nginx
+    - php-fpm
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Linux command shows the local routing table?
+    answers: *id005
+    hint: It begins with the `ip` networking utility.
+    explanation: '`ip route` displays routes and the default gateway used by the host.'
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-identity-linux-groups
+  title: Identity and Linux Group Review
+  description: Inventory local users and groups, then identify where group membership grants access. This
+    is a disposable, isolated VM. Complete the service inventory and course check, then capture the instance
+    flag.
+  difficulty: intermediate
+  category: linux
+  machines:
+  - role: target
+    profile_id: linux-hardening-ssh-linux-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: identity-access-management
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Inventory local users and groups, then identify where group membership grants access.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - linux
+  - hardening
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - identity
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What security principle says an account should receive only the access it needs?
+    answers: &id006
+    - least privilege
+    - principle of least privilege
+    hint: It limits standing permissions to the minimum required.
+    explanation: Least privilege reduces the impact of compromised or misused accounts.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-samba-share-inventory
+  title: Samba Share Inventory
+  description: Enumerate SMB services and share exposure as preparation for the path's directory-services
+    capstone. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: hard
+  category: infrastructure
+  machines:
+  - role: target
+    profile_id: service-config-smb-linux-h
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: active-directory-fundamentals
+  estimated_minutes: 90
+  reset_behavior: disposable
+  objectives:
+  - Enumerate SMB services and share exposure as preparation for the path's directory-services capstone.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - infra
+  - config
+  - hard
+  - debian
+  - learning-path
+  - guided
+  - identity
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer: &id007
+    - smbd
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What security principle says an account should receive only the access it needs?
+    answers: *id006
+    hint: It limits standing permissions to the minimum required.
+    explanation: Least privilege reduces the impact of compromised or misused accounts.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-samba-account-enumeration
+  title: Samba Account and Service Enumeration
+  description: Identify the file-sharing service and document the account and access questions an AD assessment
+    must answer. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: intermediate
+  category: linux
+  machines:
+  - role: target
+    profile_id: linux-enum-smb-linux-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: active-directory-fundamentals
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Identify the file-sharing service and document the account and access questions an AD assessment must
+    answer.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - linux
+  - enum
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - identity
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - smbd
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What security principle says an account should receive only the access it needs?
+    answers: *id006
+    hint: It limits standing permissions to the minimum required.
+    explanation: Least privilege reduces the impact of compromised or misused accounts.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-samba-service-hardening
+  title: Samba Service Hardening
+  description: Review service exposure and access boundaries on a Samba host; recommend a scoped hardening
+    change. This is a disposable, isolated VM. Complete the service inventory and course check, then capture
+    the instance flag.
+  difficulty: hard
+  category: infrastructure
+  machines:
+  - role: target
+    profile_id: service-config-smb-linux-h
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: identity-access-management
+  estimated_minutes: 90
+  reset_behavior: disposable
+  objectives:
+  - Review service exposure and access boundaries on a Samba host; recommend a scoped hardening change.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - infra
+  - config
+  - hard
+  - debian
+  - learning-path
+  - guided
+  - identity
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer: *id007
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What security principle says an account should receive only the access it needs?
+    answers: *id006
+    hint: It limits standing permissions to the minimum required.
+    explanation: Least privilege reduces the impact of compromised or misused accounts.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-identity-privilege-boundaries
+  title: Identity Privilege Boundaries
+  description: Trace how local identity and group privileges affect access, then state the least-privilege
+    correction. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: hard
+  category: linux
+  machines:
+  - role: target
+    profile_id: linux-privesc-ssh-linux-h
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: windows-privilege-escalation-concepts
+  estimated_minutes: 90
+  reset_behavior: disposable
+  objectives:
+  - Trace how local identity and group privileges affect access, then state the least-privilege correction.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - linux
+  - privesc
+  - hard
+  - debian
+  - learning-path
+  - guided
+  - identity
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What security principle says an account should receive only the access it needs?
+    answers: *id006
+    hint: It limits standing permissions to the minimum required.
+    explanation: Least privilege reduces the impact of compromised or misused accounts.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-linux-auth-log-review
+  title: Linux Authentication Log Review
+  description: Inspect authentication evidence, separate routine activity from suspicious events, and
+    record a time window. This is a disposable, isolated VM. Complete the service inventory and course
+    check, then capture the instance flag.
+  difficulty: easy
+  category: defensive
+  machines:
+  - role: target
+    profile_id: log-investigation-ssh-linux-e
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: log-analysis
+  estimated_minutes: 40
+  reset_behavior: disposable
+  objectives:
+  - Inspect authentication evidence, separate routine activity from suspicious events, and record a time
+    window.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - defensive
+  - logs
+  - easy
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What time-ordered record helps reconstruct a sequence of security events?
+    answers: &id008
+    - timeline
+    - incident timeline
+    - event timeline
+    hint: It arranges events chronologically.
+    explanation: A timeline aligns events from multiple sources so analysts can reconstruct what happened.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-detection-rule-practice
+  title: Detection Rule Practice
+  description: Translate an observed behaviour into a detection idea with evidence, useful context, and
+    a clear limitation. This is a disposable, isolated VM. Complete the service inventory and course check,
+    then capture the instance flag.
+  difficulty: advanced
+  category: defensive
+  machines:
+  - role: target
+    profile_id: detection-debian-monitor-a
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: detection-engineering
+  estimated_minutes: 120
+  reset_behavior: disposable
+  objectives:
+  - Translate an observed behaviour into a detection idea with evidence, useful context, and a clear limitation.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - defensive
+  - detection
+  - advanced
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - rsyslog
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What time-ordered record helps reconstruct a sequence of security events?
+    answers: *id008
+    hint: It arranges events chronologically.
+    explanation: A timeline aligns events from multiple sources so analysts can reconstruct what happened.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-incident-timeline-practice
+  title: Incident Timeline Practice
+  description: Build a short incident timeline from host evidence and distinguish confirmed facts from
+    hypotheses. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: intermediate
+  category: defensive
+  machines:
+  - role: target
+    profile_id: incident-ssh-linux-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: incident-response
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Build a short incident timeline from host evidence and distinguish confirmed facts from hypotheses.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - defensive
+  - ir
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What time-ordered record helps reconstruct a sequence of security events?
+    answers: *id008
+    hint: It arranges events chronologically.
+    explanation: A timeline aligns events from multiple sources so analysts can reconstruct what happened.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-threat-hunt-practice
+  title: Threat Hunting Practice
+  description: Turn a testable hypothesis into a focused hunt and record what would confirm or refute
+    it. This is a disposable, isolated VM. Complete the service inventory and course check, then capture
+    the instance flag.
+  difficulty: advanced
+  category: defensive
+  machines:
+  - role: target
+    profile_id: threat-hunt-debian-monitor-a
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: threat-hunting
+  estimated_minutes: 120
+  reset_behavior: disposable
+  objectives:
+  - Turn a testable hypothesis into a focused hunt and record what would confirm or refute it.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - defensive
+  - hunt
+  - advanced
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - rsyslog
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What time-ordered record helps reconstruct a sequence of security events?
+    answers: *id008
+    hint: It arranges events chronologically.
+    explanation: A timeline aligns events from multiple sources so analysts can reconstruct what happened.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-network-evidence-review
+  title: Network Evidence Review
+  description: Inspect network-service evidence and explain how time, direction, and endpoints shape an
+    alert. This is a disposable, isolated VM. Complete the service inventory and course check, then capture
+    the instance flag.
+  difficulty: intermediate
+  category: forensics
+  machines:
+  - role: target
+    profile_id: network-forensics-debian-monitor-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: network-monitoring
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Inspect network-service evidence and explain how time, direction, and endpoints shape an alert.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - defensive
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - rsyslog
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What time-ordered record helps reconstruct a sequence of security events?
+    answers: *id008
+    hint: It arranges events chronologically.
+    explanation: A timeline aligns events from multiple sources so analysts can reconstruct what happened.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-static-analysis-capstone
+  title: Static Analysis Capstone
+  description: Practise a safe static-analysis sequence and record hashes, file type, strings, and initial
+    hypotheses. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: expert
+  category: reverse
+  machines:
+  - role: target
+    profile_id: re-static-ssh-linux-x
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: reverse-engineering-fundamentals
+  estimated_minutes: 180
+  reset_behavior: disposable
+  objectives:
+  - Practise a safe static-analysis sequence and record hashes, file type, strings, and initial hypotheses.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What is the name for analysing a binary without running it?
+    answers: &id009
+    - static analysis
+    - static
+    hint: It contrasts with dynamic analysis.
+    explanation: Static analysis examines file structure, metadata, strings, and code without executing
+      the sample.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-malware-triage-capstone
+  title: Malware Triage Capstone
+  description: Triage a contained analysis environment and separate observed indicators from unverified
+    conclusions. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: expert
+  category: forensics
+  machines:
+  - role: target
+    profile_id: malware-triage-ssh-linux-x
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: malware-analysis-fundamentals
+  estimated_minutes: 180
+  reset_behavior: disposable
+  objectives:
+  - Triage a contained analysis environment and separate observed indicators from unverified conclusions.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - forensics
+  - malware
+  - expert
+  - debian
+  - learning-path
+  - guided
+  - reverse
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What is the name for analysing a binary without running it?
+    answers: *id009
+    hint: It contrasts with dynamic analysis.
+    explanation: Static analysis examines file structure, metadata, strings, and code without executing
+      the sample.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-re-backup-agent
+  title: 'Reverse Engineering: Backup Agent'
+  description: Inspect the analysis target's services and binary artefacts before describing its likely
+    role. This is a disposable, isolated VM. Complete the service inventory and course check, then capture
+    the instance flag.
+  difficulty: expert
+  category: reverse
+  machines:
+  - role: target
+    profile_id: re-static-ssh-linux-backup-agent-1-2
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: reverse-engineering-fundamentals
+  estimated_minutes: 180
+  reset_behavior: disposable
+  objectives:
+  - Inspect the analysis target's services and binary artefacts before describing its likely role.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - backup-agent
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What is the name for analysing a binary without running it?
+    answers: *id009
+    hint: It contrasts with dynamic analysis.
+    explanation: Static analysis examines file structure, metadata, strings, and code without executing
+      the sample.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-re-job-runner
+  title: 'Reverse Engineering: Job Runner'
+  description: Use file metadata and strings to build a cautious first-pass description of a job-runner
+    component. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: advanced
+  category: reverse
+  machines:
+  - role: target
+    profile_id: re-static-ssh-linux-job-runner-1-5
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: reverse-engineering-fundamentals
+  estimated_minutes: 120
+  reset_behavior: disposable
+  objectives:
+  - Use file metadata and strings to build a cautious first-pass description of a job-runner component.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - reverse
+  - re
+  - advanced
+  - debian
+  - job-runner
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What is the name for analysing a binary without running it?
+    answers: *id009
+    hint: It contrasts with dynamic analysis.
+    explanation: Static analysis examines file structure, metadata, strings, and code without executing
+      the sample.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-re-message-queue
+  title: 'Reverse Engineering: Message Queue'
+  description: Inspect a message-queue component in isolation and record evidence before drawing conclusions.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: expert
+  category: reverse
+  machines:
+  - role: target
+    profile_id: re-static-ssh-linux-message-queue-1-8
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: reverse-engineering-fundamentals
+  estimated_minutes: 180
+  reset_behavior: disposable
+  objectives:
+  - Inspect a message-queue component in isolation and record evidence before drawing conclusions.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - reverse
+  - re
+  - expert
+  - debian
+  - message-queue
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: What is the name for analysing a binary without running it?
+    answers: *id009
+    hint: It contrasts with dynamic analysis.
+    explanation: Static analysis examines file structure, metadata, strings, and code without executing
+      the sample.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-container-host-audit
+  title: Container Host Audit
+  description: Inspect container tooling and host services, then identify configuration evidence relevant
+    to least privilege. This is a disposable, isolated VM. Complete the service inventory and course check,
+    then capture the instance flag.
+  difficulty: intermediate
+  category: container
+  machines:
+  - role: target
+    profile_id: container-sec-ssh-linux-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: docker-security
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Inspect container tooling and host services, then identify configuration evidence relevant to least
+    privilege.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - container
+  - docker
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which principle should guide container capabilities and privileges?
+    answers: &id010
+    - least privilege
+    - principle of least privilege
+    hint: Grant only the capabilities required by the workload.
+    explanation: Least privilege reduces the damage a compromised container can cause to its host.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-container-runtime-hardening
+  title: Container Runtime Hardening
+  description: Review a container host's runtime and network surface, then propose and verify a safer
+    configuration. This is a disposable, isolated VM. Complete the service inventory and course check,
+    then capture the instance flag.
+  difficulty: hard
+  category: container
+  machines:
+  - role: target
+    profile_id: container-sec-ubuntu-srv-h
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: docker-security
+  estimated_minutes: 90
+  reset_behavior: disposable
+  objectives:
+  - Review a container host's runtime and network surface, then propose and verify a safer configuration.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - container
+  - docker
+  - hard
+  - ubuntu
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which principle should guide container capabilities and privileges?
+    answers: *id010
+    hint: Grant only the capabilities required by the workload.
+    explanation: Least privilege reduces the damage a compromised container can cause to its host.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-segmentation-verification
+  title: Network Segmentation Verification
+  description: Map the host's network interfaces and verify which service paths should be reachable. This
+    is a disposable, isolated VM. Complete the service inventory and course check, then capture the instance
+    flag.
+  difficulty: intermediate
+  category: network-appliance
+  machines:
+  - role: target
+    profile_id: net-segment-ssh-linux-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: network-segmentation
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Map the host's network interfaces and verify which service paths should be reachable.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - network
+  - segmentation
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - networking
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Nmap option requests service and version detection?
+    answers: *id004
+    hint: It is the short option with a capital V.
+    explanation: Nmap's `-sV` probes discovered ports to identify service names and versions.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-container-image-policy
+  title: Container Image and Workload Policy
+  description: Review image provenance, workload identity, and runtime permissions in a container host.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: intermediate
+  category: container
+  machines:
+  - role: target
+    profile_id: container-sec-ubuntu-srv-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: kubernetes-security
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Review image provenance, workload identity, and runtime permissions in a container host.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - container
+  - docker
+  - intermediate
+  - ubuntu
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which principle should guide container capabilities and privileges?
+    answers: *id010
+    hint: Grant only the capabilities required by the workload.
+    explanation: Least privilege reduces the damage a compromised container can cause to its host.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-container-iac-review
+  title: Container Infrastructure-as-Code Review
+  description: Review declarative container configuration and explain how you would verify live-state
+    drift. This is a disposable, isolated VM. Complete the service inventory and course check, then capture
+    the instance flag.
+  difficulty: advanced
+  category: container
+  machines:
+  - role: target
+    profile_id: container-sec-ssh-linux-a
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: iac-security
+  estimated_minutes: 120
+  reset_behavior: disposable
+  objectives:
+  - Review declarative container configuration and explain how you would verify live-state drift.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - container
+  - docker
+  - advanced
+  - debian
+  - learning-path
+  - guided
+  - cloud
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Terraform command previews infrastructure changes without applying them?
+    answers:
+    - terraform plan
+    - terraform plan -out
+    hint: It is the review step before the command that applies a configuration.
+    explanation: '`terraform plan` shows the proposed resource changes so they can be reviewed before
+      apply.'
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-disk-forensics-import-tool
+  title: 'Disk Forensics: Import Tool'
+  description: Practise evidence inventory, integrity checks, and timeline notes in a controlled analysis
+    host. This is a disposable, isolated VM. Complete the service inventory and course check, then capture
+    the instance flag.
+  difficulty: hard
+  category: forensics
+  machines:
+  - role: target
+    profile_id: disk-forensics-ssh-linux-import-tool-1-4
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: digital-forensics
+  estimated_minutes: 90
+  reset_behavior: disposable
+  objectives:
+  - Practise evidence inventory, integrity checks, and timeline notes in a controlled analysis host.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - forensics
+  - disk
+  - hard
+  - debian
+  - import-tool
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which digest is commonly used to verify that an evidence image has not changed?
+    answers: &id011
+    - sha-256
+    - sha256
+    - sha 256
+    hint: It is a member of the SHA-2 family and produces a 256-bit digest.
+    explanation: A SHA-256 digest can be compared before and after acquisition or analysis to detect changes.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-network-forensics-webhook
+  title: 'Network Forensics: Webhook Traffic'
+  description: Review network-monitoring evidence and document endpoints, timestamps, and confidence.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: intermediate
+  category: forensics
+  machines:
+  - role: target
+    profile_id: network-forensics-debian-monitor-webhook-receiver-1-8
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: digital-forensics
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Review network-monitoring evidence and document endpoints, timestamps, and confidence.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - forensics
+  - pcap
+  - intermediate
+  - debian
+  - webhook-receiver
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - rsyslog
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which digest is commonly used to verify that an evidence image has not changed?
+    answers: *id011
+    hint: It is a member of the SHA-2 family and produces a 256-bit digest.
+    explanation: A SHA-256 digest can be compared before and after acquisition or analysis to detect changes.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-incident-evidence-timeline
+  title: Incident Evidence Timeline
+  description: Correlate host and service evidence into a timeline while preserving source and time-zone
+    context. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: intermediate
+  category: defensive
+  machines:
+  - role: target
+    profile_id: incident-debian-monitor-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: incident-response
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Correlate host and service evidence into a timeline while preserving source and time-zone context.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - defensive
+  - ir
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  - forensics
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - rsyslog
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which digest is commonly used to verify that an evidence image has not changed?
+    answers: *id011
+    hint: It is a member of the SHA-2 family and produces a 256-bit digest.
+    explanation: A SHA-256 digest can be compared before and after acquisition or analysis to detect changes.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-malware-triage-search-index
+  title: 'Malware Triage: Search Index'
+  description: Perform safe first-pass triage and record hashes, file type, indicators, and containment
+    decisions. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: advanced
+  category: forensics
+  machines:
+  - role: target
+    profile_id: malware-triage-ssh-linux-search-index-1-0
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: malware-analysis-fundamentals
+  estimated_minutes: 120
+  reset_behavior: disposable
+  objectives:
+  - Perform safe first-pass triage and record hashes, file type, indicators, and containment decisions.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - forensics
+  - malware
+  - advanced
+  - debian
+  - search-index
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which digest is commonly used to verify that an evidence image has not changed?
+    answers: *id011
+    hint: It is a member of the SHA-2 family and produces a 256-bit digest.
+    explanation: A SHA-256 digest can be compared before and after acquisition or analysis to detect changes.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-disk-forensics-backup-agent
+  title: 'Disk Forensics: Backup Agent'
+  description: Inspect a host's file-system evidence and explain how a hash supports evidence integrity.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: intermediate
+  category: forensics
+  machines:
+  - role: target
+    profile_id: disk-forensics-ssh-linux-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: digital-forensics
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Inspect a host's file-system evidence and explain how a hash supports evidence integrity.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - forensics
+  - disk
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which digest is commonly used to verify that an evidence image has not changed?
+    answers: *id011
+    hint: It is a member of the SHA-2 family and produces a 256-bit digest.
+    explanation: A SHA-256 digest can be compared before and after acquisition or analysis to detect changes.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-tool-range-ssh
+  title: 'Tool Range: SSH Enumeration'
+  description: Use a restrained service scan to identify the SSH endpoint and record exact evidence and
+    tool options. This is a disposable, isolated VM. Complete the service inventory and course check,
+    then capture the instance flag.
+  difficulty: easy
+  category: tools
+  machines:
+  - role: target
+    profile_id: tool-range-ssh-linux-e
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: tool-nmap
+  estimated_minutes: 40
+  reset_behavior: disposable
+  objectives:
+  - Use a restrained service scan to identify the SSH endpoint and record exact evidence and tool options.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - tools
+  - range
+  - easy
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Nmap option requests service and version detection?
+    answers: &id012
+    - -sV
+    - nmap -sV
+    hint: It is the short option with a capital V.
+    explanation: Nmap's `-sV` probes discovered ports to identify service names and versions.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-tool-range-smb
+  title: 'Tool Range: SMB Enumeration'
+  description: Use SMB enumeration techniques against an isolated Samba host and record exposed services.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: intermediate
+  category: tools
+  machines:
+  - role: target
+    profile_id: tool-range-smb-linux-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: tool-smb-enum
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Use SMB enumeration techniques against an isolated Samba host and record exposed services.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - tools
+  - range
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - smbd
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Nmap option requests service and version detection?
+    answers: *id012
+    hint: It is the short option with a capital V.
+    explanation: Nmap's `-sV` probes discovered ports to identify service names and versions.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-tool-web-proxy
+  title: 'Tool Range: Web Proxy Practice'
+  description: Use an intercepting proxy to inspect a request and response, then identify one security-relevant
+    observation. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: intermediate
+  category: tools
+  machines:
+  - role: target
+    profile_id: tool-web-range-node-express-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: tool-burp
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Use an intercepting proxy to inspect a request and response, then identify one security-relevant observation.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - tools
+  - web
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - app-node
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Nmap option requests service and version detection?
+    answers: *id012
+    hint: It is the short option with a capital V.
+    explanation: Nmap's `-sV` probes discovered ports to identify service names and versions.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-toolkit-ctf-web
+  title: 'Toolkit Challenge: Web Host'
+  description: Combine discovery and HTTP-client techniques against a disposable target and verify each
+    observation. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: intermediate
+  category: ctf
+  machines:
+  - role: target
+    profile_id: ctf-box-apache-python-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: tool-http-clients
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Combine discovery and HTTP-client techniques against a disposable target and verify each observation.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - ctf
+  - tools
+  - intermediate
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - apache2
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Nmap option requests service and version detection?
+    answers: *id012
+    hint: It is the short option with a capital V.
+    explanation: Nmap's `-sV` probes discovered ports to identify service names and versions.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-toolkit-service-discovery
+  title: 'Toolkit Challenge: Service Discovery'
+  description: Compare local socket inspection with remote service detection and explain any difference.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: easy
+  category: linux
+  machines:
+  - role: target
+    profile_id: linux-enum-alpine-min-e
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: tool-nmap
+  estimated_minutes: 40
+  reset_behavior: disposable
+  objectives:
+  - Compare local socket inspection with remote service detection and explain any difference.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - linux
+  - enum
+  - easy
+  - alpine
+  - learning-path
+  - guided
+  - tools
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - sshd
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: short_answer
+    prompt: Which Nmap option requests service and version detection?
+    answers: *id012
+    hint: It is the short option with a capital V.
+    explanation: Nmap's `-sV` probes discovered ports to identify service names and versions.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-osint-source-confidence
+  title: OSINT Source Confidence
+  description: Build a small source log that records provenance, collection time, corroboration, and confidence.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: easy
+  category: osint
+  machines:
+  - role: target
+    profile_id: osint-recon-osint-station-e
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: osint-fundamentals
+  estimated_minutes: 40
+  reset_behavior: disposable
+  objectives:
+  - Build a small source log that records provenance, collection time, corroboration, and confidence.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - osint
+  - recon
+  - easy
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - lightdm
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: list
+    prompt: Name the three useful fields that make an OSINT observation auditable.
+    answers: &id013
+    - source,timestamp,confidence
+    - source,time,confidence
+    - source,date,confidence
+    hint: Record where the claim came from, when you collected it, and how certain you are.
+    explanation: Source, collection time, and confidence let another analyst assess and reproduce the
+      observation.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-osint-corroboration
+  title: OSINT Corroboration Practice
+  description: Compare independent public-source observations and explain whether they support the same
+    claim. This is a disposable, isolated VM. Complete the service inventory and course check, then capture
+    the instance flag.
+  difficulty: hard
+  category: osint
+  machines:
+  - role: target
+    profile_id: osint-investigation-osint-station-h
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: osint-techniques
+  estimated_minutes: 90
+  reset_behavior: disposable
+  objectives:
+  - Compare independent public-source observations and explain whether they support the same claim.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - osint
+  - hard
+  - debian
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - lightdm
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: list
+    prompt: Name the three useful fields that make an OSINT observation auditable.
+    answers: *id013
+    hint: Record where the claim came from, when you collected it, and how certain you are.
+    explanation: Source, collection time, and confidence let another analyst assess and reproduce the
+      observation.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-osint-recon-tooling
+  title: OSINT Recon Tooling
+  description: Choose a public-source collection method, record its limits, and avoid treating one result
+    as proof. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: intermediate
+  category: osint
+  machines:
+  - role: target
+    profile_id: osint-recon-kali-attack-i
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: osint-tools
+  estimated_minutes: 60
+  reset_behavior: disposable
+  objectives:
+  - Choose a public-source collection method, record its limits, and avoid treating one result as proof.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - osint
+  - recon
+  - intermediate
+  - kali
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: list
+    prompt: Name the three useful fields that make an OSINT observation auditable.
+    answers: *id013
+    hint: Record where the claim came from, when you collected it, and how certain you are.
+    explanation: Source, collection time, and confidence let another analyst assess and reproduce the
+      observation.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-osint-api-gateway-footprint
+  title: 'OSINT: API Gateway Footprint'
+  description: Analyse a bounded simulated footprint and distinguish attributable evidence from inference.
+    This is a disposable, isolated VM. Complete the service inventory and course check, then capture the
+    instance flag.
+  difficulty: advanced
+  category: osint
+  machines:
+  - role: target
+    profile_id: osint-investigation-osint-station-api-gateway-1-8
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: osint-techniques
+  estimated_minutes: 120
+  reset_behavior: disposable
+  objectives:
+  - Analyse a bounded simulated footprint and distinguish attributable evidence from inference.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - osint
+  - advanced
+  - debian
+  - api-gateway
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - lightdm
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: list
+    prompt: Name the three useful fields that make an OSINT observation auditable.
+    answers: *id013
+    hint: Record where the claim came from, when you collected it, and how certain you are.
+    explanation: Source, collection time, and confidence let another analyst assess and reproduce the
+      observation.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''
+- id: lab-osint-opsec-review
+  title: OSINT OPSEC Review
+  description: Plan a minimal, ethical collection workflow and document scope, exposure, and reporting
+    safeguards. This is a disposable, isolated VM. Complete the service inventory and course check, then
+    capture the instance flag.
+  difficulty: hard
+  category: osint
+  machines:
+  - role: target
+    profile_id: osint-recon-kali-attack-h
+    network: lab
+  networks:
+  - name: lab
+    mode: isolated
+  startup_order:
+  - target
+  readiness_checks: []
+  course_id: osint-opsec-reporting
+  estimated_minutes: 90
+  reset_behavior: disposable
+  objectives:
+  - Plan a minimal, ethical collection workflow and document scope, exposure, and reporting safeguards.
+  - Identify configured services and verify listening sockets with command output.
+  - Complete the graded worksheet and capture the lab flag.
+  tags:
+  - osint
+  - recon
+  - hard
+  - kali
+  - learning-path
+  - guided
+  tasks:
+  - id: service-inventory
+    kind: service_list
+    prompt: Identify the service name(s) configured for this target's application/profile and enter them,
+      separated by commas. Use `systemctl` (or `rc-service -l` on Alpine), then cross-check any network
+      listeners with `ss -lntup`. Extra base OS services are okay.
+    answer:
+    - ssh
+    hint: Start with the service manager, then compare service names with the process and port information
+      from `ss -lntup`.
+    explanation: A service inventory should name each configured service and be supported by evidence
+      from service status or listening sockets.
+  - id: course-check
+    kind: list
+    prompt: Name the three useful fields that make an OSINT observation auditable.
+    answers: *id013
+    hint: Record where the claim came from, when you collected it, and how certain you are.
+    explanation: Source, collection time, and confidence let another analyst assess and reproduce the
+      observation.
+  hints:
+  - title: Start with the host
+    text: Use the lab's own terminal and inspect the target assigned to this disposable workspace.
+  - title: Inventory services
+    text: On Debian/Ubuntu try `systemctl list-units --type=service --state=running`; on Alpine try `rc-service
+      -l`. Compare with `ss -lntup`.
+  - title: Verify before you submit
+    text: Separate service names from port numbers, and use the command output as evidence rather than
+      guessing from the lab title.
+  guide: ''

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Terminal } from "@xterm/xterm";
 import { FitAddon } from "@xterm/addon-fit";
 import { api, wsUrl } from "../api";
@@ -8,6 +8,9 @@ import { ConnectCommands } from "../components/Connect";
 
 export default function LabWorkspace() {
   const { id } = useParams();
+  const [params] = useSearchParams();
+  const pathId = params.get("path");
+  const navigate = useNavigate();
   const [li, setLi] = useState<any>(null);
   const [labId, setLabId] = useState("");
   const [active, setActive] = useState<string | null>(null);
@@ -16,6 +19,12 @@ export default function LabWorkspace() {
   const [hintsShown, setHintsShown] = useState(0);
   const [copied, setCopied] = useState("");
   const [gone, setGone] = useState(false);
+  const [taskAnswers, setTaskAnswers] = useState<Record<string, string>>({});
+  const [taskFeedback, setTaskFeedback] = useState<Record<string, any>>({});
+  const [taskSubmitting, setTaskSubmitting] = useState("");
+  const [path, setPath] = useState<any>(null);
+  const [pathActionBusy, setPathActionBusy] = useState(false);
+  const [pathError, setPathError] = useState("");
 
   const copy = (text: string, what: string) => {
     navigator.clipboard?.writeText(text).then(() => { setCopied(what); setTimeout(() => setCopied(""), 1200); }).catch(() => {});
@@ -35,11 +44,63 @@ export default function LabWorkspace() {
     return () => { clearInterval(t); document.removeEventListener("visibilitychange", onVis); };
   }, [id]);
 
+  const completedTaskCount = (li?.tasks || []).filter((task: any) => task.completed).length;
+  const worksheetComplete = (li?.tasks || []).every((task: any) => task.completed);
+  useEffect(() => {
+    if (!pathId || !li?.lab_id) { setPath(null); return; }
+    api.get(`/api/paths/${pathId}`).then((result: any) => {
+      const steps = result.steps || [];
+      const index = steps.findIndex((step: any) => step.lab_id === li.lab_id);
+      const next = result.percent < 100 && index >= 0 ? steps.slice(index + 1).find((step: any) => step.status !== "completed") : null;
+      setPath({ title: result.title, nextStep: next || null });
+    }).catch(() => setPath(null));
+  }, [pathId, li?.lab_id, li?.solved, completedTaskCount]);
+
+  const submitTask = async (task: any) => {
+    const answer = (taskAnswers[task.id] || "").trim();
+    if (!answer || taskSubmitting) return;
+    setTaskSubmitting(task.id);
+    setTaskFeedback(previous => ({ ...previous, [task.id]: null }));
+    try {
+      const result = await api.post(`/api/lab-instances/${id}/tasks/${task.id}/submit`, { answer });
+      setTaskFeedback(previous => ({ ...previous, [task.id]: result }));
+      if (result.correct) {
+        setTaskAnswers(previous => ({ ...previous, [task.id]: "" }));
+        await load();
+      }
+    } catch (error: any) {
+      setTaskFeedback(previous => ({ ...previous, [task.id]: { error: error?.message || "Submission failed." } }));
+    } finally {
+      setTaskSubmitting("");
+    }
+  };
+
   const submitFlag = async () => {
     setFlagMsg("");
-    const r = await api.post("/api/flags/submit", { scope_type: "lab", scope_id: labId, value: flag });
-    setFlagMsg(r.correct ? (r.already_solved ? "✓ Correct (already solved)" : `✓ Correct! +${r.points} pts — walkthrough unlocked below`) : "✗ Incorrect flag");
-    if (r.correct) load();
+    try {
+      const r = await api.post("/api/flags/submit", { scope_type: "lab", scope_id: labId, value: flag });
+      setFlagMsg(r.correct ? (r.already_solved ? "✓ Correct (already solved)" : `✓ Correct! +${r.points} pts — walkthrough unlocked below`) : "✗ Incorrect flag");
+      if (r.correct) load();
+    } catch (error: any) {
+      setFlagMsg(error?.message || "Could not submit the flag.");
+    }
+  };
+
+  const continuePath = async () => {
+    if (!pathId || !path?.nextStep || pathActionBusy) return;
+    setPathError(""); setPathActionBusy(true);
+    try {
+      const step = path.nextStep;
+      if (step.course_id) navigate(`/courses/${step.course_id}?path=${pathId}`);
+      else {
+        const result = await api.post("/api/lab-instances", { lab_id: step.lab_id });
+        navigate(`/labs/instance/${result.lab_instance_id}?path=${pathId}`);
+      }
+    } catch (error: any) {
+      setPathError(error?.message || "Could not open the next path step.");
+    } finally {
+      setPathActionBusy(false);
+    }
   };
 
   if (gone) return <Panel><div className="text-sm text-muted">This lab instance is no longer running. Start it again from <a className="text-brand" href="/labs">Labs</a>.</div></Panel>;
@@ -55,6 +116,8 @@ export default function LabWorkspace() {
         </div>
       </div>
 
+      {pathId && <div className="text-sm"><Link to={`/paths/${pathId}`} className="text-muted hover:text-brand">← {path?.title || "Learning path"}</Link></div>}
+
       {li.description && <div className="text-muted text-sm">{li.description}</div>}
       {li.objectives?.length > 0 && (
         <Panel>
@@ -64,6 +127,52 @@ export default function LabWorkspace() {
               <li key={i} className="text-sm text-muted flex gap-2"><span className="text-brand">▸</span>{o}</li>
             ))}
           </ul>
+        </Panel>
+      )}
+
+      {li.tasks?.length > 0 && (
+        <Panel className="border-brand">
+          <div className="flex items-start justify-between gap-3 flex-wrap">
+            <div>
+              <div className="font-semibold">Practical worksheet</div>
+              <p className="text-sm text-muted mt-1">Use the target terminal and the lab objectives to collect evidence. Complete each task before submitting the flag.</p>
+            </div>
+            <span className="tag">{completedTaskCount}/{li.tasks.length} complete</span>
+          </div>
+          <div className="space-y-3 mt-4">
+            {li.tasks.map((task: any, index: number) => {
+              const feedback = taskFeedback[task.id];
+              return (
+                <div key={task.id} className="card p-3 bg-panel2">
+                  <div className="flex items-start gap-2">
+                    <span className={`w-6 h-6 grid place-items-center rounded-full text-xs ${task.completed ? "bg-brand text-black" : "bg-panel text-muted"}`}>{task.completed ? "✓" : index + 1}</span>
+                    <div className="flex-1">
+                      <div className="text-sm font-medium">{task.prompt}</div>
+                      {task.completed ? (
+                        <div className="text-ok text-sm mt-2">Completed ✓ <span className="text-muted">{task.explanation}</span></div>
+                      ) : (
+                        <>
+                          <div className="flex gap-2 mt-2">
+                            <input className="input text-sm" value={taskAnswers[task.id] || ""}
+                              onChange={event => setTaskAnswers(previous => ({ ...previous, [task.id]: event.target.value }))}
+                              onKeyDown={event => { if (event.key === "Enter") submitTask(task); }}
+                              placeholder={li.status !== "running" ? "Waiting for the lab to start…" : task.kind === "service_list" ? "service-a, service-b, service-c" : "Your answer"} />
+                            <button className="btn btn-primary text-sm" onClick={() => submitTask(task)}
+                              disabled={li.status !== "running" || !taskAnswers[task.id]?.trim() || !!taskSubmitting}>
+                              {taskSubmitting === task.id ? "Checking…" : "Check"}
+                            </button>
+                          </div>
+                          {feedback?.correct && <div className="text-ok text-sm mt-2">Correct ✓ {feedback.explanation}</div>}
+                          {feedback && !feedback.correct && <div className="text-bad text-sm mt-2">{feedback.error || "Not quite."} {feedback.hint}</div>}
+                          {!feedback && task.hint && <div className="text-muted text-xs mt-2">Hint available after a wrong answer.</div>}
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </Panel>
       )}
 
@@ -122,8 +231,9 @@ export default function LabWorkspace() {
             <div className="font-semibold mb-1 text-sm">Submit flag</div>
             <div className="flex gap-2">
               <input className="input text-sm" placeholder="PWN{…}" value={flag} onChange={e => setFlag(e.target.value)} />
-              <button className="btn btn-primary text-sm" onClick={submitFlag}>Go</button>
+              <button className="btn btn-primary text-sm" onClick={submitFlag} disabled={li.status !== "running" || !flag.trim() || !worksheetComplete}>Go</button>
             </div>
+            {li.tasks?.length > 0 && !worksheetComplete && <div className="text-muted text-xs mt-1">Complete the worksheet to unlock flag submission.</div>}
             {flagMsg && <div className={`text-sm mt-1 ${flagMsg.startsWith("✓") ? "text-ok" : "text-bad"}`}>{flagMsg}</div>}
           </div>
         </Panel>
@@ -147,6 +257,21 @@ export default function LabWorkspace() {
         <Panel>
           <div className="font-semibold mb-2">Walkthrough {li.solved ? <span className="text-ok text-sm font-normal">· unlocked</span> : <span className="text-muted text-sm font-normal">· admin view</span>}</div>
           <pre className="text-sm whitespace-pre-wrap font-mono text-muted leading-relaxed">{li.guide}</pre>
+        </Panel>
+      )}
+
+      {pathId && li.solved && worksheetComplete && (
+        <Panel className="border-brand flex items-center justify-between gap-3 flex-wrap">
+          <div>
+            <div className="font-semibold text-ok">Path lab complete ✓</div>
+            <div className="text-sm text-muted">{path?.nextStep ? `Next: ${path.nextStep.title}` : "You have reached the end of this learning path."}</div>
+            {pathError && <div className="text-bad text-sm mt-1">{pathError}</div>}
+          </div>
+          {path?.nextStep ? (
+            <button className="btn btn-primary text-sm" onClick={continuePath} disabled={pathActionBusy}>
+              {pathActionBusy ? "Opening…" : path.nextStep.lab_id ? "Start next lab" : "Continue course"}
+            </button>
+          ) : <Link className="btn btn-primary text-sm" to={`/paths/${pathId}`}>View learning path</Link>}
         </Panel>
       )}
     </div>

@@ -7,7 +7,8 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
 from backend.app.database.models import (
-    Certificate, CourseProgress, Lab, LearningPath, LearningPathStep, ProgressStatus, User, Course,
+    Certificate, CourseProgress, Lab, LabTaskSubmission, LearningPath, LearningPathStep,
+    ProgressStatus, User, Course,
 )
 
 
@@ -69,6 +70,7 @@ def _summary(p: LearningPath) -> dict:
         "specialization": p.specialization,
         "difficulty_min": p.difficulty_min.value, "difficulty_max": p.difficulty_max.value,
         "tags": p.tags, "step_count": len(p.steps),
+        "outcomes": p.outcomes or [], "capstone": p.capstone or {},
     }
 
 
@@ -88,26 +90,51 @@ def path_detail(session: Session, path_id: str, user: User | None = None) -> dic
         select(Lab).where(Lab.id.in_(lab_ids))).scalars()} if lab_ids else {}
     progress: dict[str, CourseProgress] = {}
     solved_labs: set[str] = set()
+    completed_lab_tasks: dict[str, set[str]] = {}
     if user:
         progress = {cp.course_id: cp for cp in session.execute(
             select(CourseProgress).where(CourseProgress.user_id == user.id,
                                          CourseProgress.course_id.in_(course_ids))).scalars()} if course_ids else {}
         solved_labs = _solved_lab_ids(session, user.id)
+        if lab_ids:
+            for lab_id, task_id in session.execute(
+                select(LabTaskSubmission.lab_id, LabTaskSubmission.task_id).where(
+                    LabTaskSubmission.user_id == user.id,
+                    LabTaskSubmission.lab_id.in_(lab_ids),
+                )
+            ):
+                completed_lab_tasks.setdefault(lab_id, set()).add(task_id)
 
     steps = []
     next_step = None
     completed = 0
+    completed_required = 0
+    required_count = 0
     for step in sorted(p.steps, key=lambda s: s.order):
         course = courses.get(step.course_id) if step.course_id else None
         lab = labs.get(step.lab_id) if step.lab_id else None
         cp = progress.get(step.course_id) if step.course_id else None
         if step.lab_id:
-            # A lab step is complete once the learner has captured that lab's flag.
-            status = "completed" if step.lab_id in solved_labs else "not_started"
+            # Guided labs require both the worksheet and flag; legacy labs have no worksheet.
+            lab_tasks = list(lab.tasks or []) if lab else []
+            completed_tasks = completed_lab_tasks.get(step.lab_id, set())
+            worksheet_done = all(task["id"] in completed_tasks for task in lab_tasks)
+            if step.lab_id in solved_labs and worksheet_done:
+                status = "completed"
+            elif step.lab_id in solved_labs or completed_tasks:
+                status = "in_progress"
+            else:
+                status = "not_started"
         else:
             status = cp.status.value if cp else "not_started"
+            if cp and status == ProgressStatus.completed.value and cp.percent < 100:
+                status = ProgressStatus.in_progress.value
         if status == "completed":
             completed += 1
+        if step.required:
+            required_count += 1
+            if status == "completed":
+                completed_required += 1
         # locked if a prior required step is incomplete
         locked = False
         if user and step.required:
@@ -128,12 +155,17 @@ def path_detail(session: Session, path_id: str, user: User | None = None) -> dic
         if next_step is None and status != "completed":
             next_step = entry
 
-    percent = round(completed / len(steps) * 100, 1) if steps else 0
+    # Optional warm-ups are useful, but don't block the learning-path certificate.
+    percent = round(completed_required / required_count * 100, 1) if required_count else 0
+    if percent >= 100:
+        next_step = None
     cert = issue_if_complete(session, user, p.id, percent) if user else None
     return {
         **_summary(p),
         "steps": steps,
         "completed_steps": completed,
+        "completed_required_steps": completed_required,
+        "required_step_count": required_count,
         "percent": percent,
         "next_step": next_step,
         "certificate": _cert_out(cert) if cert else None,

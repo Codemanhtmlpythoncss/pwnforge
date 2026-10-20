@@ -24,16 +24,19 @@ say "installing Python dependencies"
 say "applying database migrations"
 "$VENV/bin/alembic" upgrade head
 
-# Course text and assessments live in the authored catalogue, so refresh their
-# database rows on every update. This touches course content only and preserves
-# learner progress, submissions and achievements.
-say "refreshing course content"
+# Course text, learning paths and lab definitions live in the authored catalogue.
+# Refresh these rows on every update while preserving learner progress,
+# worksheet submissions, flag submissions and achievements.
+say "refreshing courses, paths and labs"
 "$VENV/bin/python" - <<'PY'
-from backend.app.catalog.importer import import_courses
+from backend.app.catalog.content.courses import ALL_COURSES
+from backend.app.catalog.content.labs import LABS
+from backend.app.catalog.content.paths import LEARNING_PATHS
+from backend.app.catalog.importer import refresh_learning_content
 from backend.app.database.base import session_scope
 with session_scope() as session:
-    count = import_courses(session)
-print(f"update: refreshed {count} courses")
+    refresh_learning_content(session)
+print(f"update: refreshed {len(ALL_COURSES)} courses, {len(LEARNING_PATHS)} paths, {len(LABS)} labs")
 PY
 
 if command -v npm >/dev/null 2>&1; then

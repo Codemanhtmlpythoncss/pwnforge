@@ -5,11 +5,13 @@ description: 'Core security concepts: the CIA triad, threats and risk, defence i
 difficulty: beginner
 category: fundamentals
 specialization: null
-estimated_minutes: 65
+estimated_minutes: 105
 objectives:
 - Explain the CIA triad
 - Describe threats, vulnerabilities and risk
 - Understand defence in depth and least privilege
+- Apply course concepts in a bounded, evidence-led workflow
+- Verify results and explain limitations clearly
 prerequisites:
 - pwnforge-orientation
 competency_prereqs: []
@@ -80,6 +82,77 @@ lessons:
     \ a\nnetwork, or designing an application's authorisation model."
   exercises: []
   hints: []
+  walkthrough: []
+- title: Turn security language into a risk statement
+  difficulty: intermediate
+  minutes: 20
+  competency: security-terminology
+  body: 'Describe a security problem by naming the asset, the threat or failure, the weakness that makes
+    it possible, and the likely impact. Risk is not just a vulnerability name: likelihood and impact depend
+    on exposure, existing controls, and the value of the asset. Keep facts separate from assumptions and
+    state what evidence would change your estimate.
+
+
+    Use the methods from **Cybersecurity Fundamentals** to work this checklist:
+
+
+    - Explain the CIA triad
+
+    - Describe threats, vulnerabilities and risk
+
+    - Understand defence in depth and least privilege
+
+
+    For each item, record the target or evidence, the action you took, and the result. Mark anything not
+    verified as an assumption. Stop if the action would cross the written scope.'
+  exercises:
+  - kind: mcq
+    prompt: Which pair is the basic basis for prioritising a risk?
+    choices:
+    - Likelihood and impact
+    - Hostname and port
+    - Age and file size
+    - Username and shell
+    answer: Likelihood and impact
+    competency: security-terminology
+    explanation: Risk prioritisation considers how likely an event is and how much harm it could cause.
+    points: 10
+    hints: []
+  hints:
+  - text: Use the lesson's commands and record a short evidence note for each observation.
+  walkthrough: []
+- title: Choose a control and verify its effect
+  difficulty: intermediate
+  minutes: 20
+  competency: security-terminology
+  body: 'Choose a control that addresses the cause of the risk, not only its visible symptom. Define how
+    you will verify the control before changing anything, then repeat the same check after the change.
+    Record remaining risk and any trade-offs. A control is not proven effective merely because it was
+    configured; demonstrate that the expected unsafe behaviour is prevented and that normal use still
+    works.
+
+
+    ## Apply this to Cybersecurity Fundamentals
+
+
+    Core security concepts: the CIA triad, threats and risk, defence in depth, and the vocabulary you
+    will use throughout Pwnforge.
+
+
+    Before submitting your work, check that your evidence supports each conclusion, that you have verified
+    the relevant control or behaviour, and that your notes explain limitations. A strong result is repeatable
+    by another learner using the same target and steps.'
+  exercises:
+  - kind: short_answer
+    prompt: What must be confirmed before performing active work on a target?
+    answer: written authorisation and scope
+    competency: security-terminology
+    explanation: Confirm written authorisation and scope before active work.
+    points: 10
+    hints:
+    - Check the permission and the exact target range.
+  hints:
+  - text: Repeat the same check after a change so you can compare before and after.
   walkthrough: []
 assessment:
   title: Fundamentals Assessment
