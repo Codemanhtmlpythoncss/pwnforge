@@ -174,20 +174,24 @@ async def ws_console(ws: WebSocket, vm_id: str) -> None:
         inst = db.get(VMInstance, vm_id) if user else None
         if user is None or inst is None or (inst.owner_id != user.id and user.role.value != "administrator"):
             await ws.send_text("\r\nNot authorised for this machine.\r\n")
+            await ws.close(code=4401 if user is None else 4403)
             return
         if inst.driver == "simulation" or not inst.driver_ref:
             await ws.send_text("\r\nThis machine is simulated: it has no real console.\r\n")
+            await ws.close(code=4406)
             return
         from backend.app.vms.factory import get_driver
 
         driver = get_driver()
         if not hasattr(driver, "open_console"):
             await ws.send_text("\r\nThis host's driver has no console access.\r\n")
+            await ws.close(code=4406)
             return
         try:
             con = await asyncio.to_thread(driver.open_console, inst.driver_ref)
         except Exception as exc:  # noqa: BLE001 - shown to the user, never a host shell
             await ws.send_text(f"\r\nCouldn't open the console: {exc}\r\n")
+            await ws.close(code=1011)
             return
         await ws.send_text(f"\r\n[PwnForge: serial console of {inst.name}. Press Enter for a login prompt.]\r\n")
 
@@ -211,8 +215,9 @@ async def ws_console(ws: WebSocket, vm_id: str) -> None:
 
         tasks = [asyncio.create_task(guest_to_browser()), asyncio.create_task(browser_to_guest())]
         _done, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
-        for t in pending:
-            t.cancel()
+        for task in pending:
+            task.cancel()
+        await asyncio.gather(*tasks, return_exceptions=True)
     except WebSocketDisconnect:
         pass
     finally:

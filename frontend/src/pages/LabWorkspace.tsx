@@ -166,21 +166,59 @@ function Xterm({ vmId, real }: { vmId: string; real: boolean }) {
     term.open(ref.current);
     try { fit.fit(); } catch {}
     // A real machine: its serial console, keystrokes sent as typed. A simulated one: a line-based practice shell.
-    const ws = new WebSocket(wsUrl(real ? `/api/ws/console/${vmId}` : `/api/ws/terminal/${vmId}`));
-    ws.binaryType = "arraybuffer";
+    // Brief Wi-Fi/VPN interruptions happen; reconnect the console with backoff instead of making users reload the lab.
+    let disposed = false;
+    let socket: WebSocket | null = null;
+    let reconnectTimer = 0;
+    let attempts = 0;
     let line = "";
-    ws.onopen = () => { setStatus(real ? "connected to the machine's console" : "connected"); if (real) ws.send("\r"); };
-    ws.onclose = () => setStatus("disconnected");
-    ws.onmessage = (ev) => term.write(typeof ev.data === "string" ? ev.data : new Uint8Array(ev.data));
+    const connect = () => {
+      if (disposed) return;
+      const ws = new WebSocket(wsUrl(real ? `/api/ws/console/${vmId}` : `/api/ws/terminal/${vmId}`));
+      socket = ws;
+      ws.binaryType = "arraybuffer";
+      ws.onopen = () => {
+        if (disposed || socket !== ws) return;
+        attempts = 0;
+        setStatus(real ? "connected to the machine's console" : "connected");
+        if (real) ws.send("\r");
+      };
+      ws.onclose = (ev) => {
+        if (disposed || socket !== ws) return;
+        socket = null;
+        // These close codes are permanent for this connection (bad origin, missing access, etc.).
+        if ([4401, 4403, 4404, 4406].includes(ev.code)) {
+          setStatus(ev.code === 4401 || ev.code === 4403 ? "connection denied" : "console unavailable");
+          return;
+        }
+        attempts += 1;
+        const delay = Math.min(1000 * (2 ** Math.min(attempts - 1, 5)), 30000);
+        setStatus("disconnected — reconnecting");
+        reconnectTimer = window.setTimeout(connect, delay);
+      };
+      ws.onerror = () => ws.close();
+      ws.onmessage = (ev) => {
+        if (socket === ws) term.write(typeof ev.data === "string" ? ev.data : new Uint8Array(ev.data));
+      };
+    };
+    connect();
     term.onData((d) => {
-      if (real) { if (ws.readyState === WebSocket.OPEN) ws.send(d); return; }
+      const ws = socket;
+      if (!ws || ws.readyState !== WebSocket.OPEN) return;
+      if (real) { ws.send(d); return; }
       if (d === "\r") { ws.send(line + "\r"); term.write("\r\n"); line = ""; }
       else if (d === "\u007f") { if (line) { line = line.slice(0, -1); term.write("\b \b"); } }
       else { line += d; term.write(d); }
     });
     const onResize = () => { try { fit.fit(); } catch {} };
     window.addEventListener("resize", onResize);
-    return () => { window.removeEventListener("resize", onResize); ws.close(); term.dispose(); };
+    return () => {
+      disposed = true;
+      window.clearTimeout(reconnectTimer);
+      window.removeEventListener("resize", onResize);
+      socket?.close();
+      term.dispose();
+    };
   }, [vmId, real]);
   return (
     <div>

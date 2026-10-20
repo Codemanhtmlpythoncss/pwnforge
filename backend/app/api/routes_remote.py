@@ -38,6 +38,8 @@ def overview(user: User = Depends(current_user), db: Session = Depends(get_db)) 
     return {
         "host_addresses": access.host_addresses(db), "jump_user": cfg.get_setting(db, "remote.jump_user") or "pwnforge-jump",
         "ssh_port": int(cfg.get_setting(db, "remote.ssh_port") or 22), "lab_supernet": cfg.get_setting(db, "network.base_cidr"),
+        "web_port": int(cfg.get_setting(db, "server.port") or 8080),
+        "web_lan_access": bool(cfg.get_setting(db, "server.lan_access")),
         "tailscale": {k: ts[k] for k in ("installed", "running", "ips", "dns_name")},
         "vpn": {"initialised": openvpn.initialised(), "enabled": bool(cfg.get_setting(db, "vpn.enabled"))},
         "your_labs": [{"id": li.id, "lab_id": li.lab_id, "status": li.status.value} for li in labs],
@@ -62,7 +64,7 @@ def setup(user: User = Depends(require_admin), db: Session = Depends(get_db)) ->
                                    "Pwnforge's lab networks are isolated and are not forwarded, so reach lab machines through the "
                                    "jump host instead of advertising them." % supernet),
         },
-        "openvpn": openvpn.install_commands(get_settings().data_dir),
+        "openvpn": openvpn.install_commands(get_settings().data_dir, db),
     }
 
 
@@ -90,7 +92,7 @@ def vpn_server_config(user: User = Depends(require_admin), db: Session = Depends
     if not openvpn.initialised():
         raise HTTPException(409, "Set up the VPN certificate authority first.")
     text = _vpn(lambda: openvpn.write_server_config(db))
-    return {"config": text, "path": str(openvpn.vpn_dir() / "server.conf"), "commands": openvpn.install_commands(get_settings().data_dir)}
+    return {"config": text, "path": str(openvpn.vpn_dir() / "server.conf"), "commands": openvpn.install_commands(get_settings().data_dir, db)}
 
 
 class IssueRequest(BaseModel):

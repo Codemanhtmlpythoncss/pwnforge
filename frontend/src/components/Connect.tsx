@@ -37,7 +37,7 @@ export function maskFromCidr(cidr: string): string {
  * setup commands appear as soon as a lab or machine starts. The host's LAN IP and the lab
  * supernet are filled in automatically when the server can report them.
  */
-export function ConnectCommands({ ip, login, cidr, defaultOpen }:
+export function ConnectCommands({ ip, login, target, cidr, defaultOpen }:
   { ip: string; login?: Login; target?: boolean; cidr?: string; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(!!defaultOpen);
   const [host, setHost] = useState<HostInfo | null>(null);
@@ -51,7 +51,7 @@ export function ConnectCommands({ ip, login, cidr, defaultOpen }:
     <div className="space-y-2">
       <div className="text-muted text-xs">Run these from a terminal on your own machine (not the in-app console) to attack it like a real box. Targets don't answer ping, so <span className="font-mono text-ink">-Pn</span> is required:</div>
       <CodeBlock label="scan services" code={`nmap -Pn -sV -sC ${ip}`} />
-      {login
+      {login && !target
         ? <CodeBlock label="ssh in" code={`ssh ${login.username}@${ip}`} />
         : <CodeBlock label="all ports" code={`nmap -Pn -p- ${ip}`} />}
 

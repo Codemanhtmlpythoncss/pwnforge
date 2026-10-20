@@ -290,8 +290,24 @@ def client_view(c: VpnClient) -> dict:
             "revoked": c.revoked_at is not None, "revoked_at": iso(c.revoked_at)}
 
 
-def install_commands(data_dir: Path) -> dict:
+def install_commands(data_dir: Path, db: Session | None = None) -> dict:
     src = data_dir / "vpn"
+    # Keep the copy/paste firewall guidance tied to the actual saved settings.
+    # Don't tell administrators to forward the web port to the public internet:
+    # the web app should only be reachable on the LAN/VPN side.
+    try:
+        if db is None:
+            from backend.app.database.base import session_scope
+            with session_scope() as settings_db:
+                _, port, proto = _endpoint(settings_db)
+                web_port = int(cfg.get_setting(settings_db, "server.port") or 8080)
+                vpn_subnet = str(_net(settings_db))
+        else:
+            _, port, proto = _endpoint(db)
+            web_port = int(cfg.get_setting(db, "server.port") or 8080)
+            vpn_subnet = str(_net(db))
+    except Exception:  # noqa: BLE001 - setup commands are still useful before DB setup
+        port, proto, web_port, vpn_subnet = 1194, "udp", 8080, "10.8.0.0/24"
     return {
         "install": [
             "sudo apt install openvpn            # Debian/Ubuntu; other distributions: their openvpn package",
@@ -310,10 +326,15 @@ def install_commands(data_dir: Path) -> dict:
             "[Service]\nType=oneshot\nExecStart=/usr/bin/install -m 0644 %s/crl.pem %s/crl.pem\nEOF\n"
             "sudo systemctl daemon-reload && sudo systemctl enable --now pwnforge-vpn-crl.path" % (src, src, ETC)),
         "firewall": [
-            "# Allow the VPN port on this host's firewall (pick the one you use):",
-            "sudo ufw allow PORT/PROTO",
-            "sudo nft add rule inet filter input PROTO dport PORT accept",
+            "# If UFW is active, allow VPN clients to the web port before denying it on other interfaces:",
+            f"sudo ufw allow {port}/{proto} comment 'PwnForge VPN'",
+            f"sudo ufw insert 1 allow in on tun0 from {vpn_subnet} to any port {web_port} proto tcp comment 'PwnForge over VPN'",
+            f"sudo ufw deny in proto tcp to any port {web_port} comment 'PwnForge web private'",
+            "sudo ufw status",
+            "# Add any required LAN/Tailscale permits before the deny rule above.",
         ],
+        "router": (f"Forward {proto.upper()} port {port} on your router to this host's LAN IP. "
+                   "Do not forward the PwnForge web port to the internet."),
     }
 
 
@@ -322,7 +343,13 @@ def status(db: Session, user: User | None) -> dict:
     out = {"initialised": initialised(), "settings": {}, "warnings": [], "clients": [], "files": {}}
     try:
         host, port, proto = _endpoint(db)
-        out["settings"] = {"public_host": host, "port": port, "protocol": proto, "subnet": str(_net(db)),
+        net = _net(db)
+        vpn_host_ip = str(next(net.hosts()))
+        web_port = int(cfg.get_setting(db, "server.port") or 8080)
+        out["settings"] = {"public_host": host, "port": port, "protocol": proto, "subnet": str(net),
+                           "host_vpn_ip": vpn_host_ip, "web_port": web_port,
+                           "web_url": f"http://{vpn_host_ip}:{web_port}",
+                           "web_lan_access": bool(cfg.get_setting(db, "server.lan_access")),
                            "enabled": bool(cfg.get_setting(db, "vpn.enabled")), "client_days": int(cfg.get_setting(db, "vpn.client_days") or 365)}
         if not host:
             out["warnings"].append("vpn.public_host isn't set: clients won't know where to connect.")
