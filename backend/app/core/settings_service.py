@@ -39,8 +39,9 @@ DEFAULTS: list[SettingDef] = [
                "Allow self-service learner registration."),
     SettingDef("admin.update_command", "bash scripts/update.sh", "string", "maintenance",
                "Command the in-app Update button runs to update PwnForge (pull, reinstall, migrate, "
-               "rebuild, restart). The default is the bundled updater; clear it to disable the button "
-               "(e.g. on a host where updates are managed elsewhere)."),
+               "rebuild, restart). The bundled updater needs a writable Git checkout and dependencies; "
+               "root-managed installs should use their host updater. A custom command may delegate to "
+               "a host updater; clear this setting to disable the button."),
     SettingDef("auth.min_password_length", 1, "int", "auth",
                "Minimum password length enforced on create/change (1: any password that isn't empty)."),
     # --- resource limits (consumed by the VM capacity planner) ---

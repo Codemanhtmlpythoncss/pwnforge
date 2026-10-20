@@ -65,7 +65,7 @@ function Updates() {
           <div className="text-muted text-xs mt-1">
             {v.update_enabled
               ? "Updates PwnForge on this server (pull, reinstall, migrate, rebuild) and restarts it."
-              : "Updates are managed by the host (the nodeyard dashboard's PwnForge page, or re-running the installer). Set admin.update_command below to enable this button."}
+              : v.update_message || "Updates are managed by the host. Ask the host administrator to update this installation."}
           </div>
         </div>
         <button className="btn btn-primary text-sm" disabled={!v.update_enabled || busy} onClick={update}>
