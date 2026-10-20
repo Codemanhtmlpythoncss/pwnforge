@@ -36,7 +36,7 @@ DEFAULTS: list[SettingDef] = [
     SettingDef("auth.session_ttl_hours", 168, "int", "auth",
                "Session lifetime in hours before re-login is required."),
     SettingDef("auth.registration_open", False, "bool", "auth",
-               "Allow self-service learner registration."),
+               "Allow anyone who can reach the login page to create a learner account. Keep off unless access is private."),
     SettingDef("admin.update_command", "bash scripts/update.sh", "string", "maintenance",
                "Command the in-app Update button runs to update PwnForge (pull, reinstall, migrate, "
                "rebuild, restart). The default is the bundled updater; clear it to disable the button "

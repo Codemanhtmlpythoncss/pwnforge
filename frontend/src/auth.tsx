@@ -9,6 +9,7 @@ interface AuthState {
   refresh: () => Promise<void>;
   login: (u: string, p: string) => Promise<void>;
   bootstrap: (u: string, p: string, name?: string) => Promise<void>;
+  register: (u: string, p: string, name?: string, email?: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -42,10 +43,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const r = await api.post("/api/auth/bootstrap", { username: u, password: p, display_name: name });
     setUser(r.user); setInit(true);
   };
+  const register = async (u: string, p: string, name?: string, email?: string) => {
+    const r = await api.post("/api/auth/register", {
+      username: u,
+      password: p,
+      display_name: name?.trim() || undefined,
+      email: email?.trim() || undefined,
+    });
+    setUser(r.user);
+  };
   const logout = async () => { await api.post("/api/auth/logout"); setUser(null); };
 
   return (
-    <Ctx.Provider value={{ user, loading, initialised, registrationOpen, refresh, login, bootstrap, logout }}>
+    <Ctx.Provider value={{ user, loading, initialised, registrationOpen, refresh, login, bootstrap, register, logout }}>
       {children}
     </Ctx.Provider>
   );

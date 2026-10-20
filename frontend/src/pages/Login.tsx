@@ -3,21 +3,47 @@ import { useAuth } from "../auth";
 import { Logo, LogoMark } from "../logo";
 
 export default function Login() {
-  const { initialised, login, bootstrap } = useAuth();
+  const { initialised, registrationOpen, login, bootstrap, register } = useAuth();
   const [u, setU] = useState("");
   const [p, setP] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [creatingAccount, setCreatingAccount] = useState(false);
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
   const bootstrapping = !initialised;
+  const registering = !bootstrapping && creatingAccount;
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErr(""); setBusy(true);
     try {
       if (bootstrapping) await bootstrap(u, p, name);
+      else if (registering) {
+        if (!registrationOpen) throw new Error("Account creation is disabled. Ask the PwnForge administrator to enable sign-up or add your account.");
+        if (p !== confirmPassword) throw new Error("The passwords don't match.");
+        await register(u, p, name, email);
+      }
       else await login(u, p);
     } catch (e: any) { setErr(e.message); } finally { setBusy(false); }
+  };
+
+  const toggleAccountForm = () => {
+    setErr("");
+    if (creatingAccount) {
+      setCreatingAccount(false);
+      setP("");
+      setConfirmPassword("");
+      return;
+    }
+    if (!registrationOpen) {
+      setErr("Account creation is disabled. Ask the PwnForge administrator to enable sign-up in Settings or add your account.");
+      return;
+    }
+    setCreatingAccount(true);
+    setP("");
+    setConfirmPassword("");
   };
 
   return (
@@ -53,28 +79,48 @@ export default function Login() {
       <div className="grid place-items-center p-6">
         <form onSubmit={submit} className="card p-8 w-full max-w-sm fade-in">
           <Logo size={26} className="mb-4 lg:hidden" />
-          <div className="text-xl font-bold mb-1">{bootstrapping ? "Create administrator" : "Sign in"}</div>
+          <div className="text-xl font-bold mb-1">{bootstrapping ? "Create administrator" : registering ? "Create learner account" : "Sign in"}</div>
           <div className="text-muted text-sm mb-6">
-            {bootstrapping ? "First-run setup — this binds to localhost by default." : "Welcome back, operator."}
+            {bootstrapping ? "First-run setup — this binds to localhost by default." : registering ? "Create an account to start learning on this PwnForge server." : "Welcome back, operator."}
           </div>
-          {bootstrapping && (
+          {(bootstrapping || registering) && (
             <label className="block mb-3 text-sm">
-              <span className="text-muted">Display name</span>
-              <input className="input mt-1" value={name} onChange={e => setName(e.target.value)} />
+              <span className="text-muted">Display name{registering ? " (optional)" : ""}</span>
+              <input className="input mt-1" value={name} onChange={e => setName(e.target.value)} autoComplete="name" />
+            </label>
+          )}
+          {registering && (
+            <label className="block mb-3 text-sm">
+              <span className="text-muted">Email (optional)</span>
+              <input className="input mt-1" type="email" value={email} onChange={e => setEmail(e.target.value)} autoComplete="email" />
             </label>
           )}
           <label className="block mb-3 text-sm">
             <span className="text-muted">Username</span>
-            <input className="input mt-1" value={u} onChange={e => setU(e.target.value)} autoFocus required />
+            <input className="input mt-1" value={u} onChange={e => setU(e.target.value)} autoFocus required minLength={registering ? 3 : undefined} maxLength={registering ? 64 : undefined} autoComplete="username" />
           </label>
           <label className="block mb-5 text-sm">
             <span className="text-muted">Password</span>
-            <input className="input mt-1" type="password" value={p} onChange={e => setP(e.target.value)} required />
+            <input className="input mt-1" type="password" value={p} onChange={e => setP(e.target.value)} required autoComplete={registering || bootstrapping ? "new-password" : "current-password"} />
           </label>
+          {registering && (
+            <label className="block mb-5 text-sm">
+              <span className="text-muted">Confirm password</span>
+              <input className="input mt-1" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required autoComplete="new-password" />
+            </label>
+          )}
           {err && <div className="text-bad text-sm mb-3">⚠ {err}</div>}
           <button className="btn btn-primary w-full" disabled={busy}>
-            {busy ? "Please wait…" : bootstrapping ? "Create administrator" : "Sign in"}
+            {busy ? "Please wait…" : bootstrapping ? "Create administrator" : registering ? "Create account" : "Sign in"}
           </button>
+          {!bootstrapping && (
+            <button type="button" className="btn w-full mt-3" disabled={busy} onClick={toggleAccountForm}>
+              {registering ? "Already have an account? Sign in" : "Create account"}
+            </button>
+          )}
+          {!bootstrapping && !registrationOpen && !registering && (
+            <p className="text-muted text-xs mt-3 text-center">Self sign-up is off. Ask the administrator to add your learner account.</p>
+          )}
         </form>
       </div>
     </div>
