@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { api } from "../api";
 import { Callout, CodeBlock, Panel, Section, Tabs } from "../ui";
 import { Icon } from "../icons";
 import { loadHostInfo, maskFromCidr, type HostInfo } from "../components/Connect";
@@ -13,10 +14,17 @@ import { loadHostInfo, maskFromCidr, type HostInfo } from "../components/Connect
 export default function Guide() {
   const [net, setNet] = useState("tailscale");
   const [host, setHost] = useState<HostInfo | null>(null);
-  useEffect(() => { loadHostInfo().then(setHost); }, []);
+  const [vpn, setVpn] = useState<any>(null);
+  useEffect(() => {
+    loadHostInfo().then(setHost);
+    api.get("/api/vpn").then(setVpn).catch(() => setVpn(null));
+  }, []);
   const cidr = host?.lab_network_cidr || "10.200.0.0/16";
   const gw = host?.host_lan_ip || "<host-lan-ip>";
   const mask = maskFromCidr(cidr);
+  const vpnSettings = vpn?.settings || {};
+  const appPort = window.location.port || (window.location.protocol === "https:" ? "443" : "80");
+  const vpnWebUrl = vpnSettings.host_vpn_ip ? `http://${vpnSettings.host_vpn_ip}:${appPort}` : null;
   return (
     <div className="space-y-8 max-w-3xl">
       <div>
@@ -44,7 +52,7 @@ export default function Guide() {
           computer needs a route to them. Set this up <strong className="text-ink">once per device</strong>. Pick the method that matches your setup:
         </p>
         <Tabs label="Connection method" active={net} onChange={setNet}
-          tabs={[["tailscale", "Over Tailscale"], ["lan", "Over the local network"]]} />
+          tabs={[["tailscale", "Over Tailscale"], ["openvpn", "OpenVPN (no Tailscale)"], ["lan", "Over the local network"]]} />
 
         {net === "tailscale" && (
           <div className="space-y-3">
@@ -62,6 +70,32 @@ export default function Guide() {
           </div>
         )}
 
+        {net === "openvpn" && (
+          <div className="space-y-3">
+            {!vpnSettings.enabled || !vpn?.initialised ? (
+              <Callout kind="warn" title="OpenVPN isn't ready yet">
+                Ask the PwnForge administrator to set up OpenVPN in <strong className="text-ink">Settings → Let a friend connect without Tailscale</strong>.
+                They need to install the VPN service and issue you a personal <code>.ovpn</code> profile first.
+              </Callout>
+            ) : (
+              <>
+                <p className="text-sm text-muted">Use this when you want to connect from outside the host's LAN without installing Tailscale. Your administrator gives you one private profile for each device.</p>
+                <ol className="list-decimal ml-5 space-y-2 text-sm text-muted">
+                  <li>Install an OpenVPN client (for example, OpenVPN Connect) on your Mac, Windows, or Linux device.</li>
+                  <li>Import the <code>.ovpn</code> file your administrator sent you, then connect. Keep that file private: it contains your device's VPN key.</li>
+                  <li>Open PwnForge inside the tunnel:
+                    {vpnWebUrl ? <CodeBlock label="PwnForge over VPN" code={vpnWebUrl} /> : <div className="text-muted mt-1">Ask your administrator for the PwnForge VPN address and web port.</div>}
+                  </li>
+                  <li>Sign in with your own learner account. If you were given a temporary password, PwnForge asks you to change it.</li>
+                </ol>
+                <Callout kind="info" title="Your lab access stays private">
+                  This profile connects you to the PwnForge website and host. Lab networks are not broadly routed into the VPN; use the lab's browser workspace and console. Ask the administrator about a restricted SSH jump setup if you need to run tools directly from your laptop.
+                </Callout>
+              </>
+            )}
+          </div>
+        )}
+
         {net === "lan" && (
           <div className="space-y-3">
             <p className="text-sm text-muted">No Tailscale needed — for devices on the same local network as the host.{host?.host_lan_ip ? "" : " Ask the host's admin for its LAN IP."}</p>
@@ -70,8 +104,8 @@ export default function Guide() {
                 <CodeBlock label="on the host" code={"pwnforge-host.sh tailnet-access on"} />
               </li>
               <li>Add a static route to the lab network via the host's LAN IP:
-                <CodeBlock label="macOS / Linux" code={`sudo ip route add ${cidr} via ${gw}`} />
-                <CodeBlock label="macOS (alternative)" code={`sudo route -n add -net ${cidr} ${gw}`} />
+                <CodeBlock label="macOS" code={`sudo route -n add -net ${cidr} ${gw}`} />
+                <CodeBlock label="Linux" code={`sudo ip route add ${cidr} via ${gw}`} />
                 <CodeBlock label="Windows (admin)" code={`route add ${cidr.split("/")[0]} mask ${mask} ${gw}`} />
               </li>
             </ol>

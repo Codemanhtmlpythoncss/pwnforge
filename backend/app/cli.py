@@ -118,7 +118,10 @@ def serve(host: str = None, port: int = None, reload: bool = False) -> None:
     console.print(f"[bold green]Pwnforge serving at {url}[/bold green]")
     if bind_host == "0.0.0.0":
         console.print("[yellow]LAN access enabled — reachable from the local network.[/yellow]")
-    uvicorn.run("backend.app.main:app", host=bind_host, port=bind_port, reload=reload)
+    # Browser WebSockets are used for VM consoles and job progress. Keep server-side
+    # pings enabled, with enough timeout for a brief Wi-Fi/VPN stall to recover.
+    uvicorn.run("backend.app.main:app", host=bind_host, port=bind_port, reload=reload,
+                ws_ping_interval=25, ws_ping_timeout=75, timeout_keep_alive=75)
 
 
 # ---- courses / paths ----

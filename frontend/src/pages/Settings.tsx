@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
 import { Panel, Spinner } from "../ui";
+import OpenVpnAccess from "../components/OpenVpnAccess";
 
 function Updates() {
   const [v, setV] = useState<any>(null);
@@ -139,6 +140,7 @@ export default function Settings() {
         <div className="text-muted text-sm mt-1">Every setting has a real backend effect. RAM and limits are live-configurable.</div></div>
       {saved && <div className="text-sm text-brand">{saved}</div>}
       <Updates />
+      <OpenVpnAccess />
       <AccountReset />
       {Object.entries(groups).map(([cat, list]) => (
         <Panel key={cat}>

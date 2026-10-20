@@ -103,9 +103,11 @@ def profile_detail(profile_id: str, db: Session = Depends(get_db)) -> dict:
 def _vm_out(i: VMInstance, machine: dict | None = None) -> dict:
     """A machine as its owner (or an administrator) sees it; only those callers reach this.
 
-    ``machine`` is the lab's definition for this box, if any. A black-box target (``target`` set) shows no login
-    — getting in is the challenge — while a practice box shows the learner credentials."""
-    is_target = bool(machine and machine.get("target"))
+    ``machine`` is the lab's definition for this box, if any. Explicit black-box targets and
+    machines whose role is named ``target`` (including ``target1``/``target2``) never expose
+    the provisioned learner login. Practice boxes continue to show their credentials."""
+    role = str(machine.get("role") or "").lower() if machine else ""
+    is_target = bool(machine and (machine.get("target") or role == "target" or role.startswith("target")))
     out = {"id": i.id, "name": i.name, "profile_id": i.profile_id,
            "status": i.status.value, "driver": i.driver,
            "ip_address": i.ip_address, "vcpu": i.vcpu, "memory_mb": i.memory_mb,
